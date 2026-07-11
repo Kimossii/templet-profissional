@@ -1,0 +1,470 @@
+(function (global) {
+    function b64DecodeUnicode(str) {
+        // Convert base64 to a string
+        const binaryString = atob(str);
+
+        // Convert binary string to a byte array
+        const byteArray = new Uint8Array(binaryString.length);
+        for (var i = 0; i < binaryString.length; i++) {
+            byteArray[i] = binaryString.charCodeAt(i);
+        }
+        // Convert byte array to a string
+        const decoder = new TextDecoder('utf-8');
+        return decoder.decode(byteArray);
+    }
+
+    global.insiteScripts = global.insiteScripts || {};
+    global.insiteScripts.popup =
+        global.insiteScripts.popup ||
+        function message(scriptOptions) {
+            const dmSmartScriptDuration = scriptOptions.duration,
+                dmSmartScriptSettings = scriptOptions.settings,
+                dmSmartScriptRuleId = scriptOptions.ruleId,
+                dmSmartScriptRuleType = scriptOptions.ruleType,
+                isForced = scriptOptions.isForced;
+
+            //popupName and settings are coming from BE
+            const shouldShowPopup = function (popupName, settings) {
+                if (shouldCheckMultipleConditions) {
+                    const { conditionsToCheck } =
+                        shouldShowActionRule(settings);
+
+                    if (!conditionsToCheck) {
+                        const cookieName = getSmartRuleCookieName(
+                            popupName,
+                            ActionType.POPUP
+                        );
+                        return isForced || getCookie(cookieName) === null; //meaning conditions are filtered in BE
+                    } else {
+                        return conditionsToCheck.every(
+                            ({ condition, callback }) => {
+                                return (
+                                    isForced ||
+                                    (callback &&
+                                        callback(
+                                            popupName,
+                                            condition,
+                                            ActionType.POPUP
+                                        ))
+                                );
+                            }
+                        );
+                    }
+                } else {
+                    const {
+                        shouldCheckUserVisitsCondition,
+                        shouldCheckDateTimeRangeCondition,
+                    } = shouldShowActionRule(settings);
+
+                    const cookieName = getSmartRuleCookieName(
+                        popupName,
+                        ActionType.POPUP
+                    );
+
+                    if (shouldCheckUserVisitsCondition) {
+                        return (
+                            isForced ||
+                            shouldShowRuleObjectForUserVisit(
+                                popupName,
+                                settings,
+                                ActionType.POPUP
+                            )
+                        );
+                    }
+                    if (shouldCheckDateTimeRangeCondition) {
+                        return (
+                            isForced ||
+                            shouldShowRuleObjectForDateTimeRange(
+                                popupName,
+                                settings,
+                                ActionType.POPUP
+                            )
+                        );
+                    }
+                    return isForced || getCookie(cookieName) === null;
+                }
+            };
+
+            // If insite configured to show a popup then we don't want to show it everytime, once every "popup.insite.cookie.ttl" hours.
+            const onOpenPopup = function (popupName, event) {
+                if (isForced || window.Parameters?.disableTracking) {
+                    return;
+                }
+                setSmartRuleCookie(popupName, ActionType.POPUP);
+            };
+
+            const applyPopUp = () => {
+                const settings = JSON.parse(
+                    b64DecodeUnicode(dmSmartScriptSettings)
+                );
+                const popupName = settings.popupName;
+                const delay = isNaN(parseInt(settings.delay))
+                    ? 0
+                    : parseInt(settings.delay);
+                const timingMode =
+                    settings.timingMode === 'delay' ||
+                    settings.timingMode === 'exit-intent' ||
+                    settings.timingMode === 'scroll-percentage'
+                        ? settings.timingMode
+                        : delay > 0
+                          ? 'delay'
+                          : 'immediate';
+                const durationDelay = Math.max(
+                    parseInt(dmSmartScriptDuration, 10) || 0,
+                    0
+                );
+                const DESKTOP_EXIT_THRESHOLD = 12;
+                const MOBILE_SCROLL_EXIT_THRESHOLD = 160;
+                const MOBILE_SCROLL_MAX_DURATION_MS = 600;
+                const MOBILE_SCROLL_MIN_OFFSET = 80;
+                const DEFAULT_SCROLL_THRESHOLD = 50;
+                const MIN_SCROLL_THRESHOLD = 1;
+                const MAX_SCROLL_THRESHOLD = 100;
+                const parsedScrollThreshold = parseInt(
+                    settings.scrollThreshold,
+                    10
+                );
+                const scrollThreshold = isNaN(parsedScrollThreshold)
+                    ? DEFAULT_SCROLL_THRESHOLD
+                    : Math.min(
+                          Math.max(parsedScrollThreshold, MIN_SCROLL_THRESHOLD),
+                          MAX_SCROLL_THRESHOLD
+                      );
+                const VALID_POPUP_POSITIONS = [
+                    'center_center',
+                    'top_left',
+                    'top_center',
+                    'top_right',
+                    'center_left',
+                    'center_right',
+                    'bottom_left',
+                    'bottom_center',
+                    'bottom_right',
+                ];
+                const popupPosition =
+                    VALID_POPUP_POSITIONS.indexOf(settings.position) !== -1
+                        ? settings.position
+                        : 'center_center';
+
+                const options = {
+                    onOpen: onOpenPopup.bind(null, popupName),
+                    position: popupPosition,
+                    additionalAttributes: [
+                        {
+                            name: 'data-rule',
+                            value: dmSmartScriptRuleId,
+                        },
+                        {
+                            name: 'data-rule-type',
+                            value: dmSmartScriptRuleType,
+                        },
+                    ],
+                };
+
+                const openPopup = function () {
+                    window?.waitForDeferred?.('dmAjax', () => {
+                        $.dmrt.onLoad(
+                            $.dmrt.components.popupService.displayPopup.bind(
+                                null,
+                                popupName,
+                                options
+                            )
+                        );
+                        if (window.dmsnowplow) {
+                            dmsnowplow(
+                                'trackStructEvent',
+                                'insite',
+                                'impression',
+                                scriptOptions.ruleType,
+                                scriptOptions.ruleId
+                            );
+                        }
+                    });
+                };
+
+                const showPopupIfAllowed = function () {
+                    if (!popupName || !shouldShowPopup(popupName, settings)) {
+                        return;
+                    }
+
+                    openPopup();
+                };
+
+                const isMobileExitIntentContext = function () {
+                    const hasCoarsePointer =
+                        typeof window.matchMedia === 'function' &&
+                        window.matchMedia('(pointer: coarse)').matches;
+                    const hasTouchPoints =
+                        typeof navigator !== 'undefined' &&
+                        navigator.maxTouchPoints > 0;
+                    const isMobileUserAgent =
+                        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+                            navigator.userAgent || ''
+                        );
+
+                    return hasCoarsePointer || hasTouchPoints || isMobileUserAgent;
+                };
+
+                const registerDesktopExitIntent = function () {
+                    let isTriggered = false;
+
+                    const cleanup = function () {
+                        document.removeEventListener('mouseout', onMouseOut);
+                    };
+
+                    const onMouseOut = function (event) {
+                        if (
+                            isTriggered ||
+                            event.relatedTarget ||
+                            event.toElement
+                        ) {
+                            return;
+                        }
+
+                        if (
+                            typeof event.clientY === 'number' &&
+                            event.clientY > DESKTOP_EXIT_THRESHOLD
+                        ) {
+                            return;
+                        }
+
+                        isTriggered = true;
+                        cleanup();
+                        showPopupIfAllowed();
+                    };
+
+                    document.addEventListener('mouseout', onMouseOut);
+                };
+
+                const registerMobileExitIntent = function () {
+                    let isTriggered = false;
+                    let hasInteracted = false;
+                    let historyStateAdded = false;
+                    let lastTouchY = null;
+                    let lastTouchTime = 0;
+
+                    const cleanup = function () {
+                        document.removeEventListener(
+                            'touchstart',
+                            onTouchStart,
+                            true
+                        );
+                        document.removeEventListener('touchend', onTouchEnd, true);
+                        document.removeEventListener('click', onInteraction, true);
+                        document.removeEventListener(
+                            'keydown',
+                            onInteraction,
+                            true
+                        );
+                        window.removeEventListener('popstate', onPopState);
+                    };
+
+                    const triggerExitIntent = function () {
+                        if (isTriggered) {
+                            return;
+                        }
+
+                        isTriggered = true;
+                        cleanup();
+                        showPopupIfAllowed();
+                    };
+
+                    const onInteraction = function () {
+                        hasInteracted = true;
+
+                        if (
+                            historyStateAdded ||
+                            !window.history ||
+                            typeof window.history.pushState !== 'function'
+                        ) {
+                            return;
+                        }
+
+                        try {
+                            window.history.pushState(
+                                { dmPopupExitIntentArmed: true },
+                                document.title,
+                                window.location.href
+                            );
+                            historyStateAdded = true;
+                        } catch (e) {}
+                    };
+
+                    const onTouchStart = function (event) {
+                        onInteraction();
+
+                        const touch = event.changedTouches?.[0];
+                        if (!touch) {
+                            return;
+                        }
+
+                        lastTouchY = touch.clientY;
+                        lastTouchTime = Date.now();
+                    };
+
+                    const onTouchEnd = function (event) {
+                        if (isTriggered || !hasInteracted || lastTouchY === null) {
+                            return;
+                        }
+
+                        const touch = event.changedTouches?.[0];
+                        if (!touch) {
+                            return;
+                        }
+
+                        const scrollTop =
+                            window.pageYOffset ||
+                            document.documentElement.scrollTop ||
+                            document.body.scrollTop ||
+                            0;
+                        const touchDelta = touch.clientY - lastTouchY;
+                        const elapsed = Date.now() - lastTouchTime;
+
+                        lastTouchY = null;
+                        lastTouchTime = 0;
+
+                        if (
+                            scrollTop < MOBILE_SCROLL_MIN_OFFSET ||
+                            elapsed > MOBILE_SCROLL_MAX_DURATION_MS ||
+                            touchDelta < MOBILE_SCROLL_EXIT_THRESHOLD
+                        ) {
+                            return;
+                        }
+
+                        triggerExitIntent();
+                    };
+
+                    const onPopState = function () {
+                        if (!hasInteracted) {
+                            return;
+                        }
+
+                        triggerExitIntent();
+                    };
+
+                    document.addEventListener('touchstart', onTouchStart, true);
+                    document.addEventListener('touchend', onTouchEnd, true);
+                    document.addEventListener('click', onInteraction, true);
+                    document.addEventListener('keydown', onInteraction, true);
+                    window.addEventListener('popstate', onPopState);
+                };
+
+                const registerExitIntent = function () {
+                    if (isMobileExitIntentContext()) {
+                        registerMobileExitIntent();
+                        return;
+                    }
+
+                    registerDesktopExitIntent();
+                };
+
+                const registerScrollPercentageTrigger = function (threshold) {
+                    let isTriggered = false;
+                    let isRafScheduled = false;
+
+                    const cleanup = function () {
+                        window.removeEventListener('scroll', onScroll, true);
+                    };
+
+                    const getScrollPercent = function () {
+                        const doc = document.documentElement;
+                        const body = document.body || {};
+                        const scrollTop =
+                            window.pageYOffset ||
+                            doc.scrollTop ||
+                            body.scrollTop ||
+                            0;
+                        const viewportHeight =
+                            window.innerHeight || doc.clientHeight || 0;
+                        const documentHeight = Math.max(
+                            doc.scrollHeight || 0,
+                            body.scrollHeight || 0,
+                            doc.offsetHeight || 0,
+                            body.offsetHeight || 0,
+                            doc.clientHeight || 0
+                        );
+
+                        if (documentHeight <= 0) {
+                            return 0;
+                        }
+
+                        return (
+                            ((scrollTop + viewportHeight) / documentHeight) *
+                            100
+                        );
+                    };
+
+                    const check = function () {
+                        if (isTriggered) {
+                            return;
+                        }
+
+                        if (getScrollPercent() >= threshold) {
+                            isTriggered = true;
+                            cleanup();
+                            showPopupIfAllowed();
+                        }
+                    };
+
+                    const onScroll = function () {
+                        if (isTriggered || isRafScheduled) {
+                            return;
+                        }
+
+                        isRafScheduled = true;
+                        const scheduleCheck =
+                            typeof window.requestAnimationFrame === 'function'
+                                ? window.requestAnimationFrame
+                                : function (cb) {
+                                      return setTimeout(cb, 16);
+                                  };
+
+                        scheduleCheck(function () {
+                            isRafScheduled = false;
+                            check();
+                        });
+                    };
+
+                    window.addEventListener('scroll', onScroll, true);
+
+                    // Initial check in case the page already exceeds the
+                    // threshold (e.g. short page, or user scrolled before
+                    // the script attached).
+                    check();
+                };
+
+                if (!popupName || !shouldShowPopup(popupName, settings)) {
+                    return;
+                }
+
+                if (timingMode === 'delay') {
+                    setTimeout(function () {
+                        showPopupIfAllowed();
+                    }, (delay + durationDelay) * 1000);
+                    return;
+                }
+
+                if (timingMode === 'exit-intent') {
+                    setTimeout(function () {
+                        registerExitIntent();
+                    }, durationDelay * 1000);
+                    return;
+                }
+
+                if (timingMode === 'scroll-percentage') {
+                    setTimeout(function () {
+                        registerScrollPercentageTrigger(scrollThreshold);
+                    }, durationDelay * 1000);
+                    return;
+                }
+
+                setTimeout(function () {
+                    showPopupIfAllowed();
+                }, durationDelay * 1000);
+            };
+
+            (function () {
+                applyPopUp();
+            })();
+        };
+})(this);
