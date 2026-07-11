@@ -35,24 +35,6 @@ function initCabecalhoFixo() {
   window.addEventListener("scroll", aoScrollar, { passive: true });
 }
 
-function initMenuMobile() {
-  const botao = document.querySelector(".menu-alternar");
-  const nav = document.querySelector(".nav");
-  if (!botao || !nav) return;
-
-  botao.addEventListener("click", () => {
-    const aberto = nav.classList.toggle("esta-aberto");
-    botao.setAttribute("aria-expanded", String(aberto));
-  });
-
-  nav.querySelectorAll(".nav__link:not([data-tem-submenu])").forEach((link) => {
-    link.addEventListener("click", () => {
-      nav.classList.remove("esta-aberto");
-      botao.setAttribute("aria-expanded", "false");
-    });
-  });
-}
-
 function initSubmenusDropdown() {
   const itens = document.querySelectorAll(".nav__item--dropdown");
 
@@ -138,7 +120,6 @@ function initFormularioMembro() {
 document.addEventListener("DOMContentLoaded", () => {
   initVideoHero();
   initCabecalhoFixo();
-  initMenuMobile();
   initSubmenusDropdown();
   initAnoRodape();
   initRevelarAoScroll();
