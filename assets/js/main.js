@@ -4,6 +4,25 @@
  * a futura extracção para componentes Vue.
  */
 
+function initVideoHero() {
+  const video = document.querySelector(".hero__video");
+  if (!video) return;
+
+  const preferenciaReduzida = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  const aplicarPreferencia = (correspondeReducida) => {
+    if (correspondeReducida) {
+      video.pause();
+      video.removeAttribute("autoplay");
+    } else {
+      video.play().catch(() => {});
+    }
+  };
+
+  aplicarPreferencia(preferenciaReduzida.matches);
+  preferenciaReduzida.addEventListener("change", (evento) => aplicarPreferencia(evento.matches));
+}
+
 function initCabecalhoFixo() {
   const cabecalho = document.querySelector(".cabecalho");
   if (!cabecalho) return;
@@ -117,6 +136,7 @@ function initFormularioMembro() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  initVideoHero();
   initCabecalhoFixo();
   initMenuMobile();
   initSubmenusDropdown();
