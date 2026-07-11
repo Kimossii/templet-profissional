@@ -8,7 +8,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  min-height: 88vh;
+  min-height: 84vh;
   padding-block: var(--espaco-2xl);
   overflow: hidden;
   color: var(--cor-texto-claro);
