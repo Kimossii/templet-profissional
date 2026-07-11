@@ -49,7 +49,9 @@
 .hero__conteudo {
   position: relative;
   z-index: 2;
-  max-width: 720px;
+  max-width: 840px;
+  margin-inline: auto;
+  text-align: center;
 }
 
 .hero__eyebrow {
@@ -70,21 +72,37 @@
 
 #hero h1 {
   color: var(--cor-texto-claro);
+  font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
   margin-bottom: var(--espaco-sm);
 }
 
 .hero__texto {
   font-size: var(--fs-md);
   color: rgba(255, 255, 255, 0.88);
-  max-width: 60ch;
+  max-width: 85ch;
+  margin-inline: auto;
   margin-bottom: var(--espaco-lg);
 }
 
 .hero__acoes {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: var(--espaco-sm);
   margin-bottom: var(--espaco-xl);
+}
+
+.hero__cta {
+  background-color: transparent;
+  border-color: var(--cor-texto-claro);
+  color: var(--cor-texto-claro);
+  padding: 1rem 2.5rem;
+  font-size: var(--fs-md);
+}
+
+.hero__cta:hover {
+  background-color: var(--cor-texto-claro);
+  color: var(--cor-primaria-escura);
 }
 
 .hero__estatisticas {
