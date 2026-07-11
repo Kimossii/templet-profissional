@@ -1,1338 +1,613 @@
-<!doctype html >
-<html xmlns="http://www.w3.org/1999/xhtml" lang="pt"
-      class="ios-preview-native-scroll">
+<!doctype html>
+<html lang="pt">
 <head>
-    <meta charset="utf-8">
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script type="text/javascript">
-    window._currentDevice = 'desktop';
-    window.Parameters = window.Parameters || {
-        HomeUrl: 'https://www.apcir.pt/',
-
-        SystemID: 'US_DIRECT_PRODUCTION',
-        SiteAlias: '443a37e1',
-        SiteType: atob('RFVEQU9ORQ=='),
-        PublicationDate: 'Jun 30, 2026',
-        ExternalUid: '240050',
-        IsSiteMultilingual: false,
-        InitialPostAlias: '',
-        InitialPostPageUuid: '',
-        InitialDynamicItem: '',
-        DynamicPageInfo: {
-            isDynamicPage: false,
-            base64JsonRowData: 'null',
-        },
-        InitialPageAlias: 'home',
-        InitialPageUuid: '55f77c78f05a4bc0858849e9b2ae53a9',
-        InitialPageId: '1198472221',
-        InitialEncodedPageAlias: 'aG9tZQ==',
-        InitialHeaderUuid: '2c3a6f339e9f4e2c92414c1c66f00c81',
-        CurrentPageUrl: '',
-        IsCurrentHomePage: true,
-        AllowAjax: false,
-        AfterAjaxCommand: null,
-        HomeLinkText: 'Back To Home',
-        UseGalleryModule: false,
-        CurrentThemeName: 'Layout Theme',
-        ThemeVersion: '500000',
-        DefaultPageAlias: '',
-        RemoveDID: true,
-        WidgetStyleID: null,
-        IsHeaderFixed: false,
-        IsHeaderSkinny: false,
-        IsBfs: true,
-        StorePageAlias: 'null',
-        StorePagesUrls: 'e30=',
-        IsNewStore: 'false',
-        StorePath: '',
-        StoreId: 'null',
-        StoreVersion: 0,
-        StoreBaseUrl: '',
-        StoreCleanUrl: true,
-        StoreDisableScrolling: true,
-        IsStoreSuspended: false,
-        HasCustomDomain: true,
-        SimpleSite: false,
-        showCookieNotification: true,
-        cookiesNotificationMarkup: ' <div>Usamos cookies para garantir que voc&ecirc; tenha a melhor experi&ecirc;ncia em nosso website. Para saber mais, acesse a p&aacute;gina Privacidade.<\/div> \n',
-        translatedPageUrl: '',
-        isFastMigrationSite: false,
-        sidebarPosition: 'NA',
-        currentLanguage: 'pt',
-        currentLocale: 'pt',
-        NavItems: '{}',
-        errors: {
-            general: 'There was an error connecting to the page.<br/> Make sure you are not offline.',
-            password: 'Incorrect name/password combination',
-            tryAgain: 'Try again'
-        },
-        NavigationAreaParams: {
-            ShowBackToHomeOnInnerPages: true,
-            NavbarSize: 4,
-            NavbarLiveHomePage: 'https://www.apcir.pt/',
-            BlockContainerSelector: '.dmBody',
-            NavbarSelector: '#dmNav:has(a)',
-            SubNavbarSelector: '#subnav_main'
-        },
-        hasCustomCode: false,
-        planID: '1113',
-        customTemplateId: 'null',
-        siteTemplateId: 'null',
-        productId: 'DM_DIRECT',
-        disableTracking: true,
-        pageType: 'FROM_SCRATCH',
-        isRuntimeServer: true,
-        isInEditor: false,
-        isInPreview: false,
-        hasNativeStore: false,
-        defaultLang: 'pt',
-        hamburgerMigration: null,
-        isFlexSite: false
-    };
-
-    window.Parameters.LayoutID = {};
-    window.Parameters.LayoutID[window._currentDevice] = 6;
-    window.Parameters.LayoutVariationID = {};
-    window.Parameters.LayoutVariationID[window._currentDevice] = 5;
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- Injecting site-wide to the head -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script type="text/javascript" id="d_track_campaign">
-    (function() {
-        if (!window.location.search) {
-            return;
-        }
-        const cleanParams = window.location.search.substring(1); // Strip ?
-        const queryParams = cleanParams.split('&');
-
-        const expires = 'expires=' + new Date().getTime() + 24 * 60 * 60 * 1000;
-        const domain = 'domain=' + window.location.hostname;
-        const path = "path=/";
-
-        queryParams.forEach((param) => {
-            const [key, value = ''] = param.split('=');
-            if (key.startsWith('utm_')) {
-                const cookieName = "_dm_rt_" + key.substring(4);
-                const cookie = cookieName + "=" + value;
-                const joined = [cookie, expires, domain, path].join(";");
-                document.cookie = joined;
-            }
-        });
-    }());
-</script>
-<script type="text/javascript" >
-    var _dm_gaq = {};
-    var _gaq = _gaq || [];
-    var _dm_insite = [{ruleId: 4768983, actionName:'popup', ruleType: 'bfs'}];
-</script>
-
-
-
-
-
-
-<!-- End Injecting site-wide to the head -->
-
-<!-- Inject secured cdn script -->
-
-
-<!-- ========= Meta Tags ========= -->
-<script>
-    try {
-    if (
-        navigator.serviceWorker &&
-        navigator.serviceWorker.getRegistrations &&
-        location.protocol === 'https:'
-    ) {
-        // remove all service workers
-        navigator.serviceWorker
-            .getRegistrations()
-            .then(function (registrations) {
-                if (registrations && registrations.length) {
-                    console.log('unregistering service workers');
-                    registrations.forEach(function (registration) {
-                        registration.unregister();
-                    });
-                }
-            });
-        // clear caches
-        if (caches) {
-            caches.keys().then(function (keyList) {
-                if (keyList && keyList.length) {
-                    console.log('deleting caches');
-                    keyList.forEach(function (key) {
-                        if (key && key.indexOf('druntime') === 0) {
-                            caches.delete(key);
-                        }
-                    });
-                }
-            });
-        }
-    }
-} catch (err) {
-    // not a secured location
-}
-</script>
-
-
-
-<link rel="canonical" href="index.html">
-
-<meta id="view" name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=5, viewport-fit=cover">
-<meta name="dm:lcp-preload" content="https://lirp.cdn-website.com/md/pexels/dms3rep/multi/opt/pexels-photo-4586989-1920w.jpeg">
-<meta name="apple-mobile-web-app-capable" content="yes">
-
-<!--Add favorites icons-->
-
-<link rel="apple-touch-icon"
-      href="https://irp.cdn-website.com/443a37e1/dms3rep/multi/site_APCIR-07.png"/>
-
-<link rel="icon" type="image/x-icon" href="https://irp.cdn-website.com/443a37e1/site_favicon_16_1733310836405.ico"/>
-
-<!-- End favorite icons -->
-<link rel="preconnect" href="https://lirp.cdn-website.com/"/>
-
-
-
-<!-- render the required CSS and JS in the head section -->
-<script id='d-js-dmapi'>
-    window.SystemID = 'US_DIRECT_PRODUCTION';
-
-    if (!window.dmAPI) {
-        window.dmAPI = {
-            registerExternalRuntimeComponent: function () {
-            },
-            getCurrentDeviceType: function () {
-                return window._currentDevice;
-            },
-            runOnReady: (ns, fn) => {
-                const safeFn = dmAPI.toSafeFn(fn);
-                ns = ns || 'global_' + Math.random().toString(36).slice(2, 11);
-                const eventName = 'afterAjax.' + ns;
-
-                if (document.readyState === 'complete') {
-                    $.DM.events.off(eventName).on(eventName, safeFn);
-                    setTimeout(function () {
-                        safeFn({
-                            isAjax: false,
-                        });
-                    }, 0);
-                } else {
-                    window?.waitForDeferred?.('dmAjax', () => {
-                        $.DM.events.off(eventName).on(eventName, safeFn);
-                        safeFn({
-                            isAjax: false,
-                        });
-                    });
-                }
-            },
-            toSafeFn: (fn) => {
-                if (fn?.safe) {
-                    return fn;
-                }
-                const safeFn = function (...args) {
-                    try {
-                        return fn?.apply(null, args);
-                    } catch (e) {
-                        console.log('function failed ' + e.message);
-                    }
-                };
-                safeFn.safe = true;
-                return safeFn;
-            }
-        };
-    }
-
-    if (!window.requestIdleCallback) {
-        window.requestIdleCallback = function (fn) {
-            setTimeout(fn, 0);
-        }
-    }
-</script>
-
-<!-- loadCSS function header.jsp-->
-
-
-
-
-
-
-<script id="d-js-load-css">
-/**
- * There are a few <link> tags with CSS resource in them that are preloaded in the page
- * in each of those there is a "onload" handler which invokes the loadCSS callback
- * defined here.
- * We are monitoring 3 main CSS files - the runtime, the global and the page.
- * When each load we check to see if we can append them all in a batch. If threre
- * is no page css (which may happen on inner pages) then we do not wait for it
- */
-(function () {
-  let cssLinks = {};
-  function loadCssLink(link) {
-    link.onload = null;
-    link.rel = "stylesheet";
-    link.type = "text/css";
-  }
-  
-    function checkCss() {
-      const pageCssLink = document.querySelector("[id*='CssLink']");
-      const widgetCssLink = document.querySelector("[id*='widgetCSS']");
-
-        if (cssLinks && cssLinks.runtime && cssLinks.global && (!pageCssLink || cssLinks.page) && (!widgetCssLink || cssLinks.widget)) {
-            const storedRuntimeCssLink = cssLinks.runtime;
-            const storedPageCssLink = cssLinks.page;
-            const storedGlobalCssLink = cssLinks.global;
-            const storedWidgetCssLink = cssLinks.widget;
-
-            storedGlobalCssLink.disabled = true;
-            loadCssLink(storedGlobalCssLink);
-
-            if (storedPageCssLink) {
-                storedPageCssLink.disabled = true;
-                loadCssLink(storedPageCssLink);
-            }
-
-            if(storedWidgetCssLink) {
-                storedWidgetCssLink.disabled = true;
-                loadCssLink(storedWidgetCssLink);
-            }
-
-            storedRuntimeCssLink.disabled = true;
-            loadCssLink(storedRuntimeCssLink);
-
-            requestAnimationFrame(() => {
-                setTimeout(() => {
-                    storedRuntimeCssLink.disabled = false;
-                    storedGlobalCssLink.disabled = false;
-                    if (storedPageCssLink) {
-                      storedPageCssLink.disabled = false;
-                    }
-                    if (storedWidgetCssLink) {
-                      storedWidgetCssLink.disabled = false;
-                    }
-                    // (SUP-4179) Clear the accumulated cssLinks only when we're
-                    // sure that the document has finished loading and the document 
-                    // has been parsed.
-                    if(document.readyState === 'interactive') {
-                      cssLinks = null;
-                    }
-                }, 0);
-            });
-        }
-    }
-  
-
-  function loadCSS(link) {
-    try {
-      var urlParams = new URLSearchParams(window.location.search);
-      var noCSS = !!urlParams.get("nocss");
-      var cssTimeout = urlParams.get("cssTimeout") || 0;
-
-      if (noCSS) {
-        return;
-      }
-      if (link.href && link.href.includes("d-css-runtime")) {
-        cssLinks.runtime = link;
-        checkCss();
-      } else if (link.id === "siteGlobalCss") {
-        cssLinks.global = link;
-        checkCss();
-      } 
-      
-      else if (link.id && link.id.includes("CssLink")) {
-        cssLinks.page = link;
-        checkCss();
-      } else if (link.id && link.id.includes("widgetCSS")) {
-        cssLinks.widget = link;
-        checkCss();
-      }
-      
-      else {
-        requestIdleCallback(function () {
-          window.setTimeout(function () {
-            loadCssLink(link);
-          }, parseInt(cssTimeout, 10));
-        });
-      }
-    } catch (e) {
-      throw e
-    }
-  }
-  window.loadCSS = window.loadCSS || loadCSS;
-})();
-</script>
-
-
-
-<script data-role="deferred-init" type="text/javascript">
-    /* usage: window.getDeferred(<deferred name>).resolve() or window.getDeferred(<deferred name>).promise.then(...)*/
-    function Def() {
-        this.promise = new Promise((function (a, b) {
-            this.resolve = a, this.reject = b
-        }).bind(this))
-    }
-
-    const defs = {};
-    window.getDeferred = function (a) {
-        return null == defs[a] && (defs[a] = new Def), defs[a]
-    }
-    window.waitForDeferred = function (b, a, c) {
-        let d = window?.getDeferred?.(b);
-        d
-            ? d.promise.then(a)
-            : c && ["complete", "interactive"].includes(document.readyState)
-                ? setTimeout(a, 1)
-                : c
-                    ? document.addEventListener("DOMContentLoaded", a)
-                    : console.error(`Deferred  does not exist`);
-    };
-</script>
-<style id="forceCssIncludes">
-    /* This file is auto-generated from a `scss` file with the same name */
-
-.videobgwrapper{overflow:hidden;position:absolute;z-index:0;width:100%;height:100%;top:0;left:0;pointer-events:none;border-radius:inherit}.videobgframe{position:absolute;width:101%;height:100%;top:50%;left:50%;transform:translateY(-50%) translateX(-50%);object-fit:fill}#dm video.videobgframe{margin:0}@media (max-width:767px){.dmRoot .dmPhotoGallery.newPhotoGallery:not(.photo-gallery-done){min-height:80vh}}@media (min-width:1025px){.dmRoot .dmPhotoGallery.newPhotoGallery:not(.photo-gallery-done){min-height:45vh}}@media (min-width:768px) and (max-width:1024px){.responsiveTablet .dmPhotoGallery.newPhotoGallery:not(.photo-gallery-done){min-height:45vh}}#dm [data-show-on-page-only]{display:none!important}#dmRoot div.stickyHeaderFix div.site_content{margin-top:0!important}#dmRoot div.stickyHeaderFix div.hamburger-header-container{position:relative}
-    
-
-</style>
-<style id="cssVariables" type="text/css">
-    :root {
-  --color_1: rgba(34,56,85,1);
-  --color_2: rgba(111, 168, 179, 1);
-  --color_3: rgba(255,255,255,1);
-  --color_4: rgba(56, 163, 186, 1);
-  --color_5: rgba(233,246,255,1);
-  --color_6: rgba(56, 163, 186, 1);
-}
-</style>
-
-
-<style id="hideAnimFix">
-  .dmDesktopBody:not(.editGrid) [data-anim-desktop]:not([data-anim-desktop='none']), .dmDesktopBody:not(.editGrid) [data-anim-extended] {
-    visibility: hidden;
-  }
-
-  .dmDesktopBody:not(.editGrid) .dmNewParagraph[data-anim-desktop]:not([data-anim-desktop='none']), .dmDesktopBody:not(.editGrid) .dmNewParagraph[data-anim-extended] {
-    visibility: hidden !important;
-  }
-
-  #dmRoot:not(.editGrid) .flex-element [data-anim-extended] {
-    visibility: hidden;
-  }
-
-</style>
-
-
-
-<style id="criticalCss">
-    @charset "UTF-8";.videobgframe,.videobgwrapper{position:absolute;height:100%}.display_None,.dmPopupMask{display:none}@font-face{font-family:FontAwesome;font-display:block;src:url(https://static.cdn-website.com/fonts/fontawesome-webfont.eot?v=6);src:url(https://static.cdn-website.com/fonts/fontawesome-webfont.eot?#iefix&v=6) format("embedded-opentype"),url(https://static.cdn-website.com/fonts/fontawesome-webfont.woff?v=6) format("woff"),url(https://static.cdn-website.com/fonts/fontawesome-webfont.ttf?v=6) format("truetype"),url(https://static.cdn-website.com/fonts/fontawesome-webfont.svg#fontawesomeregular?v=6) format("svg");font-weight:400;font-style:normal}@font-face{font-family:'Source Sans Pro';font-style:normal;font-weight:400;font-display:swap;src:url(https://irp.cdn-website.com/fonts/s/sourcesanspro/v23/6xK3dSBYKcSV-LCoeQqfX1RYOo3qOK7l.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Source Sans Pro';font-style:normal;font-weight:700;font-display:swap;src:url(https://irp.cdn-website.com/fonts/s/sourcesanspro/v23/6xKydSBYKcSV-LCoeQqfX1RYOo3ig4vwlxdu.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Open Sans';font-style:normal;font-weight:300 800;font-stretch:100%;font-display:swap;src:url(https://irp.cdn-website.com/fonts/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Montserrat;font-style:normal;font-weight:100 900;font-display:swap;src:url(https://irp.cdn-website.com/fonts/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}.videobgwrapper{overflow:hidden;z-index:0;width:100%;top:0;left:0;border-radius:inherit}.videobgframe{width:101%;top:50%;left:50%;transform:translateY(-50%) translateX(-50%);object-fit:fill}#dm video.videobgframe{margin:0}:root{--color_1:rgba(34,56,85,1);--color_2:rgba(111, 168, 179, 1);--color_3:rgba(255,255,255,1);--color_4:rgba(56, 163, 186, 1);--color_5:rgba(233,246,255,1);--color_6:rgba(56, 163, 186, 1)}.dmInner{min-height:100vh!important;position:relative;min-width:768px!important}.dmPopup,.dmPopupMask{position:fixed;left:0}.dmDisplay_None{display:none!important}.clearfix:after{clear:both;visibility:hidden;line-height:0;height:0}.clearfix:after,.clearfix:before{content:" ";display:table}.clearfix{display:inline-block}#dm .dmWidget .icon{font-size:26px}body.dmRoot #dm .dmOuter .dmInner .dmWidget .icon.hasFontIcon{height:26px;margin-top:-13px;line-height:normal;text-align:center;background-image:none}.dmRoot .hasFontIcon{background-image:none!important}.dmPopupMask{margin:0;width:10px;z-index:1000000999;top:0}#dmRoot .dmPopup,.dmPopup,.dmPopupClose:before,[data-display-type=block]{display:block}.dmPopup{text-align:left;top:10px;width:93%;z-index:1000009999!important;box-sizing:border-box;background:#f5f5f5;overflow-y:auto;height:100%}.dmPopup .dmPopupTitle{text-align:left;font:700 19px Helvetica,Arial;margin:20px 20px 35px;color:#999}#dmPopup{opacity:0}.dmPopupClose,.dmPopupClose:before{position:absolute;visibility:visible}.dmPopupClose{border-radius:25px;width:27px;height:27px;z-index:1;background-color:rgba(255,255,255,.4);top:12px;right:12px}.dmPopupClose:before{font-size:20px;color:#000;top:3px;right:3px}body.dmDesktopBody:not(.mac) .data::-webkit-scrollbar{width:5px;height:5px}body.dmDesktopBody:not(.mac) .data::-webkit-scrollbar-track{background:rgba(0,0,0,.1)}body.dmDesktopBody:not(.mac) .data::-webkit-scrollbar-thumb{background:#c8c8c8;box-shadow:inset 0 1px 2px #454545;border-radius:45px}#dm .header-over-content #stickyHeaderSpacer{height:0!important}#dm .dmRespRow .dmRespColsWrapper{display:flex}#dm .dmBody .dmRespRow.relativePos,#dm .hasBackgroundOverlay:not(.dmPopupPage):not(.layout-drawer){position:relative!important}#dm .hasBackgroundOverlay:not(.hasExtraLayerOverlay):before{display:block!important;position:absolute!important;top:0!important;left:0!important;width:100%!important;height:100%!important;content:" "!important;border-radius:inherit}#dm .hasBackgroundOverlay.dmRespCol>[data-element-type]{position:relative}#dm .hasBackgroundOverlay>.bgExtraLayerOverlay{width:100%!important;height:100%!important;position:absolute;top:0;left:0}#dm .dmInner .dmWidget.align-center,.align-center{margin-left:auto;margin-right:auto}.text-align-center{text-align:center}body.fix-mobile-scrolling{overflow:initial}#dmRoot{text-decoration-skip-ink:none}.dmform-title{padding-right:15px;padding-left:15px}.contact-checkable-img{width:auto;height:100px;display:none;margin:5px}img,video{display:inline-block}.video-ssr .videobgframe{object-fit:cover}body{-webkit-overflow-scrolling:touch}@media (min-width:1025px){:root{--btn-text-font-size:16px}}@media (min-width:768px) and (max-width:1024px){:root{--btn-text-font-size:16px}}nav{display:block}[hidden]{display:none}html{font-family:Source Sans Pro;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0}img{border:0;max-width:100%;-ms-interpolation-mode:bicubic}button,input{font-family:inherit;font-size:100%;margin:0;line-height:normal}button{text-transform:none;-webkit-appearance:button}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}*,:after,:before{box-sizing:border-box}.dmRespRow.dmRespRowNoPadding{padding:0}.dmRespRow{padding-top:15px;padding-bottom:15px}.dmRespRow .dmRespRow:after,.dmRespRow .dmRespRow:before,.dmRespRow:after,.dmRespRow:before{content:" ";display:table}.dmRespRow .dmRespRow:after,.dmRespRow:after{clear:both}.dmRespRow,.dmRespRow .dmRespColsWrapper{max-width:960px;position:relative;margin:0 auto;width:100%}@media screen and (min-width:1200px){.rows-1200 .dmRespRow:not(.fullBleedMode) .dmRespColsWrapper{max-width:1200px}}.dmRespRow .dmRespCol{position:relative;width:100%;display:inline-block;vertical-align:top;float:left}.dmRespRow .dmRespCol>*{max-width:100%}.dmRespRow .dmRespRow{width:auto;margin-top:0;margin-bottom:0;max-width:none}.dmDesktopBody .dmRespRow .large-3{position:relative;width:25%}.dmDesktopBody .dmRespRow .large-6{position:relative;width:50%}.dmDesktopBody .dmRespRow .large-9{position:relative;width:75%}.dmDesktopBody .dmRespRow .large-12{position:relative;width:100%}[class*=" dm-common-icons-"]{speak:none;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-family:dm-common-icons!important}.dm-common-icons-close:before{content:"\e901"}#dm div.dmContent [class*=" icon-"],[class*=" icon-"]{font-family:FontAwesome!important;font-weight:400;font-style:normal;text-decoration:inherit;-webkit-font-smoothing:antialiased}[class*=" icon-"]:before{text-decoration:none;display:inline-block;speak:none}a [class*=" icon-"]{display:inline}[class*=" icon-"]{display:inline;width:auto;height:auto;line-height:normal;vertical-align:baseline;background-image:none;background-position:0 0;background-repeat:repeat;margin-top:0}.icon-star:before{content:"\f005"}.icon-angle-right:before{content:"\f105"}.icon-angle-down:before{content:"\f107"}#dm .dmRespRow .dmRespCol>.dmWidget{overflow:initial}@media (min-width:768px){#dm .dmRespRow .dmRespCol>.dmWidget{width:280px;max-width:100%}}@media (max-width:767px){#dm .dmInner .dmWidget{width:100%}}#dm .dmInner .dmWidget:not(.displayNone){display:inline-block}#dm .dmInner .dmWidget:not(.flexButton):not(.displayNone)[data-display-type=block]{display:block}#dm .dmInner .dmWidget{text-decoration:none;margin:10px 0;clear:both;position:relative;text-align:center;line-height:22px;box-shadow:none;background-image:none;padding:0;height:auto;border-style:solid;white-space:nowrap}#dm .dmInner .dmWidget:after{content:"";display:inline-block;height:100%;vertical-align:middle;width:0;margin-right:-.25em}#dm .dmInner .dmWidget .iconBg{position:absolute;left:0;width:50px;top:50%;margin-top:-13px}#dm .dmWidget .text{display:inline-block;vertical-align:middle;font-size:1.125em;line-height:normal;white-space:normal;padding:10px 7px;max-width:98%}p.rteBlock{margin:0}html:not(.ios-preview) #dm .hasStickyHeader .dmInner div.dmHeaderContainer{position:fixed!important;z-index:101;width:100%;min-width:768px}#dm .header-over-content .dmHeaderContainer{position:absolute;z-index:101;width:100%}[data-video-bg]{min-height:100px}.dmNewParagraph[data-version] .text-align-left{text-align:left!important}.dmNewParagraph[data-version] .text-align-center{text-align:center!important}.dmNewParagraph[data-version]{line-height:initial}.dmNewParagraph[data-version] [class*=size-]{width:auto!important;height:auto!important}.dmNewParagraph[data-version] h1,.dmNewParagraph[data-version] h2,.dmNewParagraph[data-version] h4,.dmNewParagraph[data-version] p{margin-top:0;margin-bottom:0}.imageWidget{position:relative}.imageWidget a{font-style:italic;text-align:center}#dm .postText *,#dm [list-layout=layout4][text-align=left] .postText *,.dmNewParagraph{text-align:left}.imageWidget img[width][height]{height:auto}#dm div.dmInner .dmform[data-layout=layout-3] .dmforminput>:not(label):not(div):not(small):not(.frc-banner){background:0;border:0;border-radius:0;-webkit-appearance:none;border-bottom:1px solid;height:30px}#dm div.dmInner .dmform .dmforminput label[hide=true]{display:none}.dmform .dmforminput label{display:block;overflow:hidden;text-overflow:ellipsis}#dm [blog-posts-feature-flag=true][dmle_extension=internal_blog_list][show-author=false] .authorBar,#dm [dmle_extension=internal_blog_list][show-author=false] .authorBar{display:none}#dm div.dmInner .native-inputs .contact-checkable-container .contact-checkable-img{margin-left:0;margin-bottom:0}#dm .postArticle .authorBar{font-size:80%;opacity:.8}#dm [list-layout=layout4] .postArticle .authorBar{margin:0 0 15px;padding:0}img[width][height]{height:auto}*{border:0 solid #333;scrollbar-arrow-color:#fff;scrollbar-track-color:#F2F2F2;scrollbar-face-color:silver;scrollbar-highlight-color:silver;scrollbar-3dlight-color:silver;scrollbar-shadow-color:silver;scrollbar-darkshadow-color:silver;scrollbar-width:12px}body{width:100%;overflow:hidden;-webkit-text-size-adjust:100%!important;-ms-text-size-adjust:100%!important}A IMG{border:none}h1,h2,h3,h4,ul{margin-left:0;margin-right:0}#dm video{max-width:100%!important;display:block;margin:10px auto}.dmInner *{-webkit-font-smoothing:antialiased}.clearfix,a,img,li,ul{vertical-align:top}#iscrollBody,#site_content{position:relative}.dmOuter{word-wrap:break-word}.dmInner{font-size:16px;background:#fff;color:#666}.dmDesktopBody .dmInner{min-width:960px}.dmInner a{color:#463939}.dmInner ul:not(.defaultList){padding:0}.dmHeader{background:#68ccd1;color:#666;text-align:center;position:relative;width:100%;max-width:100%}DIV.dmBody{padding:0;clear:both}.dmContent{margin:0;padding:0}#site_content ul:not(.defaultList){-webkit-padding-start:0;-moz-padding-start:0;list-style-position:inside}#innerBar{position:relative;height:36px;width:100%;font-size:20px;margin:0;z-index:80}#dm .dmRespRow.dmRespRowNoPadding{padding:0}.dmRespRowsWrapper{max-width:960px;margin:0 auto}.dmLargeBody .imageWidget:not(.displayNone){display:inline-block;max-width:100%}.imageWidget:not(.displayNone) img{width:100%}h3{font-weight:400;font-size:23px}#dm .dmRespColsWrapper{display:block}.dmNewParagraph{margin:8px 0;padding:2px 0}.dmLargeBody .dmRespRowsWrapper>.dmRespRow .dmRespCol,.dmLargeBody .fHeader .dmRespRow .dmRespCol{padding-left:.75%;padding-right:.75%}.dmLargeBody .dmRespRowsWrapper>.dmRespRow .dmRespCol:first-child,.dmLargeBody .fHeader .dmRespRow .dmRespCol:first-child{padding-left:0;padding-right:1.5%}.dmLargeBody .dmRespRowsWrapper>.dmRespRow .dmRespCol:last-child,.dmLargeBody .fHeader .dmRespRow .dmRespCol:last-child{padding-right:0;padding-left:1.5%}.dmLargeBody .dmRespRowsWrapper>.dmRespRow .dmRespCol:only-child{padding-left:0;padding-right:0}#innerBar.lineInnerBar{display:table;width:100%;box-shadow:none;-webkit-box-shadow:none;-moz-box-shadow:none;font-size:20px;margin-top:30px;margin-bottom:30px;background-color:transparent;color:#666}#innerBar .titleLine{display:table-cell;vertical-align:middle;width:50%}.dmPageTitleRow:not(#innerBar){display:none}.titleLine hr{min-height:1px;background-color:rgba(102,102,102,.2)}.dmStandardDesktop{display:block}#dmFirstContainer .dmRespRowsWrapper:after,#dmFirstContainer .dmRespRowsWrapper:before{content:"";display:table}.dmInner a{outline:0;vertical-align:inherit}.dmLinksMenu>ul{display:block;margin:0;font-size:inherit}.dmStandardDesktop{margin:0 auto}#dm h3.dmwidget-title[hide=true]{display:none}#dm .dmwidget-title{margin:10px 0;font-size:23px;text-shadow:none;text-transform:capitalize;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;word-wrap:normal}#dm .dmDivider{display:block;margin:10px 0}.dmSpacer{border:0;height:15px}body{background-color:#eee}.dmDivider{min-height:2px;border:currentColor;color:grey;background:0 0}#dm .dmDividerWrapper{display:block}.main-navigation.unifiednav{-js-display:flex;display:flex;justify-content:flex-start;align-items:stretch;overflow:visible}.main-navigation.unifiednav ul{list-style:none;padding:0;margin:0;font-size:1rem}.main-navigation.unifiednav .unifiednav__container{-js-display:flex;display:flex;justify-content:flex-start;list-style:none}.main-navigation.unifiednav .unifiednav__container>.unifiednav__item-wrap{-js-display:flex;display:flex;justify-content:flex-start;position:relative;font-weight:400}.main-navigation.unifiednav .unifiednav__container:not([data-depth])>.unifiednav__item-wrap::after,.main-navigation.unifiednav .unifiednav__container:not([data-depth])>.unifiednav__item-wrap::before{content:'';align-self:center;font-weight:700}.main-navigation.unifiednav .unifiednav__container>.unifiednav__item-wrap>.unifiednav__item{-js-display:flex;display:flex;justify-content:flex-start;align-items:center;flex-direction:row;color:inherit;text-decoration:none;position:relative;padding:12px 15px;margin:0;font-weight:inherit;letter-spacing:.03em}.main-navigation.unifiednav .unifiednav__container:not([data-depth])>.unifiednav__item-wrap>.unifiednav__item{padding:0 15px}.main-navigation.unifiednav .unifiednav__container>.unifiednav__item-wrap>.unifiednav__item .nav-item-text{white-space:nowrap}.main-navigation.unifiednav .unifiednav__container:not([data-depth])>.unifiednav__item-wrap>.unifiednav__item .nav-item-text::after,.main-navigation.unifiednav .unifiednav__container:not([data-depth])>.unifiednav__item-wrap>.unifiednav__item .nav-item-text::before{content:'';width:100%;height:0;border:0 solid transparent;border-top-color:currentColor;display:block;opacity:0}.main-navigation.unifiednav .unifiednav__container:not([data-depth])>.unifiednav__item-wrap>.unifiednav__item.dmNavItemSelected .nav-item-text::after,.main-navigation.unifiednav .unifiednav__container:not([data-depth])>.unifiednav__item-wrap>.unifiednav__item.dmNavItemSelected .nav-item-text::before{opacity:1}.main-navigation.unifiednav.effect-bottom2{padding:calc(12px - .2em - 2px) 15px}.main-navigation.unifiednav.effect-bottom2 .unifiednav__container:not([data-depth])>.unifiednav__item-wrap>.unifiednav__item .nav-item-text::after,.main-navigation.unifiednav.effect-bottom2 .unifiednav__container:not([data-depth])>.unifiednav__item-wrap>.unifiednav__item .nav-item-text::before{transform:scaleX(0);border-top-width:2px}.main-navigation.unifiednav.effect-bottom2 .unifiednav__container:not([data-depth])>.unifiednav__item-wrap>.unifiednav__item .nav-item-text::after{margin-top:.2em}.main-navigation.unifiednav.effect-bottom2 .unifiednav__container:not([data-depth])>.unifiednav__item-wrap>.unifiednav__item .nav-item-text::before{margin-bottom:.2em;border-top-color:transparent}.main-navigation.unifiednav.effect-bottom2 .unifiednav__container:not([data-depth])>.unifiednav__item-wrap>.unifiednav__item.dmNavItemSelected .nav-item-text::after,.main-navigation.unifiednav.effect-bottom2 .unifiednav__container:not([data-depth])>.unifiednav__item-wrap>.unifiednav__item.dmNavItemSelected .nav-item-text::before{transform:scaleX(1)}.main-navigation.unifiednav.effect-bottom2 .unifiednav__container:not([data-depth])>.unifiednav__item-wrap>.unifiednav__item .nav-item-text::after,.main-navigation.unifiednav.effect-bottom2 .unifiednav__container:not([data-depth])>.unifiednav__item-wrap>.unifiednav__item .nav-item-text::before{transform-origin:left}.main-navigation.unifiednav .unifiednav__container .unifiednav__item:not(.unifiednav__item_has-sub-nav) .icon{display:none}.main-navigation.unifiednav .unifiednav__container[data-depth]{position:absolute;top:0;left:0;flex-direction:column;opacity:0;z-index:100;background-color:#faf9f9}.main-navigation.unifiednav .unifiednav__container[data-depth='0']{top:100%;transform:translateY(-10px)}.main-navigation.unifiednav:not(.unifiednav_vertical) .unifiednav__container[data-depth='0']{left:15px}.main-navigation.unifiednav .unifiednav__container>.unifiednav__item-wrap .unifiednav__container>.unifiednav__item-wrap{flex-direction:column}.main-navigation.unifiednav .unifiednav__container[data-depth]>.unifiednav__item-wrap .unifiednav__item{padding:15px 30px 15px 15px;margin:0}.main-navigation.unifiednav .unifiednav__container[data-depth]>.unifiednav__item-wrap:not(:last-child)::after{content:''!important;width:100%;height:0;color:#ececec;align-self:center;border:0 solid currentColor}.main-navigation.unifiednav[layout-sub=submenu_horizontal_1] .unifiednav__container[data-depth]{color:#999}.main-navigation.unifiednav .unifiednav__container>.unifiednav__item-wrap>.unifiednav__item.unifiednav__item_has-sub-nav .icon{display:initial;padding-left:10px;margin-left:0}.main-navigation.unifiednav:not(.unifiednav_vertical)>.unifiednav__container{justify-content:inherit}#dm .p_hfcontainer nav.main-navigation.unifiednav{min-width:9em!important;text-align:initial!important}#dm .main-navigation.unifiednav .unifiednav__container[data-depth]{background-color:transparent}#dm .main-navigation.unifiednav[layout-sub=submenu_horizontal_1] .unifiednav__container[data-depth]{background-color:#faf9f9}#dm .main-navigation.unifiednav .unifiednav__container[data-depth]>.unifiednav__item-wrap:not(:last-child)::after{color:#d1d1d1}#dm div.dmContent h1,#dm div.dmContent h3{color:#666;font-family:Montserrat,"Montserrat Fallback";font-style:normal;text-decoration:none;direction:ltr}#dm .main-navigation.unifiednav[data-nav-structure=VERTICAL][data-show-vertical-sub-items=HOVER]>.unifiednav__container:not([data-depth])>.unifiednav__item-wrap .unifiednav__item.dmNavItemSelected>.nav-item-text .icon::before{transform:rotate(180deg)}#dm .main-navigation.unifiednav:not([data-nav-structure=VERTICAL])>.unifiednav__container{flex-wrap:wrap;justify-content:inherit}#dm .main-navigation.unifiednav:not([data-nav-structure=VERTICAL])>.unifiednav__container .nav-item-text::before{text-align:left}#dm .main-navigation.unifiednav:not([data-nav-structure=VERTICAL]) .unifiednav__container:not([data-depth])>.unifiednav__item-wrap:not(:last-child)::after,#dm .main-navigation.unifiednav:not([data-nav-structure=VERTICAL]) .unifiednav__container:not([data-depth])>.unifiednav__item-wrap:not(:last-child)::before{content:''}#dm .dmBody .dmRespRowsWrapper{max-width:none;background-color:transparent}.dmLargeBody .dmRespRow{width:100%;max-width:none;margin-left:0;margin-right:0;padding-left:40px;padding-right:40px}.dm-bfs.dm-layout-home div.dmInner{background-color:#fff}.dmStandardDesktop .dmHeader{background-color:#68ccd1;max-width:100%}.standardHeaderLayout .dmHeader{float:none;display:block;height:auto}#dm .p_hfcontainer div.u_1297751436,#dm .p_hfcontainer div.u_1676742201,#dm .p_hfcontainer nav.u_1200155555{float:none!important;left:0!important;min-width:0!important}#dm div.dmRespCol>*{line-height:normal}#dm div.dmContent h3{color:rgba(96,109,131,1)}#dm div.dmContent h2{font-family:Montserrat,"Montserrat Fallback";text-decoration:none;font-style:normal;direction:ltr;font-size:45px}#dm .dmform .dmforminput label,#dm div.dmInner,#dm div.dmInner .dmRespCol{color:rgba(88,114,145,1);font-family:"Open Sans","Open Sans Fallback";font-weight:300;font-style:normal;font-size:16px}#dm .dmNewParagraph,#dm .dmwidget-title,#dm .rteBlock,#dm h1,#dm h2,#dm h3,#dm h4{direction:ltr;text-align:left}.dmLargeBody .dmBody .dmRespRowsWrapper{background-color:transparent}#dm div.dmContent h1{font-weight:400;color:var(--color_1);font-size:60px}#dm div.dmContent h4{font-style:normal;font-family:Montserrat,"Montserrat Fallback";font-weight:700;color:var(--color_1);text-decoration:none;direction:ltr;font-size:20px}#dm div.dmContent h2,#dm div.dmContent h3{color:var(--color_1);font-weight:400}#dm .dmContent .dmRespRow,#dm DIV.dmOuter DIV.dmInner{background-color:rgba(0,0,0,0)}#dm div.dmContent h3{font-size:24px}@media all{:root{--btn-text-direction:ltr;--btn-border-r-color:var(--btn-border-color);--btn-border-l-color:var(--btn-border-color);--btn-border-b-width:var(--btn-border-width);--btn-border-width:2px;--btn-border-radius:0px;--btn-border-t-width:var(--btn-border-width);--btn-border-tl-radius:var(--btn-border-radius);--btn-border-br-radius:var(--btn-border-radius);--btn-border-bl-radius:var(--btn-border-radius);--btn-bg-color:rgba(0, 0, 0, 0);--btn-border-color:var(--color_1);--btn-border-tr-radius:var(--btn-border-radius);--btn-border-r-width:var(--btn-border-width);--btn-bg-image:none;--btn-border-b-color:var(--btn-border-color);--btn-border-l-width:var(--btn-border-width);--btn-border-t-color:var(--btn-border-color);--btn-text-align:center;--btn-text-color:rgb(35, 56, 85);--btn-text-decoration:none;--btn-text-font-weight:700;--btn-text-font-family:Montserrat,"Montserrat Fallback";--btn-icon-color:rgb(0, 41, 112);--btn-icon-fill:rgb(0, 41, 112);--btn-icon-wrpr-display:none;--btn-hover-border-b-color:var(--btn-hover-border-color);--btn-hover-bg:var(--color_1);--btn-hover-border-t-color:var(--btn-hover-border-color);--btn-hover-border-r-color:var(--btn-hover-border-color);--btn-hover-border-l-color:var(--btn-hover-border-color);--btn-hover-border-color:rgba(0, 0, 0, 0);--btn-hover-text-color:var(--color_3);--btn-hover-text-font-weight:var(--btn-text-font-weight);--btn-hover-text-decoration:var(--btn-text-decoration);--btn-hover-text-font-style:var(--btn-text-font-style)}}@media (min-width:0px) and (max-width:767px){:root{--btn-text-font-size:16px}}#dm .dmWidget:not([data-buttonstyle]){overflow:initial;background-clip:border-box;border-radius:1px}#dm .dmWidget:not([data-buttonstyle]) .text{padding:16px 0}#dm .dmWidget:not([data-buttonstyle]) .iconBg{display:none}@media (min-width:768px){#dm .dmRespRow .dmRespCol>.dmWidget{width:222px}}#dm div.dmInner #site_content .dmWidget{background-color:var(--btn-bg-color);background-image:var(--btn-bg-image);border-color:var(--btn-border-color);border-bottom-color:var(--btn-border-b-color);border-left-color:var(--btn-border-l-color);border-right-color:var(--btn-border-r-color);border-top-color:var(--btn-border-t-color);border-radius:var(--btn-border-radius);border-bottom-left-radius:var(--btn-border-bl-radius);border-bottom-right-radius:var(--btn-border-br-radius);border-top-left-radius:var(--btn-border-tl-radius);border-top-right-radius:var(--btn-border-tr-radius);border-width:var(--btn-border-width);border-bottom-width:var(--btn-border-b-width);border-left-width:var(--btn-border-l-width);border-right-width:var(--btn-border-r-width);border-top-width:var(--btn-border-t-width);direction:var(--btn-text-direction);text-align:var(--btn-text-align)}#dm div.dmInner #site_content .dmWidget span.text{color:var(--btn-text-color);font-family:var(--btn-text-font-family);font-size:var(--btn-text-font-size);font-weight:var(--btn-text-font-weight);text-decoration:var(--btn-text-decoration)}#dm .p_hfcontainer .u_1200155555.main-navigation.unifiednav:not(.unifiednav_vertical) .unifiednav__container:not([data-depth])>.unifiednav__item-wrap:not(:last-child)::after,#dm .p_hfcontainer .u_1200155555.main-navigation.unifiednav:not(.unifiednav_vertical) .unifiednav__container:not([data-depth])>.unifiednav__item-wrap:not(:last-child)::before,#dm .p_hfcontainer nav.u_1200155555.main-navigation.unifiednav .unifiednav__container:not([data-depth])>.unifiednav__item-wrap>.unifiednav__item,#dm .p_hfcontainer nav.u_1200155555.main-navigation.unifiednav .unifiednav__container[data-depth] .unifiednav__item{font-size:14px!important}#dm div.dmInner #site_content .dmWidget span.icon{color:var(--btn-icon-color);fill:var(--btn-icon-fill)}#dm .p_hfcontainer nav.u_1200155555.main-navigation.unifiednav .unifiednav__container:not([data-depth])>.unifiednav__item-wrap>.unifiednav__item,#dm .p_hfcontainer nav.u_1200155555.main-navigation.unifiednav .unifiednav__container[data-depth] .unifiednav__item{font-family:Montserrat!important;color:var(--color_3)!important}#dm div.dmInner #site_content .dmWidget:not([data-buttonstyle]) .iconBg{display:var(--btn-icon-wrpr-display)}#dm .p_hfcontainer div.u_1297751436 img{border-radius:0!important;-moz-border-radius:0!important;-webkit-border-radius:0!important}#dm .p_hfcontainer nav.u_1200155555.main-navigation.unifiednav .unifiednav__container[data-depth]>.unifiednav__item-wrap:not(:last-child)::after{border-top-style:solid!important;border-top-width:1px!important;border-top-color:var(--color_3)!important}#dm .p_hfcontainer nav.u_1200155555.main-navigation.unifiednav .unifiednav__container[data-depth]{background-color:rgba(0,0,0,.1)!important}#dm .p_hfcontainer .u_1200155555.main-navigation.unifiednav .unifiednav__container[data-depth] .unifiednav__item{padding-right:15px!important}div#dm .header-over-content .dmInner .dmHeader:not(.scroll-responder_set){background-color:rgba(0,0,0,0)!important}#dm .p_hfcontainer .u_1297751436{width:100%!important}#dm .p_hfcontainer div.u_1676742201{border-style:solid!important;border-color:var(--color_1)!important;border-width:0!important;background-color:var(--color_1)!important}#dm .dmInner div.dmHeader,#dm .dmInner div.dmHeader.u_hcontainer,#dm .dmInner div.u_hcontainer{background-color:rgba(0,0,0,0)!important;border-style:solid!important;border-width:0!important;box-shadow:none!important;-moz-box-shadow:none!important;-webkit-box-shadow:none!important;border-color:rgba(57,181,74,1)!important}#dm .dmInner div.dmHeader.u_hcontainer,#dm .dmInner div.u_hcontainer{padding-top:10px!important;padding-bottom:17px!important}.fHeader #hcontainer.dmHeader[freeheader=true]{padding-top:initial!important;padding-bottom:initial!important}#dm .dmInner div.fHeader .dmHeader[freeheader=true]{padding-top:20px!important;padding-bottom:20px!important}#dm .p_hfcontainer div.u_1297751436{top:0!important;width:209px!important;position:relative!important;max-width:100%!important;text-align:center!important;display:block!important;padding:0!important;margin:-1px auto 0 0!important}#dm .p_hfcontainer div.u_1292756149{padding:0!important}#dm .p_hfcontainer div.u_1656708059{padding-left:10px!important}#dm .p_hfcontainer div.u_1676742201{top:0!important;width:auto!important;position:relative!important;height:auto!important;min-height:auto!important;max-width:100%!important;text-align:center!important;padding:20px 0!important;margin:-20px 0 0!important}#dm .p_hfcontainer nav.u_1200155555{color:#fff!important;top:0!important;width:100%!important;position:relative!important;height:auto!important;max-width:100%!important;justify-content:center!important;align-items:stretch!important;text-align:center!important;padding:7px 15px 6.8px!important;margin:7px 0 0!important}.stickyHeaderSpacer{height:112.95px!important}#dm .dmBody a.u_1445436586 span.text{color:var(--color_3)!important;font-weight:700!important}#dm .dmBody div.u_1140576514{background-color:var(--color_3)!important}#dm .dmBody .u_1928535356:before{opacity:.5!important;background-color:var(--color_3)!important}#dm .dmBody div.u_1928535356:before{background-color:rgba(0,0,0,1)!important;opacity:.06!important}#dm .dmBody div.u_1318242600{background-color:var(--color_5)!important}#dm .dmBody div.dmform-error{color:var(--color_3)!important}#dm .dmBody div.u_1177656182 hr{color:var(--color_4)!important;border-top-width:4px!important;border-top-style:solid!important}#dm .dmBody div.u_1452009612 .dmforminput input{color:var(--color_3)!important}#dm .dmBody div.u_1452009612 .dmforminput label{color:var(--color_3)!important;font-weight:400!important;font-size:16px!important}#dm .dmBody .u_1727689151:before,#dm .dmBody .u_1727689151>.bgExtraLayerOverlay{opacity:.5!important;background-color:#106eb8!important}#dm .dmBody div.u_1727689151{background-color:rgba(0,0,0,0)!important;background-image:url(https://lirp.cdn-website.com/md/pexels/dms3rep/multi/opt/pexels-photo-4586989-1920w.jpeg),url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAABhGlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw0AcxV9TpUUqHSwo4pChOlkQFemoVShChVArtOpgcukXNGlIUlwcBdeCgx+LVQcXZ10dXAVB8APEzc1J0UVK/F9aaBHjwXE/3t173L0DhEaFaVbPBKDptplOJsRsblUMvEJAGEEMIi4zy5iTpBQ8x9c9fHy9i/Es73N/jn41bzHAJxLPMsO0iTeIZzZtg/M+cYSVZJX4nHjcpAsSP3JdafEb56LLAs+MmJn0PHGEWCx2sdLFrGRqxNPEUVXTKV/ItljlvMVZq9RY+578haG8vrLMdZojSGIRS5AgQkENZVRgI0arToqFNO0nPPzDrl8il0KuMhg5FlCFBtn1g//B726twtRkKymUAHpfHOdjFAjsAs2643wfO07zBPA/A1d6x19tAPFP0usdLXoEhLeBi+uOpuwBlzvA0JMhm7Ir+WkKhQLwfkbflAMGboG+tVZv7X2cPgAZ6ip1AxwcAmNFyl73eHewu7d/z7T7+wFwJnKmZ9+MiwAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+UCDwksLkLIPkkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAC0lEQVQI12NgAAIAAAUAAeImBZsAAAAASUVORK5CYII=)!important;-webkit-box-shadow:none!important;box-shadow:none!important;-moz-box-shadow:none!important}#dm .dmBody div.u_1727689151:before,#dm .dmBody div.u_1727689151>.bgExtraLayerOverlay{opacity:.77!important;background-image:linear-gradient(0deg,rgba(35,78,146,1) 0,rgba(56,163,186,1) 100%)!important}#dm .dmBody div.u_1928535356{background-repeat:no-repeat!important;background-image:url(https://lirp.cdn-website.com/443a37e1/dms3rep/multi/opt/Dr.-Kris-Maes_a1-1920w.jpeg),url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAABhGlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw0AcxV9TpUUqHSwo4pChOlkQFemoVShChVArtOpgcukXNGlIUlwcBdeCgx+LVQcXZ10dXAVB8APEzc1J0UVK/F9aaBHjwXE/3t173L0DhEaFaVbPBKDptplOJsRsblUMvEJAGEEMIi4zy5iTpBQ8x9c9fHy9i/Es73N/jn41bzHAJxLPMsO0iTeIZzZtg/M+cYSVZJX4nHjcpAsSP3JdafEb56LLAs+MmJn0PHGEWCx2sdLFrGRqxNPEUVXTKV/ItljlvMVZq9RY+578haG8vrLMdZojSGIRS5AgQkENZVRgI0arToqFNO0nPPzDrl8il0KuMhg5FlCFBtn1g//B726twtRkKymUAHpfHOdjFAjsAs2643wfO07zBPA/A1d6x19tAPFP0usdLXoEhLeBi+uOpuwBlzvA0JMhm7Ir+WkKhQLwfkbflAMGboG+tVZv7X2cPgAZ6ip1AxwcAmNFyl73eHewu7d/z7T7+wFwJnKmZ9+MiwAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+UCDwksLkLIPkkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAC0lEQVQI12NgAAIAAAUAAeImBZsAAAAASUVORK5CYII=)!important;background-size:cover!important}#dm .dmBody div.u_1162380900{padding:0!important;margin:0!important}#dm .dmBody div.u_1306635763,#dm .dmBody div.u_1727781700{max-width:calc(100% - 0px)!important;min-width:25px!important;padding:2px 0!important;height:auto!important;float:none!important;top:0!important;left:0!important;position:relative!important}#dm .dmBody div.u_1727781700{width:521px!important;margin:15px 0 8px!important}#dm .dmBody div.u_1306635763{width:490px!important;display:block!important;margin:20px 462px 0 0!important}#dm .dmBody div.u_1318242600{padding:40px!important}#dm .dmBody div.u_1177656182{width:110px!important;display:block!important;float:none!important;top:0!important;left:0!important;position:relative!important;height:auto!important;max-width:100%!important;min-width:0!important;text-align:center!important;padding:0!important;margin:0 auto 0 0!important}#dm .dmBody div.u_1140576514{margin-top:0!important;padding:70px 40px!important}#dm .d-page-1716942098 DIV.dmInner{background-repeat:repeat!important;background-image:none!important;background-size:auto!important;background-attachment:fixed!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important}#dm .dmBody div.u_1727689151 .videobgframe{object-position:41% 50%!important;object-fit:cover!important}#dm .dmBody a.u_1445436586{border-color:var(--color_3)!important;display:block!important;float:none!important;top:0!important;left:0!important;width:calc(100% - 480px)!important;position:relative!important;height:60px!important;max-width:236px!important;min-width:25px!important;text-align:center!important;min-height:auto!important;margin:73px auto 0!important;padding:0!important}#dm .dmBody div.u_1727689151,#dm .dmBody div.u_1809890126{max-width:100%!important;float:none!important;top:0!important;left:0!important;position:relative!important;height:auto!important;min-height:auto!important}#dm .dmBody div.u_1809890126{width:calc(100% - 0px)!important;min-width:25px!important;padding:2px 0!important;margin:45px auto 8px!important}#dm .dmBody div.u_1727689151{width:auto!important;min-width:0!important;text-align:center!important;background-repeat:no-repeat!important;background-size:cover!important;background-attachment:initial!important;background-position:50% 50%!important;padding:80.5px 40px 105.5px!important;margin:0!important}#dm .dmBody div.u_1180150324{float:none!important;top:0!important;left:0!important;width:calc(100% - 186px)!important;position:relative!important;height:auto!important;max-width:828px!important;min-width:25px!important;display:block!important;min-height:auto!important;padding:2px 0!important;margin:106px auto 8px!important}#dm .dmBody div.u_1928535356{background-position:50% 0!important}.font-size-48{font-size:48px!important}.font-size-20,.size-20{font-size:20px!important}#\31 035950909,#\31 200155555,#\31 299197567,#\31 308679831,#\31 450780278,#\31 532638140,#\31 618982020,#\31 824747099,#\31 834218732,#\31 837856251,#\31 896802789,#\31 908981315{order:0;flex-direction:row}#\33 2805{order:1}#\33 6062{order:2}#\31 223280141,#\31 828340425{order:0}#\31 223280141{flex-direction:row} #dm .dmPhotoGallery.newPhotoGallery .dmPhotoGalleryHolder:not(.photo-gallery-done) {display: none;} @media (max-width:767px){ [data-hidden-on-mobile] {display:none!important}}
-    .dmDesktopBody [data-anim-desktop]:not([data-anim-desktop='none']) {
-      visibility: hidden;
-    }
-
-    
-</style>
-
-
-
-<style id="fontFallbacks">
-    @font-face {
-  font-family: "Lobster Two Fallback";
-  src: local('Arial');
-  ascent-override: 123.9905%;
-  descent-override: 30.9976%;
-  size-adjust: 80.6513%;
-  line-gap-override: 0%;
- }@font-face {
-  font-family: "Creepster Fallback";
-  src: local('Arial');
-  ascent-override: 104.0992%;
-  descent-override: 23.8338%;
-  size-adjust: 91.3717%;
-  line-gap-override: 0%;
- }@font-face {
-  font-family: "Inter Fallback";
-  src: local('Arial');
-  ascent-override: 90.199%;
-  descent-override: 22.4836%;
-  size-adjust: 107.4014%;
-  line-gap-override: 0%;
- }@font-face {
-  font-family: "Amiko Fallback";
-  src: local('Arial');
-  ascent-override: 82.254%;
-  descent-override: 35.9861%;
-  size-adjust: 112.8212%;
-  line-gap-override: 0%;
- }@font-face {
-  font-family: "Creepster Fallback";
-  src: local('Arial');
-  ascent-override: 104.0992%;
-  descent-override: 23.8338%;
-  size-adjust: 91.3717%;
-  line-gap-override: 0%;
- }@font-face {
-  font-family: "Lobster Fallback";
-  src: local('Arial');
-  ascent-override: 114.651%;
-  descent-override: 28.6627%;
-  size-adjust: 87.2212%;
-  line-gap-override: 0%;
- }@font-face {
-  font-family: "Montserrat Fallback";
-  src: local('Arial');
-  ascent-override: 84.9466%;
-  descent-override: 22.0264%;
-  size-adjust: 113.954%;
-  line-gap-override: 0%;
- }@font-face {
-  font-family: "Arvo Fallback";
-  src: local('Arial');
-  ascent-override: 87.6577%;
-  descent-override: 22.538%;
-  line-gap-override: 2.4498%;
-  size-adjust: 109.6239%;
-}@font-face {
-  font-family: "Oswald Fallback";
-  src: local('Arial');
-  ascent-override: 145.0682%;
-  descent-override: 35.1423%;
-  size-adjust: 82.2372%;
-  line-gap-override: 0%;
- }@font-face {
-  font-family: "Open Sans Fallback";
-  src: local('Arial');
-  ascent-override: 101.1768%;
-  descent-override: 27.7323%;
-  size-adjust: 105.6416%;
-  line-gap-override: 0%;
- }@font-face {
-  font-family: "Eater Fallback";
-  src: local('Arial');
-  ascent-override: 100.9625%;
-  descent-override: 32.0168%;
-  size-adjust: 140.1549%;
-  line-gap-override: 0%;
- }
-</style>
-
-
-<!-- End render the required css and JS in the head section -->
-
-
-
-
-
-
-
-  <link type="application/rss+xml" rel="alternate" href="feed/rss2"/>
-  <link type="application/atom+xml" rel="alternate" href="feed/atom"/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://www.apcir.pt/"/>
-  <title>
-    
-    APCIR – Associação Portuguesa de Cirurgia Robótica
-  
-  </title>
-  <meta name="keywords" content="Cirurgia; Robótica; Inteligência Artifiical; AI; Portugal; Associação; Medicina; "/>
-  <meta name="description" content="Site oficial da Associação Portuguesa de Cirurgia Robótica (APCI).
-Fundada em 2024.
-Mais informações brevemente."/>
-
-  <meta name="twitter:card" content="summary"/>
-  <meta name="twitter:title" content="APCIR – Associação Portuguesa de Cirurgia Robótica"/>
-  <meta name="twitter:description" content="Site oficial da Associação Portuguesa de Cirurgia Robótica (APCI).
-Fundada em 2024.
-Mais informações brevemente."/>
-  <meta property="og:description" content="Site oficial da Associação Portuguesa de Cirurgia Robótica (APCI).
-Fundada em 2024.
-Mais informações brevemente."/>
-  <meta property="og:title" content="APCIR – Associação Portuguesa de Cirurgia Robótica"/>
-
-
-
-
-<!-- SYS- VVNfRElSRUNUX1BST0RVQ1RJT04= -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AESOA — Associação dos Enfermeiros da Sala Operatória de Angola</title>
+  <meta
+    name="description"
+    content="A AESOA representa e apoia os enfermeiros perioperatórios em Angola, promovendo a formação contínua, a segurança do doente e as boas práticas na sala operatória."
+  />
+  <meta name="theme-color" content="#1b5e43" />
+
+  <link rel="icon" type="image/png" href="assets/img/logo.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="AESOA — Associação dos Enfermeiros da Sala Operatória de Angola" />
+  <meta
+    property="og:description"
+    content="Formação contínua, segurança do doente e valorização da enfermagem perioperatória em Angola."
+  />
+  <meta property="og:image" content="assets/img/logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="assets/css/variables.css" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/sections.css" />
 </head>
+<body>
+  <a class="link-saltar" href="#conteudo-principal">Saltar para o conteúdo</a>
 
+  <!-- SECTION: cabecalho -->
+  <header class="cabecalho">
+    <div class="container cabecalho__interior">
+      <a class="cabecalho__logo" href="index.html" aria-label="AESOA — Página inicial">
+        <img src="assets/img/logo.png" alt="Logótipo da AESOA" width="48" height="48" />
+        <span class="cabecalho__logo-texto">
+          AESOA
+          <span>Enfermeiros da Sala Operatória de Angola</span>
+        </span>
+      </a>
 
+      <nav class="nav" id="nav-principal" aria-label="Navegação principal">
+        <ul class="nav__lista">
+          <li class="nav__item">
+            <a class="nav__link" href="index.html" aria-current="page">Início</a>
+          </li>
 
+          <li class="nav__item nav__item--dropdown">
+            <a class="nav__link" href="about.html">
+              Associação
+              <svg class="nav__seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </a>
+            <ul class="nav__submenu">
+              <li><a class="nav__link" href="about.html">Sobre a AESOA</a></li>
+              <li><a class="nav__link" href="corpossociais.html">Corpos Sociais</a></li>
+              <li><a class="nav__link" href="conselho-cientifico.html">Conselho Fiscal</a></li>
+              <li><a class="nav__link" href="estatutos.html">Estatutos</a></li>
+            </ul>
+          </li>
 
+          <li class="nav__item">
+            <a class="nav__link" href="seccoes.html">Secções</a>
+          </li>
 
+          <li class="nav__item">
+            <a class="nav__link" href="socios.html">Sócios</a>
+          </li>
 
+          <li class="nav__item">
+            <a class="nav__link" href="noticias.html">Notícias</a>
+          </li>
 
+          <li class="nav__item nav__item--dropdown">
+            <a class="nav__link" href="seccoes.html">
+              Eventos
+              <svg class="nav__seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </a>
+            <ul class="nav__submenu">
+              <li><a class="nav__link" href="ii-portuguese-conference-on-robotic-surgery.html">Congresso Nacional AESOA 2026</a></li>
+              <li><a class="nav__link" href="i-portuguese-conference-on-robotic-surgery.html">Congresso Nacional AESOA 2025</a></li>
+            </ul>
+          </li>
 
+          <li class="nav__item">
+            <a class="nav__link" href="contactos.html">Contactos</a>
+          </li>
+        </ul>
+      </nav>
 
-
-
-
-
-
-
-
-
-
-
-
-
-<body id="dmRoot" data-page-alias="home"  class="dmRoot dmDesktopBody fix-mobile-scrolling addCanvasBorder dmResellerSite mac dmLargeBody "
-      style="padding:0;margin:0;"
-      
-    >
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- ========= Site Content ========= -->
-<div id="dm" class='dmwr'>
-    
-    <div class="dm_wrapper standard-var5 widgetStyle-3 standard">
-         <div dmwrapped="true" id="1901957768" class="dm-home-page" themewaschanged="true" desktop-global-classes="header-over-content" tablet-global-classes="header-over-content" mobile-global-classes="header-over-content"> <div dmtemplateid="StandardLayoutMultiD" class="standardHeaderLayout dm-bfs dm-layout-home hasAnimations inMiniHeaderMode hasStickyHeader rows-1200 header-over-content dmPageBody d-page-1716942098 inputs-css-clean dmFreeHeader" id="dm-outer-wrapper" data-page-class="1716942098" data-soch="true" data-background-parallax-selector=".dmHomeSection1, .dmSectionParallex"> <div id="dmStyle_outerContainer" class="dmOuter"> <div id="dmStyle_innerContainer" class="dmInner"> <div class="dmLayoutWrapper standard-var dmStandardDesktop"> <div> <div id="iscrollBody"> <div id="site_content"> <div class="dmHeaderContainer fHeader d-header-wrapper"> <div id="hcontainer" class="u_hcontainer dmHeader p_hfcontainer" freeheader="true" headerlayout="7f3c1de367df47d5b45ab63d33101c7b===header" data-scrollable-target="body" data-scrollable-target-threshold="1" data-scroll-responder-id="1" logo-size-target="62%" layout="78f5c343822e4eb3aac27f4ad5d13812===header"> <div dm:templateorder="85" class="dmHeaderResp dmHeaderStack noSwitch" id="1709005236"> <div class="u_1676742201 dmRespRow dmDefaultListContentRow" style="text-align:center" id="1676742201"> <div class="dmRespColsWrapper" id="1299197567"> <div class="u_1292756149 small-12 dmRespCol large-3 medium-3" id="1292756149"> <div class="u_1297751436 imageWidget align-center" data-widget-type="image" id="1297751436" data-element-type="image"> <a href="index.html" id="1295227041"><img src="https://lirp.cdn-website.com/443a37e1/dms3rep/multi/opt/site_APCIR_lettering+branco-e56e8e1b-155w.png" id="1667800642" class="" data-dm-image-path="https://irp.cdn-website.com/443a37e1/dms3rep/multi/site_APCIR_lettering+branco-e56e8e1b.png" width="612" height="158" onerror="handleImageLoadError(this)"/></a> 
-</div> 
-</div> 
- <div class="u_1656708059 dmRespCol small-12 large-9 medium-9" id="1656708059"> <nav class="u_1200155555 effect-bottom2 main-navigation unifiednav dmLinksMenu" role="navigation" layout-main="horizontal_nav_layout_1" layout-sub="submenu_horizontal_1" data-show-vertical-sub-items="HOVER" id="1200155555" dmle_extension="onelinksmenu" data-element-type="onelinksmenu" wr="true" icon="true" surround="true" adwords="" navigation-id="unifiedNav"> <ul role="menubar" class="unifiednav__container unav-top  " data-auto="navigation-pages"> <li role="menuitem" class=" unifiednav__item-wrap " data-auto="more-pages" data-depth="0"> <a href="index.html" class="unifiednav__item unav-item unav-top-item  dmNavItemSelected  dmUDNavigationItem_00  " target="" data-target-page-alias="" aria-current="page" data-auto="selected-page"> <span class="nav-item-text " data-link-text="INICIO" data-auto="page-text-style">INICIO<span class="icon icon-angle-down"></span> 
-</span> 
-</a> 
-</li> 
- <li role="menuitem" aria-haspopup="true" aria-expanded="false" data-sub-nav-menu="true" class=" unifiednav__item-wrap " data-auto="more-pages" data-depth="0"> <a href="index.html#" class="unifiednav__item unav-item unav-top-item  dmUDNavigationItem_010101444983  unifiednav__item_has-sub-nav" target="" data-target-page-alias=""> <span class="nav-item-text " data-link-text="ASSOCIAÇÃO" data-auto="page-text-style">ASSOCIA&Ccedil;&Atilde;O<span class="icon icon-angle-down"></span> 
-</span> 
-</a> 
- <ul role="menu" class="unifiednav__container unifiednav__container_sub-nav unav-sub" data-depth="0" data-auto="sub-pages"> <li role="menuitem" class=" unifiednav__item-wrap " data-auto="more-pages" data-depth="1"> <a href="about.html" class="unifiednav__item unav-item   dmUDNavigationItem_010101661768  " target="" data-target-page-alias=""> <span class="nav-item-text " data-link-text="Mensagem do Presidente" data-auto="page-text-style">Mensagem do Presidente<span class="icon icon-angle-right"></span> 
-</span> 
-</a> 
-</li> 
- <li role="menuitem" class=" unifiednav__item-wrap " data-auto="more-pages" data-depth="1"> <a href="corpossociais.html" class="unifiednav__item unav-item   dmUDNavigationItem_010101626871  " target="" data-target-page-alias=""> <span class="nav-item-text " data-link-text="Corpos Sociais" data-auto="page-text-style">Corpos Sociais<span class="icon icon-angle-right"></span> 
-</span> 
-</a> 
-</li> 
- <li role="menuitem" class=" unifiednav__item-wrap " data-auto="more-pages" data-depth="1"> <a href="conselho-cientifico.html" class="unifiednav__item unav-item   dmUDNavigationItem_010101802627  " target="" data-target-page-alias=""> <span class="nav-item-text " data-link-text="Conselho Científico" data-auto="page-text-style">Conselho Cient&iacute;fico<span class="icon icon-angle-right"></span> 
-</span> 
-</a> 
-</li> 
- <li role="menuitem" class=" unifiednav__item-wrap " data-auto="more-pages" data-depth="1"> <a href="estatutos.html" class="unifiednav__item unav-item   dmUDNavigationItem_010101825409  " target="" data-target-page-alias=""> <span class="nav-item-text " data-link-text="Estatutos" data-auto="page-text-style">Estatutos<span class="icon icon-angle-right"></span> 
-</span> 
-</a> 
-</li> 
-</ul> 
-</li> 
- <li role="menuitem" class=" unifiednav__item-wrap " data-auto="more-pages" data-depth="0"> <a href="seccoes.html" class="unifiednav__item unav-item unav-top-item  dmUDNavigationItem_010101852403  " target="" data-target-page-alias=""> <span class="nav-item-text " data-link-text="SECÇÕES" data-auto="page-text-style">SEC&Ccedil;&Otilde;ES<span class="icon icon-angle-down"></span> 
-</span> 
-</a> 
-</li> 
- <li role="menuitem" class=" unifiednav__item-wrap " data-auto="more-pages" data-depth="0"> <a href="socios.html" class="unifiednav__item unav-item unav-top-item  dmUDNavigationItem_010101723297  " target="" data-target-page-alias=""> <span class="nav-item-text " data-link-text="SÓCIOS" data-auto="page-text-style">S&Oacute;CIOS<span class="icon icon-angle-down"></span> 
-</span> 
-</a> 
-</li> 
- <li role="menuitem" class=" unifiednav__item-wrap " data-auto="more-pages" data-depth="0"> <a href="noticias.html" class="unifiednav__item unav-item unav-top-item  dmUDNavigationItem_010101447605  " target="" data-target-page-alias=""> <span class="nav-item-text " data-link-text="NOTÍCIAS" data-auto="page-text-style">NOT&Iacute;CIAS<span class="icon icon-angle-down"></span> 
-</span> 
-</a> 
-</li> 
- <li role="menuitem" aria-haspopup="true" aria-expanded="false" data-sub-nav-menu="true" class=" unifiednav__item-wrap " data-auto="more-pages" data-depth="0"> <a href="index.html#" class="unifiednav__item unav-item unav-top-item  dmUDNavigationItem_01010114539  unifiednav__item_has-sub-nav" target="" data-target-page-alias=""> <span class="nav-item-text " data-link-text="EVENTOS" data-auto="page-text-style">EVENTOS<span class="icon icon-angle-down"></span> 
-</span> 
-</a> 
- <ul role="menu" class="unifiednav__container unifiednav__container_sub-nav unav-sub" data-depth="0" data-auto="sub-pages"> <li role="menuitem" class=" unifiednav__item-wrap " data-auto="more-pages" data-depth="1"> <a href="ii-portuguese-conference-on-robotic-surgery.html" class="unifiednav__item unav-item   dmUDNavigationItem_010101793693  " target="" data-target-page-alias=""> <span class="nav-item-text " data-link-text="II Portuguese Conference on Robotic Surgery" data-auto="page-text-style">II Portuguese Conference on Robotic Surgery<span class="icon icon-angle-right"></span> 
-</span> 
-</a> 
-</li> 
- <li role="menuitem" class=" unifiednav__item-wrap " data-auto="more-pages" data-depth="1"> <a href="i-portuguese-conference-on-robotic-surgery.html" class="unifiednav__item unav-item   dmUDNavigationItem_010101700130  " target="" data-target-page-alias=""> <span class="nav-item-text " data-link-text="I Portuguese Conference on Robotic Surgery" data-auto="page-text-style">I Portuguese Conference on Robotic Surgery<span class="icon icon-angle-right"></span> 
-</span> 
-</a> 
-</li> 
-</ul> 
-</li> 
- <li role="menuitem" class=" unifiednav__item-wrap " data-auto="more-pages" data-depth="0"> <a href="contactos.html" class="unifiednav__item unav-item unav-top-item  dmUDNavigationItem_010101567797  " target="" data-target-page-alias=""> <span class="nav-item-text " data-link-text="CONTACTOS" data-auto="page-text-style">CONTACTOS<span class="icon icon-angle-down"></span> 
-</span> 
-</a> 
-</li> 
-</ul> 
-</nav> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
- <div class="stickyHeaderSpacer" id="stickyHeaderSpacer" data-new="true"></div> 
- <div class="dmRespRow dmRespRowStable dmRespRowNoPadding dmPageTitleRow "> <div class="dmRespColsWrapper"> <div class="large-12 dmRespCol"> <div id="innerBar" class="innerBar lineInnerBar dmDisplay_None"> <div class="titleLine display_None"><hr/></div> 
-<!-- Page title is hidden in css for new responsive sites. It is left here only so we don't break old sites. Don't copy it to new layouts --> <div id="pageTitleText"></div> 
- <div class="titleLine display_None"><hr/></div> 
-</div> 
-</div> 
-</div> 
-</div> 
- <div dmwrapped="true" id="dmFirstContainer" class="dmBody u_dmStyle_template_home dm-home-page" themewaschanged="true" desktop-global-classes="header-over-content" tablet-global-classes="header-over-content" mobile-global-classes="header-over-content"> <div id="allWrapper" class="allWrapper"><!-- navigation placeholders --> <div id="dm_content" class="dmContent" role="main"> <div dm:templateorder="170" class="dmHomeRespTmpl mainBorder dmRespRowsWrapper dmFullRowRespTmpl" id="1716942098"> <div class="u_1727689151 dmRespRow dmSectionNoParallax hasBackgroundOverlay hasExtraLayerOverlay relativePos" style="text-align: center;" id="1727689151" data-anim-desktop="none" data-video-bg="eyJzcmMiOiJodHRwczovL3ZpZC5jZG4td2Vic2l0ZS5jb20vbWQvcGV4ZWxzL3ZpZGVvcy9mcmVlLXZpZGVvLTMxOTc2Mzgtdi5tcDQiLCJpZCI6Imh0dHBzOi8vdmlkLmNkbi13ZWJzaXRlLmNvbS9tZC9wZXhlbHMvdmlkZW9zL2ZyZWUtdmlkZW8tMzE5NzYzOC12Lm1wNCIsInByb3ZpZGVyIjoiY2RuIiwiZW1iZWQiOiJodHRwczovL3ZpZC5jZG4td2Vic2l0ZS5jb20vbWQvcGV4ZWxzL3ZpZGVvcy9mcmVlLXZpZGVvLTMxOTc2Mzgtdi5tcDQiLCJyYXRpbyI6MC41MjUsInRodW1ibmFpbCI6Imh0dHBzOi8vaXJwLmNkbi13ZWJzaXRlLmNvbS9tZC9wZXhlbHMvZG1zM3JlcC9tdWx0aS9mcmVlLXZpZGVvLTMxOTc2MzgudjIuMDAwMDAwMC5qcGciLCJzdXBwb3J0QmdPbk1vYmlsZSI6dHJ1ZSwic3VwcG9ydEJnTG9vcCI6dHJ1ZSwicG9zdGVyIjoiaHR0cHM6Ly9pcnAuY2RuLXdlYnNpdGUuY29tL21kL3BleGVscy9kbXMzcmVwL211bHRpL2ZyZWUtdmlkZW8tMzE5NzYzOC52Mi4wMDAwMDAwLmpwZyJ9" data-video-bg-mobile="true" data-video-init="true"> <div class="videobgwrapper video-ssr" data-ratio="0.525"> <video autoplay="autoplay" playsinline="playsinline" muted="muted" loop="loop" class="videobgframe" poster="https://lirp.cdn-website.com/md/pexels/dms3rep/multi/opt/free-video-3197638.v2.0000000-1920w.jpg" src="https://vid.cdn-website.com/md/pexels/videos/free-video-3197638-v.mp4" style="object-position: 50% 50%" id="videobgframe-1727689151"></video> 
-</div> 
- <div class="bgExtraLayerOverlay"></div> 
- <div class="dmRespColsWrapper" id="1618982020"> <div class="u_1162380900 dmRespCol small-12 medium-12 large-12" id="1162380900"> <div class="u_1180150324 dmNewParagraph" id="1180150324" style="transition: none 0s ease 0s; text-align: center;" data-element-type="paragraph" data-version="5"> <h1 class="text-align-center"><span class="" style="display: initial; color: var(--color_3);"><span style="display: initial; color: var(--color_3);">Associa&ccedil;&atilde;o Portuguesa</span> 
-</span><span style="display: initial; color: var(--color_3);" class="font-size-48 m-font-size-38">de</span><span single-space="true" class="" style="display: initial; color: var(--color_3);"> <span style="display: initial; color: var(--color_3);"></span> 
-</span><span style="display: initial; color: var(--color_3); font-weight: bold;">Cirurgia Rob&oacute;tica</span></h1> 
-</div> <a data-display-type="block" class="u_1445436586 align-center dmButtonLink dmWidget dmWwr default dmOnlyButton dmDefaultGradient" file="false" href="index.html#lets-talk" id="1445436586" data-element-type="dButtonLinkId"> <span class="iconBg" id="1138227811"> <span class="icon hasFontIcon icon-star" id="1739283928"></span> 
-</span> 
- <span class="text" id="1849216809">Ser S&oacute;cio</span> 
-</a> 
- <div class="dmRespRow" id="1388289979"> <div class="dmRespColsWrapper" id="1308679831"> <div class="dmRespCol small-12 medium-12 large-12" id="1068880891"> <div class="dmNewParagraph u_1809890126" data-element-type="paragraph" data-version="5" id="1809890126" style="transition: none 0s ease 0s; text-align: left; display: block;"><p class="text-align-center m-size-16 size-20"><span class="font-size-20 m-font-size-16" style="font-weight: normal; display: initial; color: var(--color_5);">A Associa&ccedil;&atilde;o Portuguesa de Cirurgia Rob&oacute;tica, integra m&eacute;dicos, investigadores <br/>e outros profissionais de sa&uacute;de dedicados na &aacute;rea de cirurgia rob&oacute;tica em Portugal.</span></p></div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
- <div class="u_1140576514 dmRespRow mobile-columns-reversed" style="text-align: center;" id="1140576514"> <div class="dmRespColsWrapper" id="1035950909"> <div class="dmRespCol small-12 medium-6 large-6 u_1928535356 hasBackgroundOverlay" id="1928535356"> <div class="u_1302066556 dmSpacer" id="1302066556" data-element-type="spacer"></div> 
-</div> 
- <div class="dmRespCol small-12 medium-6 large-6 u_1318242600" id="1318242600"> <div class="u_1993373998 dmNewParagraph" id="1993373998" data-element-type="paragraph" data-version="5"> <h2><span style="display: initial;">Mensagem do Presidente</span></h2> 
-</div> <div class="u_1177656182 dmDividerWrapper clearfix" data-element-type="dDividerId" data-layout="divider-style-1" data-widget-version="2" id="1177656182"><hr class="dmDivider" style="border-width:2px; border-top-style:solid; color:grey;" id="1273288854"/></div> 
- <div class="u_1727781700 dmNewParagraph" id="1727781700" style="transition: opacity 1s ease-in-out;" data-element-type="paragraph" data-version="5"> <h4><span style="display: initial;">Dr. Kris Maes</span></h4> 
-</div> <div class="u_1306635763 dmNewParagraph" id="1306635763" style="transition: opacity 1s ease-in-out;" data-version="5"><p class="text-align-left"><span style="font-weight: 400; display: initial;">A Associa&ccedil;&atilde;o Portuguesa de Cirurgia Rob&oacute;tica (APCiR) nasce num momento determinante para a cirurgia rob&oacute;tica em Portugal. Desde o in&iacute;cio desta t&eacute;cnica no pa&iacute;s, em 2010, o seu desenvolvimento foi condicionado pela tardia introdu&ccedil;&atilde;o do primeiro sistema rob&oacute;tico no Servi&ccedil;o Nacional de Sa&uacute;de, apenas em 2019. Apesar disso, Portugal destacou-se pela realiza&ccedil;&atilde;o de v&aacute;rios procedimentos pioneiros.</span></p></div> <a data-display-type="block" class="u_1257119902 align-center dmButtonLink dmWidget dmWwr default dmOnlyButton dmDefaultGradient" file="false" href="about.html" id="1257119902" data-element-type="dButtonLinkId"> <span class="iconBg" id="1415148177"> <span class="icon hasFontIcon icon-star" id="1548215815"></span> 
-</span> 
- <span class="text" id="1171901642">Leia Mais</span> 
-</a> 
-</div> 
-</div> 
-</div> 
- <div class="u_lets-talk dmRespRow dmSectionNoParallax hasBackgroundOverlay" style="text-align: center;" id="lets-talk" data-anchor="lets-talk"> <div class="dmRespColsWrapper" id="1896802789"> <div class="u_1678972967 dmRespCol small-12 large-6 medium-6" id="1678972967" data-anim-desktop="fadeIn"> <div class="u_1036796695 dmNewParagraph" id="1036796695" style="transition: none; display: block;" data-element-type="paragraph" data-version="5"> <h2 class="text-align-left"><span style="color: var(--color_3); display: initial;">Seja S&oacute;cio APCIR</span></h2> 
-</div> <div class="u_1746094557 dmNewParagraph" id="1746094557" style="transition: none; display: block;" data-version="5"><p class="text-align-left"><span style="font-weight: 400; color: var(--color_3); display: initial;">Para ser S&oacute;cio da Associa&ccedil;&atilde;o Portuguesa de Cirurgia Rob&oacute;tica dever&aacute; seguir os seguintes passos:</span></p><p class="text-align-left"><span style="display: initial; color: var(--color_3);"><br/></span></p> <ol class="defaultList ordered"><li class="text-align-left" style="color: var(--color_3);"><span class="" style="font-weight: 400; color: var(--color_3); display: initial;"><span style="font-weight: 400; color: var(--color_3); display: initial;">Fazer download da</span> 
-</span><span class="" style="font-weight: normal; color: var(--color_3); display: initial;"><span style="font-weight: normal; color: var(--color_3); display: initial;">Ficha de S&oacute;cio</span> 
-</span><a href="https://irp.cdn-website.com/443a37e1/files/uploaded/Ficha+de+So-cio+APCIR_08+2025.docx" target="_blank" runtime_url="https://irp.cdn-website.com/443a37e1/files/uploaded/Ficha+de+So-cio+APCIR_08+2025.docx" file="true" type="file" style="font-weight: bold; color: var(--color_3); display: initial;"><strong>aqui</strong></a><span style="font-weight: 400; color: var(--color_3); display: initial;">;</span></li><li class="text-align-left" style="color: var(--color_3);"><span style="font-weight: 400; color: var(--color_3); display: initial;">Imprimir e preencher a Ficha de S&oacute;cio;</span></li><li class="text-align-left" style="color: var(--color_3);"><span style="font-weight: 400; color: var(--color_3); display: initial;">Submeter atrav&eacute;s do formul&aacute;rio &agrave; sua direita.</span></li></ol> 
-<p class="text-align-left"><span style="display: initial; color: var(--color_3);"><br/></span></p><p class="text-align-left"><span class="" style="font-weight: 400; color: var(--color_3); display: initial;"><span style="font-weight: 400; color: var(--color_3); display: initial;">Caso tenha alguma quest&atilde;o,</span> 
-</span><a href="contactos.html" runtime_url="/contactos" type="page" style="font-weight: 400; display: initial;">entrar em contacto</a><span class="" style="font-weight: 400; display: initial; color: var(--color_3);"> <span style="font-weight: 400; display: initial; color: var(--color_3);">por favor com a APCIR.</span></span></p></div></div> 
- <div class="u_1676193405 dmRespCol small-12 large-6 medium-6" id="1676193405"> <div class="u_1452009612 dmform default native-inputs" data-element-type="dContactUsRespId" id="1452009612" data-layout="layout-3" data-require-captcha="true" data-captcha-position="bottomleft" captcha="true"> <h3 class="dmform-title dmwidget-title" id="1213280368" hide="true">Contate-nos</h3> 
- <div class="dmform-wrapper" id="1949964098" captcha-lang="pt"> <form method="post" class="dmRespDesignRow" locale="ENGLISH" id="1615785970"> <div class="dmforminput required  small-12 dmRespDesignCol medium-12 large-12" id="1504212396"> <label for="1551443234" id="1319311863" class="" data-dm-for="dmform-0">Nome:</label> 
-<input type="text" class="" name="dmform-0" id="1551443234"/><input type="hidden" name="label-dmform-0" value="Nome:" id="1185722408" class=""/></div> 
- <div class="dmforminput required  small-12 dmRespDesignCol medium-12 large-12" id="1833338735"> <label for="1447680007" id="1589611890" class="" data-dm-for="dmform-2">Telefone:</label> 
-<input type="tel" class="" name="dmform-2" id="1447680007"/><input type="hidden" name="label-dmform-2" value="Telefone:" id="1683288456" class=""/></div> 
- <div class="dmforminput required  small-12 dmRespDesignCol medium-12 large-12" id="1243021319"> <label for="1576506731" id="1403931024" class="" data-dm-for="dmform-1">E-mail:</label> 
-<input type="email" class="" name="dmform-1" id="1576506731"/><input type="hidden" name="label-dmform-1" value="E-mail:" id="1249262977" class=""/></div> 
- <div class="dmforminput small-12 dmRespDesignCol medium-6 large-6" id="1895540385"> <label for="1098352766" id="1681095314" data-dm-for="dmform-32806">Anexar ficha de s&oacute;cio preenchida</label> 
- <div class="filewrapper" id="1565040638"> <a data-file="true" class="fileUploadLink" id="48879" value="Carregar Arquivo" file-upload-lang="pt">Carregar Arquivo</a> 
-&nbsp; <span class="fileLabel" id="1201403856"></span> 
-<input type="hidden" name="dmform-32806" class="fileName" value="" id="1098352766"/></div> 
-<input type="hidden" name="label-dmform-32806" value="Anexar ficha de sócio preenchida" id="1863552773" class=""/></div> 
- <div class="dmforminput small-12 dmRespDesignCol required newLine medium-12 large-12" id="1734919870"> <label for="32805" id="1170681524" class="" hide="true" data-dm-for="dmform-4">Ades&atilde;o</label> 
- <div class="optinwrapper" id="1630908605"> <div id="21310" class="contact-checkable-container"> <label for="32805" class="for-checkable" id="1532638140"><input type="checkbox" value="true" name="dmform-4" id="32805" class="checkable-input"/> <div id="36062"><p class="rteBlock" id="1371489513">Pretendo iniciar o meu processo para S&oacute;cio APCIR.</p></div> 
- <span class="img-wrapper" id="1536481458"></span> 
- <span class="img-wrapper"><img alt="" id="22099" class="contact-checkable-img" onerror="handleImageLoadError(this)"/></span> 
-</label> 
-</div> 
-</div> 
-<input type="hidden" name="label-dmform-4" value="Adesão" id="1554146620" class=""/></div> 
- <div class="dmformsubmit dmWidget R" id="1381130256"><input class="" name="submit" type="submit" value="Fazer parte da APCIR" id="1740744342"/></div> 
-<input name="dmformsendto" type="hidden" value="O0wrseIfFLvO81ULaXHBgeECM4BuZgkmNN7WN/pZNYzlXyvbW6WpwGiOb3MDHeNn2ZaY7s+VFiE=" id="1543986987" class="" data-dec="true"/><input class="dmActionInput" type="hidden" name="action" value="/_dm/s/rt/widgets/dmform.submit.jsp" id="1609204232"/><input name="dmformfrom" type="hidden" value="" id="1243630849"/><input name="dmformsubject" type="hidden" value="Novo Sócio APCIR" id="1023900519" class="" data-email-subject="Novo Sócio APCIR"/> <span hidden="" id="1420496556"><input type="hidden" name="dmformautoreplyenabled" value="false" id="1385483346" class=""/><input type="hidden" name="dmformautoreplyfrom" value="Associação Portuguesa de Cirurgia Robótica" id="1601222593" class=""/><input type="hidden" name="dmformautoreplysubject" value="Obrigado por sua solicitação" id="1594824506"/><input type="hidden" name="dmformautoreplymsg" value="UmVjZWJlbW9zIHN1YSBtZW5zYWdlbSAtIG9icmlnYWRvLiBBbGd1w6ltIGRhIG5vc3NhIGVxdWlwZSBlbnRyYXLDoSBlbSBjb250YXRvIGNvbSB2b2PDqiBlbSBicmV2ZS4=" id="1164545953"/><input type="hidden" name="dmformautoreplyincludeformcopy" value="true" id="1454915704"/></span> 
-<input name="dmformsubmitparams" type="hidden" value="8mpKnCSiNQXK/d9M7IDrSyut/Rg88+TM8c+Pwjo8i2MMQX/b4kPczhhVFx6PrkEQmJM4Uu2ykLNW5iMHZ2SOrL28L5BJDtXtFWNtX/G0hNIuH69SIBs6v0xg3L53exarTp9DXSvUpkXxmyHYVBsTHyI6qXmPKSBmMtcgyaiKJuWBZghNROZTch5bwqn5hIksIshU4ZYXfIcpyAeFFo9EBTndVb/GTDD16nJflK/A8sZOvRnpfI/CFtiizFEJS5p4lGifgFy28Y/ckWqS4g2qXeWlwSWBgCyJtywgt5+fZ5ZqZU6KWBnxZ565oPTZXeDnz8GG4YyiavhLkwwgyfK3uT4xLdhgrB/+bDJ91KAOd12pdRLwZBY8H1ZGISgQaHfjs/w+CkrrUTOkx69eIvs0l/zEn9oKXGcAN2fxZdtUcJU+MS3YYKwf/hmh7WSQZCv2XCcvJrombWc4ECUgudsLZLoDf368RuXiijOnEOsSyiYstoeu6qDx9W58uVwq0EGRbxMDCzFZxTwRwmsS/768kzh5pml5l1Tz5Ner1oefi3TFbjcPvOFGPWKK4L9QEx8Qe9XyfMTi1LToO03FpoTIig==" data-dec="true"/><input type="hidden" name="page_uuid" value="55f77c78f05a4bc0858849e9b2ae53a9"/></form> 
-</div> 
- <div class="dmform-success" style="display:none" id="1115059248" data-success-page="home"><p class="rteBlock">Recebemos o seu pedido.</p><p class="rteBlock">Retornaremos assim que poss&iacute;vel.</p></div> 
- <div class="dmform-error" style="display:none" id="1828595734">Desculpe, houve um erro ao enviar a mensagem. Por favor, tente novamente mais tarde.</div> 
-</div> 
-</div> 
-</div> 
-</div> 
- <div class="dmRespRow u_1712248315" style="text-align: center;" id="1712248315"> <div class="dmRespColsWrapper" id="1824747099"> <div class="dmRespCol small-12 medium-12 large-12 u_1937752581" id="1937752581"> <div class="u_1768312342 dmNewParagraph" id="1768312342" style="transition: opacity 1s ease-in-out 0s; text-align: center;" data-element-type="paragraph" data-version="5"> <h2 class="text-align-center"><span style="display: initial;">Atualidade</span></h2> 
-</div> <div class="u_1828340425 default mainBlog layout4" id="1828340425" dmle_extension="internal_blog_list" data-element-type="internal_blog_list" show-images="true" postspadding="15" wr="true" trim-title="false" show-blog-title="false" posts-animation="fadeInUp" show-action-text="true" text-align="left" icon="true" surround="true" adwords="" list-layout="layout4" visible-items="2" visible-post-lines="4" search-tags="" search-term="" more-posts-text="Show More" header-type="H2" posts-padding="10" posts-per-row="2" show-author="false" text-box-padding="false" action-text="Saber mais" skip-post-index="-1" blog-posts-feature-flag="true" data-image-hover-effect="opacity" show-more-posts-text="false" data-paginate-total-elements="5"> <div class="inner "> <div style="-ms-grid-column:1; -ms-grid-row:1" class="postArticle "> <div class="inner clearfix wow" style="animation-delay: 200.0ms;"> <a class="blogImgLink" dont-color-link="true" href="120-minute-session-on-robotic-colorectal-cancer-surgery.html" data-blog-post-alias="120-minute-session-on-robotic-colorectal-cancer-surgery" aria-label="120-Minute Session on Robotic Colorectal Cancer Surgery with Semi-Live Surgery"> <div class="blogImg" style="background-image: url('https://lirp.cdn-website.com/443a37e1/dms3rep/multi/opt/3-120-Minute+Session+on+Robotic+Colorectal+Cancer+Surgery-1-1920w.png');"><img src="https://lirp.cdn-website.com/443a37e1/dms3rep/multi/opt/3-120-Minute+Session+on+Robotic+Colorectal+Cancer+Surgery-1-1920w.png" alt="" onerror="handleImageLoadError(this)"/></div> 
-</a> 
- <div class="postTextContainer"> <div class="postText clearfix"> <div class="postTitle"> <h3> <a dont-color-link="true" href="120-minute-session-on-robotic-colorectal-cancer-surgery.html" data-blog-post-alias="120-minute-session-on-robotic-colorectal-cancer-surgery">120-Minute Session on Robotic Colorectal Cancer Surgery with Semi-Live Surgery</a> 
-</h3> 
-</div> 
- <div class="authorBar"> <span>5 de fevereiro de 2025</span> 
-</div> 
- <div class="postDescription">I Portuguese Conference on Robotic Surgery                                                      04 e 05 Jul 2025                                                      Conference Centre Pestana Palace, Lisboa                                                                                                            Join us for a unparalleled session dedicated to robotic surgery in colorectal cancer, with a focus on rectal cancer and right-sided colon cancer. Organized by the Portuguese Association for Robotic Surgery (APCiR), this 120-minute session will showcase some of the world&rsquo;s most esteemed colorectal surgeons.                                                      The program will emphasize two critical aspects of robotic colorectal surgery: achieving proper oncologic dissection and ensuring safe anastomosis creation using the robotic platform. Attendees will gain invaluable insights through:                                                                                     Theoretical Lectures                                                      World-leading experts will share the latest advancements and best practices in robotic oncologic surgery.                                                                                     Tips &amp; Tricks                                                      Practical guidance to refine surgical techniques for optimal outcomes.                                                                                                  ﻿                        Semi-Live Surgery                                                      A unique opportunity to analyze and discuss surgical procedures in detail, focusing on precision and safety.                                                      This comprehensive session is designed to provide surgeons with cutting-edge knowledge and the skills needed to deliver the highest standards of care in robotic colorectal cancer surgery. Don&rsquo;t miss this essential event!</div> 
-</div> 
- <div class="readMore"> <a dont-color-link="true" href="120-minute-session-on-robotic-colorectal-cancer-surgery.html"></a> 
-</div> 
-</div> 
-</div> 
-</div> 
- <div style="-ms-grid-column:2; -ms-grid-row:1" class="postArticle lastArticle"> <div class="inner clearfix wow" style="animation-delay: 400.0ms;"> <a class="blogImgLink" dont-color-link="true" href="oesophagogastric-session-120-minutes.html" data-blog-post-alias="oesophagogastric-session-120-minutes" aria-label="Oesophagogastric surgery will be featured in a 120-minute session"> <div class="blogImg" style="background-image: url('https://lirp.cdn-website.com/443a37e1/dms3rep/multi/opt/Oesophagogastric+Session+-+120+Minutes-3-1920w.png');"><img src="https://lirp.cdn-website.com/443a37e1/dms3rep/multi/opt/Oesophagogastric+Session+-+120+Minutes-3-1920w.png" alt="" onerror="handleImageLoadError(this)"/></div> 
-</a> 
- <div class="postTextContainer"> <div class="postText clearfix"> <div class="postTitle"> <h3> <a dont-color-link="true" href="oesophagogastric-session-120-minutes.html" data-blog-post-alias="oesophagogastric-session-120-minutes">Oesophagogastric surgery will be featured in a 120-minute session</a> 
-</h3> 
-</div> 
- <div class="authorBar"> <span>4 de fevereiro de 2025</span> 
-</div> 
- <div class="postDescription">I Portuguese Conference on Robotic Surgery                                                      04 e 05 Jul 2025                                                      Conference Centre Pestana Palace, Lisboa                                                                                                            In the first congress of the Portuguese Association for Robotic Surgery (APCIR), oesophagogastric surgery will be featured in a 120-minute session. This session, entirely dedicated to oesophageal and gastric surgery, will host renowned national and international specialists, recognized leaders in the use of robotic surgery for the treatment of these conditions.                                                                                                            The programme will emphasise critical aspects of the approach to these pathologies, namely:                                                                                                            Oesophageal cancer surgery                                   - Performing intrathoracic anastomosis using the robotic platform in oesophageal cancer surgery, optimising lymphadenectomy, and proper patient positioning and docking with the available robotic platforms.                                                                                     Hiatal hernia                                   - Tips &amp; tricks for the management of hiatal hernia.                                                                   ﻿                                                                  Gastric cancer surgery                                   - Optimising lymphadenectomy in gastric cancer surgery and oesophagojejunal anastomosis in total gastrectomy.                                                      We look forward to welcoming you to this session, confident that the invited specialists will share their ideas and experiences to ensure the highest standards in using robotic platforms for the treatment of these complex conditions.</div> 
-</div> 
- <div class="readMore"> <a dont-color-link="true" href="oesophagogastric-session-120-minutes.html"></a> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
- <div class="dmRespRow" id="1218296310"> <div class="dmRespColsWrapper" id="1223280141"> <div class="dmRespCol empty-column small-12 large-6 medium-6" id="1825929506"></div> 
- <div class="dmRespCol empty-column large-6 medium-6 small-12" id="1434309064"></div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
- <div class="dmFooterContainer"> <div id="fcontainer" class="u_fcontainer f_hcontainer dmFooter p_hfcontainer"> <div dm:templateorder="250" class="dmFooterResp generalFooter" id="1943048428"> <div class="dmRespRow" id="1982998874"> <div class="dmRespColsWrapper" id="1834218732"> <div class="dmRespCol empty-column large-12 medium-12 small-12" id="1068989068"></div> 
-</div> 
-</div> 
- <div class="u_1686005289 dmRespRow" style="text-align: center;" id="1686005289"> <div class="dmRespColsWrapper" id="1837856251"> <div class="u_1449882040 dmRespCol small-12 large-4 medium-4" id="1449882040"> <div class="u_1432396660 imageWidget align-center" data-widget-type="image" id="1432396660" data-element-type="image"><img src="https://lirp.cdn-website.com/443a37e1/dms3rep/multi/opt/site_APCIR_lettering+azul-228w.png" id="1207286069" class="" data-dm-image-path="https://irp.cdn-website.com/443a37e1/dms3rep/multi/site_APCIR_lettering+azul.png" width="612" height="158" onerror="handleImageLoadError(this)"/></div> 
- <div class="u_1572480689 dmNewParagraph" id="1572480689" data-element-type="paragraph" style="transition: none;" data-version="5"> <h6 class="text-align-left"><span class="" style="color:var(--color_3);font-weight:300;display:initial;font-family:Montserrat, 'Montserrat Fallback';"><span style="color:var(--color_3);font-weight:300;display:initial;font-family:Montserrat, 'Montserrat Fallback';">Associa&ccedil;&atilde;o Portuguesa de</span> 
-</span></h6> 
- <h6 class="text-align-left size-18 m-size-14"><span style="color:var(--color_3);font-weight:bold;display:initial;font-family:Montserrat, 'Montserrat Fallback';" class="font-size-18 m-font-size-14">Cirurgia Rob&oacute;tica</span></h6> 
-</div></div> 
- <div class="u_1188157081 dmRespCol small-12 medium-4 large-4" id="1188157081"> <div class="u_1226296094 dmNewParagraph" id="1226296094" style="transition: none; display: block;" data-element-type="paragraph" data-version="5"><h6 style="color:var(--color_3);" class="text-align-left"><span style="color: var(--color_3); font-weight: 700; display: initial;">LINKS R&Aacute;PIDOS</span></h6></div> <nav class="u_1908981315 unifiednav_vertical effect-text-fill main-navigation unifiednav dmLinksMenu" role="navigation" layout-main="vertical_nav_layout_4" layout-sub="" data-show-vertical-sub-items="HOVER" id="1908981315" dmle_extension="onelinksmenu" data-element-type="onelinksmenu" data-logo-src="https://irp.cdn-website.com/md/dmtmpl/c9808ecc-c47e-4c74-ac2f-64c8176556ac/dms3rep/multi/desktop/physioArtboard+2.svg" alt="" data-nav-structure="VERTICAL" wr="true" icon="true" surround="true" adwords="" navigation-id="unifiedNav"> <ul role="menubar" class="unifiednav__container unav-top  " data-auto="navigation-pages"> <li role="menuitem" class=" unifiednav__item-wrap " data-auto="more-pages" data-depth="0"> <a href="index.html" class="unifiednav__item unav-item unav-top-item  dmNavItemSelected  dmUDNavigationItem_00  " target="" data-target-page-alias="" aria-current="page" data-auto="selected-page"> <span class="nav-item-text " data-link-text="INICIO" data-auto="page-text-style">INICIO<span class="icon icon-angle-down"></span> 
-</span> 
-</a> 
-</li> 
- <li role="menuitem" aria-haspopup="true" aria-expanded="false" data-sub-nav-menu="true" class=" unifiednav__item-wrap " data-auto="more-pages" data-depth="0"> <a href="index.html#" class="unifiednav__item unav-item unav-top-item  dmUDNavigationItem_010101444983  unifiednav__item_has-sub-nav" target="" data-target-page-alias=""> <span class="nav-item-text " data-link-text="ASSOCIAÇÃO" data-auto="page-text-style">ASSOCIA&Ccedil;&Atilde;O<span class="icon icon-angle-down"></span> 
-</span> 
-</a> 
- <ul role="menu" class="unifiednav__container unifiednav__container_sub-nav unav-sub" data-depth="0" data-auto="sub-pages"> <li role="menuitem" class=" unifiednav__item-wrap " data-auto="more-pages" data-depth="1"> <a href="about.html" class="unifiednav__item unav-item   dmUDNavigationItem_010101661768  " target="" data-target-page-alias=""> <span class="nav-item-text " data-link-text="Mensagem do Presidente" data-auto="page-text-style">Mensagem do Presidente<span class="icon icon-angle-right"></span> 
-</span> 
-</a> 
-</li> 
- <li role="menuitem" class=" unifiednav__item-wrap " data-auto="more-pages" data-depth="1"> <a href="corpossociais.html" class="unifiednav__item unav-item   dmUDNavigationItem_010101626871  " target="" data-target-page-alias=""> <span class="nav-item-text " data-link-text="Corpos Sociais" data-auto="page-text-style">Corpos Sociais<span class="icon icon-angle-right"></span> 
-</span> 
-</a> 
-</li> 
- <li role="menuitem" class=" unifiednav__item-wrap " data-auto="more-pages" data-depth="1"> <a href="conselho-cientifico.html" class="unifiednav__item unav-item   dmUDNavigationItem_010101802627  " target="" data-target-page-alias=""> <span class="nav-item-text " data-link-text="Conselho Científico" data-auto="page-text-style">Conselho Cient&iacute;fico<span class="icon icon-angle-right"></span> 
-</span> 
-</a> 
-</li> 
- <li role="menuitem" class=" unifiednav__item-wrap " data-auto="more-pages" data-depth="1"> <a href="estatutos.html" class="unifiednav__item unav-item   dmUDNavigationItem_010101825409  " target="" data-target-page-alias=""> <span class="nav-item-text " data-link-text="Estatutos" data-auto="page-text-style">Estatutos<span class="icon icon-angle-right"></span> 
-</span> 
-</a> 
-</li> 
-</ul> 
-</li> 
- <li role="menuitem" class=" unifiednav__item-wrap " data-auto="more-pages" data-depth="0"> <a href="seccoes.html" class="unifiednav__item unav-item unav-top-item  dmUDNavigationItem_010101852403  " target="" data-target-page-alias=""> <span class="nav-item-text " data-link-text="SECÇÕES" data-auto="page-text-style">SEC&Ccedil;&Otilde;ES<span class="icon icon-angle-down"></span> 
-</span> 
-</a> 
-</li> 
- <li role="menuitem" class=" unifiednav__item-wrap " data-auto="more-pages" data-depth="0"> <a href="socios.html" class="unifiednav__item unav-item unav-top-item  dmUDNavigationItem_010101723297  " target="" data-target-page-alias=""> <span class="nav-item-text " data-link-text="SÓCIOS" data-auto="page-text-style">S&Oacute;CIOS<span class="icon icon-angle-down"></span> 
-</span> 
-</a> 
-</li> 
- <li role="menuitem" class=" unifiednav__item-wrap " data-auto="more-pages" data-depth="0"> <a href="noticias.html" class="unifiednav__item unav-item unav-top-item  dmUDNavigationItem_010101447605  " target="" data-target-page-alias=""> <span class="nav-item-text " data-link-text="NOTÍCIAS" data-auto="page-text-style">NOT&Iacute;CIAS<span class="icon icon-angle-down"></span> 
-</span> 
-</a> 
-</li> 
- <li role="menuitem" aria-haspopup="true" aria-expanded="false" data-sub-nav-menu="true" class=" unifiednav__item-wrap " data-auto="more-pages" data-depth="0"> <a href="index.html#" class="unifiednav__item unav-item unav-top-item  dmUDNavigationItem_01010114539  unifiednav__item_has-sub-nav" target="" data-target-page-alias=""> <span class="nav-item-text " data-link-text="EVENTOS" data-auto="page-text-style">EVENTOS<span class="icon icon-angle-down"></span> 
-</span> 
-</a> 
- <ul role="menu" class="unifiednav__container unifiednav__container_sub-nav unav-sub" data-depth="0" data-auto="sub-pages"> <li role="menuitem" class=" unifiednav__item-wrap " data-auto="more-pages" data-depth="1"> <a href="ii-portuguese-conference-on-robotic-surgery.html" class="unifiednav__item unav-item   dmUDNavigationItem_010101793693  " target="" data-target-page-alias=""> <span class="nav-item-text " data-link-text="II Portuguese Conference on Robotic Surgery" data-auto="page-text-style">II Portuguese Conference on Robotic Surgery<span class="icon icon-angle-right"></span> 
-</span> 
-</a> 
-</li> 
- <li role="menuitem" class=" unifiednav__item-wrap " data-auto="more-pages" data-depth="1"> <a href="i-portuguese-conference-on-robotic-surgery.html" class="unifiednav__item unav-item   dmUDNavigationItem_010101700130  " target="" data-target-page-alias=""> <span class="nav-item-text " data-link-text="I Portuguese Conference on Robotic Surgery" data-auto="page-text-style">I Portuguese Conference on Robotic Surgery<span class="icon icon-angle-right"></span> 
-</span> 
-</a> 
-</li> 
-</ul> 
-</li> 
- <li role="menuitem" class=" unifiednav__item-wrap " data-auto="more-pages" data-depth="0"> <a href="contactos.html" class="unifiednav__item unav-item unav-top-item  dmUDNavigationItem_010101567797  " target="" data-target-page-alias=""> <span class="nav-item-text " data-link-text="CONTACTOS" data-auto="page-text-style">CONTACTOS<span class="icon icon-angle-down"></span> 
-</span> 
-</a> 
-</li> 
-</ul> 
-</nav> 
-</div> 
- <div class="u_1738521024 dmRespCol small-12 medium-4 large-4" id="1738521024"> <div class="u_1968492912 dmNewParagraph" id="1968492912" style="transition: none; display: block;" data-element-type="paragraph" data-version="5"> <h6 class="text-align-left"><span style="display: initial; font-weight: 700; color: var(--color_3);">CONTACTOS</span></h6> 
-</div> <div class="u_1209896453 dmNewParagraph" id="1209896453" data-element-type="paragraph" data-version="5"> <h6 class="text-align-left"><span class="" style="color: var(--color_3); display: initial;"><span style="color: var(--color_3); display: initial;">(+351) &nbsp;218 429 710</span> 
-</span><span style="color: var(--color_3); display: initial;" class="m-font-size-8 font-size-10">(chamada para a rede fixa nacional)</span></h6> 
- <h6 class="text-align-left"><span style="color: var(--color_3); display: initial;">secretariado@apcir.pt</span></h6> 
- <h6 class="text-align-left"><span style="display: initial; color: rgb(255, 255, 255);">Cal&ccedil;ada de Arroios, 16 C Sala 3 1000-027 Lisboa</span></h6> 
-</div></div> 
-</div> 
-</div> 
- <div class="dmRespRow u_1964699644" style="text-align: center;" id="1964699644"> <div class="dmRespColsWrapper" id="1450780278"> <div class="dmRespCol small-12 medium-12 large-12" id="1105000544"> <div class="u_1229617412 dmNewParagraph" id="1229617412" data-element-type="paragraph" data-version="5"> <h6 class="text-align-left"><a href="http://www.admedic.pt" runtime_url="http://www.admedic.pt" type="url" style="display: initial;" target="_blank">Ad M&eacute;dic+</a></h6> 
-</div></div> 
-</div> 
-</div> 
-</div> 
- <div id="1236746004" dmle_extension="powered_by" data-element-type="powered_by" icon="true" surround="false"></div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
-
+      <div class="cabecalho__acoes">
+        <a class="btn btn--primario" href="#torne-se-membro">Torne-se Membro</a>
+        <button
+          class="menu-alternar"
+          type="button"
+          aria-label="Abrir menu de navegação"
+          aria-expanded="false"
+          aria-controls="nav-principal"
+        >
+          <span class="menu-alternar__barra"></span>
+          <span class="menu-alternar__barra"></span>
+          <span class="menu-alternar__barra"></span>
+        </button>
+      </div>
     </div>
-</div>
-<!--  Add full CSS and Javascript before the close tag of the body if needed -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- Google Fonts Include -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- loadCSS function fonts.jsp-->
-
-
-
-<link rel="preload" href="https://irp.cdn-website.com/fonts/css2?family=Lobster+Two:wght@400;700&family=Creepster:wght@400&family=Inter:wght@100..900&family=Amiko:wght@400;600;700&family=Creepster:wght@400&family=Lobster:wght@400&family=Montserrat:wght@100..900&family=Arvo:wght@400;700&family=Oswald:wght@200..700&family=Source+Sans+Pro:wght@200;300;400;600;700;900&family=Open+Sans:wght@300..800&family=Eater:wght@400&amp;subset=latin-ext&amp;display=swap"  as="style" fetchpriority="low" onload="loadCSS(this)" />
-
-
-
-
-
-<!-- RT CSS Include d-css-runtime-desktop-one-package-structured-global-->
-<link rel="preload" as="style" fetchpriority="low" onload="loadCSS(this)" href="https://static.cdn-website.com/mnlt/production/6610/_dm/s/rt/dist/css/d-css-runtime-desktop-one-package-structured-global.min.css" />
-
-<!-- End of RT CSS Include -->
-
-<link rel="preload" href="https://irp.cdn-website.com/WIDGET_CSS/ea32afbf9f015636abe157a89d679df3.css" id="widgetCSS" as="style" fetchpriority="low" onload="loadCSS(this)" />
-
-<!-- Support `img` size attributes -->
-<style>img[width][height] {
-  height: auto;
-}</style>
-
-<!-- Support showing sticky element on page only -->
-<style>
-  body[data-page-alias="home"] #dm [data-show-on-page-only="home"] {
-    display: block !important;
-  }
-</style>
-
-<!-- This is populated in Ajax navigation -->
-<style id="pageAdditionalWidgetsCss" type="text/css">
-</style>
-
-
-
-
-<!-- Site CSS -->
-<link rel="preload" href="https://irp.cdn-website.com/443a37e1/files/443a37e1_withFlex_1.min.css?v=649" id="siteGlobalCss" as="style" fetchpriority="low" onload="loadCSS(this)" />
-
-
-
-<style id="customWidgetStyle" type="text/css">
-    
-</style>
-<style id="innerPagesStyle" type="text/css">
-    
-</style>
-
-
-<style
-        id="additionalGlobalCss" type="text/css"
->
-</style>
-
-<!-- Page CSS -->
-<link rel="preload" href="https://irp.cdn-website.com/443a37e1/files/443a37e1_home_withFlex_1.min.css?v=649" id="homeCssLink" as="style" fetchpriority="low" onload="loadCSS(this)" />
-
-<style id="pagestyle" type="text/css">
-    
-</style>
-
-<style id="pagestyleDevice" type="text/css">
-    
-</style>
-
-<!-- Flex Sections CSS -->
-
-
-
-
-
-<style id="globalFontSizeStyle" type="text/css">
-    .font-size-48, .size-48, .size-48 > font { font-size: 48px !important; }.font-size-20, .size-20, .size-20 > font { font-size: 20px !important; }.font-size-18, .size-18, .size-18 > font { font-size: 18px !important; }.font-size-10, .size-10, .size-10 > font { font-size: 10px !important; }
-</style>
-<style id="pageFontSizeStyle" type="text/css">
-</style>
-
-<!-- ========= JS Section ========= -->
-<script>
-    var isWLR = true;
-
-    window.customWidgetsFunctions = {};
-    window.customWidgetsStrings = {};
-    window.collections = {};
-    window.currentLanguage = "PORTUGUESE"
-    window.isSitePreview = false;
-</script>
-<script type="text/javascript">
-
-    var d_version = "production_6610";
-    var build = "2026-07-09T10_48_42";
-    window['v' + 'ersion'] = d_version;
-
-    function buildEditorParent() {
-        window.isMultiScreen = true;
-        window.editorParent = {};
-        window.previewParent = {};
-        window.assetsCacheQueryParam = "?version=2026-07-09T10_48_42";
-        try {
-            var _p = window.parent;
-            if (_p && _p.document && _p.$ && _p.$.dmfw) {
-                window.editorParent = _p;
-            } else if (_p.isSitePreview) {
-                window.previewParent = _p;
-            }
-        } catch (e) {
-
-        }
-    }
-
-    buildEditorParent();
-</script>
-
-<!-- Load jQuery -->
-<script type="text/javascript" id='d-js-jquery'
-        src="https://static.cdn-website.com/libs/jquery/jquery-3.7.0.min.js"></script>
-<!-- End Load jQuery -->
-<!-- Injecting site-wide before scripts -->
-<!-- End Injecting site-wide to the head -->
-
-
-<script>
-    var _jquery = window.$;
-
-    var jqueryAliases = ['$', 'jquery', 'jQuery'];
-
-    jqueryAliases.forEach((alias) => {
-        Object.defineProperty(window, alias, {
-            get() {
-                return _jquery;
-            },
-            set() {
-                console.warn("Trying to over-write the global jquery object!");
-            }
-        });
-    });
-    window.jQuery.migrateMute = true;
-</script>
-<script>
-    window.cookiesNotificationMarkupPreview = ' <div>Usamos cookies para garantir que voc&ecirc; tenha a melhor experi&ecirc;ncia em nosso website. Para saber mais, acesse a p&aacute;gina Privacidade.<\/div> \n';
-</script>
-
-<!-- HEAD RT JS Include -->
-<script id='d-js-params'>
-    window.INSITE = window.INSITE || {};
-    window.INSITE.device = "desktop";
-
-    window.rtCommonProps = {};
-    rtCommonProps["rt.ajax.ajaxScriptsFix"] =true;
-    rtCommonProps["rt.pushnotifs.sslframe.encoded"] = 'aHR0cHM6Ly97c3ViZG9tYWlufS5wdXNoLW5vdGlmcy5jb20=';
-    rtCommonProps["runtimecollector.url"] = 'https://rtc.multiscreensite.com';
-    rtCommonProps["performance.tabletPreview.removeScroll"] = 'false';
-    rtCommonProps["inlineEditGrid.snap"] =true;
-    rtCommonProps["popup.insite.cookie.ttl"] = '0.5';
-    rtCommonProps["rt.pushnotifs.force.button"] =true;
-    rtCommonProps["common.mapbox.js.override"] =false;
-    rtCommonProps["common.here.appId"] = 'iYvDjIQ2quyEu0rg0hLo';
-    rtCommonProps["common.here.appCode"] = '1hcIxLJcbybmtBYTD9Z1UA';
-    rtCommonProps["isCoverage.test"] =false;
-    rtCommonProps["ecommerce.ecwid.script"] = 'https://app.multiscreenstore.com/script.js';
-    rtCommonProps["common.resources.dist.cdn"] =true;
-    rtCommonProps["common.build.dist.folder"] = 'production/6610';
-    rtCommonProps["common.resources.cdn.host"] = 'https://static.cdn-website.com';
-    rtCommonProps["common.resources.folder"] = 'https://static.cdn-website.com/mnlt/production/6610';
-    rtCommonProps["feature.flag.runtime.backgroundSlider.preload.slowly"] =true;
-    rtCommonProps["feature.flag.runtime.newAnimation.enabled"] =true;
-    rtCommonProps["feature.flag.runtime.newAnimation.jitAnimation.enabled"] =true;
-    rtCommonProps["feature.flag.sites.google.analytics.gtag"] =true;
-    rtCommonProps["feature.flag.runOnReadyNewTask"] =true;
-    rtCommonProps["isAutomation.test"] =false;
-    rtCommonProps["booking.cal.api.domain"] = 'api.cal.com';
-
-    
-    rtCommonProps['common.mapsProvider'] = 'mapbox';
-    
-    rtCommonProps['common.mapsProvider.version'] = '0.52.0';
-    rtCommonProps['common.geocodeProvider'] = 'mapbox';
-    rtCommonProps['server.for.resources'] = '';
-    rtCommonProps['feature.flag.lazy.widgets'] = true;
-    rtCommonProps['feature.flag.single.wow'] = false;
-    rtCommonProps['feature.flag.disallowPopupsInEditor'] = true;
-    rtCommonProps['feature.flag.mark.anchors'] = true;
-    rtCommonProps['captcha.public.key'] = '6LffcBsUAAAAAMU-MYacU-6QHY4iDtUEYv_Ppwlz';
-    rtCommonProps['captcha.invisible.public.key'] = '6LeiWB8UAAAAAHYnVJM7_-7ap6bXCUNGiv7bBPME';
-    rtCommonProps["images.sizes.small"] =160;
-    rtCommonProps["images.sizes.mobile"] =640;
-    rtCommonProps["images.sizes.tablet"] =1280;
-    rtCommonProps["images.sizes.desktop"] =1920;
-    rtCommonProps["modules.resources.cdn"] =true;
-    rtCommonProps["import.images.storage.imageCDN"] = 'https://lirp.cdn-website.com/';
-    rtCommonProps["feature.flag.runtime.inp.threshold"] =150;
-    rtCommonProps["feature.flag.performance.logs"] =false;
-    rtCommonProps["site.widget.form.captcha.type"] = 'g_recaptcha';
-    rtCommonProps["friendly.captcha.site.key"] = 'FCMGSQG9GVNMFS8K';
-    rtCommonProps["cookiebot.mapbox.consent.category"] = 'marketing';
-    rtCommonProps["termly.mapbox.consent.category"] = 'performance';
-    // feature flags that's used out of runtime module (in  legacy files)
-    rtCommonProps["platform.monolith.personalization.dateTimeCondition.popupMsgAction.moveToclient.enabled"] =true;
-
-    window.rtFlags = {};
-    rtFlags["unsuspendEcwidStoreOnRuntime.enabled"] =true;
-    rtFlags["scripts.widgetCount.enabled"] =true;
-    rtFlags["fnb.animations.tracking.enabled"] =true;
-    rtFlags["ecom.ecwidNewUrlStructure.enabled"] = false;
-    rtFlags["ecom.ecwid.accountPage.emptyBaseUrl.enabled"] = true;
-    rtFlags["ecom.ecwid.pages.links.disable.listeners"] = true;
-    rtFlags["ecom.ecwid.storefrontV3.enabled"] = false;
-    rtFlags["ecom.ecwid.old.store.fix.facebook.share"] = true;
-    rtFlags["ecom.monolith.legacy.js.api.disabled.for.new.sites"] = false;
-    rtFlags["feature.flag.photo.gallery.exact.size"] =true;
-    rtFlags["geocode.search.localize"] =false;
-    rtFlags["feature.flag.runtime.newAnimation.asyncInit.setTimeout.enabled"] =false;
-    rtFlags["twitter.heightLimit.enabled"] = true;
-    rtFlags["runtime.lottieOverflow"] =false;
-    rtFlags["runtime.monitoring.sentry.ignoreErrors"] = "";
-    rtFlags["streamline.monolith.personalization.supportMultipleConditions.enabled"] =false;
-    rtFlags["flex.animation.design.panel.layout"] =true;
-    rtFlags["runtime.cwv.report.cls.enabled"] =false;
-    rtFlags["runtime.cwv.report.lcp.enabled"] =false;
-    rtFlags["runtime.lcp.preload.selfheal.enabled"] =false;
-    rtFlags["contact.form.useActiveForm"] =true;
-    rtFlags["contact.form.custom.errors.enabled"] =false;
-    rtFlags["runtime.ssr.productStore.internal.observer"] =true;
-    rtFlags["runtime.ssr.productCustomizations"] =true;
-    rtFlags["runtime.ssr.runtime.filter-sort.newFilterSortWidgetWithOptions.enabled"] =true;
-    rtFlags["runtime.ssr.ssrSlider.jumpThreshold.enabled"] =true;
-</script>
-<script src="https://static.cdn-website.com/mnlt/production/6610/_dm/s/rt/dist/scripts/d-js-one-runtime-unified-desktop.min.js"  id="d-js-core"></script>
-<!-- End of HEAD RT JS Include -->
-<script src="https://static.cdn-website.com/mnlt/production/6610/_dm/s/rt/dist/scripts/d-js-jquery-migrate.min.js" ></script>
-<script>
-    
-    $(window).bind("orientationchange", function (e) {
-        $.layoutManager.initLayout();
-        
-    });
-    $(document).resize(function () {
-        
-    });
-</script>
-<script src="_dm/s/rt/smart/popup.js%3Fr=3" type="text/javascript"></script><script src="_dm/s/rt/smart/helpers.js" type="text/javascript"></script><script src="_dm/s/rt/smart/userVisitsConditionService.js%3Fv=1" type="text/javascript"></script><script src="_dm/s/rt/smart/timeRangeConditionService.js" type="text/javascript"></script><script src="https://static.cdn-website.com/libs/rrule/2.8.1/rrule.min.js" type="text/javascript"></script><script>(function(global){
-global.insiteScripts.popup({useNew: true, ruleId : '4768983', ruleType : 'bfs', settings : 'eyJkZWxheSI6IiIsImNvbmRpdGlvbnNfbnVtYmVyIjoiMiIsInVzZXJfdmlzaXRzX251bWJlciI6IjEifQ==', duration : null, isForced : false });
-})(this);</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div style="display:none;" id="P6iryBW0Wu"></div>
-
-<!-- photoswipe markup -->
-
-
-
-
-
-
-
-
-
-<!-- Root element of PhotoSwipe. Must have class pswp. -->
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    <!-- Background of PhotoSwipe. 
-         It's a separate element as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
-
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
-
-        <!-- Container that holds slides. 
-            PhotoSwipe keeps only 3 of them in the DOM to save memory.
-            Don't modify these 3 pswp__item elements, data is added later on. -->
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
+  </header>
+  <!-- /SECTION: cabecalho -->
+
+  <main id="conteudo-principal">
+    <!-- SECTION: hero -->
+    <section id="hero" aria-label="Apresentação da AESOA">
+      <div class="container hero__conteudo">
+        <span class="hero__eyebrow">Associação dos Enfermeiros da Sala Operatória de Angola</span>
+        <h1>Excelência e segurança do doente na sala operatória</h1>
+        <p class="hero__texto">
+          A AESOA reúne, forma e representa os enfermeiros perioperatórios em Angola, promovendo
+          boas práticas, actualização científica contínua e a valorização da profissão em todo o
+          país.
+        </p>
+        <div class="hero__acoes">
+          <a class="btn btn--primario" href="#torne-se-membro">Torne-se Membro</a>
+          <a class="btn btn--contorno" href="#sobre">Conhecer a AESOA</a>
+        </div>
+        <dl class="hero__estatisticas">
+          <div>
+            <dt class="hero__estatistica-numero">+500</dt>
+            <dd class="hero__estatistica-legenda">Enfermeiros associados</dd>
+          </div>
+          <div>
+            <dt class="hero__estatistica-numero">18</dt>
+            <dd class="hero__estatistica-legenda">Províncias representadas</dd>
+          </div>
+          <div>
+            <dt class="hero__estatistica-numero">+10</dt>
+            <dd class="hero__estatistica-legenda">Anos de actividade</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+    <!-- /SECTION: hero -->
+
+    <!-- SECTION: sobre -->
+    <section id="sobre" class="secao" aria-labelledby="sobre-titulo">
+      <div class="container">
+        <div data-revelar>
+          <span class="secao-eyebrow">Quem somos</span>
+          <h2 id="sobre-titulo">Sobre a AESOA</h2>
+          <div class="secao-divisor"></div>
+          <p>
+            Fundada para dar voz e identidade própria aos profissionais de enfermagem que actuam
+            na sala operatória, a AESOA congrega enfermeiros perioperatórios, instrumentistas e
+            estudantes de enfermagem de todo o território angolano, do círculo de Luanda às
+            demais províncias.
+          </p>
+          <p>
+            Trabalhamos lado a lado com hospitais, escolas de enfermagem e sociedades científicas
+            para elevar os padrões de segurança do doente cirúrgico e reconhecer o papel central
+            do enfermeiro perioperatório na equipa de saúde.
+          </p>
+
+          <ul class="sobre__lista">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M9 12l2 2 4-4" /></svg>
+              Formação contínua e certificação profissional
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M9 12l2 2 4-4" /></svg>
+              Representação nacional junto de entidades de saúde
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M9 12l2 2 4-4" /></svg>
+              Promoção de boas práticas na sala operatória
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M9 12l2 2 4-4" /></svg>
+              Valorização da carreira de enfermagem perioperatória
+            </li>
+          </ul>
+
+          <div class="hero__acoes">
+            <a class="btn btn--contorno-primario" href="estatutos.html">Consultar os Estatutos</a>
+            <a class="btn btn--contorno-primario" href="corpossociais.html">Conhecer a Direcção</a>
+          </div>
         </div>
 
-        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-        <div class="pswp__ui pswp__ui--hidden">
+        <img
+          class="sobre__imagem"
+          data-revelar
+          src="https://placehold.co/720x820/1b5e43/ffffff?text=Equipa+AESOA"
+          alt="Equipa de enfermagem perioperatória da AESOA"
+          width="720"
+          height="820"
+          loading="lazy"
+        />
+      </div>
+    </section>
+    <!-- /SECTION: sobre -->
 
-            <div class="pswp__top-bar">
-
-                <!--  Controls are self-explanatory. Order can be changed. -->
-
-                <div class="pswp__counter"></div>
-
-                <button class="pswp__button pswp__button--close" title="Fechar (Esc)"></button>
-
-                <button class="pswp__button pswp__button--share" title="Compartilhar"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Alternar tela cheia "></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Aumentar/diminuir zoom"></button>
-
-                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-                <!-- element will get class pswp__preloader--active when preloader is running -->
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                      <div class="pswp__preloader__cut">
-                        <div class="pswp__preloader__donut"></div>
-                      </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div> 
-            </div>
-
-            <button class="pswp__button pswp__button--arrow--left" title="Anterior (seta para esquerda)">
-            </button>
-
-            <button class="pswp__button pswp__button--arrow--right" title="Próximo (seta para a direita)">
-            </button>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-
+    <!-- SECTION: missao-visao-valores -->
+    <section id="missao-visao-valores" class="secao secao--alt" aria-labelledby="mvv-titulo">
+      <div class="container">
+        <div class="secao-cabecalho secao-cabecalho--centro" data-revelar>
+          <span class="secao-eyebrow">O que nos move</span>
+          <h2 id="mvv-titulo">Missão, Visão e Valores</h2>
+          <div class="secao-divisor"></div>
         </div>
 
-    </div>
+        <div class="mvv__grelha">
+          <article class="mvv__cartao" data-revelar>
+            <span class="selo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="5" /><circle cx="12" cy="12" r="1" /></svg>
+            </span>
+            <h3>Missão</h3>
+            <p>
+              Promover a excelência da enfermagem perioperatória em Angola através da formação
+              contínua, da investigação e da defesa dos padrões de segurança do doente na sala
+              operatória.
+            </p>
+          </article>
 
-</div>
-<div id="fb-root"
-        data-locale="pt_PT"></div>
-<!-- Alias: 443a37e1 -->
-<div class="dmPopupMask" id="dmPopupMask"></div>
-<div id="dmPopup" class="dmPopup">
-	<div class="dmPopupCloseWrapper"> <div class="dmPopupClose dm-common-icons-close oneIcon" onclick="dmHidePopup(event);"></div> </div>
- 	<div class="dmPopupTitle"> <span></span> Share by:</div> 
-	<div class="data"></div>
-</div><script type="text/javascript">
-    
-    Parameters.NavigationAreaParams.MoreButtonText = 'MORE';
-    
-    Parameters.NavigationAreaParams.LessButtonText = 'LESS';
-    Parameters.HomeLinkText = 'Home';
-    </script>
-<!--  End Script tags -->
-<!--  Site Wide Html Markup -->
-<!--  Site Wide Html Markup -->
+          <article class="mvv__cartao" data-revelar>
+            <span class="selo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" /><circle cx="12" cy="12" r="3" /></svg>
+            </span>
+            <h3>Visão</h3>
+            <p>
+              Ser reconhecida como a entidade de referência na representação e valorização dos
+              enfermeiros de sala operatória em Angola e na região da África Austral.
+            </p>
+          </article>
+
+          <article class="mvv__cartao" data-revelar>
+            <span class="selo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" /></svg>
+            </span>
+            <h3>Valores</h3>
+            <p>
+              Ética profissional, rigor científico, trabalho em equipa, humanização dos cuidados
+              e compromisso permanente com a segurança do doente.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <!-- /SECTION: missao-visao-valores -->
+
+    <!-- SECTION: formacoes-eventos -->
+    <section id="formacoes-eventos" class="secao" aria-labelledby="formacoes-titulo">
+      <div class="container">
+        <div class="secao-cabecalho secao-cabecalho--centro" data-revelar>
+          <span class="secao-eyebrow">Desenvolvimento profissional</span>
+          <h2 id="formacoes-titulo">Formações e Eventos</h2>
+          <div class="secao-divisor"></div>
+          <p>
+            Cursos, workshops e congressos pensados para actualizar conhecimentos e partilhar
+            experiências entre enfermeiros perioperatórios de todo o país.
+          </p>
+        </div>
+
+        <div class="formacoes__grelha">
+          <article class="cartao" data-revelar>
+            <img
+              class="cartao__imagem"
+              src="https://placehold.co/480x320/1b5e43/ffffff?text=Curso+Avan%C3%A7ado"
+              alt="Curso de Enfermagem Perioperatória Avançada"
+              width="480"
+              height="320"
+              loading="lazy"
+            />
+            <div class="cartao__corpo">
+              <span class="cartao__etiqueta">Formação</span>
+              <span class="cartao__data">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="14" height="14" style="display:inline-block;vertical-align:-2px;margin-right:4px;"><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M16 3v4M8 3v4M3 11h18" /></svg>
+                Setembro 2026 · Luanda
+              </span>
+              <h3 class="cartao__titulo">Curso de Enfermagem Perioperatória Avançada</h3>
+              <p class="cartao__texto">
+                Programa intensivo sobre técnicas cirúrgicas actuais, segurança do doente e
+                gestão de equipas na sala operatória.
+              </p>
+            </div>
+          </article>
+
+          <article class="cartao" data-revelar>
+            <img
+              class="cartao__imagem"
+              src="https://placehold.co/480x320/2f8b66/ffffff?text=Congresso+Nacional"
+              alt="Congresso Nacional de Enfermagem Perioperatória"
+              width="480"
+              height="320"
+              loading="lazy"
+            />
+            <div class="cartao__corpo">
+              <span class="cartao__etiqueta">Congresso</span>
+              <span class="cartao__data">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="14" height="14" style="display:inline-block;vertical-align:-2px;margin-right:4px;"><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M16 3v4M8 3v4M3 11h18" /></svg>
+                Novembro 2026 · Luanda
+              </span>
+              <h3 class="cartao__titulo">Congresso Nacional de Enfermagem Perioperatória</h3>
+              <p class="cartao__texto">
+                O maior encontro de enfermeiros de sala operatória em Angola, com conferencistas
+                nacionais e internacionais.
+              </p>
+            </div>
+          </article>
+
+          <article class="cartao" data-revelar>
+            <img
+              class="cartao__imagem"
+              src="https://placehold.co/480x320/123d2c/ffffff?text=Workshop"
+              alt="Workshop de Instrumentação Cirúrgica"
+              width="480"
+              height="320"
+              loading="lazy"
+            />
+            <div class="cartao__corpo">
+              <span class="cartao__etiqueta">Workshop</span>
+              <span class="cartao__data">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="14" height="14" style="display:inline-block;vertical-align:-2px;margin-right:4px;"><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M16 3v4M8 3v4M3 11h18" /></svg>
+                Outubro 2026 · Benguela
+              </span>
+              <h3 class="cartao__titulo">Workshop de Instrumentação Cirúrgica</h3>
+              <p class="cartao__texto">
+                Sessão prática dedicada à instrumentação e à organização da sala operatória em
+                contexto real.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <div class="formacoes__rodape">
+          <a class="btn btn--contorno-primario" href="#torne-se-membro">
+            Torne-se membro para saber mais em primeira mão
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- /SECTION: formacoes-eventos -->
+
+    <!-- SECTION: torne-se-membro -->
+    <section id="torne-se-membro" class="secao" aria-labelledby="membro-titulo">
+      <div class="container membro__grelha">
+        <div data-revelar>
+          <span class="secao-eyebrow">Junte-se a nós</span>
+          <h2 id="membro-titulo">Torne-se Membro da AESOA</h2>
+          <div class="secao-divisor"></div>
+          <p>
+            Ser sócio da AESOA significa fazer parte de uma comunidade profissional activa, com
+            acesso a formação, eventos científicos e uma rede nacional de enfermeiros
+            perioperatórios.
+          </p>
+
+          <ol class="membro__passos">
+            <li>Preencha o formulário com os seus dados profissionais.</li>
+            <li>A nossa equipa entra em contacto para validar a sua inscrição.</li>
+            <li>Receba a confirmação e o cartão de associado da AESOA.</li>
+          </ol>
+        </div>
+
+        <form class="membro__formulario" id="formulario-membro" novalidate data-revelar>
+          <div class="formulario__grupo formulario__grupo--linha">
+            <div>
+              <label for="campo-nome">Nome completo</label>
+              <input type="text" id="campo-nome" name="nome" autocomplete="name" required />
+            </div>
+            <div>
+              <label for="campo-telefone">Telefone</label>
+              <input type="tel" id="campo-telefone" name="telefone" autocomplete="tel" required />
+            </div>
+          </div>
+
+          <div class="formulario__grupo">
+            <label for="campo-email">E-mail</label>
+            <input type="email" id="campo-email" name="email" autocomplete="email" required />
+          </div>
+
+          <div class="formulario__grupo formulario__grupo--linha">
+            <div>
+              <label for="campo-categoria">Categoria profissional</label>
+              <select id="campo-categoria" name="categoria" required>
+                <option value="">Seleccione uma opção</option>
+                <option value="enfermeiro-perioperatorio">Enfermeiro Perioperatório</option>
+                <option value="enfermeiro-instrumentista">Enfermeiro Instrumentista</option>
+                <option value="estudante">Estudante de Enfermagem</option>
+                <option value="outro">Outra área da saúde</option>
+              </select>
+            </div>
+            <div>
+              <label for="campo-provincia">Província</label>
+              <input type="text" id="campo-provincia" name="provincia" placeholder="Ex: Luanda" required />
+            </div>
+          </div>
+
+          <div class="formulario__grupo">
+            <label for="campo-mensagem">Mensagem (opcional)</label>
+            <textarea id="campo-mensagem" name="mensagem" rows="3"></textarea>
+          </div>
+
+          <label class="formulario__consentimento">
+            <input type="checkbox" name="consentimento" required />
+            Autorizo a AESOA a contactar-me relativamente a este pedido de adesão.
+          </label>
+
+          <button class="btn btn--primario btn--bloco" type="submit" style="margin-top: var(--espaco-md);">
+            Enviar Pedido de Adesão
+          </button>
+
+          <p class="formulario__mensagem" role="status"></p>
+        </form>
+      </div>
+    </section>
+    <!-- /SECTION: torne-se-membro -->
+
+    <!-- SECTION: noticias -->
+    <section id="noticias" class="secao secao--alt" aria-labelledby="noticias-titulo">
+      <div class="container">
+        <div class="secao-cabecalho secao-cabecalho--centro" data-revelar>
+          <span class="secao-eyebrow">Actualidade</span>
+          <h2 id="noticias-titulo">Notícias</h2>
+          <div class="secao-divisor"></div>
+        </div>
+
+        <div class="noticias__grelha">
+          <article class="cartao" data-revelar>
+            <img
+              class="cartao__imagem"
+              src="https://placehold.co/480x320/1b5e43/ffffff?text=Parceria+Hospitalar"
+              alt="AESOA reforça parceria com hospitais de Luanda"
+              width="480"
+              height="320"
+              loading="lazy"
+            />
+            <div class="cartao__corpo">
+              <span class="cartao__data">11 de Julho de 2026</span>
+              <h3 class="cartao__titulo">AESOA reforça parceria com hospitais de Luanda para formação prática</h3>
+              <p class="cartao__texto">
+                Novo protocolo permite estágios supervisionados em sala operatória para
+                associados em processo de certificação.
+              </p>
+            </div>
+          </article>
+
+          <article class="cartao" data-revelar>
+            <img
+              class="cartao__imagem"
+              src="https://placehold.co/480x320/2f8b66/ffffff?text=Boas+Pr%C3%A1ticas"
+              alt="Novo referencial de boas práticas em instrumentação cirúrgica"
+              width="480"
+              height="320"
+              loading="lazy"
+            />
+            <div class="cartao__corpo">
+              <span class="cartao__data">2 de Julho de 2026</span>
+              <h3 class="cartao__titulo">Novo referencial de boas práticas em instrumentação cirúrgica</h3>
+              <p class="cartao__texto">
+                Documento elaborado pelo Conselho Fiscal da AESOA define critérios comuns para
+                todo o país.
+              </p>
+            </div>
+          </article>
+
+          <article class="cartao" data-revelar>
+            <img
+              class="cartao__imagem"
+              src="https://placehold.co/480x320/123d2c/ffffff?text=Congresso+2026"
+              alt="Inscrições abertas para o Congresso Nacional de Enfermagem Perioperatória"
+              width="480"
+              height="320"
+              loading="lazy"
+            />
+            <div class="cartao__corpo">
+              <span class="cartao__data">20 de Junho de 2026</span>
+              <h3 class="cartao__titulo">Inscrições abertas para o Congresso Nacional de Enfermagem Perioperatória</h3>
+              <p class="cartao__texto">
+                Associados têm condições especiais de inscrição até ao final de Agosto.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <div class="noticias__rodape">
+          <a class="btn btn--contorno-primario" href="noticias.html">Ver todas as notícias</a>
+        </div>
+      </div>
+    </section>
+    <!-- /SECTION: noticias -->
+
+    <!-- SECTION: contactos -->
+    <section id="contactos" class="secao" aria-labelledby="contactos-titulo">
+      <div class="container contactos__grelha">
+        <div data-revelar>
+          <span class="secao-eyebrow">Fale connosco</span>
+          <h2 id="contactos-titulo">Contactos</h2>
+          <div class="secao-divisor"></div>
+
+          <div class="contactos__lista">
+            <div class="contactos__item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="22" height="22" style="color:var(--cor-primaria);flex-shrink:0;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z" /><circle cx="12" cy="10" r="3" /></svg>
+              <div>
+                <h3>Sede</h3>
+                <p>Rua Amílcar Cabral, Bairro Maianga, Luanda, Angola</p>
+              </div>
+            </div>
+
+            <div class="contactos__item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="22" height="22" style="color:var(--cor-primaria);flex-shrink:0;"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .6 2.9a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.5 2.9.6a2 2 0 0 1 1.8 2.1z" /></svg>
+              <div>
+                <h3>Telefone</h3>
+                <p><a href="tel:+244923000000">+244 923 000 000</a></p>
+              </div>
+            </div>
+
+            <div class="contactos__item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="22" height="22" style="color:var(--cor-primaria);flex-shrink:0;"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m3 6 9 7 9-7" /></svg>
+              <div>
+                <h3>E-mail</h3>
+                <p><a href="mailto:geral@aesoa.ao">geral@aesoa.ao</a></p>
+              </div>
+            </div>
+
+            <div class="contactos__item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="22" height="22" style="color:var(--cor-primaria);flex-shrink:0;"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg>
+              <div>
+                <h3>Horário</h3>
+                <p>Segunda a Sexta, 08h00 – 17h00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <img
+          class="contactos__mapa"
+          data-revelar
+          src="https://placehold.co/720x480/e7f2ec/1b5e43?text=Mapa+%E2%80%94+Luanda%2C+Angola"
+          alt="Mapa de localização da sede da AESOA em Luanda"
+          width="720"
+          height="480"
+          loading="lazy"
+        />
+      </div>
+    </section>
+    <!-- /SECTION: contactos -->
+  </main>
+
+  <!-- SECTION: rodape -->
+  <footer class="rodape">
+    <div class="container">
+      <div class="rodape__grelha">
+        <div>
+          <span class="rodape__logo-caixa">
+            <img class="rodape__logo" src="assets/img/logo.png" alt="Logótipo da AESOA" />
+          </span>
+          <p class="rodape__descricao">
+            Associação dos Enfermeiros da Sala Operatória de Angola. Formação, representação e
+            segurança do doente na sala operatória.
+          </p>
+        </div>
+
+        <nav aria-label="Links rápidos">
+          <h4 class="rodape__titulo">Links Rápidos</h4>
+          <ul class="rodape__lista">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="about.html">Sobre a AESOA</a></li>
+            <li><a href="socios.html">Sócios</a></li>
+            <li><a href="noticias.html">Notícias</a></li>
+            <li><a href="contactos.html">Contactos</a></li>
+          </ul>
+        </nav>
+
+        <div>
+          <h4 class="rodape__titulo">Contactos</h4>
+          <div class="rodape__contacto">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z" /><circle cx="12" cy="10" r="3" /></svg>
+            <span>Rua Amílcar Cabral, Bairro Maianga, Luanda, Angola</span>
+          </div>
+          <div class="rodape__contacto">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .6 2.9a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.5 2.9.6a2 2 0 0 1 1.8 2.1z" /></svg>
+            <span><a href="tel:+244923000000">+244 923 000 000</a></span>
+          </div>
+          <div class="rodape__contacto">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m3 6 9 7 9-7" /></svg>
+            <span><a href="mailto:geral@aesoa.ao">geral@aesoa.ao</a></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rodape__baixo">
+        <p>© <span data-ano-atual>2026</span> AESOA — Associação dos Enfermeiros da Sala Operatória de Angola. Todos os direitos reservados.</p>
+        <div class="rodape__redes">
+          <a href="#" aria-label="AESOA no Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.6h2.6l.4-3h-3v-1.9c0-.9.2-1.5 1.6-1.5h1.6V4.3c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.2v2.4H7.7v3H10V21h3.5z" /></svg>
+          </a>
+          <a href="#" aria-label="AESOA no LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.9 8.4H3.6V20h3.3V8.4zM5.3 3.3a1.9 1.9 0 1 0 0 3.9 1.9 1.9 0 0 0 0-3.9zM20.4 20h-3.3v-6.1c0-1.5-.5-2.5-1.8-2.5-1 0-1.6.7-1.9 1.3-.1.2-.1.6-.1.9V20H10s.1-10.5 0-11.6h3.3v1.6c.4-.7 1.2-1.7 3-1.7 2.2 0 3.9 1.4 3.9 4.5V20z" /></svg>
+          </a>
+          <a href="#" aria-label="AESOA no Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" /></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- /SECTION: rodape -->
+
+  <script src="assets/js/main.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,301 @@
+/*
+ * AESOA — Estilos específicos de cada secção do index.html
+ */
+
+/* ===== Hero ===== */
+
+#hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 88vh;
+  padding-block: var(--espaco-2xl);
+  color: var(--cor-texto-claro);
+  background: linear-gradient(
+      160deg,
+      rgba(18, 61, 44, 0.94) 0%,
+      rgba(27, 94, 67, 0.88) 55%,
+      rgba(47, 139, 102, 0.82) 100%
+    ),
+    url("https://placehold.co/1920x1080/123d2c/123d2c?text=+") center / cover no-repeat;
+}
+
+.hero__conteudo {
+  max-width: 720px;
+}
+
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--fonte-titulo);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cor-texto-claro);
+  background-color: rgba(255, 255, 255, 0.14);
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--raio-pill);
+  margin-bottom: var(--espaco-md);
+}
+
+#hero h1 {
+  color: var(--cor-texto-claro);
+  margin-bottom: var(--espaco-sm);
+}
+
+.hero__texto {
+  font-size: var(--fs-md);
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 60ch;
+  margin-bottom: var(--espaco-lg);
+}
+
+.hero__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-sm);
+  margin-bottom: var(--espaco-xl);
+}
+
+.hero__estatisticas {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: var(--espaco-lg);
+}
+
+.hero__estatistica-numero {
+  display: block;
+  font-family: var(--fonte-titulo);
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  color: var(--cor-texto-claro);
+}
+
+.hero__estatistica-legenda {
+  font-size: var(--fs-xs);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ===== Sobre a AESOA ===== */
+
+#sobre .container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--espaco-2xl);
+  align-items: center;
+}
+
+.sobre__imagem {
+  border-radius: var(--raio-lg);
+  box-shadow: var(--sombra-lg);
+}
+
+.sobre__lista {
+  list-style: none;
+  padding: 0;
+  margin: var(--espaco-md) 0 var(--espaco-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sobre__lista li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: var(--fs-sm);
+  color: var(--cor-texto-suave);
+}
+
+.sobre__lista svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 0.15rem;
+  color: var(--cor-primaria);
+}
+
+/* ===== Missão, Visão e Valores ===== */
+
+.mvv__grelha {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--espaco-md);
+}
+
+.mvv__cartao {
+  padding: var(--espaco-lg) var(--espaco-md);
+  background-color: var(--cor-fundo);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-lg);
+  text-align: left;
+  transition: box-shadow var(--transicao-base), transform var(--transicao-base);
+}
+
+.mvv__cartao:hover {
+  box-shadow: var(--sombra-md);
+  transform: translateY(-4px);
+}
+
+.mvv__cartao p {
+  font-size: var(--fs-sm);
+}
+
+/* ===== Formações e Eventos ===== */
+
+.formacoes__grelha,
+.noticias__grelha {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--espaco-md);
+}
+
+.formacoes__rodape,
+.noticias__rodape {
+  margin-top: var(--espaco-lg);
+  text-align: center;
+}
+
+/* ===== Torne-se Membro ===== */
+
+#torne-se-membro {
+  background-color: var(--cor-primaria-escura);
+  color: var(--cor-texto-claro);
+}
+
+#torne-se-membro .secao-eyebrow {
+  color: var(--cor-texto-claro);
+  opacity: 0.85;
+}
+
+#torne-se-membro .secao-cabecalho h2,
+#torne-se-membro .secao-cabecalho p {
+  color: var(--cor-texto-claro);
+}
+
+#torne-se-membro .secao-divisor {
+  background-color: var(--cor-texto-claro);
+}
+
+.membro__grelha {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--espaco-2xl);
+  align-items: start;
+}
+
+.membro__passos {
+  list-style: none;
+  margin: var(--espaco-md) 0 0;
+  padding: 0;
+  counter-reset: passo;
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-md);
+}
+
+.membro__passos li {
+  counter-increment: passo;
+  display: flex;
+  gap: var(--espaco-sm);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.membro__passos li::before {
+  content: counter(passo);
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.14);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  color: var(--cor-texto-claro);
+}
+
+.membro__formulario {
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  padding: var(--espaco-lg);
+  border-radius: var(--raio-lg);
+  box-shadow: var(--sombra-lg);
+}
+
+/* ===== Contactos ===== */
+
+.contactos__grelha {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--espaco-2xl);
+  align-items: start;
+}
+
+.contactos__lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-md);
+  margin-top: var(--espaco-md);
+}
+
+.contactos__item {
+  display: flex;
+  gap: var(--espaco-sm);
+}
+
+.contactos__item h3 {
+  font-size: var(--fs-md);
+  margin-bottom: 0.2rem;
+}
+
+.contactos__item p {
+  font-size: var(--fs-sm);
+}
+
+.contactos__mapa {
+  width: 100%;
+  border-radius: var(--raio-lg);
+  box-shadow: var(--sombra-md);
+}
+
+/* ===== Responsivo — secções ===== */
+
+@media (max-width: 960px) {
+  #sobre .container,
+  .membro__grelha,
+  .contactos__grelha {
+    grid-template-columns: 1fr;
+  }
+
+  .sobre__imagem {
+    order: -1;
+  }
+
+  .mvv__grelha,
+  .formacoes__grelha,
+  .noticias__grelha {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero__estatisticas {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--espaco-md);
+  }
+}
+
+@media (max-width: 640px) {
+  .mvv__grelha,
+  .formacoes__grelha,
+  .noticias__grelha {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__acoes {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
