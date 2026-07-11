@@ -12,7 +12,7 @@
   padding-block: var(--espaco-2xl);
   overflow: hidden;
   color: var(--cor-texto-claro);
-  background-color: var(--cor-primaria-escura);
+  background-color: var(--cor-hero-fundo);
 }
 
 .hero__video-fundo {
@@ -38,12 +38,7 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(
-    160deg,
-    rgba(18, 61, 44, 0.94) 0%,
-    rgba(27, 94, 67, 0.88) 55%,
-    rgba(47, 139, 102, 0.82) 100%
-  );
+  background: rgba(93, 146, 124, 0.78);
 }
 
 .hero__conteudo {
