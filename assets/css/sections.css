@@ -299,6 +299,8 @@
 
 .contactos__mapa {
   width: 100%;
+  aspect-ratio: 3 / 2;
+  height: auto;
   border-radius: var(--raio-lg);
   box-shadow: var(--sombra-md);
 }
