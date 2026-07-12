@@ -36,6 +36,10 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+body.menu-aberto {
+  overflow: hidden;
+}
+
 h1,
 h2,
 h3,

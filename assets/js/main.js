@@ -35,6 +35,57 @@ function initCabecalhoFixo() {
   window.addEventListener("scroll", aoScrollar, { passive: true });
 }
 
+function initMenuMobile() {
+  const botao = document.querySelector("#botao-menu");
+  const nav = document.querySelector("#nav-principal");
+  if (!botao || !nav) return;
+
+  const PONTO_QUEBRA = 1200;
+
+  const fecharSubmenus = () => {
+    nav.querySelectorAll(".nav__item--dropdown.esta-aberto").forEach((item) => {
+      item.classList.remove("esta-aberto");
+      item.querySelector(":scope > .nav__link")?.setAttribute("aria-expanded", "false");
+    });
+  };
+
+  const fecharMenu = () => {
+    nav.classList.remove("esta-aberto");
+    botao.setAttribute("aria-expanded", "false");
+    botao.setAttribute("aria-label", "Abrir menu de navegação");
+    document.body.classList.remove("menu-aberto");
+    fecharSubmenus();
+  };
+
+  const alternarMenu = () => {
+    const aberto = nav.classList.toggle("esta-aberto");
+    botao.setAttribute("aria-expanded", String(aberto));
+    botao.setAttribute("aria-label", aberto ? "Fechar menu de navegação" : "Abrir menu de navegação");
+    document.body.classList.toggle("menu-aberto", aberto);
+    if (!aberto) fecharSubmenus();
+  };
+
+  botao.addEventListener("click", alternarMenu);
+
+  nav.querySelectorAll(".nav__link").forEach((link) => {
+    link.addEventListener("click", () => {
+      if (window.innerWidth > PONTO_QUEBRA || link.hasAttribute("data-tem-submenu")) return;
+      fecharMenu();
+    });
+  });
+
+  document.addEventListener("keydown", (evento) => {
+    if (evento.key === "Escape" && nav.classList.contains("esta-aberto")) {
+      fecharMenu();
+      botao.focus();
+    }
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > PONTO_QUEBRA) fecharMenu();
+  });
+}
+
 function initSubmenusDropdown() {
   const itens = document.querySelectorAll(".nav__item--dropdown");
 
@@ -136,6 +187,7 @@ function initFormularioMembro() {
 document.addEventListener("DOMContentLoaded", () => {
   initVideoHero();
   initCabecalhoFixo();
+  initMenuMobile();
   initSubmenusDropdown();
   initAnoRodape();
   initRevelarAoScroll();
