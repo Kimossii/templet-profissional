@@ -267,50 +267,11 @@
   box-shadow: var(--sombra-lg);
 }
 
-/* ===== Contactos ===== */
-
-.contactos__grelha {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: var(--espaco-2xl);
-  align-items: start;
-}
-
-.contactos__lista {
-  display: flex;
-  flex-direction: column;
-  gap: var(--espaco-md);
-  margin-top: var(--espaco-md);
-}
-
-.contactos__item {
-  display: flex;
-  gap: var(--espaco-sm);
-}
-
-.contactos__item h3 {
-  font-size: var(--fs-md);
-  margin-bottom: 0.2rem;
-}
-
-.contactos__item p {
-  font-size: var(--fs-sm);
-}
-
-.contactos__mapa {
-  width: 100%;
-  aspect-ratio: 3 / 2;
-  height: auto;
-  border-radius: var(--raio-lg);
-  box-shadow: var(--sombra-md);
-}
-
 /* ===== Responsivo — secções ===== */
 
 @media (max-width: 960px) {
   #sobre .container,
-  .membro__grelha,
-  .contactos__grelha {
+  .membro__grelha {
     grid-template-columns: 1fr;
   }
 

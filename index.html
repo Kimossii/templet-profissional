@@ -203,7 +203,7 @@
           <div class="secao-divisor"></div>
         </div>
 
-        <div class="mvv__grelha">
+        <div class="mvv__grelha grelha-escalonada">
           <article class="mvv__cartao" data-revelar>
             <span class="selo">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -269,7 +269,7 @@
           </p>
         </div>
 
-        <div class="formacoes__grelha">
+        <div class="formacoes__grelha grelha-escalonada">
           <article class="cartao" data-revelar>
             <img class="cartao__imagem" src="assets/img/site/Gestao-Perioperatoria.jpg"
               alt="Curso de Enfermagem Perioperatória Avançada" width="480" height="320" loading="lazy" />
@@ -429,7 +429,7 @@
           <div class="secao-divisor"></div>
         </div>
 
-        <div class="noticias__grelha">
+        <div class="noticias__grelha grelha-escalonada">
           <article class="cartao" data-revelar>
             <img class="cartao__imagem" src="assets/img/site/reforcaparceria.jpg"
               alt="AESOA reforça parceria com hospitais de Luanda" width="480" height="320" loading="lazy" />
@@ -478,76 +478,6 @@
     </section>
     <!-- /SECTION: noticias -->
 
-    <!-- SECTION: contactos -->
-    <section id="contactos" class="secao" aria-labelledby="contactos-titulo">
-      <div class="container contactos__grelha">
-        <div data-revelar>
-          <span class="secao-eyebrow">Fale connosco</span>
-          <h2 id="contactos-titulo">Contactos</h2>
-          <div class="secao-divisor"></div>
-
-          <div class="contactos__lista">
-            <div class="contactos__item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" aria-hidden="true" width="22" height="22"
-                style="color:var(--cor-primaria);flex-shrink:0;">
-                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-              <div>
-                <h3>Sede</h3>
-                <p>Rua Amílcar Cabral, Bairro Maianga, Luanda, Angola</p>
-              </div>
-            </div>
-
-            <div class="contactos__item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" aria-hidden="true" width="22" height="22"
-                style="color:var(--cor-primaria);flex-shrink:0;">
-                <path
-                  d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .6 2.9a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.5 2.9.6a2 2 0 0 1 1.8 2.1z" />
-              </svg>
-              <div>
-                <h3>Telefone</h3>
-                <p><a href="tel:+244923000000">+244 923 000 000</a></p>
-              </div>
-            </div>
-
-            <div class="contactos__item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" aria-hidden="true" width="22" height="22"
-                style="color:var(--cor-primaria);flex-shrink:0;">
-                <rect x="2" y="4" width="20" height="16" rx="2" />
-                <path d="m3 6 9 7 9-7" />
-              </svg>
-              <div>
-                <h3>E-mail</h3>
-                <p><a href="mailto:geral@aesoa.ao">geral@aesoa.ao</a></p>
-              </div>
-            </div>
-
-            <div class="contactos__item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" aria-hidden="true" width="22" height="22"
-                style="color:var(--cor-primaria);flex-shrink:0;">
-                <circle cx="12" cy="12" r="9" />
-                <path d="M12 7v5l3 3" />
-              </svg>
-              <div>
-                <h3>Horário</h3>
-                <p>Segunda a Sexta, 08h00 – 17h00</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <iframe class="contactos__mapa" data-revelar
-          src="https://www.google.com/maps?q=Rua+Am%C3%ADlcar+Cabral,+Bairro+Maianga,+Luanda,+Angola&output=embed"
-          title="Mapa de localização da sede da AESOA em Luanda" width="720" height="480" loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade" style="border:0;" allowfullscreen></iframe>
-      </div>
-    </section>
-    <!-- /SECTION: contactos -->
   </main>
 
   <!-- SECTION: rodape -->
@@ -605,7 +535,7 @@
       </div>
 
       <div class="rodape__baixo">
-        <p>© <span data-ano-atual>2026</span> AESOA — Associação dos Enfermeiros da Sala Operatória de Angola. Todos os
+        <p>© <span data-ano-atual>2026</span> AESOA. Todos os
           direitos reservados.</p>
         <div class="rodape__redes">
           <a href="#" aria-label="AESOA no Facebook">
@@ -629,9 +559,26 @@
           </a>
         </div>
       </div>
+
+      <div class="rodape__creditos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" aria-hidden="true">
+          <polyline points="16 18 22 12 16 6" />
+          <polyline points="8 6 2 12 8 18" />
+        </svg>
+        <span>Desenvolvido por <strong>Kimossi</strong></span>
+      </div>
     </div>
   </footer>
   <!-- /SECTION: rodape -->
+
+  <button type="button" id="botao-topo" class="botao-topo" aria-label="Voltar ao topo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+      stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 19V5" />
+      <path d="m5 12 7-7 7 7" />
+    </svg>
+  </button>
 
   <script src="assets/js/main.js" defer></script>
 </body>

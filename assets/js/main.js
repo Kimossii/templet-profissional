@@ -92,6 +92,22 @@ function initRevelarAoScroll() {
   elementos.forEach((el) => observador.observe(el));
 }
 
+function initBotaoTopo() {
+  const botao = document.querySelector("#botao-topo");
+  if (!botao) return;
+
+  const aoScrollar = () => {
+    botao.classList.toggle("esta-visivel", window.scrollY > 480);
+  };
+
+  aoScrollar();
+  window.addEventListener("scroll", aoScrollar, { passive: true });
+
+  botao.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+
 function initFormularioMembro() {
   const formulario = document.querySelector("#formulario-membro");
   if (!formulario) return;
@@ -123,5 +139,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initSubmenusDropdown();
   initAnoRodape();
   initRevelarAoScroll();
+  initBotaoTopo();
   initFormularioMembro();
 });
