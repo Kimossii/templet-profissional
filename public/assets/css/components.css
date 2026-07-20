@@ -99,6 +99,110 @@
   margin-inline: auto;
 }
 
+/* ===== Barra superior ===== */
+
+.topbar {
+  background-color: var(--cor-primaria-escura);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.topbar__interior {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-md);
+  min-height: 42px;
+  padding-block: 0.4rem;
+}
+
+.topbar__contactos {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-sm);
+  min-width: 0;
+}
+
+.topbar__contacto {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--fonte-corpo);
+  font-size: var(--fs-xs);
+  color: rgba(255, 255, 255, 0.72);
+  white-space: nowrap;
+  transition: color var(--transicao-base);
+}
+
+.topbar__contacto svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.topbar__contacto:hover {
+  color: var(--cor-texto-claro);
+}
+
+.topbar__separador {
+  width: 1px;
+  height: 14px;
+  flex-shrink: 0;
+  background-color: rgba(255, 255, 255, 0.18);
+}
+
+.topbar__acoes {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-sm);
+  flex-shrink: 0;
+}
+
+.topbar__login {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--fonte-titulo);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.85);
+  white-space: nowrap;
+  transition: color var(--transicao-base);
+}
+
+.topbar__login svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.topbar__login:hover {
+  color: var(--cor-texto-claro);
+}
+
+.topbar__cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 1.1rem;
+  border-radius: var(--raio-pill);
+  background-color: var(--cor-primaria-clara);
+  color: var(--cor-texto-claro);
+  font-family: var(--fonte-titulo);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: background-color var(--transicao-base), color var(--transicao-base),
+    transform var(--transicao-base);
+}
+
+.topbar__cta:hover {
+  background-color: var(--cor-texto-claro);
+  color: var(--cor-primaria-escura);
+  transform: translateY(-1px);
+}
+
 /* ===== Cabeçalho / Navbar ===== */
 
 .cabecalho {
@@ -664,6 +768,10 @@
 /* ===== Responsivo — componentes ===== */
 
 @media (max-width: 1200px) {
+  .topbar {
+    display: none;
+  }
+
   .cabecalho {
     position: fixed;
     left: 0;
