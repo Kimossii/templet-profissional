@@ -115,6 +115,21 @@ function initSubmenusDropdown() {
   });
 }
 
+function initAcordeaoValores() {
+  const itens = document.querySelectorAll(".valores__item");
+  if (!itens.length) return;
+
+  itens.forEach((item) => {
+    const botao = item.querySelector(".valores__cabecalho");
+    if (!botao) return;
+
+    botao.addEventListener("click", () => {
+      const aberto = item.classList.toggle("esta-aberto");
+      botao.setAttribute("aria-expanded", String(aberto));
+    });
+  });
+}
+
 function initAnoRodape() {
   const elemento = document.querySelector("[data-ano-atual]");
   if (!elemento) return;
@@ -313,6 +328,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initCabecalhoFixo();
   initMenuMobile();
   initSubmenusDropdown();
+  initAcordeaoValores();
   initAnoRodape();
   initRevelarAoScroll();
   initBotaoTopo();

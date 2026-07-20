@@ -172,7 +172,7 @@
 
 .mvv__grelha {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--espaco-md);
 }
 
@@ -192,6 +192,105 @@
 
 .mvv__cartao p {
   font-size: var(--fs-sm);
+}
+
+.mvv__cartao--valores {
+  grid-column: 1 / -1;
+}
+
+.valores__intro {
+  color: var(--cor-texto-suave);
+  font-size: var(--fs-sm);
+  margin-bottom: var(--espaco-md);
+  max-width: 65ch;
+}
+
+.valores__lista {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem var(--espaco-md);
+}
+
+.valores__item {
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-md);
+  background-color: var(--cor-fundo);
+  overflow: hidden;
+  transition: border-color var(--transicao-base);
+}
+
+.valores__item.esta-aberto {
+  border-color: var(--cor-primaria-clara);
+}
+
+.valores__cabecalho {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-sm);
+  width: 100%;
+  padding: 0.85rem var(--espaco-sm);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--fonte-corpo);
+  color: var(--cor-texto);
+}
+
+.valores__numero {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--cor-primaria-suave);
+  color: var(--cor-primaria);
+  font-family: var(--fonte-titulo);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+}
+
+.valores__titulo {
+  flex: 1;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  color: var(--cor-primaria-escura);
+}
+
+.valores__seta {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: var(--cor-primaria);
+  transition: transform var(--transicao-base);
+}
+
+.valores__item.esta-aberto .valores__seta {
+  transform: rotate(180deg);
+}
+
+.valores__painel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--transicao-base);
+}
+
+.valores__item.esta-aberto .valores__painel {
+  grid-template-rows: 1fr;
+}
+
+.valores__painel-interior {
+  overflow: hidden;
+}
+
+.valores__painel p {
+  margin: 0;
+  padding: 0 var(--espaco-sm) 0.95rem calc(28px + var(--espaco-sm) * 2);
+  font-size: var(--fs-sm);
+  color: var(--cor-texto-suave);
 }
 
 /* ===== Formações e Eventos ===== */
@@ -739,6 +838,10 @@ body.lightbox-aberta {
   .formacoes__grelha,
   .noticias__grelha {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .valores__lista {
+    grid-template-columns: 1fr;
   }
 
   .hero__estatisticas {
