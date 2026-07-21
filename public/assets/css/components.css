@@ -493,6 +493,29 @@
   height: 30px;
 }
 
+/* ===== Cartão com hiperligação (variante de .mvv__cartao / .cartao) ===== */
+
+a.mvv__cartao {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+a.mvv__cartao:hover h3 {
+  color: var(--cor-primaria);
+}
+
+/* ===== Grupo de etiquetas ===== */
+
+.etiquetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: var(--espaco-sm) 0 var(--espaco-md);
+  padding: 0;
+  list-style: none;
+}
+
 /* ===== Formulário ===== */
 
 .formulario__grupo {

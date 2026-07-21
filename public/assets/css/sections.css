@@ -464,6 +464,174 @@
   color: var(--cor-texto-claro);
 }
 
+/* ===== Página Sobre — estatísticas institucionais ===== */
+
+.estatisticas__grelha {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--espaco-md);
+  margin: 0;
+  margin-top: var(--espaco-xl);
+  padding-top: var(--espaco-xl);
+  border-top: 1px solid var(--cor-borda);
+  list-style: none;
+}
+
+.estatistica {
+  text-align: center;
+}
+
+.estatistica__numero {
+  display: block;
+  font-family: var(--fonte-titulo);
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  color: var(--cor-primaria);
+}
+
+.estatistica__rotulo {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cor-texto-suave);
+}
+
+/* ===== Página Sobre — linha do tempo ===== */
+
+.linha-tempo {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  max-width: 780px;
+  margin-inline: auto;
+}
+
+.linha-tempo::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 39px;
+  width: 2px;
+  background-color: var(--cor-borda);
+}
+
+.linha-tempo__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  column-gap: var(--espaco-md);
+  padding-bottom: var(--espaco-lg);
+}
+
+.linha-tempo__item:last-child {
+  padding-bottom: 0;
+}
+
+.linha-tempo__marco {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: var(--cor-fundo);
+  border: 2px solid var(--cor-primaria);
+  box-shadow: var(--sombra-sm);
+}
+
+.linha-tempo__ano {
+  font-family: var(--fonte-titulo);
+  font-weight: 800;
+  font-size: var(--fs-md);
+  color: var(--cor-primaria);
+}
+
+.linha-tempo__conteudo {
+  padding-top: var(--espaco-xs);
+}
+
+.linha-tempo__conteudo h3 {
+  margin-bottom: 0.35rem;
+}
+
+.linha-tempo__conteudo p {
+  font-size: var(--fs-sm);
+}
+
+/* ===== Página Sobre — pilares de actuação ===== */
+
+.pilares__grelha {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--espaco-md);
+}
+
+/* ===== Página Sobre — estrutura institucional ===== */
+
+.estrutura__grelha {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--espaco-md);
+}
+
+/* ===== Página Sobre — testemunhos ===== */
+
+.testemunhos__grelha {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--espaco-md);
+}
+
+.testemunho {
+  margin: 0;
+  padding: var(--espaco-lg) var(--espaco-md);
+  background-color: var(--cor-fundo);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-lg);
+  transition: box-shadow var(--transicao-base), transform var(--transicao-base);
+}
+
+.testemunho:hover {
+  box-shadow: var(--sombra-md);
+  transform: translateY(-4px);
+}
+
+.testemunho__aspas {
+  width: 30px;
+  height: 30px;
+  color: var(--cor-primaria-clara);
+  margin-bottom: var(--espaco-sm);
+}
+
+.testemunho__texto {
+  font-size: var(--fs-sm);
+  color: var(--cor-texto-suave);
+  margin-bottom: var(--espaco-md);
+}
+
+.testemunho__autor {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.testemunho__nome {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  color: var(--cor-primaria-escura);
+  font-size: var(--fs-sm);
+}
+
+.testemunho__cargo {
+  font-size: var(--fs-xs);
+  color: var(--cor-texto-suave);
+}
+
 /* ===== Galeria ===== */
 
 .galeria__filtros {
@@ -836,7 +1004,10 @@ body.lightbox-aberta {
 
   .mvv__grelha,
   .formacoes__grelha,
-  .noticias__grelha {
+  .noticias__grelha,
+  .pilares__grelha,
+  .estrutura__grelha,
+  .testemunhos__grelha {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -847,6 +1018,10 @@ body.lightbox-aberta {
   .hero__estatisticas {
     grid-template-columns: repeat(3, 1fr);
     gap: var(--espaco-md);
+  }
+
+  .estatisticas__grelha {
+    gap: var(--espaco-lg);
   }
 
   .pagina-hero {
@@ -862,8 +1037,32 @@ body.lightbox-aberta {
 @media (max-width: 640px) {
   .mvv__grelha,
   .formacoes__grelha,
-  .noticias__grelha {
+  .noticias__grelha,
+  .pilares__grelha,
+  .estrutura__grelha,
+  .testemunhos__grelha {
     grid-template-columns: 1fr;
+  }
+
+  .estatisticas__grelha {
+    grid-template-columns: 1fr;
+  }
+
+  .linha-tempo::before {
+    left: 27px;
+  }
+
+  .linha-tempo__item {
+    grid-template-columns: 56px 1fr;
+  }
+
+  .linha-tempo__marco {
+    width: 56px;
+    height: 56px;
+  }
+
+  .linha-tempo__ano {
+    font-size: var(--fs-sm);
   }
 
   .hero__acoes {
