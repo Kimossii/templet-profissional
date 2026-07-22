@@ -21,6 +21,12 @@
  * `fotoPos` (object-position CSS, ex.: "70% 30%"). Sem `foto`, mostra-se só
  * o círculo com iniciais (comportamento anterior).
  *
+ * Ao passar o rato (ou focar por teclado) num avatar da tira, aparece um
+ * cartão lateral com os detalhes desse orador — sem alterar o destaque
+ * principal, que só muda com clique/selecção. O cartão aparece do lado com
+ * mais espaço (direita se o avatar estiver na metade esquerda, e vice-versa)
+ * e só em dispositivos com rato real (media query "hover: hover").
+ *
  * Diferenças deliberadas face ao componente React original (não é um bug):
  * 1. Sem fotografias individuais dos oradores (não existem), a `foto` de
  *    cada item é antes uma imagem temática (instrumental, sala operatória)
@@ -131,6 +137,112 @@
     const setaAnterior = container.querySelector(".palestrantes-carrossel__seta--anterior");
     const setaSeguinte = container.querySelector(".palestrantes-carrossel__seta--seguinte");
 
+    // ===== cartão lateral (pré-visualização ao passar o rato / focar) =====
+    // Ancorado à fila toda (não ao botão específico) para nunca tapar os
+    // outros avatares; e o próprio cartão também segura o hover, para não
+    // fechar ao mover o rato de cima do botão para cima dele.
+    const cartao = document.createElement("div");
+    cartao.className = "palestrantes-carrossel__cartao";
+    cartao.setAttribute("aria-hidden", "true");
+    cartao.innerHTML =
+      '<div class="palestrantes-carrossel__cartao-capa">' +
+      '<span class="palestrantes-carrossel__cartao-selo"></span>' +
+      "</div>" +
+      '<div class="palestrantes-carrossel__cartao-corpo">' +
+      '<span class="palestrantes-carrossel__cartao-contador"></span>' +
+      '<h4 class="palestrantes-carrossel__cartao-nome"></h4>' +
+      '<p class="palestrantes-carrossel__cartao-cargo"></p>' +
+      '<span class="palestrantes-carrossel__cartao-pais"></span>' +
+      "</div>";
+    container.appendChild(cartao);
+
+    const cartaoCapa = cartao.querySelector(".palestrantes-carrossel__cartao-capa");
+    const cartaoSelo = cartao.querySelector(".palestrantes-carrossel__cartao-selo");
+    const cartaoContador = cartao.querySelector(".palestrantes-carrossel__cartao-contador");
+    const cartaoNome = cartao.querySelector(".palestrantes-carrossel__cartao-nome");
+    const cartaoCargo = cartao.querySelector(".palestrantes-carrossel__cartao-cargo");
+    const cartaoPais = cartao.querySelector(".palestrantes-carrossel__cartao-pais");
+    let temporizadorCartao = null;
+
+    function preencherCartao(idx) {
+      const item = items[idx];
+      cartaoCapa.querySelectorAll("img, .palestrantes-carrossel__cartao-tinta").forEach(function (el) {
+        el.remove();
+      });
+      if (item.foto) {
+        const img = document.createElement("img");
+        img.className = "palestrantes-carrossel__cartao-foto";
+        img.src = item.foto;
+        img.alt = "";
+        if (item.fotoPos) img.style.objectPosition = item.fotoPos;
+        cartaoCapa.insertBefore(img, cartaoSelo);
+        const tinta = document.createElement("span");
+        tinta.className = "palestrantes-carrossel__cartao-tinta";
+        cartaoCapa.insertBefore(tinta, cartaoSelo);
+      }
+      cartaoSelo.textContent = iniciaisDe(item);
+
+      cartaoContador.textContent = String(idx + 1).padStart(2, "0") + " — " + String(M).padStart(2, "0");
+      cartaoNome.textContent = item.nome || "";
+      cartaoCargo.textContent = item.cargo || "";
+      cartaoCargo.style.display = item.cargo ? "" : "none";
+      cartaoPais.textContent = item.pais || "";
+      cartaoPais.style.display = item.pais ? "" : "none";
+    }
+
+    function posicionarCartao(botao) {
+      const contRect = container.getBoundingClientRect();
+      const botRect = botao.getBoundingClientRect();
+      const centroBotaoX = botRect.left + botRect.width / 2 - contRect.left;
+      const centroBotaoY = botRect.top + botRect.height / 2 - contRect.top;
+      const mostrarDireita = centroBotaoX <= contRect.width / 2;
+      const afastamento = botRect.width / 2 + 16;
+      cartao.style.left = (mostrarDireita ? centroBotaoX + afastamento : centroBotaoX - afastamento) + "px";
+      cartao.style.top = centroBotaoY + "px";
+      cartao.classList.toggle("palestrantes-carrossel__cartao--direita", mostrarDireita);
+      cartao.classList.toggle("palestrantes-carrossel__cartao--esquerda", !mostrarDireita);
+    }
+
+    function pararTemporizadorCartao() {
+      if (temporizadorCartao) {
+        clearTimeout(temporizadorCartao);
+        temporizadorCartao = null;
+      }
+    }
+
+    function mostrarCartao(idx, botao) {
+      pararTemporizadorCartao();
+      temporizadorCartao = window.setTimeout(
+        function () {
+          preencherCartao(idx);
+          posicionarCartao(botao);
+          cartao.classList.add("palestrantes-carrossel__cartao--visivel");
+        },
+        reducedMotion ? 0 : 100
+      );
+    }
+
+    // Esconde com uma pequena margem: o rato sai do botão em direcção ao
+    // próprio cartão (que fica ao lado, não por baixo), por isso precisa de
+    // uma "ponte" — sem ela, o cartão fechava-se antes de o rato lá chegar.
+    function agendarEsconderCartao() {
+      pararTemporizadorCartao();
+      temporizadorCartao = window.setTimeout(
+        function () {
+          cartao.classList.remove("palestrantes-carrossel__cartao--visivel");
+        },
+        reducedMotion ? 0 : 150
+      );
+    }
+
+    function escondeCartao() {
+      pararTemporizadorCartao();
+      cartao.classList.remove("palestrantes-carrossel__cartao--visivel");
+    }
+
+    cartao.addEventListener("mouseenter", pararTemporizadorCartao);
+    cartao.addEventListener("mouseleave", agendarEsconderCartao);
+
     // ===== destaque (avatar grande + legenda) =====
     function montarAvatarFoto(item) {
       const img = document.createElement("img");
@@ -240,7 +352,14 @@
       avatar.textContent = iniciaisDe(item);
       avatar.setAttribute("aria-hidden", "true");
       botao.appendChild(avatar);
-      botao.addEventListener("click", function () { selecionar(idx); });
+      botao.addEventListener("click", function () {
+        if (arrastoConfirmado) return; // ignora o clique gerado no fim de um deslize
+        selecionar(idx);
+      });
+      botao.addEventListener("mouseenter", function () { mostrarCartao(idx, botao); });
+      botao.addEventListener("mouseleave", agendarEsconderCartao);
+      botao.addEventListener("focus", function () { mostrarCartao(idx, botao); });
+      botao.addEventListener("blur", agendarEsconderCartao);
       tira.appendChild(botao);
       return botao;
     });
@@ -286,6 +405,7 @@
     }
 
     function selecionar(itemIdx) {
+      escondeCartao();
       const activoAtual = mod(Math.round(posRef), M);
       if (itemIdx === activoAtual) return;
 
@@ -341,6 +461,46 @@
 
     setaAnterior.addEventListener("click", function () { selecionar(mod(ativo - 1, M)); });
     setaSeguinte.addEventListener("click", function () { selecionar(mod(ativo + 1, M)); });
+
+    // ===== deslizar por toque (mobile) =====
+    // Em ecrãs tácteis não há hover, por isso o avanço/recuo por gesto
+    // substitui as setas (escondidas abaixo dos 640px) e o hover da tira.
+    let arrastoX = 0;
+    let arrastoY = 0;
+    let arrastoActivo = false;
+    let arrastoConfirmado = false;
+    const LIMIAR_DESLIZE = 32;
+
+    container.addEventListener("pointerdown", function (e) {
+      if (e.pointerType !== "touch") return;
+      arrastoX = e.clientX;
+      arrastoY = e.clientY;
+      arrastoActivo = true;
+      arrastoConfirmado = false;
+    });
+
+    container.addEventListener("pointermove", function (e) {
+      if (!arrastoActivo || e.pointerType !== "touch") return;
+      const dx = e.clientX - arrastoX;
+      const dy = e.clientY - arrastoY;
+      if (!arrastoConfirmado && Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy)) {
+        arrastoConfirmado = true;
+      }
+    });
+
+    container.addEventListener("pointerup", function (e) {
+      if (!arrastoActivo || e.pointerType !== "touch") return;
+      arrastoActivo = false;
+      if (!arrastoConfirmado) return;
+      const dx = e.clientX - arrastoX;
+      if (Math.abs(dx) >= LIMIAR_DESLIZE) {
+        selecionar(mod(ativo + (dx < 0 ? 1 : -1), M));
+      }
+    });
+
+    container.addEventListener("pointercancel", function () {
+      arrastoActivo = false;
+    });
 
     // estado inicial
     atualizarTira(0);
