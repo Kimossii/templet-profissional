@@ -178,7 +178,7 @@
       style="background-image: url('assets/img/site/CongressoNacional.jpg');">
       <div class="pagina-hero__sobreposicao"></div>
 
-      <div class="container pagina-hero__conteudo pagina-hero__conteudo--largo">
+      <div class="container pagina-hero__conteudo pagina-hero__conteudo--largo congresso-anim-hero__conteudo">
         <nav class="fio-migalha" aria-label="Localização atual">
           <a href="index.html">Início</a>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -199,10 +199,16 @@
             <circle cx="12" cy="8" r="6" />
             <path d="M15.5 13.5 17 22l-5-3-5 3 1.5-8.5" />
           </svg>
-          3.º Congresso Nacional AESOA
+          2.º Congresso Nacional AESOA
         </span>
 
-        <h1>Congresso Nacional AESOA 2025</h1>
+        <!-- A arte de partículas é puramente decorativa; o texto acessível vive no h1 abaixo -->
+        <h1 class="sr-only">Congresso Nacional AESOA 2025</h1>
+
+        <div class="congresso-anim__vapor-wrap" aria-hidden="true">
+          <div id="titulo-vapor" class="congresso-anim__vapor"></div>
+        </div>
+
         <p class="pagina-hero__tema">"Excelência e Inovação na Sala Operatória: Cuidar, Formar, Transformar"</p>
         <p class="pagina-hero__texto">
           Três dias de ciência, prática e networking dedicados à enfermagem perioperatória angolana — conferências
@@ -210,7 +216,7 @@
           Angola.
         </p>
 
-        <div class="hero__acoes" style="justify-content: flex-start; margin-top: var(--espaco-md);">
+        <div class="hero__acoes" style="margin-top: var(--espaco-md);">
           <a class="btn hero__cta hero__cta--solido" href="#inscricao">Garantir a Minha Inscrição</a>
           <a class="btn btn--contorno hero__cta" href="#programa">Ver Programa Completo</a>
         </div>
@@ -1251,6 +1257,43 @@
   </button>
 
   <script src="assets/js/main.js" defer></script>
+
+  <script src="vaporize-text.js"></script>
+  <script>
+    (function () {
+      var el = document.getElementById('titulo-vapor');
+      if (!el || typeof initVaporizeText !== 'function') return;
+
+      // O motor ajusta a fonte sozinho à largura do contentor (ver fitFont em
+      // vaporize-text.js); os tamanhos aqui em baixo são só o ponto de partida.
+      el.style.width = "100%";
+      el.style.height = "clamp(90px, 15vw, 170px)";
+
+      initVaporizeText(el, {
+        // O título entra, permanece legível e dissolve-se para dar lugar ao
+        // lema do congresso — depois o ciclo volta ao título.
+        texts: [
+          "CONGRESSO NACIONAL AESOA 2025",
+          "EXCELÊNCIA · INOVAÇÃO · CUIDADO",
+        ],
+        font: { fontFamily: "Montserrat", fontWeight: 800, fontSize: 110 },
+        color: "rgb(255, 255, 255)",
+        spread: 14,
+        density: 8,
+        alignment: "center",
+        appear: {
+          mode: "particle",
+          order: "left-to-right",
+          transition: { duration: 1.1, ease: "easeOut" },
+        },
+        disappear: {
+          mode: "particle",
+          order: "right-to-left",
+          transition: { duration: 1.3, ease: "easeOut", delay: 2.4 },
+        },
+      });
+    })();
+  </script>
 </body>
 
 </html>

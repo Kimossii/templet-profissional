@@ -1031,6 +1031,120 @@ body.lightbox-aberta {
   margin-bottom: var(--espaco-md);
 }
 
+/* ===== Congresso — título animado (vaporize-text.js) ===== */
+
+.congresso-anim__vapor-wrap {
+  position: relative;
+  max-width: 1020px;
+  margin: 0 auto var(--espaco-md);
+}
+
+/* Vinheta suave atrás do título para garantir contraste sobre a fotografia,
+   sem escurecer a imagem inteira. */
+.congresso-anim__vapor-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -35% -6%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(5, 33, 22, 0.6) 0%, rgba(5, 33, 22, 0) 72%);
+}
+
+.congresso-anim__vapor {
+  width: 100%;
+  height: clamp(90px, 15vw, 170px);
+}
+
+.pagina-hero--imagem .pagina-hero__tema {
+  text-align: center;
+  margin-inline: auto;
+}
+
+.congresso-anim-hero__conteudo {
+  max-width: 860px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.congresso-anim-hero__conteudo .fio-migalha,
+.congresso-anim-hero__conteudo .pagina-hero__etiqueta {
+  justify-content: center;
+  margin-inline: auto;
+}
+
+.congresso-anim-hero__conteudo .hero__acoes {
+  justify-content: center !important;
+}
+
+.congresso-anim-hero__conteudo .congresso__factos {
+  text-align: left;
+}
+
+/* Entrada suave do texto em torno da animação, sincronizada com o "voo" das partículas */
+.congresso-anim-hero__conteudo > * {
+  opacity: 0;
+  animation: congresso-anim-subir 0.8s ease-out forwards;
+}
+
+.congresso-anim-hero__conteudo .fio-migalha {
+  animation-delay: 0.05s;
+}
+
+.congresso-anim-hero__conteudo .pagina-hero__etiqueta {
+  animation-delay: 0.15s;
+}
+
+.congresso-anim-hero__conteudo .congresso-anim__vapor-wrap {
+  animation: congresso-anim-fade 0.6s ease-out forwards;
+  animation-delay: 0.25s;
+}
+
+.congresso-anim-hero__conteudo .pagina-hero__tema {
+  animation-delay: 1.5s;
+}
+
+.congresso-anim-hero__conteudo .pagina-hero__texto {
+  animation-delay: 1.65s;
+}
+
+.congresso-anim-hero__conteudo .hero__acoes {
+  animation-delay: 1.8s;
+}
+
+.congresso-anim-hero__conteudo .congresso__factos {
+  animation-delay: 1.95s;
+}
+
+@keyframes congresso-anim-subir {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes congresso-anim-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .congresso-anim-hero__conteudo > * {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 /* ===== Congresso — factos rápidos ===== */
 
 .congresso__factos {
