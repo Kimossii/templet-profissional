@@ -990,15 +990,487 @@ body.lightbox-aberta {
   overflow: hidden;
 }
 
+/* ===== Página Congresso — cabeçalho com imagem ===== */
+
+.pagina-hero--imagem {
+  background-size: cover;
+  background-position: center;
+}
+
+.pagina-hero--imagem .pagina-hero__sobreposicao {
+  background: linear-gradient(180deg, rgba(4, 84, 52, 0.85) 0%, rgba(18, 61, 44, 0.78) 100%);
+}
+
+.pagina-hero__conteudo--largo {
+  max-width: 980px;
+}
+
+.pagina-hero__etiqueta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--fonte-titulo);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cor-texto-claro);
+  background-color: rgba(255, 255, 255, 0.16);
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--raio-pill);
+  margin-bottom: var(--espaco-md);
+}
+
+.pagina-hero__tema {
+  font-family: var(--fonte-titulo);
+  font-size: var(--fs-md);
+  font-style: italic;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+  margin-top: -0.3rem;
+  margin-bottom: var(--espaco-md);
+}
+
+/* ===== Congresso — factos rápidos ===== */
+
+.congresso__factos {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--espaco-sm);
+  margin-top: var(--espaco-lg);
+}
+
+.congresso__facto {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: var(--espaco-sm);
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--raio-md);
+  backdrop-filter: blur(4px);
+}
+
+.congresso__facto svg {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--cor-texto-claro);
+  opacity: 0.9;
+}
+
+.congresso__facto-rotulo {
+  display: block;
+  font-size: var(--fs-xs);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.congresso__facto-valor {
+  display: block;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  color: var(--cor-texto-claro);
+  line-height: 1.25;
+}
+
+/* ===== Congresso — programa (agenda por dia) ===== */
+
+.programa__abas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--espaco-xs);
+  margin-bottom: var(--espaco-lg);
+}
+
+.programa__aba {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.65rem 1.5rem;
+  border-radius: var(--raio-pill);
+  border: 2px solid var(--cor-borda);
+  background-color: var(--cor-fundo);
+  font-family: var(--fonte-titulo);
+  color: var(--cor-texto-suave);
+  transition: background-color var(--transicao-base), border-color var(--transicao-base),
+    color var(--transicao-base);
+}
+
+.programa__aba-dia {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+.programa__aba-data {
+  font-size: var(--fs-xs);
+}
+
+.programa__aba:hover {
+  border-color: var(--cor-primaria-clara);
+  color: var(--cor-primaria-escura);
+}
+
+.programa__aba.esta-ativo {
+  background-color: var(--cor-primaria);
+  border-color: var(--cor-primaria);
+  color: var(--cor-texto-claro);
+}
+
+.programa__dia {
+  display: none;
+}
+
+.programa__dia.esta-ativo {
+  display: block;
+}
+
+.programa__lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 880px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-sm);
+}
+
+.programa__item {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: var(--espaco-md);
+  padding: var(--espaco-md);
+  background-color: var(--cor-fundo);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-md);
+  transition: box-shadow var(--transicao-base), transform var(--transicao-base);
+}
+
+.programa__item:hover {
+  box-shadow: var(--sombra-sm);
+  transform: translateX(4px);
+}
+
+.programa__item--destaque {
+  border-color: var(--cor-primaria-clara);
+  background-color: var(--cor-primaria-suave);
+}
+
+.programa__hora {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  color: var(--cor-primaria);
+  white-space: nowrap;
+}
+
+.programa__titulo {
+  margin-bottom: 0.25rem;
+}
+
+.programa__descricao {
+  font-size: var(--fs-sm);
+  margin-bottom: 0.4rem;
+}
+
+.programa__orador {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--cor-primaria-escura);
+}
+
+/* ===== Congresso — palestrantes ===== */
+
+.palestrantes__grelha {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--espaco-md);
+}
+
+.palestrante {
+  text-align: center;
+  padding: var(--espaco-md);
+  background-color: var(--cor-fundo);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-lg);
+  transition: box-shadow var(--transicao-base), transform var(--transicao-base);
+}
+
+.palestrante:hover {
+  box-shadow: var(--sombra-md);
+  transform: translateY(-4px);
+}
+
+.palestrante__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 84px;
+  height: 84px;
+  margin: 0 auto var(--espaco-sm);
+  border-radius: 50%;
+  background-color: var(--cor-primaria-suave);
+  color: var(--cor-primaria);
+  font-family: var(--fonte-titulo);
+  font-weight: 800;
+  font-size: var(--fs-lg);
+}
+
+.palestrante__nome {
+  font-size: var(--fs-sm);
+  margin-bottom: 0.15rem;
+}
+
+.palestrante__cargo {
+  font-size: var(--fs-xs);
+  color: var(--cor-texto-suave);
+}
+
+.palestrante__pais {
+  display: inline-block;
+  margin-top: var(--espaco-xs);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--cor-primaria);
+}
+
+/* ===== Congresso — inscrições / preços ===== */
+
+.precos__grelha {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--espaco-md);
+  align-items: stretch;
+}
+
+.preco {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: var(--espaco-lg) var(--espaco-md) var(--espaco-md);
+  background-color: var(--cor-fundo);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-lg);
+  transition: box-shadow var(--transicao-base), transform var(--transicao-base);
+}
+
+.preco:hover {
+  box-shadow: var(--sombra-md);
+  transform: translateY(-4px);
+}
+
+.preco--destaque {
+  border-color: var(--cor-primaria);
+  box-shadow: var(--sombra-md);
+}
+
+.preco__etiqueta {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.25rem 0.85rem;
+  border-radius: var(--raio-pill);
+  background-color: var(--cor-primaria);
+  color: var(--cor-texto-claro);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.preco__categoria {
+  font-size: var(--fs-md);
+  margin-bottom: 0.35rem;
+}
+
+.preco__valor {
+  font-family: var(--fonte-titulo);
+  font-weight: 800;
+  font-size: var(--fs-xl);
+  color: var(--cor-primaria);
+  margin-bottom: var(--espaco-xs);
+}
+
+.preco__valor small {
+  font-family: var(--fonte-corpo);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--cor-texto-suave);
+}
+
+.preco__lista {
+  list-style: none;
+  margin: 0 0 var(--espaco-md);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  flex-grow: 1;
+}
+
+.preco__lista li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: var(--fs-sm);
+  color: var(--cor-texto-suave);
+}
+
+.preco__lista svg {
+  flex-shrink: 0;
+  width: 17px;
+  height: 17px;
+  margin-top: 0.2rem;
+  color: var(--cor-primaria);
+}
+
+/* ===== Congresso — perguntas frequentes ===== */
+
+.faq__lista {
+  max-width: 820px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.faq__item {
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-md);
+  background-color: var(--cor-fundo);
+  overflow: hidden;
+  transition: border-color var(--transicao-base);
+}
+
+.faq__item.esta-aberto {
+  border-color: var(--cor-primaria-clara);
+}
+
+.faq__cabecalho {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-sm);
+  width: 100%;
+  padding: var(--espaco-sm) var(--espaco-md);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  color: var(--cor-primaria-escura);
+}
+
+.faq__seta {
+  flex-shrink: 0;
+  margin-left: auto;
+  width: 18px;
+  height: 18px;
+  color: var(--cor-primaria);
+  transition: transform var(--transicao-base);
+}
+
+.faq__item.esta-aberto .faq__seta {
+  transform: rotate(180deg);
+}
+
+.faq__painel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--transicao-base);
+}
+
+.faq__item.esta-aberto .faq__painel {
+  grid-template-rows: 1fr;
+}
+
+.faq__painel-interior {
+  overflow: hidden;
+}
+
+.faq__painel p {
+  margin: 0;
+  padding: 0 var(--espaco-md) var(--espaco-md);
+  font-size: var(--fs-sm);
+  color: var(--cor-texto-suave);
+}
+
+/* ===== Congresso — formulário de inscrição (cartão centrado) ===== */
+
+.inscricao__formulario {
+  max-width: 760px;
+  margin-inline: auto;
+  background-color: var(--cor-fundo);
+  padding: var(--espaco-lg);
+  border-radius: var(--raio-lg);
+  box-shadow: var(--sombra-lg);
+}
+
+/* ===== Congresso — local do evento ===== */
+
+.local__grelha {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--espaco-2xl);
+  align-items: center;
+}
+
+.local__lista {
+  list-style: none;
+  margin: var(--espaco-md) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-sm);
+}
+
+.local__lista li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: var(--fs-sm);
+  color: var(--cor-texto-suave);
+}
+
+.local__lista svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 0.15rem;
+  color: var(--cor-primaria);
+}
+
+.local__imagem {
+  border-radius: var(--raio-lg);
+  box-shadow: var(--sombra-lg);
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
 /* ===== Responsivo — secções ===== */
 
 @media (max-width: 960px) {
   #sobre .container,
-  .membro__grelha {
+  .membro__grelha,
+  .local__grelha {
     grid-template-columns: 1fr;
   }
 
-  .sobre__imagem {
+  .sobre__imagem,
+  .local__imagem {
     order: -1;
   }
 
@@ -1007,7 +1479,10 @@ body.lightbox-aberta {
   .noticias__grelha,
   .pilares__grelha,
   .estrutura__grelha,
-  .testemunhos__grelha {
+  .testemunhos__grelha,
+  .congresso__factos,
+  .palestrantes__grelha,
+  .precos__grelha {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -1040,8 +1515,19 @@ body.lightbox-aberta {
   .noticias__grelha,
   .pilares__grelha,
   .estrutura__grelha,
-  .testemunhos__grelha {
+  .testemunhos__grelha,
+  .congresso__factos,
+  .palestrantes__grelha,
+  .precos__grelha {
     grid-template-columns: 1fr;
+  }
+
+  .programa__item {
+    grid-template-columns: 1fr;
+  }
+
+  .pagina-hero__conteudo--largo {
+    max-width: 100%;
   }
 
   .estatisticas__grelha {

@@ -130,6 +130,68 @@ function initAcordeaoValores() {
   });
 }
 
+function initAbasPrograma() {
+  const abas = document.querySelectorAll(".programa__aba");
+  const dias = document.querySelectorAll(".programa__dia");
+  if (!abas.length || !dias.length) return;
+
+  abas.forEach((aba) => {
+    aba.addEventListener("click", () => {
+      const alvo = aba.dataset.dia;
+
+      abas.forEach((outraAba) => {
+        const estaAtiva = outraAba === aba;
+        outraAba.classList.toggle("esta-ativo", estaAtiva);
+        outraAba.setAttribute("aria-selected", String(estaAtiva));
+      });
+
+      dias.forEach((dia) => {
+        dia.classList.toggle("esta-ativo", dia.dataset.dia === alvo);
+      });
+    });
+  });
+}
+
+function initAcordeaoFAQ() {
+  const itens = document.querySelectorAll(".faq__item");
+  if (!itens.length) return;
+
+  itens.forEach((item) => {
+    const botao = item.querySelector(".faq__cabecalho");
+    if (!botao) return;
+
+    botao.addEventListener("click", () => {
+      const aberto = item.classList.toggle("esta-aberto");
+      botao.setAttribute("aria-expanded", String(aberto));
+    });
+  });
+}
+
+function initFormularioCongresso() {
+  const formulario = document.querySelector("#formulario-congresso");
+  if (!formulario) return;
+
+  const mensagem = formulario.querySelector(".formulario__mensagem");
+
+  formulario.addEventListener("submit", (evento) => {
+    evento.preventDefault();
+
+    if (!formulario.checkValidity()) {
+      formulario.reportValidity();
+      return;
+    }
+
+    // Sem backend por enquanto: confirma a intenção de inscrição no ecrã.
+    // Substituir por uma chamada à API (ex: fetch) quando o backend existir.
+    mensagem.textContent =
+      "Inscrição recebida. A comissão organizadora do congresso entrará em contacto para confirmar o pagamento.";
+    mensagem.classList.remove("formulario__mensagem--erro");
+    mensagem.classList.add("formulario__mensagem--sucesso", "esta-visivel");
+
+    formulario.reset();
+  });
+}
+
 function initAnoRodape() {
   const elemento = document.querySelector("[data-ano-atual]");
   if (!elemento) return;
@@ -329,10 +391,13 @@ document.addEventListener("DOMContentLoaded", () => {
   initMenuMobile();
   initSubmenusDropdown();
   initAcordeaoValores();
+  initAbasPrograma();
+  initAcordeaoFAQ();
   initAnoRodape();
   initRevelarAoScroll();
   initBotaoTopo();
   initFormularioMembro();
+  initFormularioCongresso();
   initFiltroGaleria();
   initLightboxGaleria();
 });
