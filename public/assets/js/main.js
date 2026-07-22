@@ -106,7 +106,7 @@ function initSubmenusDropdown() {
       link.setAttribute("aria-expanded", String(aberto));
 
       itens.forEach((outro) => {
-        if (outro !== item) {
+        if (outro !== item && !outro.contains(item)) {
           outro.classList.remove("esta-aberto");
           outro.querySelector(":scope > .nav__link")?.setAttribute("aria-expanded", "false");
         }

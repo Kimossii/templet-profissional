@@ -374,8 +374,8 @@
   transition: transform var(--transicao-base);
 }
 
-.nav__item--dropdown:hover .nav__seta,
-.nav__item--dropdown.esta-aberto .nav__seta {
+.nav__item--dropdown:hover > .nav__link .nav__seta,
+.nav__item--dropdown.esta-aberto > .nav__link .nav__seta {
   transform: rotate(180deg);
 }
 
@@ -398,11 +398,22 @@
     visibility var(--transicao-base);
 }
 
-.nav__item--dropdown:hover .nav__submenu,
-.nav__item--dropdown.esta-aberto .nav__submenu {
+.nav__item--dropdown:hover > .nav__submenu,
+.nav__item--dropdown.esta-aberto > .nav__submenu {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+}
+
+/* Subnível: "AESOA Congressos" abre um flyout lateral dentro do submenu "Eventos". */
+.nav__submenu .nav__item--dropdown {
+  position: relative;
+}
+
+.nav__submenu .nav__submenu {
+  top: 0;
+  left: 100%;
+  margin-left: var(--espaco-2xs);
 }
 
 .nav__submenu .nav__link {
@@ -965,8 +976,14 @@ a.mvv__cartao:hover h3 {
     padding: 0 0 var(--espaco-2xs);
   }
 
-  .nav__item--dropdown.esta-aberto .nav__submenu {
+  .nav__item--dropdown.esta-aberto > .nav__submenu {
     display: block;
+  }
+
+  .nav__submenu .nav__submenu {
+    top: 0;
+    left: 0;
+    margin-left: 0;
   }
 
   .nav__submenu .nav__link {
@@ -975,6 +992,10 @@ a.mvv__cartao:hover h3 {
     text-transform: none;
     letter-spacing: normal;
     font-weight: 600;
+  }
+
+  .nav__submenu .nav__submenu .nav__link {
+    padding-left: calc(var(--espaco-2xs) + 1rem);
   }
 
   .nav__submenu .nav__link:hover {
