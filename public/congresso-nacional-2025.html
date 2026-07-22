@@ -570,7 +570,9 @@
     <!-- /SECTION: programa -->
 
     <!-- SECTION: palestrantes -->
-    <section id="palestrantes" class="secao secao--alt" aria-labelledby="palestrantes-titulo">
+    <section id="palestrantes" class="secao" aria-labelledby="palestrantes-titulo"
+      style="background-image: url('assets/img/site/instrumentais.jpg');">
+      <div class="palestrantes__sobreposicao" aria-hidden="true"></div>
       <div class="container">
         <div class="secao-cabecalho secao-cabecalho--centro" data-revelar>
           <span class="secao-eyebrow">Oradores confirmados</span>
@@ -582,63 +584,7 @@
           </p>
         </div>
 
-        <div class="palestrantes__grelha grelha-escalonada">
-          <article class="palestrante" data-revelar>
-            <span class="palestrante__avatar" aria-hidden="true">MN</span>
-            <h3 class="palestrante__nome">Maria Fernanda Necaca</h3>
-            <p class="palestrante__cargo">Presidente da AESOA</p>
-            <span class="palestrante__pais">Angola</span>
-          </article>
-
-          <article class="palestrante" data-revelar>
-            <span class="palestrante__avatar" aria-hidden="true">JK</span>
-            <h3 class="palestrante__nome">João Baptista Kiala</h3>
-            <p class="palestrante__cargo">Director Clínico, Hospital Geral de Luanda</p>
-            <span class="palestrante__pais">Angola</span>
-          </article>
-
-          <article class="palestrante" data-revelar>
-            <span class="palestrante__avatar" aria-hidden="true">IM</span>
-            <h3 class="palestrante__nome">Isabel Cristina Moreira</h3>
-            <p class="palestrante__cargo">Convidada Internacional, AESOP</p>
-            <span class="palestrante__pais">Portugal</span>
-          </article>
-
-          <article class="palestrante" data-revelar>
-            <span class="palestrante__avatar" aria-hidden="true">PS</span>
-            <h3 class="palestrante__nome">Pedro Manuel Sachiambo</h3>
-            <p class="palestrante__cargo">Especialista em Enfermagem Perioperatória</p>
-            <span class="palestrante__pais">Angola</span>
-          </article>
-
-          <article class="palestrante" data-revelar>
-            <span class="palestrante__avatar" aria-hidden="true">CN</span>
-            <h3 class="palestrante__nome">Carlos Alberto Neto</h3>
-            <p class="palestrante__cargo">Faculdade de Medicina, Universidade Agostinho Neto</p>
-            <span class="palestrante__pais">Angola</span>
-          </article>
-
-          <article class="palestrante" data-revelar>
-            <span class="palestrante__avatar" aria-hidden="true">AD</span>
-            <h3 class="palestrante__nome">Ana Paula Domingos</h3>
-            <p class="palestrante__cargo">Coordenadora de Formação, AESOA</p>
-            <span class="palestrante__pais">Angola</span>
-          </article>
-
-          <article class="palestrante" data-revelar>
-            <span class="palestrante__avatar" aria-hidden="true">MF</span>
-            <h3 class="palestrante__nome">Miguel Ondjaki Ferreira</h3>
-            <p class="palestrante__cargo">Especialista em Controlo de Infecção</p>
-            <span class="palestrante__pais">Angola</span>
-          </article>
-
-          <article class="palestrante" data-revelar>
-            <span class="palestrante__avatar" aria-hidden="true">BS</span>
-            <h3 class="palestrante__nome">Beatriz Sumbo</h3>
-            <p class="palestrante__cargo">Enfermeira Instrumentista-Chefe, Clínica Sagrada Esperança</p>
-            <span class="palestrante__pais">Angola</span>
-          </article>
-        </div>
+        <div id="carrossel-palestrantes" data-revelar></div>
       </div>
     </section>
     <!-- /SECTION: palestrantes -->
@@ -1278,6 +1224,36 @@
           order: "right-to-left",
           transition: { duration: 1.3, ease: "easeOut", delay: 2.4 },
         },
+      });
+    })();
+  </script>
+
+  <script src="palestrantes-carousel.js"></script>
+  <script>
+    (function () {
+      var el = document.getElementById('carrossel-palestrantes');
+      if (!el || typeof initPalestrantesCarousel !== 'function') return;
+
+      var ecraPequeno = window.matchMedia('(max-width: 640px)').matches;
+
+      // As fotos são temáticas (instrumental e sala operatória, sem rostos de
+      // terceiros) — não há retratos individuais dos oradores. Por isso as
+      // iniciais ficam sempre visíveis como "selo" sobre a foto.
+      initPalestrantesCarousel(el, {
+        items: [
+          { iniciais: 'MN', nome: 'Maria Fernanda Necaca', cargo: 'Presidente da AESOA', pais: '🇦🇴 Angola', foto: 'assets/img/site/Workshopinstrumentacao.jpg', fotoPos: 'center' },
+          { iniciais: 'JK', nome: 'João Baptista Kiala', cargo: 'Director Clínico, Hospital Geral de Luanda', pais: '🇦🇴 Angola', foto: 'assets/img/hero-poster.jpg', fotoPos: '70% 40%' },
+          { iniciais: 'IM', nome: 'Isabel Cristina Moreira', cargo: 'Convidada Internacional, AESOP', pais: '🇵🇹 Portugal', foto: 'assets/img/site/instrumentais.jpg', fotoPos: '20% 50%' },
+          { iniciais: 'PS', nome: 'Pedro Manuel Sachiambo', cargo: 'Especialista em Enfermagem Perioperatória', pais: '🇦🇴 Angola', foto: 'assets/img/site/Workshopinstrumentacao.jpg', fotoPos: '80% 30%' },
+          { iniciais: 'CN', nome: 'Carlos Alberto Neto', cargo: 'Faculdade de Medicina, Universidade Agostinho Neto', pais: '🇦🇴 Angola', foto: 'assets/img/hero-poster.jpg', fotoPos: '30% 60%' },
+          { iniciais: 'AD', nome: 'Ana Paula Domingos', cargo: 'Coordenadora de Formação, AESOA', pais: '🇦🇴 Angola', foto: 'assets/img/site/instrumentais.jpg', fotoPos: '70% 40%' },
+          { iniciais: 'MF', nome: 'Miguel Ondjaki Ferreira', cargo: 'Especialista em Controlo de Infecção', pais: '🇦🇴 Angola', foto: 'assets/img/site/Workshopinstrumentacao.jpg', fotoPos: '40% 70%' },
+          { iniciais: 'BS', nome: 'Beatriz Sumbo', cargo: 'Enfermeira Instrumentista-Chefe, Clínica Sagrada Esperança', pais: '🇦🇴 Angola', foto: 'assets/img/hero-poster.jpg', fotoPos: '60% 20%' },
+        ],
+        buttonSize: ecraPequeno ? 46 : 64,
+        gap: ecraPequeno ? 14 : 22,
+        curve: ecraPequeno ? 5 : 6,
+        avatarSize: ecraPequeno ? 130 : 180,
       });
     })();
   </script>
