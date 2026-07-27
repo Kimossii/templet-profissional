@@ -324,6 +324,30 @@ function initFormularioContacto() {
   });
 }
 
+function initFormularioNewsletter() {
+  const formulario = document.querySelector("#formulario-newsletter");
+  if (!formulario) return;
+
+  const mensagem = formulario.querySelector(".formulario__mensagem");
+
+  formulario.addEventListener("submit", (evento) => {
+    evento.preventDefault();
+
+    if (!formulario.checkValidity()) {
+      formulario.reportValidity();
+      return;
+    }
+
+    // Sem backend por enquanto: confirma a subscrição no ecrã.
+    // Substituir por uma chamada à API (ex: fetch) quando o backend existir.
+    mensagem.textContent = "Subscrição confirmada! Vai começar a receber as novidades da AESOA por email.";
+    mensagem.classList.remove("formulario__mensagem--erro");
+    mensagem.classList.add("formulario__mensagem--sucesso", "esta-visivel");
+
+    formulario.reset();
+  });
+}
+
 function initFiltroGaleria() {
   const filtros = document.querySelectorAll(".galeria__filtro");
   const itens = document.querySelectorAll(".galeria__item");
@@ -461,6 +485,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initFormularioMembro();
   initFormularioCongresso();
   initFormularioContacto();
+  initFormularioNewsletter();
   initFiltroGaleria();
   initLightboxGaleria();
 });
