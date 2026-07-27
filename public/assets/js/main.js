@@ -348,6 +348,134 @@ function initFormularioNewsletter() {
   });
 }
 
+function initPaginaNoticia() {
+  const container = document.querySelector("#noticia-conteudo");
+  const naoEncontrada = document.querySelector("#noticia-nao-encontrada");
+  if (!container || !naoEncontrada) return;
+
+  const slug = new URLSearchParams(location.search).get("slug");
+  const dados =
+    typeof NOTICIAS_DADOS !== "undefined" && slug && Object.hasOwn(NOTICIAS_DADOS, slug)
+      ? NOTICIAS_DADOS[slug]
+      : null;
+
+  if (!dados) {
+    naoEncontrada.hidden = false;
+    container.hidden = true;
+    return;
+  }
+
+  document.title = `${dados.titulo} | AESOA`;
+
+  document.querySelector("#noticia-hero").style.backgroundImage = `url('${dados.imagem}')`;
+  document.querySelector("#noticia-categoria").textContent = dados.categoria;
+  document.querySelector("#noticia-titulo").textContent = dados.titulo;
+  document.querySelector("#noticia-data").textContent = dados.data;
+
+  const totalPalavras = dados.corpo.join(" ").trim().split(/\s+/).length;
+  const minutos = Math.max(1, Math.round(totalPalavras / 200));
+  document.querySelector("#noticia-tempo-leitura").textContent = `${minutos} min de leitura`;
+
+  const corpoEl = document.querySelector("#noticia-corpo");
+  corpoEl.replaceChildren();
+  const posicaoCitacao = Math.floor(dados.corpo.length / 2) - 1;
+
+  dados.corpo.forEach((paragrafo, indice) => {
+    const p = document.createElement("p");
+    p.textContent = paragrafo;
+    if (indice === 0) p.classList.add("noticia-corpo__lead");
+    corpoEl.appendChild(p);
+
+    if (dados.citacao && indice === posicaoCitacao) {
+      const citacao = document.createElement("blockquote");
+      citacao.className = "noticia-corpo__citacao";
+      citacao.textContent = dados.citacao;
+      corpoEl.appendChild(citacao);
+    }
+  });
+
+  const urlAtual = encodeURIComponent(location.href);
+  const tituloAtual = encodeURIComponent(dados.titulo);
+  document.querySelector("#partilha-whatsapp").href = `https://wa.me/?text=${tituloAtual}%20${urlAtual}`;
+  document.querySelector("#partilha-facebook").href =
+    `https://www.facebook.com/sharer/sharer.php?u=${urlAtual}`;
+  document.querySelector("#partilha-linkedin").href =
+    `https://www.linkedin.com/sharing/share-offsite/?url=${urlAtual}`;
+  document.querySelector("#partilha-email").href = `mailto:?subject=${tituloAtual}&body=${urlAtual}`;
+
+  const relacionadasEl = document.querySelector("#noticia-relacionadas-grelha");
+  const relacionadas = Object.entries(NOTICIAS_DADOS)
+    .filter(([outroSlug]) => outroSlug !== slug)
+    .slice(0, 3);
+
+  relacionadas.forEach(([outroSlug, outraNoticia]) => {
+    const artigo = document.createElement("article");
+    artigo.className = "cartao";
+
+    const imagem = document.createElement("img");
+    imagem.className = "cartao__imagem";
+    imagem.src = outraNoticia.imagem;
+    imagem.alt = outraNoticia.imagemAlt;
+    imagem.width = 480;
+    imagem.height = 320;
+    imagem.loading = "lazy";
+    artigo.appendChild(imagem);
+
+    const corpo = document.createElement("div");
+    corpo.className = "cartao__corpo";
+
+    const etiqueta = document.createElement("span");
+    etiqueta.className = "cartao__etiqueta";
+    etiqueta.textContent = outraNoticia.categoria;
+    corpo.appendChild(etiqueta);
+
+    const data = document.createElement("span");
+    data.className = "cartao__data";
+    data.textContent = outraNoticia.data;
+    corpo.appendChild(data);
+
+    const titulo = document.createElement("h3");
+    titulo.className = "cartao__titulo";
+    titulo.textContent = outraNoticia.titulo;
+    corpo.appendChild(titulo);
+
+    const texto = document.createElement("p");
+    texto.className = "cartao__texto";
+    texto.textContent = outraNoticia.resumo;
+    corpo.appendChild(texto);
+
+    const leiaMais = document.createElement("a");
+    leiaMais.className = "cartao__leiamais";
+    leiaMais.href = `noticia.html?slug=${encodeURIComponent(outroSlug)}`;
+    leiaMais.append("Ler mais ");
+
+    const svgNS = "http://www.w3.org/2000/svg";
+    const seta = document.createElementNS(svgNS, "svg");
+    seta.setAttribute("viewBox", "0 0 24 24");
+    seta.setAttribute("fill", "none");
+    seta.setAttribute("stroke", "currentColor");
+    seta.setAttribute("stroke-width", "2");
+    seta.setAttribute("stroke-linecap", "round");
+    seta.setAttribute("stroke-linejoin", "round");
+    seta.setAttribute("aria-hidden", "true");
+    const setaPath = document.createElementNS(svgNS, "path");
+    setaPath.setAttribute("d", "M5 12h14M13 6l6 6-6 6");
+    seta.appendChild(setaPath);
+    leiaMais.appendChild(seta);
+
+    corpo.appendChild(leiaMais);
+
+    artigo.appendChild(corpo);
+    relacionadasEl.appendChild(artigo);
+  });
+
+  if (!relacionadas.length) {
+    document.querySelector("#noticia-relacionadas-secao").hidden = true;
+  }
+
+  container.hidden = false;
+}
+
 function initFiltroGaleria() {
   const filtros = document.querySelectorAll(".galeria__filtro");
   const itens = document.querySelectorAll(".galeria__item");
@@ -486,6 +614,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initFormularioCongresso();
   initFormularioContacto();
   initFormularioNewsletter();
+  initPaginaNoticia();
   initFiltroGaleria();
   initLightboxGaleria();
 });
