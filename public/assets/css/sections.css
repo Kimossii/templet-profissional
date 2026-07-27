@@ -2337,3 +2337,43 @@ body.lightbox-aberta {
     align-items: flex-start;
   }
 }
+
+/* ===== Página Contactos — cartões de contacto ===== */
+
+.contacto__grelha {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--espaco-md);
+}
+
+/* ===== Página Contactos — redes sociais ===== */
+
+.contacto__redes {
+  display: flex;
+  justify-content: center;
+  gap: var(--espaco-sm);
+}
+
+.contacto__rede {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--cor-primaria-suave);
+  color: var(--cor-primaria);
+  transition: background-color var(--transicao-base), color var(--transicao-base),
+    transform var(--transicao-base);
+}
+
+.contacto__rede svg {
+  width: 24px;
+  height: 24px;
+}
+
+.contacto__rede:hover {
+  background-color: var(--cor-primaria);
+  color: var(--cor-texto-claro);
+  transform: translateY(-3px);
+}

@@ -299,6 +299,31 @@ function initFormularioMembro() {
   });
 }
 
+function initFormularioContacto() {
+  const formulario = document.querySelector("#formulario-contacto");
+  if (!formulario) return;
+
+  const mensagem = formulario.querySelector(".formulario__mensagem");
+
+  formulario.addEventListener("submit", (evento) => {
+    evento.preventDefault();
+
+    if (!formulario.checkValidity()) {
+      formulario.reportValidity();
+      return;
+    }
+
+    // Sem backend por enquanto: confirma a receção da mensagem no ecrã.
+    // Substituir por uma chamada à API (ex: fetch) quando o backend existir.
+    mensagem.textContent =
+      "Mensagem enviada. A equipa da AESOA entrará em contacto brevemente.";
+    mensagem.classList.remove("formulario__mensagem--erro");
+    mensagem.classList.add("formulario__mensagem--sucesso", "esta-visivel");
+
+    formulario.reset();
+  });
+}
+
 function initFiltroGaleria() {
   const filtros = document.querySelectorAll(".galeria__filtro");
   const itens = document.querySelectorAll(".galeria__item");
@@ -435,6 +460,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initBotaoTopo();
   initFormularioMembro();
   initFormularioCongresso();
+  initFormularioContacto();
   initFiltroGaleria();
   initLightboxGaleria();
 });
