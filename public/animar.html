@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pré-visualização — Carrossel de Palestrantes AESOA 2025</title>
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Reaproveita as folhas de estilo reais do site: o que aqui funcionar
+       transplanta para congresso-nacional-2025.html sem qualquer ajuste. -->
+  <link rel="stylesheet" href="assets/css/variables.css" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/sections.css" />
+
+  <style>
+    /* ===== Carrossel de palestrantes — só o necessário para esta pré-visualização.
+       Depois de aprovado, isto transita para sections.css tal como aconteceu
+       com o título animado (ver .congresso-anim__* nesse ficheiro). ===== */
+
+    .palestrantes-carrossel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--espaco-md);
+    }
+
+    .palestrantes-carrossel__vitrine {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--espaco-sm);
+    }
+
+    .palestrantes-carrossel__avatar-caixa {
+      position: relative;
+    }
+
+    .palestrantes-carrossel__camada {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: translate(0, 0) scale(1) rotate(0deg);
+      opacity: 1;
+    }
+
+    .palestrantes-carrossel__camada--a-entrar {
+      transition: none;
+      transform: translate(calc(var(--dir) * 70px), 46px) scale(0.82) rotate(calc(var(--dir) * 8deg));
+      opacity: 0;
+    }
+
+    .palestrantes-carrossel__camada--a-sair {
+      transform: translate(calc(var(--dir) * -70px), 46px) scale(0.82) rotate(calc(var(--dir) * -8deg));
+      opacity: 0;
+    }
+
+    .palestrantes-carrossel__avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--cor-primaria);
+      color: var(--cor-texto-claro);
+      font-family: var(--fonte-titulo);
+      font-weight: 800;
+      font-size: clamp(2rem, 1.6rem + 1.5vw, 2.75rem);
+      box-shadow: var(--sombra-lg);
+    }
+
+    .palestrantes-carrossel__legenda {
+      text-align: center;
+      max-width: 420px;
+      transition: opacity 0.3s ease;
+      opacity: 1;
+    }
+
+    .palestrantes-carrossel__legenda--a-desvanecer {
+      opacity: 0;
+    }
+
+    .palestrantes-carrossel__nome {
+      font-size: var(--fs-lg);
+      margin-bottom: 0.15rem;
+    }
+
+    .palestrantes-carrossel__cargo {
+      font-size: var(--fs-sm);
+      color: var(--cor-texto-suave);
+    }
+
+    .palestrantes-carrossel__pais {
+      display: inline-block;
+      margin-top: var(--espaco-xs);
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--cor-primaria);
+    }
+
+    .palestrantes-carrossel__tira {
+      position: relative;
+      width: 100%;
+      max-width: 640px;
+      overflow: hidden;
+    }
+
+    .palestrantes-carrossel__botao {
+      position: absolute;
+      left: 50%;
+      border: 0;
+      padding: 0;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--cor-primaria-suave);
+      color: var(--cor-primaria);
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+      will-change: transform, opacity;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .palestrantes-carrossel__botao:hover {
+      box-shadow: var(--sombra-sm);
+    }
+
+    .palestrantes-carrossel__botao:focus-visible {
+      outline: 2px solid var(--cor-primaria);
+      outline-offset: 3px;
+    }
+
+    .palestrantes-carrossel__botao.is-activo {
+      background-color: var(--cor-primaria);
+      color: var(--cor-texto-claro);
+      box-shadow: var(--sombra-md);
+    }
+
+    .palestrantes-carrossel__botao-avatar {
+      font-family: var(--fonte-titulo);
+      font-weight: 800;
+      font-size: 0.85rem;
+      pointer-events: none;
+    }
+
+    @media (max-width: 640px) {
+      .palestrantes-carrossel__botao-avatar {
+        font-size: 0.7rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .palestrantes-carrossel__camada {
+        transition: none !important;
+      }
+
+      .palestrantes-carrossel__legenda {
+        transition: none !important;
+      }
+    }
+
+    /* ===== Faixa de pré-visualização (não faz parte da secção a transplantar) ===== */
+    .preview-nota {
+      position: fixed;
+      right: var(--espaco-xs);
+      bottom: var(--espaco-xs);
+      z-index: 20;
+      max-width: 230px;
+      padding: 0.45rem 0.7rem;
+      background-color: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--raio-md);
+      backdrop-filter: blur(6px);
+      color: rgba(255, 255, 255, 0.8);
+      font-family: var(--fonte-corpo);
+      font-size: 0.68rem;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 560px) {
+      .preview-nota {
+        max-width: 170px;
+        font-size: 0.62rem;
+      }
+    }
+
+    .preview-nota strong {
+      color: var(--cor-texto-claro);
+    }
+
+    .preview-nota code {
+      color: #7fd6ab;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===================================================================
+       SECÇÃO — pensada para substituir directamente a grelha estática de
+       "palestrantes__grelha" em congresso-nacional-2025.html (mesmas
+       classes reais do site: secao, secao--alt, container, secao-cabecalho).
+       Após aprovação, copiar isto para lá e adicionar
+       <script src="palestrantes-carousel.js"></script> à página.
+       =================================================================== -->
+  <section id="palestrantes" class="secao secao--alt" aria-labelledby="palestrantes-titulo">
+    <div class="container">
+      <div class="secao-cabecalho secao-cabecalho--centro">
+        <span class="secao-eyebrow">Oradores confirmados</span>
+        <h2 id="palestrantes-titulo">Palestrantes & Convidados</h2>
+        <div class="secao-divisor"></div>
+        <p>
+          Profissionais nacionais e internacionais de referência na enfermagem perioperatória e na gestão
+          hospitalar.
+        </p>
+      </div>
+
+      <div id="carrossel-palestrantes"></div>
+    </div>
+  </section>
+
+  <!-- Aviso apenas de pré-visualização — não copiar para a página final -->
+  <p class="preview-nota" role="note">
+    <strong>Pré-visualização</strong> — carrossel com <code>palestrantes-carousel.js</code>. Ainda não integrado em
+    <code>congresso-nacional-2025.html</code>.
+  </p>
+
+  <script src="palestrantes-carousel.js"></script>
+  <script>
+    (function () {
+      var el = document.getElementById('carrossel-palestrantes');
+      if (!el || typeof initPalestrantesCarousel !== 'function') return;
+
+      var ecraPequeno = window.matchMedia('(max-width: 640px)').matches;
+
+      // Mesmos oito oradores já usados na grelha estática de
+      // congresso-nacional-2025.html — copiados aqui tal e qual.
+      initPalestrantesCarousel(el, {
+        items: [
+          { iniciais: 'MN', nome: 'Maria Fernanda Necaca', cargo: 'Presidente da AESOA', pais: 'Angola' },
+          { iniciais: 'JK', nome: 'João Baptista Kiala', cargo: 'Director Clínico, Hospital Geral de Luanda', pais: 'Angola' },
+          { iniciais: 'IM', nome: 'Isabel Cristina Moreira', cargo: 'Convidada Internacional, AESOP', pais: 'Portugal' },
+          { iniciais: 'PS', nome: 'Pedro Manuel Sachiambo', cargo: 'Especialista em Enfermagem Perioperatória', pais: 'Angola' },
+          { iniciais: 'CN', nome: 'Carlos Alberto Neto', cargo: 'Faculdade de Medicina, Universidade Agostinho Neto', pais: 'Angola' },
+          { iniciais: 'AD', nome: 'Ana Paula Domingos', cargo: 'Coordenadora de Formação, AESOA', pais: 'Angola' },
+          { iniciais: 'MF', nome: 'Miguel Ondjaki Ferreira', cargo: 'Especialista em Controlo de Infecção', pais: 'Angola' },
+          { iniciais: 'BS', nome: 'Beatriz Sumbo', cargo: 'Enfermeira Instrumentista-Chefe, Clínica Sagrada Esperança', pais: 'Angola' },
+        ],
+        buttonSize: ecraPequeno ? 46 : 64,
+        gap: ecraPequeno ? 14 : 22,
+        curve: ecraPequeno ? 5 : 6,
+        avatarSize: ecraPequeno ? 120 : 168,
+      });
+    })();
+  </script>
+
+</body>
+
+</html>

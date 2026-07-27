@@ -2111,37 +2111,6 @@ body.lightbox-aberta {
   }
 }
 
-/* ===== Página Estatutos — pastilhas no hero ===== */
-
-.pagina-hero__pastilhas {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-top: var(--espaco-md);
-}
-
-.pagina-hero__pastilha {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.4rem 1rem;
-  border-radius: var(--raio-pill);
-  background-color: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.32);
-  font-family: var(--fonte-titulo);
-  font-size: var(--fs-xs);
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  color: var(--cor-texto-claro);
-}
-
-/* ===== Página Estatutos — cartões-resumo ===== */
-
-.estatuto-resumo__grelha {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: var(--espaco-md);
-}
-
 /* ===== Página Estatutos — índice rápido ===== */
 
 .estatuto-indice__grelha {
