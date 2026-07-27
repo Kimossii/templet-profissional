@@ -2110,3 +2110,261 @@ body.lightbox-aberta {
     height: 38px;
   }
 }
+
+/* ===== Página Estatutos — pastilhas no hero ===== */
+
+.pagina-hero__pastilhas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: var(--espaco-md);
+}
+
+.pagina-hero__pastilha {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 1rem;
+  border-radius: var(--raio-pill);
+  background-color: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  font-family: var(--fonte-titulo);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--cor-texto-claro);
+}
+
+/* ===== Página Estatutos — cartões-resumo ===== */
+
+.estatuto-resumo__grelha {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--espaco-md);
+}
+
+/* ===== Página Estatutos — índice rápido ===== */
+
+.estatuto-indice__grelha {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--espaco-sm);
+  max-width: 980px;
+  margin-inline: auto;
+}
+
+.estatuto-indice__link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: var(--espaco-sm) var(--espaco-md);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-md);
+  background-color: var(--cor-fundo);
+  transition: background-color var(--transicao-base), border-color var(--transicao-base),
+    transform var(--transicao-base);
+}
+
+.estatuto-indice__link:hover {
+  background-color: var(--cor-primaria-suave);
+  border-color: var(--cor-primaria-clara);
+  transform: translateY(-2px);
+}
+
+.estatuto-indice__numero {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: var(--cor-primaria);
+  color: var(--cor-texto-claro);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: var(--fs-xs);
+}
+
+.estatuto-indice__titulo {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  color: var(--cor-primaria-escura);
+  line-height: 1.3;
+}
+
+/* ===== Página Estatutos — acordeão do articulado ===== */
+
+.estatuto__lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-sm);
+  max-width: 920px;
+  margin-inline: auto;
+}
+
+.estatuto__capitulo {
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-md);
+  background-color: var(--cor-fundo);
+  overflow: hidden;
+  scroll-margin-top: calc(var(--altura-cabecalho) + var(--espaco-md));
+  transition: border-color var(--transicao-base), box-shadow var(--transicao-base);
+}
+
+.estatuto__capitulo.esta-aberto {
+  border-color: var(--cor-primaria-clara);
+  box-shadow: var(--sombra-sm);
+}
+
+.estatuto__cabecalho {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-sm);
+  width: 100%;
+  padding: var(--espaco-md);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.estatuto__numero-capitulo {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background-color: var(--cor-primaria-suave);
+  color: var(--cor-primaria);
+  font-family: var(--fonte-titulo);
+  font-weight: 800;
+  font-size: var(--fs-sm);
+}
+
+.estatuto__cabecalho-texto {
+  flex: 1;
+  min-width: 0;
+}
+
+.estatuto__cabecalho-texto span {
+  display: block;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cor-primaria);
+  margin-bottom: 0.15rem;
+}
+
+.estatuto__cabecalho-texto h3 {
+  margin: 0;
+  font-size: var(--fs-md);
+}
+
+.estatuto__seta {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--cor-primaria);
+  transition: transform var(--transicao-base);
+}
+
+.estatuto__capitulo.esta-aberto .estatuto__seta {
+  transform: rotate(180deg);
+}
+
+.estatuto__corpo {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--transicao-base);
+}
+
+.estatuto__capitulo.esta-aberto .estatuto__corpo {
+  grid-template-rows: 1fr;
+}
+
+.estatuto__corpo-interior {
+  overflow: hidden;
+}
+
+.estatuto__corpo-conteudo {
+  padding: 0 var(--espaco-md) var(--espaco-md);
+  border-top: 1px solid var(--cor-borda);
+}
+
+.estatuto__seccao-titulo {
+  margin: var(--espaco-md) 0 var(--espaco-xs);
+  padding-top: var(--espaco-md);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cor-primaria);
+}
+
+.estatuto__corpo-conteudo > .estatuto__seccao-titulo:first-child {
+  padding-top: var(--espaco-md);
+}
+
+.estatuto__artigo {
+  padding-top: var(--espaco-md);
+}
+
+.estatuto__artigo-numero {
+  display: block;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: var(--fs-base);
+  color: var(--cor-primaria-escura);
+  margin-bottom: 0.4rem;
+}
+
+.estatuto__artigo p {
+  font-size: var(--fs-sm);
+  color: var(--cor-texto-suave);
+  margin: 0 0 var(--espaco-xs);
+}
+
+.estatuto__alineas,
+.estatuto__pontos {
+  list-style: none;
+  margin: 0 0 var(--espaco-sm);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.estatuto__alineas li,
+.estatuto__pontos li {
+  display: flex;
+  gap: 0.6rem;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-corpo);
+  color: var(--cor-texto-suave);
+}
+
+.estatuto__alineas .estatuto__alineas,
+.estatuto__alineas .estatuto__pontos,
+.estatuto__pontos .estatuto__alineas,
+.estatuto__pontos .estatuto__pontos {
+  margin: 0.45rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.estatuto__marcador {
+  flex-shrink: 0;
+  font-weight: 700;
+  color: var(--cor-primaria);
+  min-width: 1.6rem;
+}
+
+@media (max-width: 640px) {
+  .estatuto__cabecalho {
+    align-items: flex-start;
+  }
+}

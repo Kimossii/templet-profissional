@@ -167,6 +167,42 @@ function initAcordeaoFAQ() {
   });
 }
 
+function initAcordeaoEstatutos() {
+  const itens = document.querySelectorAll(".estatuto__capitulo");
+  if (!itens.length) return;
+
+  const abrirItem = (item) => {
+    if (!item) return;
+    item.classList.add("esta-aberto");
+    const botao = item.querySelector(".estatuto__cabecalho");
+    if (botao) botao.setAttribute("aria-expanded", "true");
+  };
+
+  itens.forEach((item) => {
+    const botao = item.querySelector(".estatuto__cabecalho");
+    if (!botao) return;
+
+    botao.addEventListener("click", () => {
+      const aberto = item.classList.toggle("esta-aberto");
+      botao.setAttribute("aria-expanded", String(aberto));
+    });
+  });
+
+  document.querySelectorAll(".estatuto-indice__link").forEach((link) => {
+    link.addEventListener("click", () => {
+      abrirItem(document.querySelector(link.getAttribute("href")));
+    });
+  });
+
+  if (location.hash) {
+    const alvo = document.querySelector(location.hash);
+    if (alvo && alvo.classList.contains("estatuto__capitulo")) {
+      abrirItem(alvo);
+      window.requestAnimationFrame(() => alvo.scrollIntoView({ behavior: "smooth", block: "start" }));
+    }
+  }
+}
+
 function initFormularioCongresso() {
   const formulario = document.querySelector("#formulario-congresso");
   if (!formulario) return;
@@ -393,6 +429,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initAcordeaoValores();
   initAbasPrograma();
   initAcordeaoFAQ();
+  initAcordeaoEstatutos();
   initAnoRodape();
   initRevelarAoScroll();
   initBotaoTopo();
