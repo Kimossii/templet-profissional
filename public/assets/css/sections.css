@@ -2660,3 +2660,74 @@ body.lightbox-aberta {
     min-height: 42vh;
   }
 }
+
+/* ===== Páginas de Serviços — passos numerados ===== */
+
+.passos__lista {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--espaco-lg);
+  counter-reset: passo;
+}
+
+.passos__lista--duas-colunas {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.passos__grupo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-md);
+}
+
+.passos__grupo-titulo {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--cor-primaria);
+  margin-bottom: var(--espaco-xs);
+}
+
+.passos__item {
+  position: relative;
+  padding-left: var(--espaco-2xl);
+}
+
+.passos__numero {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--cor-primaria);
+  color: var(--cor-texto-claro);
+  font-family: var(--fonte-titulo);
+  font-weight: 800;
+  font-size: var(--fs-md);
+}
+
+.passos__item h3 {
+  font-size: var(--fs-md);
+  margin-bottom: 0.3rem;
+}
+
+.passos__item p {
+  font-size: var(--fs-sm);
+  color: var(--cor-texto-suave);
+}
+
+@media (max-width: 900px) {
+  .passos__lista {
+    grid-template-columns: 1fr;
+  }
+
+  .passos__lista--duas-colunas {
+    grid-template-columns: 1fr;
+  }
+}

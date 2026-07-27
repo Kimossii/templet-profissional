@@ -348,6 +348,31 @@ function initFormularioNewsletter() {
   });
 }
 
+function initFormularioBanco() {
+  const formulario = document.querySelector("#formulario-banco");
+  if (!formulario) return;
+
+  const mensagem = formulario.querySelector(".formulario__mensagem");
+
+  formulario.addEventListener("submit", (evento) => {
+    evento.preventDefault();
+
+    if (!formulario.checkValidity()) {
+      formulario.reportValidity();
+      return;
+    }
+
+    // Sem backend por enquanto: confirma o registo no ecrã.
+    // Substituir por uma chamada à API (ex: fetch) quando o backend existir.
+    mensagem.textContent =
+      "Registo recebido. A AESOA vai rever a sua candidatura e entrará em contacto brevemente.";
+    mensagem.classList.remove("formulario__mensagem--erro");
+    mensagem.classList.add("formulario__mensagem--sucesso", "esta-visivel");
+
+    formulario.reset();
+  });
+}
+
 function initPaginaNoticia() {
   const container = document.querySelector("#noticia-conteudo");
   const naoEncontrada = document.querySelector("#noticia-nao-encontrada");
@@ -615,6 +640,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initFormularioContacto();
   initFormularioNewsletter();
   initPaginaNoticia();
+  initFormularioBanco();
   initFiltroGaleria();
   initLightboxGaleria();
 });
