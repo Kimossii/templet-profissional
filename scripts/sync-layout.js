@@ -1,38 +1,39 @@
-<!doctype html>
-<html lang="pt">
+#!/usr/bin/env node
+/*
+ * AESOA — Sincronizador do "chrome" partilhado (topbar + cabeçalho/nav + rodapé)
+ *
+ * Problema que resolve: o topbar, o menu principal e o rodapé estão duplicados,
+ * byte a byte, em todas as páginas HTML. Sempre que se altera o menu (ex: ligar
+ * um novo link), é preciso repetir a edição em todos os ficheiros — já aconteceu
+ * várias vezes nesta fase do projeto.
+ *
+ * O que este script faz: mantém a estrutura do topbar/cabeçalho/rodapé como
+ * modelo único aqui (TOPBAR_HTML / HEADER_TEMPLATE / FOOTER_TEMPLATE) e
+ * regenera essas três secções em cada página HTML listada em PAGINAS,
+ * marcando o item de menu/rodapé correto como "aria-current=page" para
+ * essa página. Tudo o resto de cada ficheiro (title, meta tags, <main>...)
+ * fica exactamente como está — o script só toca no que vem entre os
+ * comentários "<!-- SECTION: topbar -->" / "<!-- SECTION: cabecalho -->" /
+ * "<!-- SECTION: rodape -->" e os respectivos fechos.
+ *
+ * Uso:
+ *   node scripts/sync-layout.js           → aplica as alterações
+ *   node scripts/sync-layout.js --check   → só mostra que ficheiros mudariam,
+ *                                            sem escrever nada (modo seguro)
+ *
+ * Este script é uma ferramenta de desenvolvimento, não faz parte do site
+ * publicado. Quando o projeto migrar para Vue/Laravel, este ficheiro deixa
+ * de ser necessário — o topbar/cabeçalho/rodapé passam a ser um componente
+ * de layout único (ex: AppLayout.vue).
+ */
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Aconselhamento Jurídico | AESOA — Associação dos Enfermeiros da Sala Operatória de Angola</title>
-  <meta name="description"
-    content="Apoio e orientação da AESOA em questões relacionadas com a carreira, os direitos e os deveres profissionais dos enfermeiros perioperatórios." />
-  <meta name="theme-color" content="#1b5e43" />
+const fs = require("node:fs");
+const path = require("node:path");
 
-  <link rel="icon" type="image/png" href="assets/img/logo-emblema.png" />
+const PUBLIC_DIR = path.join(__dirname, "..", "public");
 
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Aconselhamento Jurídico — AESOA" />
-  <meta property="og:description"
-    content="Apoio em questões de carreira, direitos laborais e situações de assédio ou discriminação." />
-  <meta property="og:image" content="assets/multimidia/galeria/otimizado/foto-equipa-sorridente.jpg" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap"
-    rel="stylesheet" />
-
-  <link rel="stylesheet" href="assets/css/variables.css" />
-  <link rel="stylesheet" href="assets/css/base.css" />
-  <link rel="stylesheet" href="assets/css/components.css" />
-  <link rel="stylesheet" href="assets/css/sections.css" />
-</head>
-
-<body>
-  <a class="link-saltar" href="#conteudo-principal">Saltar para o conteúdo</a>
-
-  <!-- SECTION: topbar -->
+// ===== Modelo único do topbar (sem variação entre páginas) =====
+const TOPBAR_HTML = `<!-- SECTION: topbar -->
   <div class="topbar">
     <div class="container topbar__interior">
       <div class="topbar__contactos">
@@ -65,13 +66,15 @@
           Login de membro
         </a>
         <span class="topbar__separador" aria-hidden="true"></span>
-        <a class="topbar__cta" href="index.html#torne-se-membro">Inscrever-se hoje</a>
+        <a class="topbar__cta" href="__CTA_HREF__">Inscrever-se hoje</a>
       </div>
     </div>
   </div>
-  <!-- /SECTION: topbar -->
+  <!-- /SECTION: topbar -->`;
 
-  <!-- SECTION: cabecalho -->
+// ===== Modelo único do cabeçalho/menu (versão "neutra", sem aria-current) =====
+// Para adicionar/remover/renomear um item de menu, editar SÓ aqui.
+const HEADER_TEMPLATE = `<!-- SECTION: cabecalho -->
   <header class="cabecalho">
     <div class="container cabecalho__interior">
       <a class="cabecalho__logo" href="index.html" aria-label="AESOA — Página inicial">
@@ -116,7 +119,7 @@
               <li><a class="nav__link" href="consultadoria-saude.html">Consultadoria de Saúde</a></li>
               <li><a class="nav__link" href="eventos-webinars.html">Eventos & Webinars</a></li>
               <li><a class="nav__link" href="banco-enfermeiros.html">Banco com Enfermeiros</a></li>
-              <li><a class="nav__link" href="aconselhamento-juridico.html" aria-current="page">Aconselhamento Jurídico</a></li>
+              <li><a class="nav__link" href="aconselhamento-juridico.html">Aconselhamento Jurídico</a></li>
             </ul>
           </li>
 
@@ -167,143 +170,10 @@
       </button>
     </div>
   </header>
-  <!-- /SECTION: cabecalho -->
+  <!-- /SECTION: cabecalho -->`;
 
-  <main id="conteudo-principal">
-    <!-- SECTION: cabecalho de página -->
-    <section class="pagina-hero" aria-label="Aconselhamento Jurídico">
-      <div class="container pagina-hero__conteudo">
-        <nav class="fio-migalha" aria-label="Localização atual">
-          <a href="index.html">Início</a>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round" aria-hidden="true">
-            <path d="m9 18 6-6-6-6" />
-          </svg>
-          <span>Serviços</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round" aria-hidden="true">
-            <path d="m9 18 6-6-6-6" />
-          </svg>
-          <span aria-current="page">Aconselhamento Jurídico</span>
-        </nav>
-        <h1>Aconselhamento Jurídico</h1>
-        <p class="pagina-hero__texto">
-          Apoio e orientação em questões relacionadas com a carreira, os direitos e os deveres profissionais
-          dos enfermeiros perioperatórios.
-        </p>
-      </div>
-    </section>
-    <!-- /SECTION: cabecalho de página -->
-
-    <!-- SECTION: o que oferecemos -->
-    <section id="oferecemos" class="secao" aria-labelledby="oferecemos-titulo">
-      <div class="container">
-        <div class="secao-cabecalho secao-cabecalho--centro" data-revelar>
-          <span class="secao-eyebrow">Um serviço da AESOA</span>
-          <h2 id="oferecemos-titulo">O Que Oferecemos</h2>
-          <div class="secao-divisor"></div>
-          <p>
-            Nos termos dos nossos Estatutos, compete à AESOA emitir pareceres sobre problemas que digam
-            respeito à carreira de Enfermagem e representar os seus associados perante organismos oficiais.
-          </p>
-        </div>
-
-        <div class="mvv__grelha grelha-escalonada">
-          <article class="mvv__cartao" data-revelar>
-            <span class="selo">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" aria-hidden="true">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
-                <path d="M14 2v6h6" />
-                <path d="M9 13h6M9 17h6" />
-              </svg>
-            </span>
-            <h3>Direitos Laborais</h3>
-            <p>Esclarecimento sobre direitos e deveres no exercício da profissão de enfermagem
-              perioperatória.</p>
-          </article>
-
-          <article class="mvv__cartao" data-revelar>
-            <span class="selo">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" aria-hidden="true">
-                <path d="M12 3v18" />
-                <path d="M3 7h6m6 0h6" />
-                <path d="M5 7 2 14a3.5 3.5 0 0 0 6 0L5 7Z" />
-                <path d="M19 7l-3 7a3.5 3.5 0 0 0 6 0l-3-7Z" />
-                <path d="M8 21h8" />
-              </svg>
-            </span>
-            <h3>Questões de Carreira</h3>
-            <p>Apoio em assuntos relacionados com a progressão e o reconhecimento da carreira de Enfermagem
-              junto dos organismos competentes.</p>
-          </article>
-
-          <article class="mvv__cartao" data-revelar>
-            <span class="selo">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" aria-hidden="true">
-                <path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5l-8-3Z" />
-              </svg>
-            </span>
-            <h3>Assédio e Discriminação</h3>
-            <p>Encaminhamento e apoio na denúncia de situações de assédio sexual, assédio moral ou
-              discriminação, junto da Ordem dos Enfermeiros de Angola e de outras entidades competentes.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-    <!-- /SECTION: o que oferecemos -->
-
-    <!-- SECTION: como funciona -->
-    <section id="como-funciona" class="secao secao--alt" aria-labelledby="como-funciona-titulo">
-      <div class="container">
-        <div class="secao-cabecalho secao-cabecalho--centro" data-revelar>
-          <span class="secao-eyebrow">Processo</span>
-          <h2 id="como-funciona-titulo">Como Funciona</h2>
-          <div class="secao-divisor"></div>
-        </div>
-
-        <div class="passos__lista" data-revelar>
-          <div class="passos__item">
-            <span class="passos__numero">1</span>
-            <h3>Exponha a Sua Situação</h3>
-            <p>Contacte a AESOA através dos canais habituais, descrevendo a questão com o maior detalhe
-              possível.</p>
-          </div>
-          <div class="passos__item">
-            <span class="passos__numero">2</span>
-            <h3>Análise Interna</h3>
-            <p>A Direção analisa o caso e determina o encaminhamento mais adequado à situação.</p>
-          </div>
-          <div class="passos__item">
-            <span class="passos__numero">3</span>
-            <h3>Acompanhamento</h3>
-            <p>O associado é acompanhado ao longo do processo, com o apoio institucional da AESOA.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- /SECTION: como funciona -->
-
-    <!-- SECTION: cta -->
-    <section id="servico-cta" class="secao" aria-labelledby="servico-cta-titulo">
-      <div class="container">
-        <div class="secao-cabecalho secao-cabecalho--centro" data-revelar>
-          <span class="secao-eyebrow">Precisa de apoio?</span>
-          <h2 id="servico-cta-titulo">Fale com a Direção da AESOA</h2>
-          <div class="secao-divisor"></div>
-          <p>Toda a informação partilhada é tratada com confidencialidade e rigor profissional.</p>
-        </div>
-        <div class="hero__acoes" style="justify-content:center;" data-revelar>
-          <a class="btn btn--primario" href="contactos.html">Falar com a Direção</a>
-        </div>
-      </div>
-    </section>
-    <!-- /SECTION: cta -->
-  </main>
-
-  <!-- SECTION: rodape -->
+// ===== Modelo único do rodapé (versão "neutra", sem aria-current) =====
+const FOOTER_TEMPLATE = `<!-- SECTION: rodape -->
   <footer class="rodape">
     <div class="container">
       <div class="rodape__grelha">
@@ -403,17 +273,101 @@
       </div>
     </div>
   </footer>
-  <!-- /SECTION: rodape -->
+  <!-- /SECTION: rodape -->`;
 
-  <button type="button" id="botao-topo" class="botao-topo" aria-label="Voltar ao topo">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
-      stroke-linejoin="round" aria-hidden="true">
-      <path d="M12 19V5" />
-      <path d="m5 12 7-7 7 7" />
-    </svg>
-  </button>
+// ===== Qual página marca qual link de menu / rodapé como "actual" =====
+// footerCurrent fica a null quando o rodapé não tem link para essa página
+// (ex.: Estatutos e os Serviços não aparecem nos "Links Rápidos" do rodapé)
+// ou quando, hoje, essa página ainda não marca o próprio link no rodapé
+// (mantido tal como está, para não mudar comportamento existente).
+//
+// pularRodape: true → esta página tem um rodapé personalizado (diferente do
+// modelo partilhado) e o script não lhe mexe. Caso conhecido:
+// congresso-nacional-2025.html troca o link "Sócios" por um link próprio
+// para si mesma nos Links Rápidos — é intencional, não uma inconsistência.
+const PAGINAS = {
+  "index.html": { navCurrent: "index.html", footerCurrent: null, ctaHref: "#torne-se-membro" },
+  "about.html": { navCurrent: "about.html", footerCurrent: "about.html" },
+  "estatutos.html": { navCurrent: "estatutos.html", footerCurrent: null },
+  "contactos.html": { navCurrent: "contactos.html", footerCurrent: "contactos.html" },
+  "noticias.html": { navCurrent: "noticias.html", footerCurrent: "noticias.html" },
+  "noticia.html": { navCurrent: "noticias.html", footerCurrent: "noticias.html" },
+  "galeria.html": { navCurrent: "galeria.html", footerCurrent: "galeria.html" },
+  "congresso-nacional-2025.html": {
+    navCurrent: "congresso-nacional-2025.html",
+    footerCurrent: null,
+    pularRodape: true,
+  },
+  "consultadoria-saude.html": { navCurrent: "consultadoria-saude.html", footerCurrent: null },
+  "eventos-webinars.html": { navCurrent: "eventos-webinars.html", footerCurrent: null },
+  "banco-enfermeiros.html": { navCurrent: "banco-enfermeiros.html", footerCurrent: null },
+  "aconselhamento-juridico.html": { navCurrent: "aconselhamento-juridico.html", footerCurrent: null },
+};
 
-  <script src="assets/js/main.js" defer></script>
-</body>
+function escapeRegExp(texto) {
+  return texto.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
 
-</html>
+function renderTopbar(ctaHref) {
+  return TOPBAR_HTML.replace("__CTA_HREF__", ctaHref || "index.html#torne-se-membro");
+}
+
+function renderHeader(navCurrent) {
+  const alvo = new RegExp(`(<a class="nav__link" href="${escapeRegExp(navCurrent)}")>`, "g");
+  return HEADER_TEMPLATE.replace(alvo, '$1 aria-current="page">');
+}
+
+function renderFooter(footerCurrent) {
+  if (!footerCurrent) return FOOTER_TEMPLATE;
+  const alvo = `href="${footerCurrent}">`;
+  return FOOTER_TEMPLATE.replace(alvo, `href="${footerCurrent}" aria-current="page">`);
+}
+
+function substituirSeccao(conteudo, nomeSeccao, novoBloco) {
+  const regex = new RegExp(
+    `<!-- SECTION: ${nomeSeccao} -->[\\s\\S]*?<!-- /SECTION: ${nomeSeccao} -->`
+  );
+  if (!regex.test(conteudo)) {
+    throw new Error(`Secção "${nomeSeccao}" não encontrada`);
+  }
+  return conteudo.replace(regex, novoBloco);
+}
+
+function main() {
+  const modoVerificacao = process.argv.includes("--check");
+  let alterados = 0;
+  let inalterados = 0;
+
+  for (const [ficheiro, config] of Object.entries(PAGINAS)) {
+    const caminho = path.join(PUBLIC_DIR, ficheiro);
+    if (!fs.existsSync(caminho)) {
+      console.log(`(ignorado, não existe) ${ficheiro}`);
+      continue;
+    }
+
+    const original = fs.readFileSync(caminho, "utf8");
+    let atualizado = original;
+    atualizado = substituirSeccao(atualizado, "topbar", renderTopbar(config.ctaHref));
+    atualizado = substituirSeccao(atualizado, "cabecalho", renderHeader(config.navCurrent));
+    if (!config.pularRodape) {
+      atualizado = substituirSeccao(atualizado, "rodape", renderFooter(config.footerCurrent));
+    }
+
+    if (atualizado === original) {
+      inalterados += 1;
+      continue;
+    }
+
+    alterados += 1;
+    console.log(`${modoVerificacao ? "[mudaria]" : "[atualizado]"} ${ficheiro}`);
+    if (!modoVerificacao) {
+      fs.writeFileSync(caminho, atualizado, "utf8");
+    }
+  }
+
+  console.log(
+    `\n${alterados} ficheiro(s) ${modoVerificacao ? "mudariam" : "atualizados"}, ${inalterados} já estavam em sincronia.`
+  );
+}
+
+main();
