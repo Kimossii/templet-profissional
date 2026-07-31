@@ -3049,7 +3049,7 @@ body.lightbox-aberta {
     right: auto;
     width: 100%;
     margin-top: 0;
-    margin-left: var(--espaco-md);
+    margin-left: 0.75rem;
     transform: scale(0.96);
     transform-origin: left top;
   }
@@ -3058,7 +3058,7 @@ body.lightbox-aberta {
     left: auto;
     right: 100%;
     margin-left: 0;
-    margin-right: var(--espaco-md);
+    margin-right: 0.75rem;
     transform-origin: right top;
   }
 
@@ -3075,7 +3075,7 @@ body.lightbox-aberta {
   .cursos__grelha .cursos__cartao:nth-child(3n) .cursos__cartao-detalhe {
     left: 100%;
     right: auto;
-    margin-left: var(--espaco-md);
+    margin-left: 0.75rem;
     margin-right: 0;
     transform-origin: left top;
   }
@@ -3084,7 +3084,7 @@ body.lightbox-aberta {
     left: auto;
     right: 100%;
     margin-left: 0;
-    margin-right: var(--espaco-md);
+    margin-right: 0.75rem;
     transform-origin: right top;
   }
 }
