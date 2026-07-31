@@ -2941,6 +2941,79 @@ body.lightbox-aberta {
   color: var(--cor-texto-claro);
 }
 
+/* ===== Página Cursos — brilho animado nos CTA (hover), cores da marca ===== */
+
+.efeito-brilho {
+  position: relative;
+  z-index: 0;
+}
+
+.efeito-brilho::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: calc(100% + 6px);
+  height: calc(100% + 6px);
+  background: linear-gradient(45deg,
+    var(--cor-primaria-escura),
+    var(--cor-primaria),
+    var(--cor-primaria-clara),
+    #f0a324,
+    var(--cor-primaria-clara),
+    var(--cor-primaria),
+    var(--cor-primaria-escura));
+  background-size: 400% 400%;
+  border-radius: inherit;
+  filter: blur(5px);
+  z-index: -2;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  animation: cursos-brilho 7s linear infinite;
+}
+
+.efeito-brilho::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: var(--cor-fundo);
+  z-index: -1;
+}
+
+.efeito-brilho:hover::before,
+.efeito-brilho:focus-visible::before {
+  opacity: 1;
+}
+
+/* A máscara (::after) fica sempre por cima do preenchimento do próprio
+   botão, por isso o hover deste botão não troca para fundo/texto
+   invertidos (ficava texto claro sobre a máscara clara, invisível) —
+   mantém-se o texto verde da marca, com o brilho como reação ao hover. */
+.efeito-brilho:hover,
+.efeito-brilho:focus-visible {
+  background-color: transparent;
+  color: var(--cor-primaria);
+}
+
+.cursos__cartao-detalhe-acoes .efeito-brilho::after {
+  background-color: var(--cor-primaria-suave);
+}
+
+@keyframes cursos-brilho {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 .cursos__cartao-preco {
   display: flex;
   flex-direction: column;
