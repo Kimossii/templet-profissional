@@ -568,6 +568,36 @@ function initFiltroCursos() {
   campoPesquisa?.addEventListener("input", aplicarFiltro);
 }
 
+function initFavoritosCursos() {
+  const botoes = document.querySelectorAll(".cursos__favorito");
+  if (!botoes.length) return;
+
+  const CHAVE = "aesoa-cursos-favoritos";
+  const favoritos = new Set(JSON.parse(localStorage.getItem(CHAVE) || "[]"));
+
+  function guardar() {
+    localStorage.setItem(CHAVE, JSON.stringify(Array.from(favoritos)));
+  }
+
+  botoes.forEach((botao) => {
+    const slug = botao.dataset.slug;
+    const estaFavorito = favoritos.has(slug);
+    botao.classList.toggle("esta-favorito", estaFavorito);
+    botao.setAttribute("aria-pressed", String(estaFavorito));
+
+    botao.addEventListener("click", () => {
+      const ativo = botao.classList.toggle("esta-favorito");
+      botao.setAttribute("aria-pressed", String(ativo));
+      if (ativo) {
+        favoritos.add(slug);
+      } else {
+        favoritos.delete(slug);
+      }
+      guardar();
+    });
+  });
+}
+
 function initLightboxGaleria() {
   const itens = Array.from(document.querySelectorAll(".galeria__item"));
   const lightbox = document.querySelector("#lightbox-galeria");
@@ -688,4 +718,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initFiltroGaleria();
   initLightboxGaleria();
   initFiltroCursos();
+  initFavoritosCursos();
 });

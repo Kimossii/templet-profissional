@@ -2878,9 +2878,8 @@ body.lightbox-aberta {
 .cursos__cartao-rodape {
   margin-top: auto;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--espaco-xs);
+  flex-direction: column;
+  gap: 0.5rem;
   padding-top: var(--espaco-sm);
   margin-bottom: var(--espaco-sm);
   border-top: 1px solid var(--cor-borda);
@@ -2908,10 +2907,9 @@ body.lightbox-aberta {
   flex-shrink: 0;
 }
 
-.cursos__cartao-preco-normal {
+.cursos__cartao-preco-real {
   font-size: var(--fs-xs);
   color: var(--cor-texto-suave);
-  text-decoration: line-through;
 }
 
 .cursos__cartao-preco-socio {
@@ -2933,16 +2931,6 @@ body.lightbox-aberta {
   color: var(--cor-texto-claro);
   background-color: var(--cor-primaria-clara);
   padding: 0.15rem 0.5rem;
-  border-radius: var(--raio-pill);
-}
-
-.cursos__cartao-preco--gratis {
-  font-family: var(--fonte-titulo);
-  font-weight: 800;
-  font-size: var(--fs-sm);
-  color: var(--cor-texto-claro);
-  background-color: var(--cor-primaria);
-  padding: 0.4rem 0.85rem;
   border-radius: var(--raio-pill);
 }
 
@@ -3041,19 +3029,27 @@ body.lightbox-aberta {
   margin: 0.35rem 0;
 }
 
-.cursos__cartao-detalhe-duracao {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
+.cursos__cartao-detalhe-meta {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 0.4rem;
+  column-gap: 0.9rem;
   font-size: var(--fs-xs);
   color: var(--cor-texto-suave);
   margin-bottom: var(--espaco-sm);
 }
 
-.cursos__cartao-detalhe-duracao svg {
+.cursos__cartao-detalhe-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.cursos__cartao-detalhe-meta svg {
   width: 14px;
   height: 14px;
   flex-shrink: 0;
+  color: var(--cor-primaria);
 }
 
 .cursos__cartao-detalhe-texto {
@@ -3101,6 +3097,51 @@ body.lightbox-aberta {
   .cursos__cartao-aprender {
     grid-template-columns: 1fr;
   }
+}
+
+.cursos__cartao-detalhe-acoes {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: var(--espaco-md);
+}
+
+.cursos__cartao-detalhe-acoes .btn {
+  flex: 1;
+}
+
+.cursos__favorito {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border: 2px solid var(--cor-borda);
+  border-radius: var(--raio-pill);
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto-suave);
+  transition: border-color var(--transicao-base), color var(--transicao-base),
+    background-color var(--transicao-base);
+}
+
+.cursos__favorito svg {
+  width: 20px;
+  height: 20px;
+}
+
+.cursos__favorito:hover {
+  border-color: var(--cor-primaria-clara);
+  color: var(--cor-primaria);
+}
+
+.cursos__favorito.esta-favorito {
+  border-color: var(--cor-primaria);
+  background-color: var(--cor-primaria-suave);
+  color: var(--cor-primaria);
+}
+
+.cursos__favorito.esta-favorito svg {
+  fill: var(--cor-primaria);
 }
 
 /* ===== Página Cursos — estado vazio ===== */
