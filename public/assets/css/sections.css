@@ -2834,11 +2834,11 @@ body.lightbox-aberta {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding: 0.85rem 0.9rem;
+  padding: 0.7rem 0.8rem;
 }
 
 .cursos__cartao .cartao__titulo {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   line-height: 1.3;
   margin-bottom: 0.3rem;
   display: -webkit-box;
@@ -2847,30 +2847,38 @@ body.lightbox-aberta {
   overflow: hidden;
 }
 
-.cursos__cartao-meta {
+.cursos__cartao-info {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem;
-  margin: 0.3rem 0;
+  gap: 0.25rem 0.55rem;
+  margin: 0 0 0.35rem;
   padding: 0;
   list-style: none;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--cor-texto-suave);
 }
 
-.cursos__cartao-meta li {
-  font-size: 0.6875rem;
-  font-weight: 700;
-  color: var(--cor-texto-suave);
-  border: 1px solid var(--cor-borda);
-  border-radius: var(--raio-pill);
-  padding: 0.15rem 0.55rem;
+.cursos__cartao-info li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+}
+
+.cursos__cartao-info svg {
+  width: 11px;
+  height: 11px;
+  flex-shrink: 0;
+  color: var(--cor-primaria);
 }
 
 .cursos__cartao-avaliacao {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.3rem;
   margin-bottom: 0;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--cor-texto-suave);
 }
 
@@ -2912,7 +2920,7 @@ body.lightbox-aberta {
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
-  padding-top: 0.55rem;
+  padding-top: 0.5rem;
   border-top: 1px solid var(--cor-borda);
 }
 
@@ -2920,9 +2928,9 @@ body.lightbox-aberta {
   flex-shrink: 0;
   font-family: var(--fonte-titulo);
   font-weight: 700;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--cor-primaria);
-  padding: 0.4rem 0.8rem;
+  padding: 0.35rem 0.7rem;
   border: 1.5px solid var(--cor-primaria);
   border-radius: var(--raio-pill);
   transition: background-color var(--transicao-base), color var(--transicao-base);
@@ -2931,20 +2939,6 @@ body.lightbox-aberta {
 .cursos__cartao-cta:hover {
   background-color: var(--cor-primaria);
   color: var(--cor-texto-claro);
-}
-
-.cursos__cartao-duracao {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: var(--fs-xs);
-  color: var(--cor-texto-suave);
-}
-
-.cursos__cartao-duracao svg {
-  width: 15px;
-  height: 15px;
-  flex-shrink: 0;
 }
 
 .cursos__cartao-preco {
@@ -2991,27 +2985,22 @@ body.lightbox-aberta {
 }
 
 .cursos__cartao > .cartao__imagem {
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 2 / 1;
   border-radius: var(--raio-lg) var(--raio-lg) 0 0;
-}
-
-.cursos__cartao-corpo .btn {
-  padding: 0.65rem 1.5rem;
-  font-size: var(--fs-sm);
 }
 
 .cursos__cartao-selo {
   position: absolute;
-  top: 0.85rem;
-  left: 0.85rem;
+  top: 0.6rem;
+  left: 0.6rem;
   z-index: 2;
   font-family: var(--fonte-titulo);
-  font-size: 0.6875rem;
+  font-size: 0.625rem;
   font-weight: 700;
   letter-spacing: 0.03em;
   color: var(--cor-texto-claro);
   background-color: var(--cor-primaria);
-  padding: 0.3rem 0.75rem;
+  padding: 0.25rem 0.6rem;
   border-radius: var(--raio-pill);
   box-shadow: var(--sombra-sm);
 }
@@ -3033,7 +3022,7 @@ body.lightbox-aberta {
   left: 0;
   width: 100%;
   margin-top: 0.5rem;
-  padding: 1rem 1.1rem;
+  padding: 0.85rem 0.95rem;
   background-color: var(--cor-fundo);
   border: 1px solid var(--cor-borda);
   border-radius: var(--raio-lg);
