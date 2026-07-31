@@ -2731,3 +2731,213 @@ body.lightbox-aberta {
     grid-template-columns: 1fr;
   }
 }
+
+/* ===== Página Cursos — estatísticas no hero (fundo escuro) ===== */
+
+.pagina-hero .estatisticas__grelha {
+  border-top-color: rgba(255, 255, 255, 0.25);
+}
+
+.pagina-hero .estatistica__numero {
+  color: var(--cor-texto-claro);
+}
+
+.pagina-hero .estatistica__rotulo {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ===== Página Cursos — filtros e pesquisa ===== */
+
+.cursos__filtros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-md);
+  margin-bottom: var(--espaco-lg);
+}
+
+.cursos__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cursos__filtro {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--raio-pill);
+  border: 2px solid var(--cor-borda);
+  background-color: var(--cor-fundo);
+  font-family: var(--fonte-titulo);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--cor-texto-suave);
+  transition: background-color var(--transicao-base), border-color var(--transicao-base),
+    color var(--transicao-base);
+}
+
+.cursos__filtro:hover {
+  border-color: var(--cor-primaria-clara);
+  color: var(--cor-primaria-escura);
+}
+
+.cursos__filtro.esta-ativo {
+  background-color: var(--cor-primaria);
+  border-color: var(--cor-primaria);
+  color: var(--cor-texto-claro);
+}
+
+.cursos__pesquisa {
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 320px;
+}
+
+.cursos__pesquisa svg {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: var(--cor-texto-suave);
+  pointer-events: none;
+}
+
+.cursos__pesquisa input {
+  width: 100%;
+  padding: 0.7rem 1rem 0.7rem 2.6rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-pill);
+  background-color: var(--cor-fundo);
+  font-size: var(--fs-sm);
+  transition: border-color var(--transicao-base), box-shadow var(--transicao-base);
+}
+
+.cursos__pesquisa input:focus {
+  border-color: var(--cor-primaria);
+  box-shadow: 0 0 0 3px var(--cor-primaria-suave);
+  outline: none;
+}
+
+/* ===== Página Cursos — grelha e cartões ===== */
+
+.cursos__grelha {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--espaco-md);
+}
+
+.cursos__cartao {
+  display: flex;
+  flex-direction: column;
+}
+
+.cursos__cartao--oculto {
+  display: none;
+}
+
+.cursos__cartao-corpo {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: var(--espaco-md);
+}
+
+.cursos__cartao-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.35rem 0 var(--espaco-sm);
+  padding: 0;
+  list-style: none;
+}
+
+.cursos__cartao-meta li {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--cor-texto-suave);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-pill);
+  padding: 0.2rem 0.6rem;
+}
+
+.cursos__cartao-formador {
+  font-size: var(--fs-sm);
+  color: var(--cor-texto-suave);
+  margin-bottom: var(--espaco-sm);
+}
+
+.cursos__cartao-rodape {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-xs);
+  padding-top: var(--espaco-sm);
+  margin-bottom: var(--espaco-sm);
+  border-top: 1px solid var(--cor-borda);
+}
+
+.cursos__cartao-duracao {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: var(--fs-xs);
+  color: var(--cor-texto-suave);
+}
+
+.cursos__cartao-duracao svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.cursos__cartao-preco {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: var(--fs-xs);
+  color: var(--cor-primaria);
+  text-align: right;
+}
+
+/* ===== Página Cursos — estado vazio ===== */
+
+.cursos__vazio {
+  display: none;
+  text-align: center;
+  padding: var(--espaco-2xl) var(--espaco-md);
+  color: var(--cor-texto-suave);
+}
+
+.cursos__vazio.esta-visivel {
+  display: block;
+}
+
+@media (max-width: 960px) {
+  .cursos__grelha {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .cursos__grelha {
+    grid-template-columns: 1fr;
+  }
+
+  .cursos__filtros {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cursos__pesquisa {
+    max-width: 100%;
+  }
+}

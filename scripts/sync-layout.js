@@ -115,7 +115,7 @@ const HEADER_TEMPLATE = `<!-- SECTION: cabecalho -->
               </svg>
             </a>
             <ul class="nav__submenu">
-              <li><a class="nav__link" href="#">Cursos práticos</a></li>
+              <li><a class="nav__link" href="cursos.html">Cursos</a></li>
               <li><a class="nav__link" href="consultadoria-saude.html">Consultadoria de Saúde</a></li>
               <li><a class="nav__link" href="eventos-webinars.html">Eventos & Webinars</a></li>
               <li><a class="nav__link" href="banco-enfermeiros.html">Banco com Enfermeiros</a></li>
@@ -298,6 +298,7 @@ const PAGINAS = {
     footerCurrent: null,
     pularRodape: true,
   },
+  "cursos.html": { navCurrent: "cursos.html", footerCurrent: null },
   "consultadoria-saude.html": { navCurrent: "consultadoria-saude.html", footerCurrent: null },
   "eventos-webinars.html": { navCurrent: "eventos-webinars.html", footerCurrent: null },
   "banco-enfermeiros.html": { navCurrent: "banco-enfermeiros.html", footerCurrent: null },

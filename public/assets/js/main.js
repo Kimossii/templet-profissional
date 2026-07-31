@@ -524,6 +524,50 @@ function initFiltroGaleria() {
   });
 }
 
+function initFiltroCursos() {
+  const pills = document.querySelectorAll(".cursos__filtro");
+  const campoPesquisa = document.querySelector("#cursos-pesquisa");
+  const cursos = document.querySelectorAll(".cursos__cartao");
+  const vazio = document.querySelector("#cursos-vazio");
+  if (!pills.length || !cursos.length) return;
+
+  let categoriaAtiva = "todos";
+
+  function aplicarFiltro() {
+    const termo = (campoPesquisa?.value || "").trim().toLowerCase();
+    let visiveis = 0;
+
+    cursos.forEach((curso) => {
+      const correspondeCategoria = categoriaAtiva === "todos" || curso.dataset.categoria === categoriaAtiva;
+      const titulo = curso.querySelector(".cartao__titulo")?.textContent.toLowerCase() || "";
+      const formador = curso.querySelector(".cursos__cartao-formador")?.textContent.toLowerCase() || "";
+      const correspondePesquisa = !termo || titulo.includes(termo) || formador.includes(termo);
+      const mostrar = correspondeCategoria && correspondePesquisa;
+
+      curso.classList.toggle("cursos__cartao--oculto", !mostrar);
+      if (mostrar) visiveis += 1;
+    });
+
+    vazio?.classList.toggle("esta-visivel", visiveis === 0);
+  }
+
+  pills.forEach((pill) => {
+    pill.addEventListener("click", () => {
+      categoriaAtiva = pill.dataset.filtro;
+
+      pills.forEach((outraPill) => {
+        const estaAtiva = outraPill === pill;
+        outraPill.classList.toggle("esta-ativo", estaAtiva);
+        outraPill.setAttribute("aria-selected", String(estaAtiva));
+      });
+
+      aplicarFiltro();
+    });
+  });
+
+  campoPesquisa?.addEventListener("input", aplicarFiltro);
+}
+
 function initLightboxGaleria() {
   const itens = Array.from(document.querySelectorAll(".galeria__item"));
   const lightbox = document.querySelector("#lightbox-galeria");
@@ -643,4 +687,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initFormularioBanco();
   initFiltroGaleria();
   initLightboxGaleria();
+  initFiltroCursos();
 });
