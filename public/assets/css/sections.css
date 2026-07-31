@@ -2949,17 +2949,18 @@ body.lightbox-aberta {
 }
 
 .cursos__cartao-preco-real {
-  font-size: 0.6875rem;
-  color: var(--cor-texto-suave);
+  font-family: var(--fonte-titulo);
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--cor-texto);
 }
 
 .cursos__cartao-preco-socio {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  font-family: var(--fonte-titulo);
-  font-weight: 800;
-  font-size: 0.85rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
   color: var(--cor-primaria);
   white-space: nowrap;
 }
@@ -3023,7 +3024,7 @@ body.lightbox-aberta {
   width: 100%;
   margin-top: 0.5rem;
   padding: 0.85rem 0.95rem;
-  background-color: var(--cor-fundo);
+  background-color: var(--cor-primaria-suave);
   border: 1px solid var(--cor-borda);
   border-radius: var(--raio-lg);
   box-shadow: var(--sombra-lg);
