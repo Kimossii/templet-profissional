@@ -2834,12 +2834,13 @@ body.lightbox-aberta {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding: 1.1rem 1.25rem;
+  padding: 0.85rem 0.9rem;
 }
 
 .cursos__cartao .cartao__titulo {
-  font-size: 1.05rem;
+  font-size: 0.9rem;
   line-height: 1.3;
+  margin-bottom: 0.3rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -2867,9 +2868,9 @@ body.lightbox-aberta {
 .cursos__cartao-avaliacao {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  margin-bottom: 0.3rem;
-  font-size: var(--fs-xs);
+  gap: 0.35rem;
+  margin-bottom: 0;
+  font-size: 0.75rem;
   color: var(--cor-texto-suave);
 }
 
@@ -2908,10 +2909,28 @@ body.lightbox-aberta {
 .cursos__cartao-rodape {
   margin-top: auto;
   display: flex;
-  justify-content: flex-end;
-  padding-top: 0.6rem;
-  margin-bottom: 0.6rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-top: 0.55rem;
   border-top: 1px solid var(--cor-borda);
+}
+
+.cursos__cartao-cta {
+  flex-shrink: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--cor-primaria);
+  padding: 0.4rem 0.8rem;
+  border: 1.5px solid var(--cor-primaria);
+  border-radius: var(--raio-pill);
+  transition: background-color var(--transicao-base), color var(--transicao-base);
+}
+
+.cursos__cartao-cta:hover {
+  background-color: var(--cor-primaria);
+  color: var(--cor-texto-claro);
 }
 
 .cursos__cartao-duracao {
@@ -2930,36 +2949,36 @@ body.lightbox-aberta {
 
 .cursos__cartao-preco {
   display: flex;
-  align-items: baseline;
-  justify-content: flex-end;
-  gap: 0.5rem;
-  flex-shrink: 0;
+  flex-direction: column;
+  gap: 0.05rem;
+  min-width: 0;
 }
 
 .cursos__cartao-preco-real {
-  font-size: var(--fs-xs);
+  font-size: 0.6875rem;
   color: var(--cor-texto-suave);
 }
 
 .cursos__cartao-preco-socio {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.3rem;
   font-family: var(--fonte-titulo);
   font-weight: 800;
-  font-size: var(--fs-md);
+  font-size: 0.85rem;
   color: var(--cor-primaria);
+  white-space: nowrap;
 }
 
 .cursos__cartao-preco-selo {
   display: inline-flex;
   align-items: center;
   font-family: var(--fonte-titulo);
-  font-size: 0.6875rem;
+  font-size: 0.6rem;
   font-weight: 700;
   color: var(--cor-texto-claro);
   background-color: var(--cor-primaria-clara);
-  padding: 0.15rem 0.5rem;
+  padding: 0.1rem 0.4rem;
   border-radius: var(--raio-pill);
 }
 
@@ -3014,7 +3033,7 @@ body.lightbox-aberta {
   left: 0;
   width: 100%;
   margin-top: 0.5rem;
-  padding: var(--espaco-md);
+  padding: 1rem 1.1rem;
   background-color: var(--cor-fundo);
   border: 1px solid var(--cor-borda);
   border-radius: var(--raio-lg);
@@ -3081,61 +3100,68 @@ body.lightbox-aberta {
 }
 
 .cursos__cartao-detalhe-titulo {
-  margin: 0.35rem 0;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  margin: 0.3rem 0;
 }
 
 .cursos__cartao-detalhe-meta {
   display: flex;
   flex-wrap: wrap;
-  row-gap: 0.4rem;
-  column-gap: 0.9rem;
-  font-size: var(--fs-xs);
+  row-gap: 0.3rem;
+  column-gap: 0.7rem;
+  font-size: 0.7rem;
   color: var(--cor-texto-suave);
-  margin-bottom: var(--espaco-sm);
+  margin-bottom: 0.5rem;
 }
 
 .cursos__cartao-detalhe-meta span {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.3rem;
 }
 
 .cursos__cartao-detalhe-meta svg {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   flex-shrink: 0;
   color: var(--cor-primaria);
 }
 
 .cursos__cartao-detalhe-texto {
-  font-size: var(--fs-sm);
+  font-size: 0.8rem;
+  line-height: 1.45;
   color: var(--cor-texto-suave);
-  margin-bottom: var(--espaco-sm);
+  margin-bottom: 0.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .cursos__cartao-detalhe-subtitulo {
   font-family: var(--fonte-titulo);
   font-weight: 700;
-  font-size: var(--fs-xs);
+  font-size: 0.6875rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--cor-primaria);
-  margin-bottom: var(--espaco-xs);
+  margin-bottom: 0.4rem;
 }
 
 .cursos__cartao-aprender {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.5rem var(--espaco-sm);
+  gap: 0.4rem 0.7rem;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .cursos__cartao-aprender li {
-  font-size: var(--fs-xs);
+  font-size: 0.7rem;
   color: var(--cor-texto-suave);
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
 .cursos__cartao-aprender strong {
@@ -3156,12 +3182,14 @@ body.lightbox-aberta {
 
 .cursos__cartao-detalhe-acoes {
   display: flex;
-  gap: 0.6rem;
-  margin-top: var(--espaco-md);
+  gap: 0.5rem;
+  margin-top: 0.75rem;
 }
 
 .cursos__cartao-detalhe-acoes .btn {
   flex: 1;
+  padding: 0.55rem 1rem;
+  font-size: 0.8rem;
 }
 
 .cursos__favorito {
@@ -3169,8 +3197,8 @@ body.lightbox-aberta {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 48px;
-  height: 48px;
+  width: 38px;
+  height: 38px;
   border: 2px solid var(--cor-borda);
   border-radius: var(--raio-pill);
   background-color: var(--cor-fundo);
@@ -3180,8 +3208,8 @@ body.lightbox-aberta {
 }
 
 .cursos__favorito svg {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
 }
 
 .cursos__favorito:hover {
