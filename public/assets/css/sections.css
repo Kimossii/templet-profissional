@@ -2901,11 +2901,206 @@ body.lightbox-aberta {
 }
 
 .cursos__cartao-preco {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.15rem;
+  flex-shrink: 0;
+}
+
+.cursos__cartao-preco-normal {
+  font-size: var(--fs-xs);
+  color: var(--cor-texto-suave);
+  text-decoration: line-through;
+}
+
+.cursos__cartao-preco-socio {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--fonte-titulo);
+  font-weight: 800;
+  font-size: var(--fs-md);
+  color: var(--cor-primaria);
+}
+
+.cursos__cartao-preco-selo {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--fonte-titulo);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--cor-texto-claro);
+  background-color: var(--cor-primaria-clara);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--raio-pill);
+}
+
+.cursos__cartao-preco--gratis {
+  font-family: var(--fonte-titulo);
+  font-weight: 800;
+  font-size: var(--fs-sm);
+  color: var(--cor-texto-claro);
+  background-color: var(--cor-primaria);
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--raio-pill);
+}
+
+/* ===== Página Cursos — painel de detalhe (só ao passar o rato, desktop) ===== */
+
+.cursos__cartao {
+  position: relative;
+  overflow: visible;
+  z-index: 1;
+}
+
+.cursos__cartao > .cartao__imagem {
+  border-radius: var(--raio-lg) var(--raio-lg) 0 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cursos__cartao:hover,
+  .cursos__cartao:focus-within {
+    z-index: 40;
+  }
+}
+
+.cursos__cartao-detalhe {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: var(--espaco-md);
+  background-color: var(--cor-fundo);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-lg);
+  box-shadow: var(--sombra-lg);
+  z-index: 30;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity var(--transicao-base), transform var(--transicao-base),
+    visibility var(--transicao-base);
+  pointer-events: none;
+}
+
+/* Em rato (desktop/tablet largo), o painel abre para o lado em vez de
+   por baixo, com a mesma largura do card: para a direita por omissão,
+   para a esquerda no último card de cada linha (3ª coluna em ecrãs
+   largos, 2ª coluna em ecrãs médios). Em ecrãs de toque (sem rato)
+   este painel nunca aparece — só existe o card e o botão "Ver Curso". */
+@media (hover: hover) and (pointer: fine) and (min-width: 641px) {
+  .cursos__cartao-detalhe {
+    top: 0;
+    left: 100%;
+    right: auto;
+    width: 100%;
+    margin-top: 0;
+    margin-left: var(--espaco-md);
+    transform: scale(0.96);
+    transform-origin: left top;
+  }
+
+  .cursos__grelha .cursos__cartao:nth-child(3n) .cursos__cartao-detalhe {
+    left: auto;
+    right: 100%;
+    margin-left: 0;
+    margin-right: var(--espaco-md);
+    transform-origin: right top;
+  }
+
+  .cursos__cartao:hover .cursos__cartao-detalhe,
+  .cursos__cartao:focus-within .cursos__cartao-detalhe {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    pointer-events: auto;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (min-width: 641px) and (max-width: 960px) {
+  .cursos__grelha .cursos__cartao:nth-child(3n) .cursos__cartao-detalhe {
+    left: 100%;
+    right: auto;
+    margin-left: var(--espaco-md);
+    margin-right: 0;
+    transform-origin: left top;
+  }
+
+  .cursos__grelha .cursos__cartao:nth-child(2n) .cursos__cartao-detalhe {
+    left: auto;
+    right: 100%;
+    margin-left: 0;
+    margin-right: var(--espaco-md);
+    transform-origin: right top;
+  }
+}
+
+.cursos__cartao-detalhe-titulo {
+  margin: 0.35rem 0;
+}
+
+.cursos__cartao-detalhe-duracao {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: var(--fs-xs);
+  color: var(--cor-texto-suave);
+  margin-bottom: var(--espaco-sm);
+}
+
+.cursos__cartao-detalhe-duracao svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.cursos__cartao-detalhe-texto {
+  font-size: var(--fs-sm);
+  color: var(--cor-texto-suave);
+  margin-bottom: var(--espaco-sm);
+}
+
+.cursos__cartao-detalhe-subtitulo {
   font-family: var(--fonte-titulo);
   font-weight: 700;
   font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   color: var(--cor-primaria);
-  text-align: right;
+  margin-bottom: var(--espaco-xs);
+}
+
+.cursos__cartao-aprender {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem var(--espaco-sm);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cursos__cartao-aprender li {
+  font-size: var(--fs-xs);
+  color: var(--cor-texto-suave);
+  line-height: 1.5;
+}
+
+.cursos__cartao-aprender strong {
+  color: var(--cor-texto);
+}
+
+.cursos__cartao-aprender strong::before {
+  content: "+ ";
+  color: var(--cor-primaria);
+  font-weight: 800;
+}
+
+@media (max-width: 640px) {
+  .cursos__cartao-aprender {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ===== Página Cursos — estado vazio ===== */
