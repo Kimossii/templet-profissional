@@ -3389,8 +3389,13 @@ body.lightbox-aberta {
   background-color: var(--cor-primaria-escura);
 }
 
+/* O estado de aberto ao rato é controlado por JS (ver
+   initDetalheCursoDesktop em main.js), não por :hover puro — :hover
+   perde-se de forma instantânea ao atravessar o pequeno vão entre o
+   card e o painel, fechando tudo antes do utilizador conseguir chegar
+   ao botão "Mostrar mais". A classe dá uma margem de tolerância. */
 @media (hover: hover) and (pointer: fine) {
-  .cursos__cartao:hover,
+  .cursos__cartao--hover-aberto,
   .cursos__cartao:focus-within {
     z-index: 40;
   }
@@ -3502,7 +3507,7 @@ body.lightbox-aberta {
     filter: drop-shadow(2px 2px 2px rgba(18, 61, 44, 0.2));
   }
 
-  .cursos__cartao:hover .cursos__cartao-detalhe,
+  .cursos__cartao--hover-aberto .cursos__cartao-detalhe,
   .cursos__cartao:focus-within .cursos__cartao-detalhe {
     opacity: 1;
     visibility: visible;

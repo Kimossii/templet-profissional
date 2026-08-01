@@ -774,6 +774,36 @@ function initDetalheCursoMovel() {
   });
 }
 
+// No desktop, o painel de detalhe abre ao passar o rato. Um :hover CSS
+// puro fecha tudo assim que o cursor sai do card — incluindo o
+// instante em que atravessa o pequeno vão até ao painel — o que faz o
+// painel desaparecer antes do utilizador conseguir clicar em "Mostrar
+// mais". Aqui damos uma margem de tolerância: só fecha se o rato não
+// voltar a entrar no card (ou no próprio painel, que é seu descendente)
+// dentro de ATRASO_FECHO_MS.
+function initDetalheCursoDesktop() {
+  const cartoes = document.querySelectorAll(".cursos__cartao");
+  if (!cartoes.length) return;
+
+  const ATRASO_FECHO_MS = 350;
+
+  cartoes.forEach((cartao) => {
+    let temporizador = null;
+
+    cartao.addEventListener("mouseenter", () => {
+      clearTimeout(temporizador);
+      cartao.classList.add("cursos__cartao--hover-aberto");
+    });
+
+    cartao.addEventListener("mouseleave", () => {
+      clearTimeout(temporizador);
+      temporizador = setTimeout(() => {
+        cartao.classList.remove("cursos__cartao--hover-aberto");
+      }, ATRASO_FECHO_MS);
+    });
+  });
+}
+
 function initFavoritosCursos() {
   const botoes = document.querySelectorAll(".cursos__favorito");
   if (!botoes.length) return;
@@ -925,5 +955,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initLightboxGaleria();
   initFiltroCursos();
   initDetalheCursoMovel();
+  initDetalheCursoDesktop();
   initFavoritosCursos();
 });
