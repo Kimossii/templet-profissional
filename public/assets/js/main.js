@@ -732,6 +732,48 @@ function initFiltroCursos() {
   atualizarUltimaColuna();
 }
 
+// Em ecrãs de toque não há hover, por isso o painel de detalhe do
+// curso (o que aprende, formador, duração) abre ao tocar no botão
+// "Ver detalhes do curso" em vez de ao passar o rato — ver a media
+// query "(hover: none), (pointer: coarse), (max-width: 640px)" em
+// sections.css para a posição/visibilidade do painel nesse caso.
+function initDetalheCursoMovel() {
+  const botoes = document.querySelectorAll(".cursos__cartao-detalhe-toggle");
+  if (!botoes.length) return;
+
+  function fechar(cartao) {
+    cartao.classList.remove("cursos__cartao--aberto");
+    cartao.querySelector(".cursos__cartao-detalhe-toggle")?.setAttribute("aria-expanded", "false");
+  }
+
+  botoes.forEach((botao) => {
+    botao.addEventListener("click", () => {
+      const cartao = botao.closest(".cursos__cartao");
+      if (!cartao) return;
+      const estaAberto = cartao.classList.contains("cursos__cartao--aberto");
+
+      document.querySelectorAll(".cursos__cartao--aberto").forEach((outroCartao) => {
+        if (outroCartao !== cartao) fechar(outroCartao);
+      });
+
+      cartao.classList.toggle("cursos__cartao--aberto", !estaAberto);
+      botao.setAttribute("aria-expanded", String(!estaAberto));
+    });
+  });
+
+  document.addEventListener("click", (evento) => {
+    const aberto = document.querySelector(".cursos__cartao--aberto");
+    if (!aberto || aberto.contains(evento.target)) return;
+    fechar(aberto);
+  });
+
+  document.addEventListener("keydown", (evento) => {
+    if (evento.key !== "Escape") return;
+    const aberto = document.querySelector(".cursos__cartao--aberto");
+    if (aberto) fechar(aberto);
+  });
+}
+
 function initFavoritosCursos() {
   const botoes = document.querySelectorAll(".cursos__favorito");
   if (!botoes.length) return;
@@ -882,5 +924,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initFiltroGaleria();
   initLightboxGaleria();
   initFiltroCursos();
+  initDetalheCursoMovel();
   initFavoritosCursos();
 });

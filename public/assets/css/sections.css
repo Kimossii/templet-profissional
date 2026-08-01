@@ -3416,11 +3416,41 @@ body.lightbox-aberta {
   pointer-events: none;
 }
 
+/* Botão "Ver detalhes do curso" — só existe em ecrãs de toque (ver
+   regra mais abaixo); em rato o painel abre com hover, por isso o
+   botão fica escondido para não duplicar a interação. */
+.cursos__cartao-detalhe-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+  margin-top: 0.6rem;
+  padding: 0.5rem;
+  border: none;
+  border-top: 1px solid var(--cor-borda);
+  background: none;
+  font-family: var(--fonte-titulo);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--cor-primaria);
+  cursor: pointer;
+}
+
+.cursos__cartao-detalhe-toggle svg {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--transicao-base);
+}
+
+.cursos__cartao-detalhe-toggle[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
 /* Em rato (desktop/tablet largo), o painel abre para o lado em vez de
    por baixo, com a mesma largura do card: para a direita por omissão,
    para a esquerda no último card de cada linha (3ª coluna em ecrãs
-   largos, 2ª coluna em ecrãs médios). Em ecrãs de toque (sem rato)
-   este painel nunca aparece — só existe o card e o botão "Ver Curso". */
+   largos, 2ª coluna em ecrãs médios). */
 @media (hover: hover) and (pointer: fine) and (min-width: 641px) {
   .cursos__cartao-detalhe {
     top: 0;
@@ -3477,6 +3507,43 @@ body.lightbox-aberta {
     opacity: 1;
     visibility: visible;
     transform: scale(1);
+    pointer-events: auto;
+  }
+}
+
+/* Em ecrãs sem rato (telemóvel/tablet em toque) ou estreitos, não há
+   hover — o painel de detalhe abre ao tocar no botão "Ver detalhes do
+   curso" em vez de ao passar o rato. Ao contrário do desktop, aqui o
+   painel entra no fluxo normal do card (não sobrepõe) e empurra os
+   cards seguintes para baixo — numa grelha de 1 coluna, um painel
+   sobreposto tapava por completo o botão do card seguinte. */
+@media (hover: none), (pointer: coarse), (max-width: 640px) {
+  .cursos__cartao-detalhe-toggle {
+    display: flex;
+  }
+
+  .cursos__cartao-detalhe {
+    position: static;
+    width: auto;
+    max-height: 0;
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-width: 0;
+    overflow: hidden;
+    transform: none;
+    transition: opacity var(--transicao-base), max-height var(--transicao-base),
+      margin-top var(--transicao-base);
+  }
+
+  .cursos__cartao--aberto .cursos__cartao-detalhe {
+    opacity: 1;
+    visibility: visible;
+    max-height: 700px;
+    margin-top: 0.75rem;
+    padding-top: 0.85rem;
+    padding-bottom: 0.85rem;
+    border-width: 1px;
     pointer-events: auto;
   }
 }
