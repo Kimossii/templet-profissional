@@ -785,7 +785,7 @@ function initDetalheCursoDesktop() {
   const cartoes = document.querySelectorAll(".cursos__cartao");
   if (!cartoes.length) return;
 
-  const ATRASO_FECHO_MS = 350;
+  const ATRASO_FECHO_MS = 100;
 
   cartoes.forEach((cartao) => {
     let temporizador = null;
