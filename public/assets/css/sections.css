@@ -2838,6 +2838,24 @@ body.lightbox-aberta {
   border-radius: var(--raio-lg);
   box-shadow: var(--sombra-lg);
   z-index: 50;
+  max-height: 17.5rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--cor-primaria-clara) transparent;
+}
+
+.cursos__categoria-lista::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cursos__categoria-lista::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cursos__categoria-lista::-webkit-scrollbar-thumb {
+  background-color: var(--cor-primaria-clara);
+  border-radius: var(--raio-pill);
 }
 
 .cursos__categoria-lista li {
