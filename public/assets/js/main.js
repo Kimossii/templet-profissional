@@ -611,8 +611,8 @@ function initFiltroCursos() {
   const painel = document.querySelector("#cursos-filtros-painel");
   const painelContagem = document.querySelector(".cursos__filtros-avancados-contagem");
   const campoModalidade = document.querySelector("#cursos-filtro-modalidade");
+  const campoNivel = document.querySelector("#cursos-filtro-nivel");
   const campoPreco = document.querySelector("#cursos-filtro-preco");
-  const campoAvaliacao = document.querySelector("#cursos-filtro-avaliacao");
   const campoGratis = document.querySelector("#cursos-filtro-gratis");
   const campoCertificado = document.querySelector("#cursos-filtro-certificado");
   const botaoLimpar = document.querySelector(".cursos__filtros-limpar");
@@ -634,8 +634,8 @@ function initFiltroCursos() {
     if (!painelContagem) return;
     let total = 0;
     if (campoModalidade && campoModalidade.value !== "todos") total += 1;
+    if (campoNivel && campoNivel.value !== "todos") total += 1;
     if (campoPreco && campoPreco.value !== "todos") total += 1;
-    if (campoAvaliacao && campoAvaliacao.value !== "0") total += 1;
     if (campoGratis?.checked) total += 1;
     if (campoCertificado?.checked) total += 1;
 
@@ -646,8 +646,8 @@ function initFiltroCursos() {
   function aplicarFiltro() {
     const termo = (campoPesquisa?.value || "").trim().toLowerCase();
     const modalidade = campoModalidade?.value || "todos";
+    const nivel = campoNivel?.value || "todos";
     const [precoMin, precoMax] = (campoPreco?.value || "todos").split("-").map(Number);
-    const avaliacaoMinima = Number(campoAvaliacao?.value || 0);
     const soGratis = campoGratis?.checked || false;
     const soCertificado = campoCertificado?.checked || false;
     let visiveis = 0;
@@ -658,10 +658,10 @@ function initFiltroCursos() {
       const formador = curso.querySelector(".cursos__cartao-formador")?.textContent.toLowerCase() || "";
       const correspondePesquisa = !termo || titulo.includes(termo) || formador.includes(termo);
       const correspondeModalidade = modalidade === "todos" || curso.dataset.modalidade === modalidade;
+      const correspondeNivel = nivel === "todos" || curso.dataset.nivel === nivel || curso.dataset.nivel === "todos";
       const preco = Number(curso.dataset.preco || 0);
       const correspondePreco =
         campoPreco?.value === "todos" || !campoPreco?.value || (preco >= precoMin && preco <= precoMax);
-      const correspondeAvaliacao = Number(curso.dataset.avaliacao || 0) >= avaliacaoMinima;
       const correspondeGratis = !soGratis || curso.dataset.gratis === "true";
       const correspondeCertificado = !soCertificado || curso.dataset.certificado === "true";
 
@@ -669,8 +669,8 @@ function initFiltroCursos() {
         correspondeCategoria &&
         correspondePesquisa &&
         correspondeModalidade &&
+        correspondeNivel &&
         correspondePreco &&
-        correspondeAvaliacao &&
         correspondeGratis &&
         correspondeCertificado;
 
@@ -682,7 +682,7 @@ function initFiltroCursos() {
     atualizarContagemAvancados();
   }
 
-  [campoModalidade, campoPreco, campoAvaliacao].forEach((campo) => {
+  [campoModalidade, campoNivel, campoPreco].forEach((campo) => {
     campo?.addEventListener("change", aplicarFiltro);
   });
   [campoGratis, campoCertificado].forEach((campo) => {
@@ -691,8 +691,8 @@ function initFiltroCursos() {
 
   botaoLimpar?.addEventListener("click", () => {
     if (campoModalidade) campoModalidade.value = "todos";
+    if (campoNivel) campoNivel.value = "todos";
     if (campoPreco) campoPreco.value = "todos";
-    if (campoAvaliacao) campoAvaliacao.value = "0";
     if (campoGratis) campoGratis.checked = false;
     if (campoCertificado) campoCertificado.checked = false;
     aplicarFiltro();

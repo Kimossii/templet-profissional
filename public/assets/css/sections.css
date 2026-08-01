@@ -3336,6 +3336,41 @@ body.lightbox-aberta {
   background-color: #c65a1e;
 }
 
+/* Nível do curso: cor por intensidade crescente (claro → escuro) para
+   permitir leitura rápida da dificuldade em toda a grelha. */
+.cursos__cartao-nivel {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  z-index: 2;
+  font-family: var(--fonte-titulo);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--cor-texto-claro);
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--raio-pill);
+  box-shadow: var(--sombra-sm);
+}
+
+.cursos__cartao-nivel--basico {
+  background-color: var(--cor-primaria-clara);
+}
+
+.cursos__cartao-nivel--intermediario {
+  background-color: #f0a324;
+}
+
+/* Fora da escala de intensidade — cor neutra, não é um nível de
+   dificuldade mas sim "serve para todos". */
+.cursos__cartao-nivel--todos {
+  background-color: var(--cor-texto-suave);
+}
+
+.cursos__cartao-nivel--avancado {
+  background-color: var(--cor-primaria-escura);
+}
+
 @media (hover: hover) and (pointer: fine) {
   .cursos__cartao:hover,
   .cursos__cartao:focus-within {
@@ -3380,12 +3415,38 @@ body.lightbox-aberta {
     transform-origin: left top;
   }
 
+  /* Seta que liga visualmente o painel ao card de onde saiu — triângulo
+     cheio na cor da marca, com sombra suave, bem visível no vão entre o
+     card e o painel. Aponta para a esquerda (painel abre à direita). */
+  .cursos__cartao-detalhe::before {
+    content: "";
+    position: absolute;
+    top: 1.5rem;
+    left: -9px;
+    right: auto;
+    width: 0;
+    height: 0;
+    border-top: 9px solid transparent;
+    border-bottom: 9px solid transparent;
+    border-right: 9px solid var(--cor-primaria);
+    filter: drop-shadow(-2px 2px 2px rgba(18, 61, 44, 0.2));
+  }
+
   .cursos__grelha .cursos__cartao:nth-child(3n) .cursos__cartao-detalhe {
     left: auto;
     right: 100%;
     margin-left: 0;
     margin-right: 0.75rem;
     transform-origin: right top;
+  }
+
+  /* Espelhada: painel abre à esquerda, seta aponta para a direita. */
+  .cursos__grelha .cursos__cartao:nth-child(3n) .cursos__cartao-detalhe::before {
+    left: auto;
+    right: -9px;
+    border-right: none;
+    border-left: 9px solid var(--cor-primaria);
+    filter: drop-shadow(2px 2px 2px rgba(18, 61, 44, 0.2));
   }
 
   .cursos__cartao:hover .cursos__cartao-detalhe,
@@ -3406,12 +3467,31 @@ body.lightbox-aberta {
     transform-origin: left top;
   }
 
+  /* Em grelha de 2 colunas, o 3º card volta a ser a 1ª coluna da 2ª
+     linha — painel abre à direita outra vez, seta volta a apontar
+     para a esquerda (desfaz a inversão da regra genérica acima). */
+  .cursos__grelha .cursos__cartao:nth-child(3n) .cursos__cartao-detalhe::before {
+    left: -9px;
+    right: auto;
+    border-left: none;
+    border-right: 9px solid var(--cor-primaria);
+    filter: drop-shadow(-2px 2px 2px rgba(18, 61, 44, 0.2));
+  }
+
   .cursos__grelha .cursos__cartao:nth-child(2n) .cursos__cartao-detalhe {
     left: auto;
     right: 100%;
     margin-left: 0;
     margin-right: 0.75rem;
     transform-origin: right top;
+  }
+
+  .cursos__grelha .cursos__cartao:nth-child(2n) .cursos__cartao-detalhe::before {
+    left: auto;
+    right: -9px;
+    border-right: none;
+    border-left: 9px solid var(--cor-primaria);
+    filter: drop-shadow(2px 2px 2px rgba(18, 61, 44, 0.2));
   }
 }
 

@@ -318,21 +318,21 @@
               </select>
             </div>
             <div class="cursos__filtro-campo">
+              <label for="cursos-filtro-nivel">Nível</label>
+              <select id="cursos-filtro-nivel">
+                <option value="todos">Todos os níveis</option>
+                <option value="basico">Básico</option>
+                <option value="intermediario">Intermediário</option>
+                <option value="avancado">Avançado</option>
+              </select>
+            </div>
+            <div class="cursos__filtro-campo">
               <label for="cursos-filtro-preco">Preço</label>
               <select id="cursos-filtro-preco">
                 <option value="todos">Qualquer preço</option>
                 <option value="0-30000">Até 30.000 Kz</option>
                 <option value="30000-50000">30.000 – 50.000 Kz</option>
                 <option value="50000-999999">Acima de 50.000 Kz</option>
-              </select>
-            </div>
-            <div class="cursos__filtro-campo">
-              <label for="cursos-filtro-avaliacao">Avaliação mínima</label>
-              <select id="cursos-filtro-avaliacao">
-                <option value="0">Qualquer avaliação</option>
-                <option value="4.5">4.5 ★ ou mais</option>
-                <option value="4.7">4.7 ★ ou mais</option>
-                <option value="4.9">4.9 ★ ou mais</option>
               </select>
             </div>
             <div class="cursos__filtro-campo cursos__filtro-campo--checks">
@@ -351,8 +351,9 @@
 
         <div class="cursos__grelha grelha-escalonada">
           <article class="cartao cursos__cartao" data-revelar data-categoria="perioperatoria" data-modalidade="presencial"
-            data-preco="55000" data-gratis="true" data-avaliacao="4.9" data-certificado="true">
+            data-preco="55000" data-gratis="true" data-certificado="true" data-nivel="avancado">
             <span class="cursos__cartao-selo">Mais Procurado</span>
+            <span class="cursos__cartao-nivel cursos__cartao-nivel--avancado">Avançado</span>
             <img class="cartao__imagem" src="assets/multimidia/galeria/otimizado/foto-equipa-cirurgica.jpg"
               alt="Equipa de enfermagem em sala operatória durante o curso de Enfermagem Perioperatória Avançada"
               width="480" height="320" loading="lazy" />
@@ -443,7 +444,8 @@
           </article>
 
           <article class="cartao cursos__cartao" data-revelar data-categoria="perioperatoria" data-modalidade="presencial"
-            data-preco="30000" data-gratis="true" data-avaliacao="4.7" data-certificado="true">
+            data-preco="30000" data-gratis="true" data-certificado="true" data-nivel="basico">
+            <span class="cursos__cartao-nivel cursos__cartao-nivel--basico">Básico</span>
             <img class="cartao__imagem" src="assets/multimidia/galeria/otimizado/foto-preparacao.jpg"
               alt="Enfermeira em preparação para cirurgia durante curso de fundamentos de enfermagem perioperatória"
               width="480" height="320" loading="lazy" />
@@ -534,7 +536,8 @@
           </article>
 
           <article class="cartao cursos__cartao" data-revelar data-categoria="seguranca" data-modalidade="online"
-            data-preco="40000" data-gratis="false" data-avaliacao="4.8" data-certificado="true">
+            data-preco="40000" data-gratis="false" data-certificado="true" data-nivel="todos">
+            <span class="cursos__cartao-nivel cursos__cartao-nivel--todos">Todos os Níveis</span>
             <img class="cartao__imagem" src="assets/multimidia/galeria/otimizado/foto-mascara.jpg"
               alt="Enfermeiro com máscara cirúrgica durante formação em segurança do doente"
               width="480" height="320" loading="lazy" />
@@ -619,7 +622,8 @@
           </article>
 
           <article class="cartao cursos__cartao" data-revelar data-categoria="seguranca" data-modalidade="hibrido"
-            data-preco="35000" data-gratis="true" data-avaliacao="4.6" data-certificado="true">
+            data-preco="35000" data-gratis="true" data-certificado="true" data-nivel="basico">
+            <span class="cursos__cartao-nivel cursos__cartao-nivel--basico">Básico</span>
             <img class="cartao__imagem" src="assets/multimidia/galeria/otimizado/foto-centro-cirurgico.jpg"
               alt="Centro cirúrgico durante formação em prevenção de eventos adversos"
               width="480" height="320" loading="lazy" />
@@ -711,8 +715,9 @@
           </article>
 
           <article class="cartao cursos__cartao" data-revelar data-categoria="instrumentacao" data-modalidade="presencial"
-            data-preco="28000" data-gratis="true" data-avaliacao="4.8" data-certificado="true">
+            data-preco="28000" data-gratis="true" data-certificado="true" data-nivel="basico">
             <span class="cursos__cartao-selo cursos__cartao-selo--urgente">Últimas Vagas</span>
+            <span class="cursos__cartao-nivel cursos__cartao-nivel--basico">Básico</span>
             <img class="cartao__imagem" src="assets/img/site/instrumentais.jpg"
               alt="Instrumentos cirúrgicos organizados durante curso de instrumentação cirúrgica essencial"
               width="480" height="320" loading="lazy" />
@@ -803,7 +808,8 @@
           </article>
 
           <article class="cartao cursos__cartao" data-revelar data-categoria="instrumentacao" data-modalidade="presencial"
-            data-preco="65000" data-gratis="false" data-avaliacao="4.9" data-certificado="true">
+            data-preco="65000" data-gratis="false" data-certificado="true" data-nivel="avancado">
+            <span class="cursos__cartao-nivel cursos__cartao-nivel--avancado">Avançado</span>
             <img class="cartao__imagem" src="assets/img/site/Workshopinstrumentacao.jpg"
               alt="Workshop de instrumentação cirúrgica avançada em Benguela"
               width="480" height="320" loading="lazy" />
@@ -888,7 +894,8 @@
           </article>
 
           <article class="cartao cursos__cartao" data-revelar data-categoria="gestao" data-modalidade="online"
-            data-preco="50000" data-gratis="false" data-avaliacao="4.7" data-certificado="true">
+            data-preco="50000" data-gratis="false" data-certificado="true" data-nivel="intermediario">
+            <span class="cursos__cartao-nivel cursos__cartao-nivel--intermediario">Intermediário</span>
             <img class="cartao__imagem" src="assets/img/site/Gestao-Perioperatoria.jpg"
               alt="Reunião de equipa durante curso de gestão de equipas em bloco operatório"
               width="480" height="320" loading="lazy" />
@@ -973,7 +980,8 @@
           </article>
 
           <article class="cartao cursos__cartao" data-revelar data-categoria="gestao" data-modalidade="hibrido"
-            data-preco="45000" data-gratis="true" data-avaliacao="4.8" data-certificado="true">
+            data-preco="45000" data-gratis="true" data-certificado="true" data-nivel="intermediario">
+            <span class="cursos__cartao-nivel cursos__cartao-nivel--intermediario">Intermediário</span>
             <img class="cartao__imagem" src="assets/multimidia/galeria/otimizado/foto-equipa-multicultural.jpg"
               alt="Equipa multicultural de enfermagem durante curso de liderança e comunicação"
               width="480" height="320" loading="lazy" />
