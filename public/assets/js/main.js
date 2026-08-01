@@ -527,6 +527,7 @@ function initFiltroGaleria() {
 function initFiltroCursos() {
   const cursos = document.querySelectorAll(".cursos__cartao");
   const vazio = document.querySelector("#cursos-vazio");
+  const grelha = document.querySelector(".cursos__grelha");
   if (!cursos.length) return;
 
   const campoPesquisa = document.querySelector("#cursos-pesquisa");
@@ -643,6 +644,26 @@ function initFiltroCursos() {
     painelContagem.hidden = total === 0;
   }
 
+  // O painel de detalhe abre para a esquerda nos cards da última coluna
+  // da grelha. Usar `:nth-child` no CSS para isso não funciona depois de
+  // filtrar: os cards escondidos continuam a contar para a posição,
+  // por isso um card que fica sozinho no início da lista filtrada podia
+  // herdar a mesma posição (e o mesmo espelhamento) que tinha na grelha
+  // completa. Aqui recalculamos a última coluna a partir dos cards
+  // realmente visíveis, usando o nº de colunas atual da grelha.
+  function atualizarUltimaColuna() {
+    if (!grelha) return;
+    const colunas = getComputedStyle(grelha).gridTemplateColumns.split(" ").length;
+    const visiveis = Array.from(cursos).filter((curso) => !curso.classList.contains("cursos__cartao--oculto"));
+
+    cursos.forEach((curso) => curso.classList.remove("cursos__cartao--ultima-coluna"));
+    visiveis.forEach((curso, indice) => {
+      if ((indice + 1) % colunas === 0) {
+        curso.classList.add("cursos__cartao--ultima-coluna");
+      }
+    });
+  }
+
   function aplicarFiltro() {
     const termo = (campoPesquisa?.value || "").trim().toLowerCase();
     const modalidade = campoModalidade?.value || "todos";
@@ -680,6 +701,7 @@ function initFiltroCursos() {
 
     vazio?.classList.toggle("esta-visivel", visiveis === 0);
     atualizarContagemAvancados();
+    atualizarUltimaColuna();
   }
 
   [campoModalidade, campoNivel, campoPreco].forEach((campo) => {
@@ -700,7 +722,14 @@ function initFiltroCursos() {
 
   campoPesquisa?.addEventListener("input", aplicarFiltro);
 
+  let redimensionarTimeout;
+  window.addEventListener("resize", () => {
+    clearTimeout(redimensionarTimeout);
+    redimensionarTimeout = setTimeout(atualizarUltimaColuna, 150);
+  });
+
   atualizarContagemAvancados();
+  atualizarUltimaColuna();
 }
 
 function initFavoritosCursos() {
