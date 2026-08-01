@@ -525,16 +525,131 @@ function initFiltroGaleria() {
 }
 
 function initFiltroCursos() {
-  const pills = document.querySelectorAll(".cursos__filtro");
-  const campoPesquisa = document.querySelector("#cursos-pesquisa");
   const cursos = document.querySelectorAll(".cursos__cartao");
   const vazio = document.querySelector("#cursos-vazio");
-  if (!pills.length || !cursos.length) return;
+  if (!cursos.length) return;
+
+  const campoPesquisa = document.querySelector("#cursos-pesquisa");
+
+  // ----- Dropdown de categoria -----
+  const dropdown = document.querySelector("[data-categoria-dropdown]");
+  const categoriaTrigger = dropdown?.querySelector(".cursos__categoria-trigger");
+  const categoriaTexto = dropdown?.querySelector(".cursos__categoria-texto");
+  const categoriaContagemTrigger = dropdown?.querySelector(
+    ".cursos__categoria-trigger > .cursos__filtro-contagem"
+  );
+  const categoriaLista = dropdown?.querySelector(".cursos__categoria-lista");
+  const opcoesCategoria = dropdown ? Array.from(dropdown.querySelectorAll('[role="option"]')) : [];
 
   let categoriaAtiva = "todos";
 
+  opcoesCategoria.forEach((opcao) => {
+    const contagemEl = opcao.querySelector(".cursos__filtro-contagem");
+    if (!contagemEl) return;
+    const alvo = opcao.dataset.filtro;
+    contagemEl.textContent =
+      alvo === "todos"
+        ? cursos.length
+        : Array.from(cursos).filter((curso) => curso.dataset.categoria === alvo).length;
+  });
+  if (categoriaContagemTrigger) categoriaContagemTrigger.textContent = cursos.length;
+
+  function fecharCategoria() {
+    if (!categoriaLista) return;
+    categoriaLista.hidden = true;
+    categoriaTrigger?.setAttribute("aria-expanded", "false");
+  }
+
+  function abrirCategoria() {
+    if (!categoriaLista) return;
+    categoriaLista.hidden = false;
+    categoriaTrigger?.setAttribute("aria-expanded", "true");
+  }
+
+  categoriaTrigger?.addEventListener("click", () => {
+    if (categoriaLista?.hidden === false) fecharCategoria();
+    else abrirCategoria();
+  });
+
+  opcoesCategoria.forEach((opcao) => {
+    opcao.addEventListener("click", () => {
+      categoriaAtiva = opcao.dataset.filtro;
+
+      opcoesCategoria.forEach((outraOpcao) => {
+        const estaAtiva = outraOpcao === opcao;
+        outraOpcao.classList.toggle("esta-ativo", estaAtiva);
+        outraOpcao.setAttribute("aria-selected", String(estaAtiva));
+      });
+
+      if (categoriaTexto) categoriaTexto.textContent = opcao.dataset.label;
+      if (categoriaContagemTrigger) {
+        categoriaContagemTrigger.textContent = opcao.querySelector(".cursos__filtro-contagem")?.textContent || "";
+      }
+
+      fecharCategoria();
+      aplicarFiltro();
+    });
+
+    opcao.addEventListener("keydown", (evento) => {
+      if (evento.key === "Enter" || evento.key === " ") {
+        evento.preventDefault();
+        opcao.click();
+      }
+    });
+  });
+
+  document.addEventListener("click", (evento) => {
+    if (dropdown && !dropdown.contains(evento.target)) fecharCategoria();
+  });
+
+  document.addEventListener("keydown", (evento) => {
+    if (evento.key === "Escape") fecharCategoria();
+  });
+
+  // ----- Painel de filtros avançados -----
+  const painelBotao = document.querySelector(".cursos__filtros-avancados-botao");
+  const painel = document.querySelector("#cursos-filtros-painel");
+  const painelContagem = document.querySelector(".cursos__filtros-avancados-contagem");
+  const campoModalidade = document.querySelector("#cursos-filtro-modalidade");
+  const campoPreco = document.querySelector("#cursos-filtro-preco");
+  const campoAvaliacao = document.querySelector("#cursos-filtro-avaliacao");
+  const campoGratis = document.querySelector("#cursos-filtro-gratis");
+  const campoCertificado = document.querySelector("#cursos-filtro-certificado");
+  const botaoLimpar = document.querySelector(".cursos__filtros-limpar");
+
+  painelBotao?.addEventListener("click", () => {
+    if (!painel) return;
+    const abrir = painel.hidden;
+    if (abrir) {
+      painel.hidden = false;
+      requestAnimationFrame(() => painel.classList.add("esta-visivel"));
+    } else {
+      painel.classList.remove("esta-visivel");
+      painel.addEventListener("transitionend", () => { painel.hidden = true; }, { once: true });
+    }
+    painelBotao.setAttribute("aria-expanded", String(abrir));
+  });
+
+  function atualizarContagemAvancados() {
+    if (!painelContagem) return;
+    let total = 0;
+    if (campoModalidade && campoModalidade.value !== "todos") total += 1;
+    if (campoPreco && campoPreco.value !== "todos") total += 1;
+    if (campoAvaliacao && campoAvaliacao.value !== "0") total += 1;
+    if (campoGratis?.checked) total += 1;
+    if (campoCertificado?.checked) total += 1;
+
+    painelContagem.textContent = total;
+    painelContagem.hidden = total === 0;
+  }
+
   function aplicarFiltro() {
     const termo = (campoPesquisa?.value || "").trim().toLowerCase();
+    const modalidade = campoModalidade?.value || "todos";
+    const [precoMin, precoMax] = (campoPreco?.value || "todos").split("-").map(Number);
+    const avaliacaoMinima = Number(campoAvaliacao?.value || 0);
+    const soGratis = campoGratis?.checked || false;
+    const soCertificado = campoCertificado?.checked || false;
     let visiveis = 0;
 
     cursos.forEach((curso) => {
@@ -542,30 +657,50 @@ function initFiltroCursos() {
       const titulo = curso.querySelector(".cartao__titulo")?.textContent.toLowerCase() || "";
       const formador = curso.querySelector(".cursos__cartao-formador")?.textContent.toLowerCase() || "";
       const correspondePesquisa = !termo || titulo.includes(termo) || formador.includes(termo);
-      const mostrar = correspondeCategoria && correspondePesquisa;
+      const correspondeModalidade = modalidade === "todos" || curso.dataset.modalidade === modalidade;
+      const preco = Number(curso.dataset.preco || 0);
+      const correspondePreco =
+        campoPreco?.value === "todos" || !campoPreco?.value || (preco >= precoMin && preco <= precoMax);
+      const correspondeAvaliacao = Number(curso.dataset.avaliacao || 0) >= avaliacaoMinima;
+      const correspondeGratis = !soGratis || curso.dataset.gratis === "true";
+      const correspondeCertificado = !soCertificado || curso.dataset.certificado === "true";
+
+      const mostrar =
+        correspondeCategoria &&
+        correspondePesquisa &&
+        correspondeModalidade &&
+        correspondePreco &&
+        correspondeAvaliacao &&
+        correspondeGratis &&
+        correspondeCertificado;
 
       curso.classList.toggle("cursos__cartao--oculto", !mostrar);
       if (mostrar) visiveis += 1;
     });
 
     vazio?.classList.toggle("esta-visivel", visiveis === 0);
+    atualizarContagemAvancados();
   }
 
-  pills.forEach((pill) => {
-    pill.addEventListener("click", () => {
-      categoriaAtiva = pill.dataset.filtro;
+  [campoModalidade, campoPreco, campoAvaliacao].forEach((campo) => {
+    campo?.addEventListener("change", aplicarFiltro);
+  });
+  [campoGratis, campoCertificado].forEach((campo) => {
+    campo?.addEventListener("change", aplicarFiltro);
+  });
 
-      pills.forEach((outraPill) => {
-        const estaAtiva = outraPill === pill;
-        outraPill.classList.toggle("esta-ativo", estaAtiva);
-        outraPill.setAttribute("aria-selected", String(estaAtiva));
-      });
-
-      aplicarFiltro();
-    });
+  botaoLimpar?.addEventListener("click", () => {
+    if (campoModalidade) campoModalidade.value = "todos";
+    if (campoPreco) campoPreco.value = "todos";
+    if (campoAvaliacao) campoAvaliacao.value = "0";
+    if (campoGratis) campoGratis.checked = false;
+    if (campoCertificado) campoCertificado.checked = false;
+    aplicarFiltro();
   });
 
   campoPesquisa?.addEventListener("input", aplicarFiltro);
+
+  atualizarContagemAvancados();
 }
 
 function initFavoritosCursos() {

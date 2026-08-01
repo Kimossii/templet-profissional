@@ -2734,29 +2734,158 @@ body.lightbox-aberta {
 
 /* ===== Página Cursos — filtros e pesquisa ===== */
 
+/* position + z-index explícitos: a animação de "revelar" (opacity/transform)
+   cria um novo contexto de empilhamento neste elemento; sem um z-index
+   próprio aqui, a lista do dropdown de categoria (lá dentro) fica presa
+   atrás da grelha de cards, que é pintada depois no fluxo do documento. */
 .cursos__filtros {
+  position: relative;
+  z-index: 60;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--espaco-md);
+  flex-direction: column;
+  gap: var(--espaco-sm);
   margin-bottom: var(--espaco-lg);
 }
 
-.cursos__pills {
+.cursos__filtros-linha {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--espaco-xs);
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-.cursos__filtro {
+.cursos__filtro-contagem {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.6rem 1.25rem;
+  justify-content: center;
+  min-width: 1.35em;
+  padding: 0.05rem 0.35rem;
+  border-radius: var(--raio-pill);
+  background-color: var(--cor-fundo-alt);
+  color: var(--cor-texto-suave);
+  font-size: 0.7em;
+  font-weight: 700;
+  transition: background-color var(--transicao-base), color var(--transicao-base);
+}
+
+/* ----- Dropdown de categoria (select customizado) ----- */
+
+.cursos__categoria {
+  position: relative;
+  flex: 1 1 260px;
+  max-width: 320px;
+}
+
+.cursos__categoria-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--raio-pill);
+  border: 2px solid var(--cor-borda);
+  background-color: var(--cor-fundo);
+  font-family: var(--fonte-titulo);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--cor-texto);
+  box-shadow: var(--sombra-sm);
+  cursor: pointer;
+  transition: border-color var(--transicao-base), box-shadow var(--transicao-base);
+}
+
+.cursos__categoria-trigger:hover,
+.cursos__categoria-trigger[aria-expanded="true"] {
+  border-color: var(--cor-primaria-clara);
+  box-shadow: var(--sombra-md);
+}
+
+.cursos__categoria-trigger svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  color: var(--cor-primaria);
+}
+
+.cursos__categoria-texto {
+  flex-grow: 1;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cursos__categoria-seta {
+  color: var(--cor-texto-suave) !important;
+  transition: transform var(--transicao-base);
+}
+
+.cursos__categoria-trigger[aria-expanded="true"] .cursos__categoria-seta {
+  transform: rotate(180deg);
+}
+
+.cursos__categoria-lista {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  width: 100%;
+  min-width: 260px;
+  margin: 0;
+  padding: 0.4rem;
+  list-style: none;
+  background-color: var(--cor-fundo);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-lg);
+  box-shadow: var(--sombra-lg);
+  z-index: 50;
+}
+
+.cursos__categoria-lista li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0.7rem;
+  border-radius: var(--raio-md);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--cor-texto-suave);
+  cursor: pointer;
+  transition: background-color var(--transicao-base), color var(--transicao-base);
+}
+
+.cursos__categoria-lista li svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.cursos__categoria-lista li span:not(.cursos__filtro-contagem) {
+  flex-grow: 1;
+}
+
+.cursos__categoria-lista li:hover {
+  background-color: var(--cor-fundo-alt);
+  color: var(--cor-texto);
+}
+
+.cursos__categoria-lista li.esta-ativo {
+  background-color: var(--cor-primaria-suave);
+  color: var(--cor-primaria-escura);
+  font-weight: 700;
+}
+
+.cursos__categoria-lista li.esta-ativo .cursos__filtro-contagem {
+  background-color: var(--cor-fundo);
+}
+
+/* ----- Botão + painel de filtros avançados ----- */
+
+.cursos__filtros-avancados-botao {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+  padding: 0.7rem 1.1rem;
   border-radius: var(--raio-pill);
   border: 2px solid var(--cor-borda);
   background-color: var(--cor-fundo);
@@ -2764,25 +2893,131 @@ body.lightbox-aberta {
   font-size: var(--fs-sm);
   font-weight: 700;
   color: var(--cor-texto-suave);
-  transition: background-color var(--transicao-base), border-color var(--transicao-base),
-    color var(--transicao-base);
+  cursor: pointer;
+  transition: border-color var(--transicao-base), color var(--transicao-base), box-shadow var(--transicao-base);
 }
 
-.cursos__filtro:hover {
+.cursos__filtros-avancados-botao svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+}
+
+.cursos__filtros-avancados-botao:hover,
+.cursos__filtros-avancados-botao[aria-expanded="true"] {
   border-color: var(--cor-primaria-clara);
   color: var(--cor-primaria-escura);
+  box-shadow: var(--sombra-sm);
 }
 
-.cursos__filtro.esta-ativo {
+.cursos__filtros-avancados-contagem {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.4em;
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--raio-pill);
   background-color: var(--cor-primaria);
-  border-color: var(--cor-primaria);
   color: var(--cor-texto-claro);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.cursos__filtros-painel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  align-items: end;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  background-color: var(--cor-fundo-alt);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-lg);
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity var(--transicao-base), transform var(--transicao-base);
+}
+
+.cursos__filtros-painel.esta-visivel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cursos__filtros-painel[hidden] {
+  display: none;
+}
+
+.cursos__filtro-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.cursos__filtro-campo label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--cor-texto-suave);
+}
+
+.cursos__filtro-campo select {
+  width: 100%;
+  min-width: 0;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-md);
+  background-color: var(--cor-fundo);
+  font-size: var(--fs-sm);
+  font-family: inherit;
+  color: var(--cor-texto);
+  transition: border-color var(--transicao-base), box-shadow var(--transicao-base);
+}
+
+.cursos__filtro-campo select:focus {
+  border-color: var(--cor-primaria);
+  box-shadow: 0 0 0 3px var(--cor-primaria-suave);
+  outline: none;
+}
+
+.cursos__filtro-campo--checks {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+}
+
+.cursos__filtro-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--cor-texto);
+  cursor: pointer;
+}
+
+.cursos__filtro-check input {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--cor-primaria);
+  cursor: pointer;
+}
+
+.cursos__filtros-limpar {
+  justify-self: start;
+  padding: 0.55rem 0.9rem;
+  border-radius: var(--raio-md);
+  border: none;
+  background: none;
+  font-family: var(--fonte-titulo);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--cor-primaria-escura);
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .cursos__pesquisa {
   position: relative;
-  flex-shrink: 0;
-  width: 100%;
+  flex: 1 1 220px;
   max-width: 320px;
 }
 
@@ -3017,36 +3252,54 @@ body.lightbox-aberta {
 .cursos__cartao-preco {
   display: flex;
   flex-direction: column;
-  gap: 0.05rem;
+  gap: 0.3rem;
   min-width: 0;
 }
 
+/* Preço normal é sempre a referência principal do card — o que
+   qualquer visitante paga — por isso fica maior e com mais peso do
+   que a etiqueta de vantagem de sócio. */
 .cursos__cartao-preco-real {
   font-family: var(--fonte-titulo);
   font-weight: 800;
-  font-size: 0.95rem;
+  font-size: 1.2rem;
+  letter-spacing: -0.01em;
   color: var(--cor-texto);
 }
 
+/* Vantagem de sócio (grátis ou desconto): uma etiqueta compacta e
+   secundária, não compete em tamanho com o preço normal. */
 .cursos__cartao-preco-socio {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  color: var(--cor-primaria);
+  align-self: flex-start;
+  font-family: var(--fonte-titulo);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--cor-texto-claro);
+  background-color: var(--cor-primaria);
+  padding: 0.25rem 0.55rem;
+  border-radius: var(--raio-pill);
+  box-shadow: 0 2px 8px rgba(27, 94, 67, 0.25);
   white-space: nowrap;
+}
+
+.cursos__cartao-preco-socio svg {
+  width: 11px;
+  height: 11px;
+  flex-shrink: 0;
 }
 
 .cursos__cartao-preco-selo {
   display: inline-flex;
   align-items: center;
   font-family: var(--fonte-titulo);
-  font-size: 0.6rem;
+  font-size: 0.65rem;
   font-weight: 700;
   color: var(--cor-texto-claro);
-  background-color: var(--cor-primaria-clara);
-  padding: 0.1rem 0.4rem;
+  background-color: rgba(255, 255, 255, 0.25);
+  padding: 0.05rem 0.35rem;
   border-radius: var(--raio-pill);
 }
 
@@ -3314,12 +3567,38 @@ body.lightbox-aberta {
     grid-template-columns: 1fr;
   }
 
-  .cursos__filtros {
+  .cursos__filtros-linha {
     flex-direction: column;
     align-items: stretch;
   }
 
+  .cursos__categoria {
+    flex: 0 0 auto;
+    max-width: 100%;
+  }
+
+  .cursos__filtros-avancados-botao {
+    margin-left: 0;
+    justify-content: center;
+  }
+
+  .cursos__filtros-painel {
+    grid-template-columns: 1fr;
+  }
+
+  .cursos__filtro-campo--checks {
+    grid-column: 1 / -1;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .cursos__filtros-limpar {
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+
   .cursos__pesquisa {
+    flex: 0 0 auto;
     max-width: 100%;
   }
 }
