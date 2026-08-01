@@ -2978,16 +2978,31 @@ body.lightbox-aberta {
 }
 
 .cursos__filtro-campo select {
+  appearance: none;
+  -webkit-appearance: none;
   width: 100%;
   min-width: 0;
-  padding: 0.55rem 0.7rem;
+  padding: 0.6rem 2.2rem 0.6rem 0.9rem;
   border: 1px solid var(--cor-borda);
-  border-radius: var(--raio-md);
-  background-color: var(--cor-fundo);
+  border-radius: var(--raio-pill);
+  /* Tom "leite" — mais quente/rico do que branco puro, distinto do
+     verde pálido do painel à volta, para o controlo não ficar plano. */
+  background-color: #fbf8f2;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234c5a53' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px;
+  box-shadow: var(--sombra-sm);
   font-size: var(--fs-sm);
   font-family: inherit;
+  font-weight: 700;
   color: var(--cor-texto);
+  cursor: pointer;
   transition: border-color var(--transicao-base), box-shadow var(--transicao-base);
+}
+
+.cursos__filtro-campo select:hover {
+  border-color: var(--cor-primaria-clara);
 }
 
 .cursos__filtro-campo select:focus {
