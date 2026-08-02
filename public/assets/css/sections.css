@@ -3755,3 +3755,278 @@ body.lightbox-aberta {
     max-width: 100%;
   }
 }
+
+/* ===== Página Curso — Detalhe ===== */
+
+.curso-hero {
+  position: relative;
+  padding-block: var(--espaco-2xl) var(--espaco-lg);
+  overflow: hidden;
+  color: var(--cor-texto-claro);
+  background-color: var(--cor-hero-fundo);
+}
+
+.curso-hero__sobreposicao {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(120deg, var(--cor-primaria-escura) 0%, var(--cor-cabecalho) 100%);
+}
+
+.curso-hero__conteudo {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+}
+
+.curso-hero__pastilhas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: var(--espaco-sm);
+}
+
+.curso-hero h1 {
+  color: var(--cor-texto-claro);
+  font-size: clamp(1.8rem, 1.3rem + 2.2vw, 2.75rem);
+  margin: 0 0 var(--espaco-xs);
+}
+
+.curso-hero__subtitulo {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: var(--fs-md);
+  margin-bottom: var(--espaco-sm);
+  max-width: 620px;
+}
+
+.curso-hero__avaliacao {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: var(--espaco-xs);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.curso-hero__avaliacao .cursos__estrelas::before {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.curso-hero__avaliacao .cursos__cartao-avaliacao-numero {
+  color: var(--cor-texto-claro);
+}
+
+.curso-hero__formador {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: var(--espaco-sm);
+}
+
+.curso-hero__formador strong {
+  color: var(--cor-texto-claro);
+}
+
+.curso-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-md);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.curso-hero__meta li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: var(--fs-sm);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.curso-hero__meta svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* ===== Página Curso — layout de duas colunas + cartão de inscrição ===== */
+
+.curso-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: var(--espaco-lg);
+  align-items: start;
+}
+
+.curso-principal {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-xl);
+  min-width: 0;
+}
+
+.curso-inscricao {
+  position: sticky;
+  top: calc(var(--altura-cabecalho) + var(--espaco-md));
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-lg);
+  background-color: var(--cor-fundo);
+  box-shadow: var(--sombra-md);
+  overflow: hidden;
+}
+
+.curso-inscricao__imagem {
+  width: 100%;
+  aspect-ratio: 5 / 3;
+  object-fit: cover;
+}
+
+.curso-inscricao__corpo {
+  padding: var(--espaco-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-sm);
+}
+
+.curso-inscricao__preco {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.curso-inscricao__preco .cursos__cartao-preco-real {
+  font-size: 1.6rem;
+}
+
+.curso-inscricao__cta {
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+}
+
+/* .efeito-brilho was designed for outline-style CTAs (transparent fill):
+   its ::after mask always paints var(--cor-fundo) behind the label. Applied
+   to a solid .btn--primario that mask hides the green fill entirely,
+   leaving white text on a white pill. Keep the animated glow border but
+   match the mask to the button's own fill so the label stays legible. */
+.curso-inscricao__cta.efeito-brilho::after {
+  background-color: var(--cor-primaria);
+}
+
+.curso-inscricao__cta.efeito-brilho:hover,
+.curso-inscricao__cta.efeito-brilho:focus-visible {
+  color: var(--cor-texto-claro);
+}
+
+.curso-inscricao__selos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.curso-inscricao__selos li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--fs-xs);
+  color: var(--cor-texto-suave);
+}
+
+.curso-inscricao__selos svg {
+  width: 16px;
+  height: 16px;
+  color: var(--cor-primaria);
+  flex-shrink: 0;
+}
+
+.curso-inscricao__selos li[hidden] {
+  display: none;
+}
+
+.curso-inscricao__acoes {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: var(--espaco-xs);
+  border-top: 1px solid var(--cor-borda);
+}
+
+.curso-inscricao__acoes a,
+.curso-inscricao__acoes .cursos__favorito {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: var(--cor-primaria-suave);
+  color: var(--cor-primaria);
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--transicao-base), color var(--transicao-base);
+}
+
+.curso-inscricao__acoes a:hover,
+.curso-inscricao__acoes .cursos__favorito:hover {
+  background-color: var(--cor-primaria);
+  color: var(--cor-texto-claro);
+}
+
+.curso-inscricao__acoes .cursos__favorito.esta-favorito {
+  background-color: var(--cor-primaria);
+  color: var(--cor-texto-claro);
+}
+
+.curso-inscricao__acoes svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Barra fixa de inscrição — só visível em ecrãs estreitos */
+.curso-inscricao-fixa {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .curso-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .curso-inscricao {
+    position: static;
+  }
+
+  .curso-inscricao-fixa {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--espaco-sm);
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    padding: var(--espaco-xs) var(--espaco-sm);
+    background-color: var(--cor-fundo);
+    border-top: 1px solid var(--cor-borda);
+    box-shadow: 0 -4px 16px rgba(18, 61, 44, 0.12);
+  }
+
+  .curso-inscricao-fixa__preco {
+    font-family: var(--fonte-titulo);
+    font-weight: 700;
+    font-size: var(--fs-sm);
+    color: var(--cor-texto);
+  }
+
+  .curso-inscricao-fixa__cta {
+    flex-shrink: 0;
+  }
+
+  body:has(#curso-conteudo:not([hidden])) {
+    padding-bottom: 64px;
+  }
+}

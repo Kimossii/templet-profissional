@@ -557,6 +557,39 @@ function initPaginaCurso() {
     ? `${dados.modalidade} · ${dados.local}`
     : dados.modalidade;
 
+  document.querySelector("#curso-inscricao-imagem").src = dados.imagem;
+  document.querySelector("#curso-inscricao-imagem").alt = dados.imagemAlt;
+
+  const precoRealEl = document.querySelector("#curso-inscricao-preco-real");
+  const precoSocioEl = document.querySelector("#curso-inscricao-preco-socio");
+  const precoRealFormatado = `${dados.precoReal.toLocaleString("pt-PT")} Kz`;
+  precoRealEl.textContent = precoRealFormatado;
+  if (dados.precoSocio === 0) {
+    precoSocioEl.textContent = "Grátis para Sócios";
+  } else {
+    precoSocioEl.textContent = `Sócios: ${dados.precoSocio.toLocaleString("pt-PT")} Kz`;
+    if (dados.descontoSelo) {
+      const selo = document.createElement("span");
+      selo.className = "cursos__cartao-preco-selo";
+      selo.textContent = dados.descontoSelo;
+      precoSocioEl.appendChild(selo);
+    }
+  }
+
+  document.querySelector("#curso-inscricao-selo-vagas").hidden = !dados.vagasLimitadas;
+
+  const favoritoBotao = document.querySelector("#curso-inscricao-favorito");
+  favoritoBotao.dataset.slug = slug;
+
+  const urlAtual = encodeURIComponent(location.href);
+  const tituloAtual = encodeURIComponent(dados.titulo);
+  document.querySelector("#curso-inscricao-whatsapp").href = `https://wa.me/?text=${tituloAtual}%20${urlAtual}`;
+  document.querySelector("#curso-inscricao-facebook").href = `https://www.facebook.com/sharer/sharer.php?u=${urlAtual}`;
+  document.querySelector("#curso-inscricao-email").href = `mailto:?subject=${tituloAtual}&body=${urlAtual}`;
+
+  document.querySelector("#curso-inscricao-fixa-preco").textContent =
+    dados.precoSocio === 0 ? `${precoRealFormatado} · Grátis p/ Sócios` : precoRealFormatado;
+
   container.hidden = false;
 }
 
