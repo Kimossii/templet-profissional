@@ -501,6 +501,65 @@ function initPaginaNoticia() {
   container.hidden = false;
 }
 
+function initPaginaCurso() {
+  const container = document.querySelector("#curso-conteudo");
+  const naoEncontrado = document.querySelector("#curso-nao-encontrado");
+  if (!container || !naoEncontrado) return;
+
+  const slug = new URLSearchParams(location.search).get("slug");
+  const dados =
+    typeof CURSOS_DADOS !== "undefined" && slug && Object.hasOwn(CURSOS_DADOS, slug) ? CURSOS_DADOS[slug] : null;
+
+  if (!dados) {
+    naoEncontrado.hidden = false;
+    container.hidden = true;
+    return;
+  }
+
+  document.title = `${dados.titulo} | AESOA`;
+
+  document.querySelector("#curso-breadcrumb-categoria").textContent = dados.categoria;
+  document.querySelector("#curso-breadcrumb-titulo").textContent = dados.titulo;
+
+  document.querySelector("#curso-categoria-pastilha").textContent = dados.categoria;
+
+  const nivelEl = document.querySelector("#curso-nivel-pastilha");
+  nivelEl.textContent = dados.nivel;
+  nivelEl.className = "cursos__cartao-nivel";
+  const nivelModificador = {
+    Básico: "cursos__cartao-nivel--basico",
+    Intermediário: "cursos__cartao-nivel--intermediario",
+    Avançado: "cursos__cartao-nivel--avancado",
+    "Todos os Níveis": "cursos__cartao-nivel--todos",
+  }[dados.nivel];
+  if (nivelModificador) nivelEl.classList.add(nivelModificador);
+
+  const seloEl = document.querySelector("#curso-selo");
+  if (dados.selo) {
+    seloEl.textContent = dados.selo;
+    seloEl.hidden = false;
+  } else {
+    seloEl.hidden = true;
+  }
+
+  document.querySelector("#curso-titulo").textContent = dados.titulo;
+  document.querySelector("#curso-subtitulo").textContent = dados.subtitulo;
+
+  document.querySelector("#curso-estrelas-preenchimento").style.width = `${(dados.avaliacaoMedia / 5) * 100}%`;
+  document.querySelector("#curso-avaliacao-numero").textContent = dados.avaliacaoMedia.toFixed(1);
+  document.querySelector("#curso-avaliacao-total").textContent = `(${dados.totalAvaliacoes} avaliações)`;
+
+  document.querySelector("#curso-formador-hero-nome").textContent = dados.formador.nome;
+
+  document.querySelector("#curso-meta-duracao").textContent = dados.duracao;
+  document.querySelector("#curso-meta-data").textContent = `Início: ${dados.dataInicio}`;
+  document.querySelector("#curso-meta-modalidade").textContent = dados.local
+    ? `${dados.modalidade} · ${dados.local}`
+    : dados.modalidade;
+
+  container.hidden = false;
+}
+
 function initFiltroGaleria() {
   const filtros = document.querySelectorAll(".galeria__filtro");
   const itens = document.querySelectorAll(".galeria__item");
@@ -950,6 +1009,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initFormularioContacto();
   initFormularioNewsletter();
   initPaginaNoticia();
+  initPaginaCurso();
   initFormularioBanco();
   initFiltroGaleria();
   initLightboxGaleria();
