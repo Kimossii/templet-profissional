@@ -590,6 +590,33 @@ function initPaginaCurso() {
   document.querySelector("#curso-inscricao-fixa-preco").textContent =
     dados.precoSocio === 0 ? `${precoRealFormatado} · Grátis p/ Sócios` : precoRealFormatado;
 
+  const aprenderEl = document.querySelector("#curso-aprender-lista");
+  aprenderEl.replaceChildren();
+  dados.oQueVaiAprender.forEach((item) => {
+    const li = document.createElement("li");
+    li.className = "curso-aprender__item";
+
+    const svgNS = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(svgNS, "svg");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("fill", "none");
+    svg.setAttribute("stroke", "currentColor");
+    svg.setAttribute("stroke-width", "2.5");
+    svg.setAttribute("stroke-linecap", "round");
+    svg.setAttribute("stroke-linejoin", "round");
+    svg.setAttribute("aria-hidden", "true");
+    const polyline = document.createElementNS(svgNS, "polyline");
+    polyline.setAttribute("points", "20 6 9 17 4 12");
+    svg.appendChild(polyline);
+    li.appendChild(svg);
+
+    const texto = document.createElement("span");
+    texto.textContent = item;
+    li.appendChild(texto);
+
+    aprenderEl.appendChild(li);
+  });
+
   container.hidden = false;
 }
 
