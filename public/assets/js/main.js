@@ -203,6 +203,29 @@ function initAcordeaoEstatutos() {
   }
 }
 
+function initAcordeaoProgramaCurso() {
+  document.querySelectorAll(".curso-programa__modulo").forEach((item) => {
+    const botao = item.querySelector(".curso-programa__cabecalho");
+    if (!botao) return;
+
+    botao.addEventListener("click", () => {
+      const aberto = item.classList.toggle("esta-aberto");
+      botao.setAttribute("aria-expanded", String(aberto));
+    });
+  });
+}
+
+function initSobreCursoExpandir() {
+  const texto = document.querySelector("#curso-sobre-texto");
+  const botao = document.querySelector("#curso-sobre-mostrar-mais");
+  if (!texto || !botao) return;
+
+  botao.addEventListener("click", () => {
+    const expandido = texto.classList.toggle("esta-expandido");
+    botao.textContent = expandido ? "Mostrar menos" : "Mostrar mais";
+  });
+}
+
 function initFormularioCongresso() {
   const formulario = document.querySelector("#formulario-congresso");
   if (!formulario) return;
@@ -537,6 +560,8 @@ function initPaginaCurso() {
   const seloEl = document.querySelector("#curso-selo");
   if (dados.selo) {
     seloEl.textContent = dados.selo;
+    seloEl.className = "cursos__cartao-selo";
+    if (dados.selo === "Últimas Vagas") seloEl.classList.add("cursos__cartao-selo--urgente");
     seloEl.hidden = false;
   } else {
     seloEl.hidden = true;
@@ -562,12 +587,12 @@ function initPaginaCurso() {
 
   const precoRealEl = document.querySelector("#curso-inscricao-preco-real");
   const precoSocioEl = document.querySelector("#curso-inscricao-preco-socio");
-  const precoRealFormatado = `${dados.precoReal.toLocaleString("pt-PT")} Kz`;
+  const precoRealFormatado = `${dados.precoReal.toLocaleString("pt-BR")} Kz`;
   precoRealEl.textContent = precoRealFormatado;
   if (dados.precoSocio === 0) {
     precoSocioEl.textContent = "Grátis para Sócios";
   } else {
-    precoSocioEl.textContent = `Sócios: ${dados.precoSocio.toLocaleString("pt-PT")} Kz`;
+    precoSocioEl.textContent = `Sócios: ${dados.precoSocio.toLocaleString("pt-BR")} Kz`;
     if (dados.descontoSelo) {
       const selo = document.createElement("span");
       selo.className = "cursos__cartao-preco-selo";
@@ -616,6 +641,274 @@ function initPaginaCurso() {
 
     aprenderEl.appendChild(li);
   });
+
+  const totalHoras = dados.programa.reduce((soma, modulo) => soma + parseInt(modulo.duracao, 10), 0);
+  document.querySelector("#curso-programa-resumo").textContent =
+    `${dados.programa.length} módulos · ${totalHoras} horas de conteúdo`;
+
+  const TIPO_ROTULO = { aula: "Aula", pratica: "Prática", avaliacao: "Avaliação" };
+  const programaEl = document.querySelector("#curso-programa-lista");
+  programaEl.replaceChildren();
+
+  dados.programa.forEach((modulo, indiceModulo) => {
+    const item = document.createElement("div");
+    item.className = "curso-programa__modulo";
+
+    const botao = document.createElement("button");
+    botao.type = "button";
+    botao.className = "curso-programa__cabecalho";
+    botao.setAttribute("aria-expanded", "false");
+    botao.id = `curso-programa-cabecalho-${indiceModulo}`;
+
+    const tituloModulo = document.createElement("span");
+    tituloModulo.textContent = modulo.titulo;
+    botao.appendChild(tituloModulo);
+
+    const duracaoModulo = document.createElement("span");
+    duracaoModulo.className = "curso-programa__duracao";
+    duracaoModulo.textContent = modulo.duracao;
+    botao.appendChild(duracaoModulo);
+
+    const svgNS = "http://www.w3.org/2000/svg";
+    const seta = document.createElementNS(svgNS, "svg");
+    seta.setAttribute("class", "curso-programa__seta");
+    seta.setAttribute("viewBox", "0 0 24 24");
+    seta.setAttribute("fill", "none");
+    seta.setAttribute("stroke", "currentColor");
+    seta.setAttribute("stroke-width", "2");
+    seta.setAttribute("stroke-linecap", "round");
+    seta.setAttribute("stroke-linejoin", "round");
+    seta.setAttribute("aria-hidden", "true");
+    const setaPath = document.createElementNS(svgNS, "path");
+    setaPath.setAttribute("d", "m6 9 6 6 6-6");
+    seta.appendChild(setaPath);
+    botao.appendChild(seta);
+
+    item.appendChild(botao);
+
+    const painel = document.createElement("div");
+    painel.className = "curso-programa__painel";
+    const painelInterior = document.createElement("div");
+    painelInterior.className = "curso-programa__painel-interior";
+
+    const licoesEl = document.createElement("ul");
+    licoesEl.className = "curso-programa__licoes";
+    modulo.licoes.forEach((licao) => {
+      const li = document.createElement("li");
+      li.className = "curso-programa__licao";
+
+      const tipoEl = document.createElement("span");
+      tipoEl.className = `curso-programa__licao-tipo curso-programa__licao-tipo--${licao.tipo}`;
+      tipoEl.textContent = TIPO_ROTULO[licao.tipo];
+      li.appendChild(tipoEl);
+
+      const tituloLicao = document.createElement("span");
+      tituloLicao.className = "curso-programa__licao-titulo";
+      tituloLicao.textContent = licao.titulo;
+      li.appendChild(tituloLicao);
+
+      const duracaoLicao = document.createElement("span");
+      duracaoLicao.className = "curso-programa__licao-duracao";
+      duracaoLicao.textContent = licao.duracao;
+      li.appendChild(duracaoLicao);
+
+      licoesEl.appendChild(li);
+    });
+
+    painelInterior.appendChild(licoesEl);
+    painel.appendChild(painelInterior);
+    item.appendChild(painel);
+
+    programaEl.appendChild(item);
+  });
+
+  const requisitosEl = document.querySelector("#curso-requisitos-lista");
+  requisitosEl.replaceChildren();
+  dados.requisitos.forEach((item) => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    requisitosEl.appendChild(li);
+  });
+
+  const sobreEl = document.querySelector("#curso-sobre-texto");
+  sobreEl.replaceChildren();
+  dados.descricao.forEach((paragrafo) => {
+    const p = document.createElement("p");
+    p.textContent = paragrafo;
+    sobreEl.appendChild(p);
+  });
+  sobreEl.classList.remove("esta-expandido");
+  document.querySelector("#curso-sobre-mostrar-mais").textContent = "Mostrar mais";
+
+  const publicoEl = document.querySelector("#curso-publico-lista");
+  publicoEl.replaceChildren();
+  dados.publicoAlvo.forEach((item) => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    publicoEl.appendChild(li);
+  });
+
+  const iniciais = dados.formador.nome
+    .replace(/Enf\.º|Enf\.ª|Chefe|Dr\./g, "")
+    .trim()
+    .split(/\s+/)
+    .map((parte) => parte[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+  document.querySelector("#curso-formador-iniciais").textContent = iniciais;
+  document.querySelector("#curso-formador-nome").textContent = dados.formador.nome;
+  document.querySelector("#curso-formador-credenciais").textContent = dados.formador.credenciais;
+  document.querySelector("#curso-formador-bio").textContent = dados.formador.bio;
+  document.querySelector("#curso-formador-stat-cursos").textContent = dados.formador.nCursos;
+  document.querySelector("#curso-formador-stat-formandos").textContent = `${dados.formador.nFormandos}+`;
+  document.querySelector("#curso-formador-stat-avaliacao").textContent = dados.formador.avaliacaoMedia.toFixed(1);
+
+  document.querySelector("#curso-avaliacoes-media-numero").textContent = dados.avaliacaoMedia.toFixed(1);
+  document.querySelector("#curso-avaliacoes-media-estrelas").style.width = `${(dados.avaliacaoMedia / 5) * 100}%`;
+  document.querySelector("#curso-avaliacoes-media-total").textContent = `${dados.totalAvaliacoes} avaliações`;
+
+  const barrasEl = document.querySelector("#curso-avaliacoes-barras");
+  barrasEl.replaceChildren();
+  dados.distribuicaoEstrelas.forEach((percentagem, indice) => {
+    const estrelas = 5 - indice;
+    const linha = document.createElement("div");
+    linha.className = "curso-avaliacoes__barra";
+
+    const rotulo = document.createElement("span");
+    rotulo.textContent = `${estrelas} ★`;
+    linha.appendChild(rotulo);
+
+    const trilho = document.createElement("div");
+    trilho.className = "curso-avaliacoes__barra-trilho";
+    const preenchimento = document.createElement("div");
+    preenchimento.className = "curso-avaliacoes__barra-preenchimento";
+    preenchimento.style.width = `${percentagem}%`;
+    trilho.appendChild(preenchimento);
+    linha.appendChild(trilho);
+
+    const valor = document.createElement("span");
+    valor.textContent = `${percentagem}%`;
+    linha.appendChild(valor);
+
+    barrasEl.appendChild(linha);
+  });
+
+  const reviewsEl = document.querySelector("#curso-avaliacoes-lista");
+  reviewsEl.replaceChildren();
+  dados.reviews.forEach((review) => {
+    const card = document.createElement("article");
+    card.className = "curso-avaliacao-card";
+
+    const avatar = document.createElement("div");
+    avatar.className = "curso-avaliacao-card__avatar";
+    avatar.textContent = review.nome
+      .replace(/Enf\.º|Enf\.ª|Chefe|Dr\./g, "")
+      .trim()
+      .split(/\s+/)
+      .map((parte) => parte[0])
+      .slice(0, 2)
+      .join("")
+      .toUpperCase();
+    card.appendChild(avatar);
+
+    const corpo = document.createElement("div");
+    corpo.className = "curso-avaliacao-card__corpo";
+
+    const cabecalho = document.createElement("div");
+    cabecalho.className = "curso-avaliacao-card__cabecalho";
+    const nome = document.createElement("strong");
+    nome.textContent = review.nome;
+    cabecalho.appendChild(nome);
+    const data = document.createElement("span");
+    data.textContent = review.data;
+    cabecalho.appendChild(data);
+    corpo.appendChild(cabecalho);
+
+    const cargo = document.createElement("p");
+    cargo.className = "curso-avaliacao-card__cargo";
+    cargo.textContent = review.cargo;
+    corpo.appendChild(cargo);
+
+    const estrelas = document.createElement("span");
+    estrelas.className = "cursos__estrelas";
+    const preenchimentoEstrelas = document.createElement("span");
+    preenchimentoEstrelas.className = "cursos__estrelas-preenchimento";
+    preenchimentoEstrelas.style.width = `${(review.avaliacao / 5) * 100}%`;
+    estrelas.appendChild(preenchimentoEstrelas);
+    corpo.appendChild(estrelas);
+
+    const texto = document.createElement("p");
+    texto.className = "curso-avaliacao-card__texto";
+    texto.textContent = review.texto;
+    corpo.appendChild(texto);
+
+    card.appendChild(corpo);
+    reviewsEl.appendChild(card);
+  });
+
+  const relacionadosEl = document.querySelector("#curso-relacionados-grelha");
+  relacionadosEl.replaceChildren();
+  const relacionados = Object.entries(CURSOS_DADOS)
+    .filter(([outroSlug, outroCurso]) => outroSlug !== slug && outroCurso.categoriaSlug === dados.categoriaSlug)
+    .slice(0, 3);
+
+  relacionados.forEach(([outroSlug, outroCurso]) => {
+    const artigo = document.createElement("article");
+    artigo.className = "cartao";
+
+    const imagem = document.createElement("img");
+    imagem.className = "cartao__imagem";
+    imagem.src = outroCurso.imagem;
+    imagem.alt = outroCurso.imagemAlt;
+    imagem.width = 480;
+    imagem.height = 320;
+    imagem.loading = "lazy";
+    artigo.appendChild(imagem);
+
+    const corpoRelacionado = document.createElement("div");
+    corpoRelacionado.className = "cartao__corpo";
+
+    const etiqueta = document.createElement("span");
+    etiqueta.className = "cartao__etiqueta";
+    etiqueta.textContent = outroCurso.categoria;
+    corpoRelacionado.appendChild(etiqueta);
+
+    const tituloRelacionado = document.createElement("h3");
+    tituloRelacionado.className = "cartao__titulo";
+    tituloRelacionado.textContent = outroCurso.titulo;
+    corpoRelacionado.appendChild(tituloRelacionado);
+
+    const textoRelacionado = document.createElement("p");
+    textoRelacionado.className = "cartao__texto";
+    textoRelacionado.textContent = outroCurso.subtitulo;
+    corpoRelacionado.appendChild(textoRelacionado);
+
+    const link = document.createElement("a");
+    link.className = "cartao__leiamais";
+    link.href = `curso-detalhe.html?slug=${encodeURIComponent(outroSlug)}`;
+    link.append("Ver curso ");
+
+    const svgNS = "http://www.w3.org/2000/svg";
+    const seta = document.createElementNS(svgNS, "svg");
+    seta.setAttribute("viewBox", "0 0 24 24");
+    seta.setAttribute("fill", "none");
+    seta.setAttribute("stroke", "currentColor");
+    seta.setAttribute("stroke-width", "2");
+    seta.setAttribute("stroke-linecap", "round");
+    seta.setAttribute("stroke-linejoin", "round");
+    seta.setAttribute("aria-hidden", "true");
+    const setaPath = document.createElementNS(svgNS, "path");
+    setaPath.setAttribute("d", "M5 12h14M13 6l6 6-6 6");
+    seta.appendChild(setaPath);
+    link.appendChild(seta);
+
+    corpoRelacionado.appendChild(link);
+    artigo.appendChild(corpoRelacionado);
+    relacionadosEl.appendChild(artigo);
+  });
+
+  document.querySelector("#curso-relacionados-secao").hidden = relacionados.length === 0;
 
   container.hidden = false;
 }
@@ -1070,6 +1363,8 @@ document.addEventListener("DOMContentLoaded", () => {
   initFormularioNewsletter();
   initPaginaNoticia();
   initPaginaCurso();
+  initAcordeaoProgramaCurso();
+  initSobreCursoExpandir();
   initFormularioBanco();
   initFiltroGaleria();
   initLightboxGaleria();
