@@ -67,6 +67,16 @@ function encontrarProximaAulaNaoConcluida(programa, aulasConcluidas) {
   return null;
 }
 
+function obterListaPlanaAulas(programa) {
+  const lista = [];
+  programa.forEach((modulo, indiceModulo) => {
+    modulo.licoes.forEach((licao, indiceLicao) => {
+      lista.push({ indiceModulo, indiceLicao, titulo: licao.titulo });
+    });
+  });
+  return lista;
+}
+
 function initVideoHero() {
   const videos = document.querySelectorAll(".hero__video, .pagina-hero__video");
   if (!videos.length) return;
@@ -1856,7 +1866,12 @@ function initPaginaEstudo() {
   function renderizarAulaActual() {
     const modulo = dados.programa[aulaActual.indiceModulo];
     const licao = modulo.licoes[aulaActual.indiceLicao];
-    document.querySelector("#estudo-aula-titulo").textContent = licao.titulo;
+    const lista = obterListaPlanaAulas(dados.programa);
+    const numeroAula =
+      lista.findIndex(
+        (item) => item.indiceModulo === aulaActual.indiceModulo && item.indiceLicao === aulaActual.indiceLicao
+      ) + 1;
+    document.querySelector("#estudo-aula-titulo").textContent = `${numeroAula}. ${licao.titulo}`;
 
     const aulasConcluidas = obterAulasConcluidas(slug);
     const chave = `${aulaActual.indiceModulo}-${aulaActual.indiceLicao}`;
@@ -1867,6 +1882,43 @@ function initPaginaEstudo() {
     document.querySelector("#estudo-botao-concluir-texto").textContent = estaConcluida
       ? "Aula concluída"
       : "Marcar como concluída";
+  }
+
+  function renderizarNavegacaoVideo() {
+    const lista = obterListaPlanaAulas(dados.programa);
+    const indiceActual = lista.findIndex(
+      (item) => item.indiceModulo === aulaActual.indiceModulo && item.indiceLicao === aulaActual.indiceLicao
+    );
+
+    const botaoAnterior = document.querySelector("#estudo-video-anterior");
+    const dicaAnterior = document.querySelector("#estudo-video-anterior-dica");
+    const aulaAnterior = lista[indiceActual - 1];
+    botaoAnterior.disabled = !aulaAnterior;
+    botaoAnterior.setAttribute("aria-label", aulaAnterior ? `Aula anterior: ${aulaAnterior.titulo}` : "Aula anterior");
+    dicaAnterior.textContent = aulaAnterior ? aulaAnterior.titulo : "";
+
+    const botaoSeguinte = document.querySelector("#estudo-video-seguinte");
+    const dicaSeguinte = document.querySelector("#estudo-video-seguinte-dica");
+    const aulaSeguinte = lista[indiceActual + 1];
+    botaoSeguinte.disabled = !aulaSeguinte;
+    botaoSeguinte.setAttribute("aria-label", aulaSeguinte ? `Próxima aula: ${aulaSeguinte.titulo}` : "Próxima aula");
+    dicaSeguinte.textContent = aulaSeguinte ? aulaSeguinte.titulo : "";
+  }
+
+  function irParaAulaRelativa(delta) {
+    const lista = obterListaPlanaAulas(dados.programa);
+    const indiceActual = lista.findIndex(
+      (item) => item.indiceModulo === aulaActual.indiceModulo && item.indiceLicao === aulaActual.indiceLicao
+    );
+    const destino = lista[indiceActual + delta];
+    if (!destino) return;
+
+    aulaActual.indiceModulo = destino.indiceModulo;
+    aulaActual.indiceLicao = destino.indiceLicao;
+    actualizarUrlAula();
+    renderizarAulaActual();
+    renderizarNavegacaoVideo();
+    renderizarSidebar();
   }
 
   function renderizarSidebar() {
@@ -1885,6 +1937,8 @@ function initPaginaEstudo() {
     );
     document.querySelector("#estudo-lateral-resumo").textContent =
       `${dados.programa.length} módulos · ${totalConcluidas}/${totalAulas} aulas concluídas`;
+
+    let contadorAula = 0;
 
     dados.programa.forEach((modulo, indiceModulo) => {
       const item = document.createElement("div");
@@ -1905,7 +1959,7 @@ function initPaginaEstudo() {
 
       const tituloModulo = document.createElement("span");
       tituloModulo.className = "curso-programa__titulo-modulo";
-      tituloModulo.textContent = modulo.titulo;
+      tituloModulo.textContent = modulo.titulo.replace(/\s+—\s+/, ": ");
       botaoModulo.appendChild(tituloModulo);
 
       const meta = document.createElement("span");
@@ -1981,9 +2035,10 @@ function initPaginaEstudo() {
         tipoEl.textContent = TIPO_ROTULO[licao.tipo];
         botaoLicao.appendChild(tipoEl);
 
+        contadorAula += 1;
         const tituloLicao = document.createElement("span");
         tituloLicao.className = "curso-programa__licao-titulo";
-        tituloLicao.textContent = licao.titulo;
+        tituloLicao.textContent = `${contadorAula}. ${licao.titulo}`;
         botaoLicao.appendChild(tituloLicao);
 
         const duracaoLicao = document.createElement("span");
@@ -1996,6 +2051,7 @@ function initPaginaEstudo() {
           aulaActual.indiceLicao = indiceLicao;
           actualizarUrlAula();
           renderizarAulaActual();
+          renderizarNavegacaoVideo();
           renderizarSidebar();
         });
         linha.appendChild(botaoLicao);
@@ -2019,8 +2075,12 @@ function initPaginaEstudo() {
     renderizarProgressoTopo();
   });
 
+  document.querySelector("#estudo-video-anterior").addEventListener("click", () => irParaAulaRelativa(-1));
+  document.querySelector("#estudo-video-seguinte").addEventListener("click", () => irParaAulaRelativa(1));
+
   actualizarUrlAula();
   renderizarAulaActual();
+  renderizarNavegacaoVideo();
   renderizarSidebar();
   renderizarProgressoTopo();
 
