@@ -677,6 +677,27 @@ function initPaginaCurso() {
     return seta;
   };
 
+  const criarIconePreview = () => {
+    const icone = document.createElementNS(svgNS, "svg");
+    icone.setAttribute("class", "curso-programa__licao-preview-icone");
+    icone.setAttribute("viewBox", "0 0 24 24");
+    icone.setAttribute("fill", "none");
+    icone.setAttribute("stroke", "currentColor");
+    icone.setAttribute("stroke-width", "2");
+    icone.setAttribute("stroke-linecap", "round");
+    icone.setAttribute("stroke-linejoin", "round");
+    icone.setAttribute("aria-hidden", "true");
+    const circulo = document.createElementNS(svgNS, "circle");
+    circulo.setAttribute("cx", "12");
+    circulo.setAttribute("cy", "12");
+    circulo.setAttribute("r", "10");
+    icone.appendChild(circulo);
+    const triangulo = document.createElementNS(svgNS, "polygon");
+    triangulo.setAttribute("points", "10 8 16 12 10 16");
+    icone.appendChild(triangulo);
+    return icone;
+  };
+
   dados.programa.forEach((modulo, indiceModulo) => {
     const item = document.createElement("div");
     item.className = "curso-programa__modulo";
@@ -727,7 +748,7 @@ function initPaginaCurso() {
     licoesEl.className = "curso-programa__licoes";
     modulo.licoes.forEach((licao, indiceLicao) => {
       const li = document.createElement("li");
-      li.className = "curso-programa__licao";
+      li.className = licao.preview ? "curso-programa__licao curso-programa__licao--preview" : "curso-programa__licao";
 
       const idLicaoCabecalho = `curso-programa-licao-cabecalho-${indiceModulo}-${indiceLicao}`;
       const idLicaoPainel = `curso-programa-licao-painel-${indiceModulo}-${indiceLicao}`;
@@ -750,6 +771,14 @@ function initPaginaCurso() {
       tituloLicao.className = "curso-programa__licao-titulo";
       tituloLicao.textContent = licao.titulo;
       botaoLicao.appendChild(tituloLicao);
+
+      if (licao.preview) {
+        const previaEl = document.createElement("span");
+        previaEl.className = "curso-programa__licao-previa";
+        previaEl.appendChild(criarIconePreview());
+        previaEl.append("Pré-visualização");
+        botaoLicao.appendChild(previaEl);
+      }
 
       const duracaoLicao = document.createElement("span");
       duracaoLicao.className = "curso-programa__licao-duracao";

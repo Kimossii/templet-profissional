@@ -3776,7 +3776,36 @@ body.lightbox-aberta {
 .curso-hero__conteudo {
   position: relative;
   z-index: 1;
-  max-width: 760px;
+}
+
+.curso-hero__texto {
+  max-width: 640px;
+}
+
+.curso-hero__espaco {
+  display: none;
+}
+
+@media (min-width: 901px) {
+  .curso-hero__conteudo {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: var(--espaco-lg);
+    align-items: start;
+  }
+
+  .curso-hero__texto {
+    max-width: none;
+    margin-left: var(--espaco-xl);
+  }
+
+  .curso-hero__espaco {
+    display: block;
+  }
+}
+
+.curso-corpo {
+  padding-top: 0;
 }
 
 .curso-hero__pastilhas {
@@ -3791,6 +3820,7 @@ body.lightbox-aberta {
   color: var(--cor-texto-claro);
   font-size: clamp(1.8rem, 1.3rem + 2.2vw, 2.75rem);
   margin: 0 0 var(--espaco-xs);
+  text-wrap: balance;
 }
 
 .curso-hero__subtitulo {
@@ -3872,6 +3902,7 @@ body.lightbox-aberta {
 .curso-inscricao {
   position: sticky;
   top: calc(var(--altura-cabecalho) + var(--espaco-md));
+  margin-top: -460px;
   border: 1px solid var(--cor-borda);
   border-radius: var(--raio-lg);
   background-color: var(--cor-fundo);
@@ -4003,6 +4034,7 @@ body.lightbox-aberta {
   .curso-inscricao {
     position: static;
     order: -1;
+    margin-top: 0;
   }
 
   .curso-principal {
@@ -4217,6 +4249,27 @@ body.lightbox-aberta {
 
 .curso-programa__licao-cabecalho:hover {
   color: var(--cor-primaria-escura);
+}
+
+.curso-programa__licao--preview .curso-programa__licao-cabecalho {
+  background-color: var(--cor-primaria-suave);
+  border-radius: var(--raio-sm);
+}
+
+.curso-programa__licao-previa {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-shrink: 0;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--cor-primaria);
+}
+
+.curso-programa__licao-preview-icone {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
 }
 
 .curso-programa__licao-seta {

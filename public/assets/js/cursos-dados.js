@@ -52,6 +52,7 @@ const CURSOS_DADOS = {
         titulo: "Módulo 1 — Fundamentos Avançados de Cuidados Perioperatórios",
         duracao: "10h",
         licoes: [
+          { titulo: "Boas-vindas ao Curso", duracao: "3min", tipo: "aula", preview: true, descricao: "Mensagem de boas-vindas do Enf.º Chefe António Sacadura, com uma apresentação do que vai encontrar em cada módulo e como tirar o máximo proveito do curso." },
           { titulo: "Reavaliação do doente cirúrgico de alto risco", duracao: "2h", tipo: "aula", descricao: "Critérios clínicos para reavaliar o doente de alto risco imediatamente antes da cirurgia, identificando factores que possam exigir ajustes ao plano cirúrgico ou anestésico." },
           { titulo: "Protocolos avançados de preparação pré-operatória", duracao: "2h", tipo: "aula", descricao: "Protocolos de preparação pré-operatória para cirurgias complexas, incluindo optimização clínica do doente e coordenação com a equipa anestésica." },
           { titulo: "Prática orientada: preparação de doente cirúrgico complexo", duracao: "5h", tipo: "pratica", descricao: "Sessão prática orientada de preparação de um doente cirúrgico complexo, com aplicação directa dos protocolos avançados estudados na aula anterior." },
@@ -172,6 +173,7 @@ const CURSOS_DADOS = {
         titulo: "Módulo 1 — Organização e Fluxos do Bloco Operatório",
         duracao: "8h",
         licoes: [
+          { titulo: "Boas-vindas ao Curso", duracao: "3min", tipo: "aula", preview: true, descricao: "Mensagem de boas-vindas da Enf.ª Ana Kiala, com uma apresentação do que vai encontrar em cada módulo e como tirar o máximo proveito do curso." },
           { titulo: "Estrutura física e áreas do bloco operatório", duracao: "2h", tipo: "aula", descricao: "Organização física do bloco operatório e distinção entre as áreas livre, semi-restrita e restrita, e a sua importância para o controlo de infeção." },
           { titulo: "Papéis da equipa cirúrgica", duracao: "2h", tipo: "aula", descricao: "Funções e responsabilidades de cada elemento da equipa cirúrgica, da admissão do doente à alta da sala de recobro." },
           { titulo: "Normas de vestuário e higiene cirúrgica", duracao: "3h", tipo: "pratica", descricao: "Prática de fardamento cirúrgico correto, lavagem das mãos e circulação segura dentro das áreas restritas do bloco operatório." },
@@ -263,6 +265,7 @@ const CURSOS_DADOS = {
         titulo: "Módulo 1 — Cultura de Segurança do Doente",
         duracao: "5h",
         licoes: [
+          { titulo: "Boas-vindas ao Curso", duracao: "3min", tipo: "aula", preview: true, descricao: "Mensagem de boas-vindas do Dr. Manuel Domingos, com uma apresentação do que vai encontrar em cada módulo e como tirar o máximo proveito do curso." },
           { titulo: "Fundamentos da cultura de segurança", duracao: "2h", tipo: "aula", descricao: "Princípios que sustentam uma cultura organizacional orientada para a segurança do doente e a prevenção de erros." },
           { titulo: "Discussão de casos reais", duracao: "2h", tipo: "pratica", descricao: "Análise em grupo de casos reais de segurança do doente, identificando factores que contribuíram para o erro ou para a sua prevenção." },
           { titulo: "Avaliação do módulo", duracao: "1h", tipo: "avaliacao", descricao: "Avaliação da compreensão dos princípios de cultura de segurança aplicados ao contexto cirúrgico." },
@@ -360,6 +363,7 @@ const CURSOS_DADOS = {
         titulo: "Módulo 1 — Identificação de Eventos Adversos",
         duracao: "4h",
         licoes: [
+          { titulo: "Boas-vindas ao Curso", duracao: "3min", tipo: "aula", preview: true, descricao: "Mensagem de boas-vindas da Enf.ª Chefe Beatriz Neto, com uma apresentação do que vai encontrar em cada módulo e como tirar o máximo proveito do curso." },
           { titulo: "Tipos e gravidade de eventos adversos cirúrgicos", duracao: "2h", tipo: "aula", descricao: "Classificação dos principais tipos de eventos adversos cirúrgicos segundo a sua gravidade e potencial impacto no doente." },
           { titulo: "Sinais precoces de alerta", duracao: "2h", tipo: "pratica", descricao: "Identificação prática de sinais precoces de alerta que antecedem frequentemente um evento adverso cirúrgico." },
         ],
@@ -453,6 +457,7 @@ const CURSOS_DADOS = {
         titulo: "Módulo 1 — Reconhecimento de Instrumentos Cirúrgicos",
         duracao: "4h",
         licoes: [
+          { titulo: "Boas-vindas ao Curso", duracao: "3min", tipo: "aula", preview: true, descricao: "Mensagem de boas-vindas do Enf.º João Mavinga, com uma apresentação do que vai encontrar em cada módulo e como tirar o máximo proveito do curso." },
           { titulo: "Categorias de instrumentos em cirurgia geral", duracao: "2h", tipo: "aula", descricao: "Principais categorias de instrumentos cirúrgicos usados em cirurgia geral — corte, preensão, hemostasia, afastamento e sutura." },
           { titulo: "Prática de identificação de instrumentos", duracao: "2h", tipo: "pratica", descricao: "Prática de identificação rápida e correta dos instrumentos cirúrgicos mais comuns, por nome e função." },
         ],
@@ -547,6 +552,7 @@ const CURSOS_DADOS = {
         titulo: "Módulo 1 — Instrumentação em Especialidades Avançadas",
         duracao: "6h",
         licoes: [
+          { titulo: "Boas-vindas ao Curso", duracao: "3min", tipo: "aula", preview: true, descricao: "Mensagem de boas-vindas da Enf.ª Chefe Beatriz Neto, com uma apresentação do que vai encontrar em cada módulo e como tirar o máximo proveito deste workshop." },
           { titulo: "Instrumental de especialidades cirúrgicas avançadas", duracao: "2h", tipo: "aula", descricao: "Instrumental específico usado em especialidades cirúrgicas avançadas, além do instrumental de cirurgia geral já dominado pelos formandos." },
           { titulo: "Prática de reconhecimento e organização", duracao: "4h", tipo: "pratica", descricao: "Prática intensiva de reconhecimento e organização do instrumental de especialidades avançadas em pequenos grupos." },
         ],
@@ -648,6 +654,7 @@ const CURSOS_DADOS = {
         titulo: "Módulo 1 — Liderança de Equipas Cirúrgicas",
         duracao: "6h",
         licoes: [
+          { titulo: "Boas-vindas ao Curso", duracao: "3min", tipo: "aula", preview: true, descricao: "Mensagem de boas-vindas do Dr. Manuel Domingos, com uma apresentação do que vai encontrar em cada módulo e como tirar o máximo proveito do curso." },
           { titulo: "Princípios de liderança no bloco operatório", duracao: "3h", tipo: "aula", descricao: "Princípios de liderança aplicados às particularidades do bloco operatório, onde a hierarquia clínica e a gestão de equipa se cruzam." },
           { titulo: "Estudo de casos de liderança", duracao: "3h", tipo: "pratica", descricao: "Análise de casos reais de liderança em bloco operatório, discutindo decisões tomadas e alternativas possíveis." },
         ],
@@ -741,6 +748,7 @@ const CURSOS_DADOS = {
         titulo: "Módulo 1 — Comunicação Assertiva",
         duracao: "5h",
         licoes: [
+          { titulo: "Boas-vindas ao Curso", duracao: "3min", tipo: "aula", preview: true, descricao: "Mensagem de boas-vindas do Enf.º Chefe António Sacadura, com uma apresentação do que vai encontrar em cada módulo e como tirar o máximo proveito do curso." },
           { titulo: "Fundamentos da comunicação assertiva", duracao: "2h", tipo: "aula", descricao: "Princípios da comunicação assertiva e a diferença entre comunicação passiva, agressiva e assertiva em contexto clínico." },
           { titulo: "Prática de comunicação em cenários simulados", duracao: "3h", tipo: "pratica", descricao: "Prática de comunicação assertiva em cenários simulados de alta pressão dentro da sala operatória." },
         ],
