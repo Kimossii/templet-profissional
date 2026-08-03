@@ -4123,8 +4123,42 @@ body.lightbox-aberta {
   color: var(--cor-primaria-escura);
 }
 
-.curso-programa__duracao {
+.curso-programa__titulo-modulo {
+  flex: 1 1 auto;
+}
+
+.curso-programa__cabecalho-meta {
+  display: flex;
+  align-items: center;
   margin-left: auto;
+  flex-shrink: 0;
+}
+
+.curso-programa__cabecalho-meta > *:not(:last-child) {
+  position: relative;
+  padding-right: 0.7rem;
+  margin-right: 0.5rem;
+}
+
+.curso-programa__cabecalho-meta > *:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background-color: var(--cor-borda);
+  transform: translateY(-50%);
+}
+
+.curso-programa__contagem {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--cor-texto-suave);
+}
+
+.curso-programa__duracao {
   font-size: var(--fs-xs);
   font-weight: 600;
   color: var(--cor-texto-suave);
@@ -4159,18 +4193,43 @@ body.lightbox-aberta {
 .curso-programa__licoes {
   list-style: none;
   margin: 0;
-  padding: 0 var(--espaco-md) var(--espaco-md);
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  padding: 0 var(--espaco-md) var(--espaco-xs);
+  border-top: 1px solid var(--cor-borda);
 }
 
-.curso-programa__licao {
+.curso-programa__licao:not(:last-child) .curso-programa__licao-cabecalho {
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.curso-programa__licao-cabecalho {
   display: flex;
   align-items: center;
   gap: 0.6rem;
+  width: 100%;
+  padding: 0.65rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
   font-size: var(--fs-sm);
   color: var(--cor-texto);
+}
+
+.curso-programa__licao-cabecalho:hover {
+  color: var(--cor-primaria-escura);
+}
+
+.curso-programa__licao-seta {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  color: var(--cor-texto-suave);
+  transition: transform var(--transicao-base), color var(--transicao-base);
+}
+
+.curso-programa__licao.esta-aberto .curso-programa__licao-seta {
+  color: var(--cor-primaria);
+  transform: rotate(180deg);
 }
 
 .curso-programa__licao-titulo {
@@ -4178,6 +4237,7 @@ body.lightbox-aberta {
 }
 
 .curso-programa__licao-duracao {
+  flex-shrink: 0;
   font-size: var(--fs-xs);
   color: var(--cor-texto-suave);
 }
@@ -4192,6 +4252,28 @@ body.lightbox-aberta {
   padding: 0.2rem 0.5rem;
   border-radius: var(--raio-pill);
   color: var(--cor-texto-claro);
+}
+
+.curso-programa__licao-painel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--transicao-base);
+}
+
+.curso-programa__licao.esta-aberto .curso-programa__licao-painel {
+  grid-template-rows: 1fr;
+}
+
+.curso-programa__licao-painel-interior {
+  overflow: hidden;
+}
+
+.curso-programa__licao-descricao {
+  margin: 0;
+  padding: 0 0 0.85rem 1.7rem;
+  font-size: var(--fs-xs);
+  line-height: 1.55;
+  color: var(--cor-texto-suave);
 }
 
 .curso-programa__licao-tipo--aula {

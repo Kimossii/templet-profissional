@@ -213,6 +213,16 @@ function initAcordeaoProgramaCurso() {
       botao.setAttribute("aria-expanded", String(aberto));
     });
   });
+
+  document.querySelectorAll(".curso-programa__licao").forEach((item) => {
+    const botao = item.querySelector(".curso-programa__licao-cabecalho");
+    if (!botao) return;
+
+    botao.addEventListener("click", () => {
+      const aberto = item.classList.toggle("esta-aberto");
+      botao.setAttribute("aria-expanded", String(aberto));
+    });
+  });
 }
 
 function initSobreCursoExpandir() {
@@ -650,28 +660,10 @@ function initPaginaCurso() {
   const programaEl = document.querySelector("#curso-programa-lista");
   programaEl.replaceChildren();
 
-  dados.programa.forEach((modulo, indiceModulo) => {
-    const item = document.createElement("div");
-    item.className = "curso-programa__modulo";
-
-    const botao = document.createElement("button");
-    botao.type = "button";
-    botao.className = "curso-programa__cabecalho";
-    botao.setAttribute("aria-expanded", "false");
-    botao.id = `curso-programa-cabecalho-${indiceModulo}`;
-
-    const tituloModulo = document.createElement("span");
-    tituloModulo.textContent = modulo.titulo;
-    botao.appendChild(tituloModulo);
-
-    const duracaoModulo = document.createElement("span");
-    duracaoModulo.className = "curso-programa__duracao";
-    duracaoModulo.textContent = modulo.duracao;
-    botao.appendChild(duracaoModulo);
-
-    const svgNS = "http://www.w3.org/2000/svg";
+  const svgNS = "http://www.w3.org/2000/svg";
+  const criarSetaColapso = (className) => {
     const seta = document.createElementNS(svgNS, "svg");
-    seta.setAttribute("class", "curso-programa__seta");
+    seta.setAttribute("class", className);
     seta.setAttribute("viewBox", "0 0 24 24");
     seta.setAttribute("fill", "none");
     seta.setAttribute("stroke", "currentColor");
@@ -682,35 +674,105 @@ function initPaginaCurso() {
     const setaPath = document.createElementNS(svgNS, "path");
     setaPath.setAttribute("d", "m6 9 6 6 6-6");
     seta.appendChild(setaPath);
-    botao.appendChild(seta);
+    return seta;
+  };
+
+  dados.programa.forEach((modulo, indiceModulo) => {
+    const item = document.createElement("div");
+    item.className = "curso-programa__modulo";
+
+    const idCabecalho = `curso-programa-cabecalho-${indiceModulo}`;
+    const idPainel = `curso-programa-painel-${indiceModulo}`;
+
+    const botao = document.createElement("button");
+    botao.type = "button";
+    botao.className = "curso-programa__cabecalho";
+    botao.setAttribute("aria-expanded", "false");
+    botao.setAttribute("aria-controls", idPainel);
+    botao.id = idCabecalho;
+
+    botao.appendChild(criarSetaColapso("curso-programa__seta"));
+
+    const tituloModulo = document.createElement("span");
+    tituloModulo.className = "curso-programa__titulo-modulo";
+    tituloModulo.textContent = modulo.titulo;
+    botao.appendChild(tituloModulo);
+
+    const meta = document.createElement("span");
+    meta.className = "curso-programa__cabecalho-meta";
+
+    const contagemModulo = document.createElement("span");
+    contagemModulo.className = "curso-programa__contagem";
+    contagemModulo.textContent = `${modulo.licoes.length} ${modulo.licoes.length === 1 ? "aula" : "aulas"}`;
+    meta.appendChild(contagemModulo);
+
+    const duracaoModulo = document.createElement("span");
+    duracaoModulo.className = "curso-programa__duracao";
+    duracaoModulo.textContent = modulo.duracao;
+    meta.appendChild(duracaoModulo);
+
+    botao.appendChild(meta);
 
     item.appendChild(botao);
 
     const painel = document.createElement("div");
     painel.className = "curso-programa__painel";
+    painel.id = idPainel;
+    painel.setAttribute("role", "region");
+    painel.setAttribute("aria-labelledby", idCabecalho);
     const painelInterior = document.createElement("div");
     painelInterior.className = "curso-programa__painel-interior";
 
     const licoesEl = document.createElement("ul");
     licoesEl.className = "curso-programa__licoes";
-    modulo.licoes.forEach((licao) => {
+    modulo.licoes.forEach((licao, indiceLicao) => {
       const li = document.createElement("li");
       li.className = "curso-programa__licao";
+
+      const idLicaoCabecalho = `curso-programa-licao-cabecalho-${indiceModulo}-${indiceLicao}`;
+      const idLicaoPainel = `curso-programa-licao-painel-${indiceModulo}-${indiceLicao}`;
+
+      const botaoLicao = document.createElement("button");
+      botaoLicao.type = "button";
+      botaoLicao.className = "curso-programa__licao-cabecalho";
+      botaoLicao.setAttribute("aria-expanded", "false");
+      botaoLicao.setAttribute("aria-controls", idLicaoPainel);
+      botaoLicao.id = idLicaoCabecalho;
+
+      botaoLicao.appendChild(criarSetaColapso("curso-programa__licao-seta"));
 
       const tipoEl = document.createElement("span");
       tipoEl.className = `curso-programa__licao-tipo curso-programa__licao-tipo--${licao.tipo}`;
       tipoEl.textContent = TIPO_ROTULO[licao.tipo];
-      li.appendChild(tipoEl);
+      botaoLicao.appendChild(tipoEl);
 
       const tituloLicao = document.createElement("span");
       tituloLicao.className = "curso-programa__licao-titulo";
       tituloLicao.textContent = licao.titulo;
-      li.appendChild(tituloLicao);
+      botaoLicao.appendChild(tituloLicao);
 
       const duracaoLicao = document.createElement("span");
       duracaoLicao.className = "curso-programa__licao-duracao";
       duracaoLicao.textContent = licao.duracao;
-      li.appendChild(duracaoLicao);
+      botaoLicao.appendChild(duracaoLicao);
+
+      li.appendChild(botaoLicao);
+
+      const painelLicao = document.createElement("div");
+      painelLicao.className = "curso-programa__licao-painel";
+      painelLicao.id = idLicaoPainel;
+      painelLicao.setAttribute("role", "region");
+      painelLicao.setAttribute("aria-labelledby", idLicaoCabecalho);
+      const painelLicaoInterior = document.createElement("div");
+      painelLicaoInterior.className = "curso-programa__licao-painel-interior";
+
+      const descricaoLicao = document.createElement("p");
+      descricaoLicao.className = "curso-programa__licao-descricao";
+      descricaoLicao.textContent = licao.descricao;
+      painelLicaoInterior.appendChild(descricaoLicao);
+
+      painelLicao.appendChild(painelLicaoInterior);
+      li.appendChild(painelLicao);
 
       licoesEl.appendChild(li);
     });
