@@ -299,6 +299,17 @@ function initSobreCursoExpandir() {
   });
 }
 
+function initSobreEstudoExpandir() {
+  const texto = document.querySelector("#estudo-sobre-texto");
+  const botao = document.querySelector("#estudo-sobre-mostrar-mais");
+  if (!texto || !botao) return;
+
+  botao.addEventListener("click", () => {
+    const expandido = texto.classList.toggle("esta-expandido");
+    botao.textContent = expandido ? "Mostrar menos" : "Mostrar mais";
+  });
+}
+
 function initFormularioCongresso() {
   const formulario = document.querySelector("#formulario-congresso");
   if (!formulario) return;
@@ -1547,6 +1558,28 @@ function initPartilhaModalEstudo() {
 }
 
 function renderizarVisaoGeralEstudo(dados) {
+  document.querySelector("#estudo-resumo-titulo").textContent = dados.titulo;
+  document.querySelector("#estudo-resumo-subtitulo").textContent = dados.subtitulo;
+  document.querySelector("#estudo-resumo-estrelas").style.width = `${(dados.avaliacaoMedia / 5) * 100}%`;
+  document.querySelector("#estudo-resumo-avaliacao-numero").textContent = dados.avaliacaoMedia.toFixed(1);
+  document.querySelector("#estudo-resumo-avaliacao-total").textContent = `(${dados.totalAvaliacoes} avaliações)`;
+  document.querySelector("#estudo-resumo-meta-duracao").textContent = dados.duracao;
+  document.querySelector("#estudo-resumo-meta-data").textContent = `Início: ${dados.dataInicio}`;
+  document.querySelector("#estudo-resumo-meta-modalidade").textContent = dados.local
+    ? `${dados.modalidade} · ${dados.local}`
+    : dados.modalidade;
+
+  const totalAulas = dados.programa.reduce((soma, modulo) => soma + modulo.licoes.length, 0);
+  const horasVideo = dados.duracao.match(/(\d+)\s*h/);
+  document.querySelector("#estudo-numeros-nivel").textContent =
+    dados.nivel === "Todos os Níveis" ? dados.nivel : `Nível ${dados.nivel}`;
+  document.querySelector("#estudo-numeros-aulas").textContent = `${totalAulas} aulas`;
+  document.querySelector("#estudo-numeros-video").textContent = horasVideo
+    ? `${horasVideo[1]} horas no total`
+    : dados.duracao;
+  document.querySelector("#estudo-numeros-idioma").textContent = "Português";
+  document.querySelector("#estudo-numeros-legendas").textContent = "Não";
+
   const sobreEl = document.querySelector("#estudo-sobre-texto");
   sobreEl.className = "curso-sobre__texto";
   sobreEl.replaceChildren();
@@ -2017,6 +2050,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initPaginaEstudo();
   initPartilhaModalEstudo();
   initSobreCursoExpandir();
+  initSobreEstudoExpandir();
   initFormularioBanco();
   initFiltroGaleria();
   initLightboxGaleria();
