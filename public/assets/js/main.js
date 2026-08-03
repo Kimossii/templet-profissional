@@ -4,6 +4,69 @@
  * a futura extracção para componentes Vue.
  */
 
+const CHAVE_PROGRESSO_CURSOS = "aesoa-cursos-progresso";
+
+function obterAulasConcluidas(slug) {
+  try {
+    const dados = JSON.parse(localStorage.getItem(CHAVE_PROGRESSO_CURSOS) || "{}");
+    return Array.isArray(dados[slug]) ? dados[slug] : [];
+  } catch {
+    return [];
+  }
+}
+
+function guardarAulasConcluidas(slug, aulasConcluidas) {
+  try {
+    const dados = JSON.parse(localStorage.getItem(CHAVE_PROGRESSO_CURSOS) || "{}");
+    dados[slug] = aulasConcluidas;
+    localStorage.setItem(CHAVE_PROGRESSO_CURSOS, JSON.stringify(dados));
+  } catch {
+    // localStorage indisponível ou corrompido — progresso simplesmente não é guardado.
+  }
+}
+
+function calcularContagemProgresso(programa, aulasConcluidas) {
+  const concluidasSet = new Set(aulasConcluidas);
+  let total = 0;
+  let concluidas = 0;
+  programa.forEach((modulo, indiceModulo) => {
+    modulo.licoes.forEach((_licao, indiceLicao) => {
+      total += 1;
+      if (concluidasSet.has(`${indiceModulo}-${indiceLicao}`)) concluidas += 1;
+    });
+  });
+  return { concluidas, total };
+}
+
+function calcularContagemModulo(modulo, indiceModulo, aulasConcluidas) {
+  const concluidasSet = new Set(aulasConcluidas);
+  let concluidas = 0;
+  modulo.licoes.forEach((_licao, indiceLicao) => {
+    if (concluidasSet.has(`${indiceModulo}-${indiceLicao}`)) concluidas += 1;
+  });
+  return { concluidas, total: modulo.licoes.length };
+}
+
+function alternarConclusao(aulasConcluidas, chave) {
+  if (aulasConcluidas.includes(chave)) {
+    return aulasConcluidas.filter((item) => item !== chave);
+  }
+  return [...aulasConcluidas, chave];
+}
+
+function encontrarProximaAulaNaoConcluida(programa, aulasConcluidas) {
+  const concluidasSet = new Set(aulasConcluidas);
+  for (let indiceModulo = 0; indiceModulo < programa.length; indiceModulo += 1) {
+    const modulo = programa[indiceModulo];
+    for (let indiceLicao = 0; indiceLicao < modulo.licoes.length; indiceLicao += 1) {
+      if (!concluidasSet.has(`${indiceModulo}-${indiceLicao}`)) {
+        return { indiceModulo, indiceLicao };
+      }
+    }
+  }
+  return null;
+}
+
 function initVideoHero() {
   const videos = document.querySelectorAll(".hero__video, .pagina-hero__video");
   if (!videos.length) return;
@@ -612,6 +675,7 @@ function initPaginaCurso() {
   }
 
   document.querySelector("#curso-inscricao-selo-vagas").hidden = !dados.vagasLimitadas;
+  document.querySelector("#curso-inscricao-continuar").href = `curso-estudar.html?slug=${slug}`;
 
   const favoritoBotao = document.querySelector("#curso-inscricao-favorito");
   favoritoBotao.dataset.slug = slug;
@@ -1436,6 +1500,448 @@ function initLightboxGaleria() {
   });
 }
 
+function renderizarVisaoGeralEstudo(dados) {
+  const sobreEl = document.querySelector("#estudo-sobre-texto");
+  sobreEl.className = "curso-sobre__texto";
+  sobreEl.replaceChildren();
+  dados.descricao.forEach((paragrafo) => {
+    const p = document.createElement("p");
+    p.textContent = paragrafo;
+    sobreEl.appendChild(p);
+  });
+
+  const svgNS = "http://www.w3.org/2000/svg";
+  const aprenderEl = document.querySelector("#estudo-aprender-lista");
+  aprenderEl.replaceChildren();
+  dados.oQueVaiAprender.forEach((item) => {
+    const li = document.createElement("li");
+    li.className = "curso-aprender__item";
+    const svg = document.createElementNS(svgNS, "svg");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("fill", "none");
+    svg.setAttribute("stroke", "currentColor");
+    svg.setAttribute("stroke-width", "2.5");
+    svg.setAttribute("stroke-linecap", "round");
+    svg.setAttribute("stroke-linejoin", "round");
+    svg.setAttribute("aria-hidden", "true");
+    const polyline = document.createElementNS(svgNS, "polyline");
+    polyline.setAttribute("points", "20 6 9 17 4 12");
+    svg.appendChild(polyline);
+    li.appendChild(svg);
+    const texto = document.createElement("span");
+    texto.textContent = item;
+    li.appendChild(texto);
+    aprenderEl.appendChild(li);
+  });
+
+  const requisitosEl = document.querySelector("#estudo-requisitos-lista");
+  requisitosEl.replaceChildren();
+  dados.requisitos.forEach((item) => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    requisitosEl.appendChild(li);
+  });
+
+  const iniciaisFormador = dados.formador.nome
+    .replace(/Enf\.º|Enf\.ª|Chefe|Dr\./g, "")
+    .trim()
+    .split(/\s+/)
+    .map((parte) => parte[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+  document.querySelector("#estudo-formador-iniciais").textContent = iniciaisFormador;
+  document.querySelector("#estudo-formador-nome").textContent = dados.formador.nome;
+  document.querySelector("#estudo-formador-credenciais").textContent = dados.formador.credenciais;
+  document.querySelector("#estudo-formador-bio").textContent = dados.formador.bio;
+  document.querySelector("#estudo-formador-stat-cursos").textContent = dados.formador.nCursos;
+  document.querySelector("#estudo-formador-stat-formandos").textContent = `${dados.formador.nFormandos}+`;
+  document.querySelector("#estudo-formador-stat-avaliacao").textContent = dados.formador.avaliacaoMedia.toFixed(1);
+}
+
+function renderizarAvaliacoesEstudo(dados) {
+  document.querySelector("#estudo-avaliacoes-media-numero").textContent = dados.avaliacaoMedia.toFixed(1);
+  document.querySelector("#estudo-avaliacoes-media-estrelas").style.width = `${(dados.avaliacaoMedia / 5) * 100}%`;
+  document.querySelector("#estudo-avaliacoes-media-total").textContent = `${dados.totalAvaliacoes} avaliações`;
+
+  const barrasEl = document.querySelector("#estudo-avaliacoes-barras");
+  barrasEl.replaceChildren();
+  dados.distribuicaoEstrelas.forEach((percentagem, indice) => {
+    const estrelas = 5 - indice;
+    const linha = document.createElement("div");
+    linha.className = "curso-avaliacoes__barra";
+
+    const rotulo = document.createElement("span");
+    rotulo.textContent = `${estrelas} ★`;
+    linha.appendChild(rotulo);
+
+    const trilho = document.createElement("div");
+    trilho.className = "curso-avaliacoes__barra-trilho";
+    const preenchimento = document.createElement("div");
+    preenchimento.className = "curso-avaliacoes__barra-preenchimento";
+    preenchimento.style.width = `${percentagem}%`;
+    trilho.appendChild(preenchimento);
+    linha.appendChild(trilho);
+
+    const valor = document.createElement("span");
+    valor.textContent = `${percentagem}%`;
+    linha.appendChild(valor);
+
+    barrasEl.appendChild(linha);
+  });
+
+  const reviewsEl = document.querySelector("#estudo-avaliacoes-lista");
+  reviewsEl.replaceChildren();
+  dados.reviews.forEach((review) => {
+    const card = document.createElement("article");
+    card.className = "curso-avaliacao-card";
+
+    const avatar = document.createElement("div");
+    avatar.className = "curso-avaliacao-card__avatar";
+    avatar.textContent = review.nome
+      .replace(/Enf\.º|Enf\.ª|Chefe|Dr\./g, "")
+      .trim()
+      .split(/\s+/)
+      .map((parte) => parte[0])
+      .slice(0, 2)
+      .join("")
+      .toUpperCase();
+    card.appendChild(avatar);
+
+    const corpo = document.createElement("div");
+    corpo.className = "curso-avaliacao-card__corpo";
+
+    const cabecalho = document.createElement("div");
+    cabecalho.className = "curso-avaliacao-card__cabecalho";
+    const nome = document.createElement("strong");
+    nome.textContent = review.nome;
+    cabecalho.appendChild(nome);
+    const data = document.createElement("span");
+    data.textContent = review.data;
+    cabecalho.appendChild(data);
+    corpo.appendChild(cabecalho);
+
+    const cargo = document.createElement("p");
+    cargo.className = "curso-avaliacao-card__cargo";
+    cargo.textContent = review.cargo;
+    corpo.appendChild(cargo);
+
+    const estrelas = document.createElement("span");
+    estrelas.className = "cursos__estrelas";
+    const preenchimentoEstrelas = document.createElement("span");
+    preenchimentoEstrelas.className = "cursos__estrelas-preenchimento";
+    preenchimentoEstrelas.style.width = `${(review.avaliacao / 5) * 100}%`;
+    estrelas.appendChild(preenchimentoEstrelas);
+    corpo.appendChild(estrelas);
+
+    const texto = document.createElement("p");
+    texto.className = "curso-avaliacao-card__texto";
+    texto.textContent = review.texto;
+    corpo.appendChild(texto);
+
+    card.appendChild(corpo);
+    reviewsEl.appendChild(card);
+  });
+}
+
+function initSeparadoresEstudo() {
+  const botaoVisao = document.querySelector("#estudo-aba-visao-botao");
+  const botaoAvaliacoes = document.querySelector("#estudo-aba-avaliacoes-botao");
+  const painelVisao = document.querySelector("#estudo-aba-visao");
+  const painelAvaliacoes = document.querySelector("#estudo-aba-avaliacoes");
+  if (!botaoVisao || !botaoAvaliacoes || !painelVisao || !painelAvaliacoes) return;
+
+  function activar(botaoActivo, botaoInactivo, painelActivo, painelInactivo) {
+    botaoActivo.classList.add("esta-activo");
+    botaoActivo.setAttribute("aria-selected", "true");
+    botaoInactivo.classList.remove("esta-activo");
+    botaoInactivo.setAttribute("aria-selected", "false");
+    painelActivo.hidden = false;
+    painelInactivo.hidden = true;
+  }
+
+  botaoVisao.addEventListener("click", () => activar(botaoVisao, botaoAvaliacoes, painelVisao, painelAvaliacoes));
+  botaoAvaliacoes.addEventListener("click", () => activar(botaoAvaliacoes, botaoVisao, painelAvaliacoes, painelVisao));
+}
+
+function initPaginaEstudo() {
+  const container = document.querySelector("#estudo-conteudo");
+  const naoEncontrado = document.querySelector("#estudo-nao-encontrado");
+  if (!container || !naoEncontrado) return;
+
+  const parametrosIniciais = new URLSearchParams(location.search);
+  const slug = parametrosIniciais.get("slug");
+  const dados =
+    typeof CURSOS_DADOS !== "undefined" && slug && Object.hasOwn(CURSOS_DADOS, slug) ? CURSOS_DADOS[slug] : null;
+
+  if (!dados) {
+    naoEncontrado.hidden = false;
+    container.hidden = true;
+    return;
+  }
+
+  document.title = `${dados.titulo} | Estudar | AESOA`;
+  document.querySelector("#estudo-titulo").textContent = dados.titulo;
+  document.querySelector("#estudo-voltar").href = `curso-detalhe.html?slug=${slug}`;
+
+  const urlAtual = encodeURIComponent(location.href);
+  const tituloCodificado = encodeURIComponent(dados.titulo);
+  document.querySelector("#estudo-whatsapp").href = `https://wa.me/?text=${tituloCodificado}%20${urlAtual}`;
+  document.querySelector("#estudo-facebook").href = `https://www.facebook.com/sharer/sharer.php?u=${urlAtual}`;
+  document.querySelector("#estudo-email").href = `mailto:?subject=${tituloCodificado}&body=${urlAtual}`;
+
+  renderizarVisaoGeralEstudo(dados);
+  renderizarAvaliacoesEstudo(dados);
+  initSeparadoresEstudo();
+
+  const TIPO_ROTULO = { aula: "Aula", pratica: "Prática", avaliacao: "Avaliação" };
+  const svgNS = "http://www.w3.org/2000/svg";
+
+  function criarSetaColapso() {
+    const seta = document.createElementNS(svgNS, "svg");
+    seta.setAttribute("class", "curso-programa__seta");
+    seta.setAttribute("viewBox", "0 0 24 24");
+    seta.setAttribute("fill", "none");
+    seta.setAttribute("stroke", "currentColor");
+    seta.setAttribute("stroke-width", "2");
+    seta.setAttribute("stroke-linecap", "round");
+    seta.setAttribute("stroke-linejoin", "round");
+    seta.setAttribute("aria-hidden", "true");
+    const path = document.createElementNS(svgNS, "path");
+    path.setAttribute("d", "m6 9 6 6 6-6");
+    seta.appendChild(path);
+    return seta;
+  }
+
+  function criarIconeCheck() {
+    const icone = document.createElementNS(svgNS, "svg");
+    icone.setAttribute("class", "estudo-lateral__check-icone");
+    icone.setAttribute("viewBox", "0 0 24 24");
+    icone.setAttribute("fill", "none");
+    icone.setAttribute("stroke", "currentColor");
+    icone.setAttribute("stroke-width", "2.5");
+    icone.setAttribute("stroke-linecap", "round");
+    icone.setAttribute("stroke-linejoin", "round");
+    icone.setAttribute("aria-hidden", "true");
+    const polyline = document.createElementNS(svgNS, "polyline");
+    polyline.setAttribute("points", "20 6 9 17 4 12");
+    icone.appendChild(polyline);
+    return icone;
+  }
+
+  function resolverAulaInicial() {
+    const parametros = new URLSearchParams(location.search);
+    const moduloParam = Number.parseInt(parametros.get("modulo"), 10);
+    const licaoParam = Number.parseInt(parametros.get("licao"), 10);
+    if (
+      Number.isInteger(moduloParam) &&
+      Number.isInteger(licaoParam) &&
+      dados.programa[moduloParam] &&
+      dados.programa[moduloParam].licoes[licaoParam]
+    ) {
+      return { indiceModulo: moduloParam, indiceLicao: licaoParam };
+    }
+
+    const aulasConcluidas = obterAulasConcluidas(slug);
+    if (aulasConcluidas.length > 0) {
+      const proxima = encontrarProximaAulaNaoConcluida(dados.programa, aulasConcluidas);
+      if (proxima) return proxima;
+    }
+
+    return { indiceModulo: 0, indiceLicao: 0 };
+  }
+
+  const aulaActual = resolverAulaInicial();
+
+  function actualizarUrlAula() {
+    const parametros = new URLSearchParams(location.search);
+    parametros.set("slug", slug);
+    parametros.set("modulo", String(aulaActual.indiceModulo));
+    parametros.set("licao", String(aulaActual.indiceLicao));
+    history.replaceState(null, "", `${location.pathname}?${parametros.toString()}`);
+  }
+
+  function renderizarProgressoTopo() {
+    const aulasConcluidas = obterAulasConcluidas(slug);
+    const { concluidas, total } = calcularContagemProgresso(dados.programa, aulasConcluidas);
+    document.querySelector("#estudo-progresso").textContent = `Seu progresso: ${concluidas}/${total} aulas concluídas`;
+  }
+
+  function renderizarAulaActual() {
+    const modulo = dados.programa[aulaActual.indiceModulo];
+    const licao = modulo.licoes[aulaActual.indiceLicao];
+    document.querySelector("#estudo-aula-titulo").textContent = licao.titulo;
+
+    const aulasConcluidas = obterAulasConcluidas(slug);
+    const chave = `${aulaActual.indiceModulo}-${aulaActual.indiceLicao}`;
+    const estaConcluida = aulasConcluidas.includes(chave);
+    const botaoConcluir = document.querySelector("#estudo-botao-concluir");
+    botaoConcluir.classList.toggle("esta-concluida", estaConcluida);
+    botaoConcluir.setAttribute("aria-pressed", String(estaConcluida));
+    document.querySelector("#estudo-botao-concluir-texto").textContent = estaConcluida
+      ? "Aula concluída"
+      : "Marcar como concluída";
+  }
+
+  function renderizarSidebar() {
+    const aulasConcluidas = obterAulasConcluidas(slug);
+    const listaEl = document.querySelector("#estudo-lateral-lista");
+    const modulosAbertos = new Set(
+      Array.from(listaEl.querySelectorAll(".curso-programa__modulo")).flatMap((elemento, indice) =>
+        elemento.classList.contains("esta-aberto") ? [indice] : []
+      )
+    );
+    listaEl.replaceChildren();
+
+    const { concluidas: totalConcluidas, total: totalAulas } = calcularContagemProgresso(
+      dados.programa,
+      aulasConcluidas
+    );
+    document.querySelector("#estudo-lateral-resumo").textContent =
+      `${dados.programa.length} módulos · ${totalConcluidas}/${totalAulas} aulas concluídas`;
+
+    dados.programa.forEach((modulo, indiceModulo) => {
+      const item = document.createElement("div");
+      const moduloContemAulaActual =
+        modulosAbertos.size > 0
+          ? modulosAbertos.has(indiceModulo)
+          : indiceModulo === aulaActual.indiceModulo;
+      item.className = moduloContemAulaActual ? "curso-programa__modulo esta-aberto" : "curso-programa__modulo";
+
+      const idPainel = `estudo-modulo-painel-${indiceModulo}`;
+
+      const botaoModulo = document.createElement("button");
+      botaoModulo.type = "button";
+      botaoModulo.className = "curso-programa__cabecalho";
+      botaoModulo.setAttribute("aria-expanded", String(moduloContemAulaActual));
+      botaoModulo.setAttribute("aria-controls", idPainel);
+      botaoModulo.appendChild(criarSetaColapso());
+
+      const tituloModulo = document.createElement("span");
+      tituloModulo.className = "curso-programa__titulo-modulo";
+      tituloModulo.textContent = modulo.titulo;
+      botaoModulo.appendChild(tituloModulo);
+
+      const meta = document.createElement("span");
+      meta.className = "curso-programa__cabecalho-meta";
+      const { concluidas: concluidasModulo, total: totalModulo } = calcularContagemModulo(
+        modulo,
+        indiceModulo,
+        aulasConcluidas
+      );
+      const contagem = document.createElement("span");
+      contagem.className = "curso-programa__contagem";
+      contagem.textContent = `${concluidasModulo}/${totalModulo}`;
+      meta.appendChild(contagem);
+      const duracao = document.createElement("span");
+      duracao.className = "curso-programa__duracao";
+      duracao.textContent = modulo.duracao;
+      meta.appendChild(duracao);
+      botaoModulo.appendChild(meta);
+
+      botaoModulo.addEventListener("click", () => {
+        const aberto = item.classList.toggle("esta-aberto");
+        botaoModulo.setAttribute("aria-expanded", String(aberto));
+      });
+
+      item.appendChild(botaoModulo);
+
+      const painel = document.createElement("div");
+      painel.className = "curso-programa__painel";
+      painel.id = idPainel;
+      const painelInterior = document.createElement("div");
+      painelInterior.className = "curso-programa__painel-interior";
+
+      const licoesEl = document.createElement("ul");
+      licoesEl.className = "curso-programa__licoes";
+
+      modulo.licoes.forEach((licao, indiceLicao) => {
+        const li = document.createElement("li");
+        li.className = "curso-programa__licao";
+
+        const linha = document.createElement("div");
+        linha.className = "estudo-lateral__aula";
+
+        const chave = `${indiceModulo}-${indiceLicao}`;
+        const estaConcluida = aulasConcluidas.includes(chave);
+        const estaSelecionada =
+          indiceModulo === aulaActual.indiceModulo && indiceLicao === aulaActual.indiceLicao;
+
+        const check = document.createElement("button");
+        check.type = "button";
+        check.className = estaConcluida ? "estudo-lateral__check esta-concluida" : "estudo-lateral__check";
+        check.setAttribute("aria-pressed", String(estaConcluida));
+        check.setAttribute(
+          "aria-label",
+          estaConcluida ? "Marcar aula como não concluída" : "Marcar aula como concluída"
+        );
+        check.appendChild(criarIconeCheck());
+        check.addEventListener("click", () => {
+          guardarAulasConcluidas(slug, alternarConclusao(obterAulasConcluidas(slug), chave));
+          renderizarSidebar();
+          renderizarProgressoTopo();
+          renderizarAulaActual();
+        });
+        linha.appendChild(check);
+
+        const botaoLicao = document.createElement("button");
+        botaoLicao.type = "button";
+        botaoLicao.className = estaSelecionada
+          ? "estudo-lateral__aula-botao esta-selecionada"
+          : "estudo-lateral__aula-botao";
+
+        const tipoEl = document.createElement("span");
+        tipoEl.className = `curso-programa__licao-tipo curso-programa__licao-tipo--${licao.tipo}`;
+        tipoEl.textContent = TIPO_ROTULO[licao.tipo];
+        botaoLicao.appendChild(tipoEl);
+
+        const tituloLicao = document.createElement("span");
+        tituloLicao.className = "curso-programa__licao-titulo";
+        tituloLicao.textContent = licao.titulo;
+        botaoLicao.appendChild(tituloLicao);
+
+        const duracaoLicao = document.createElement("span");
+        duracaoLicao.className = "curso-programa__licao-duracao";
+        duracaoLicao.textContent = licao.duracao;
+        botaoLicao.appendChild(duracaoLicao);
+
+        botaoLicao.addEventListener("click", () => {
+          aulaActual.indiceModulo = indiceModulo;
+          aulaActual.indiceLicao = indiceLicao;
+          actualizarUrlAula();
+          renderizarAulaActual();
+          renderizarSidebar();
+        });
+        linha.appendChild(botaoLicao);
+
+        li.appendChild(linha);
+        licoesEl.appendChild(li);
+      });
+
+      painelInterior.appendChild(licoesEl);
+      painel.appendChild(painelInterior);
+      item.appendChild(painel);
+      listaEl.appendChild(item);
+    });
+  }
+
+  document.querySelector("#estudo-botao-concluir").addEventListener("click", () => {
+    const chave = `${aulaActual.indiceModulo}-${aulaActual.indiceLicao}`;
+    guardarAulasConcluidas(slug, alternarConclusao(obterAulasConcluidas(slug), chave));
+    renderizarAulaActual();
+    renderizarSidebar();
+    renderizarProgressoTopo();
+  });
+
+  actualizarUrlAula();
+  renderizarAulaActual();
+  renderizarSidebar();
+  renderizarProgressoTopo();
+
+  container.hidden = false;
+  naoEncontrado.hidden = true;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initVideoHero();
   initCabecalhoFixo();
@@ -1455,6 +1961,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initPaginaNoticia();
   initPaginaCurso();
   initAcordeaoProgramaCurso();
+  initPaginaEstudo();
   initSobreCursoExpandir();
   initFormularioBanco();
   initFiltroGaleria();
