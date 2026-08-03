@@ -1500,6 +1500,52 @@ function initLightboxGaleria() {
   });
 }
 
+function initPartilhaModalEstudo() {
+  const modal = document.querySelector("#estudo-partilha-modal");
+  const botaoAbrir = document.querySelector("#estudo-partilhar-abrir");
+  if (!modal || !botaoAbrir) return;
+
+  const campoLink = modal.querySelector("#estudo-partilha-link-campo");
+  const botaoCopiar = modal.querySelector("#estudo-partilha-copiar");
+  const textoCopiar = modal.querySelector("#estudo-partilha-copiar-texto");
+  let elementoAnterior = null;
+
+  const abrir = () => {
+    elementoAnterior = document.activeElement;
+    modal.hidden = false;
+    modal.querySelector(".partilha-modal__fechar").focus();
+  };
+
+  const fechar = () => {
+    modal.hidden = true;
+    elementoAnterior?.focus();
+  };
+
+  botaoAbrir.addEventListener("click", abrir);
+
+  modal.querySelectorAll("[data-partilha-fechar]").forEach((elemento) => {
+    elemento.addEventListener("click", fechar);
+  });
+
+  document.addEventListener("keydown", (evento) => {
+    if (modal.hidden) return;
+    if (evento.key === "Escape") fechar();
+  });
+
+  botaoCopiar?.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(campoLink.value);
+    } catch {
+      campoLink.select();
+      document.execCommand("copy");
+    }
+    textoCopiar.textContent = "Copiado!";
+    setTimeout(() => {
+      textoCopiar.textContent = "Copiar link";
+    }, 2000);
+  });
+}
+
 function renderizarVisaoGeralEstudo(dados) {
   const sobreEl = document.querySelector("#estudo-sobre-texto");
   sobreEl.className = "curso-sobre__texto";
@@ -1689,6 +1735,7 @@ function initPaginaEstudo() {
   document.querySelector("#estudo-whatsapp").href = `https://wa.me/?text=${tituloCodificado}%20${urlAtual}`;
   document.querySelector("#estudo-facebook").href = `https://www.facebook.com/sharer/sharer.php?u=${urlAtual}`;
   document.querySelector("#estudo-email").href = `mailto:?subject=${tituloCodificado}&body=${urlAtual}`;
+  document.querySelector("#estudo-partilha-link-campo").value = location.href;
 
   renderizarVisaoGeralEstudo(dados);
   renderizarAvaliacoesEstudo(dados);
@@ -1764,7 +1811,13 @@ function initPaginaEstudo() {
   function renderizarProgressoTopo() {
     const aulasConcluidas = obterAulasConcluidas(slug);
     const { concluidas, total } = calcularContagemProgresso(dados.programa, aulasConcluidas);
-    document.querySelector("#estudo-progresso").textContent = `Seu progresso: ${concluidas}/${total} aulas concluídas`;
+    document.querySelector("#estudo-progresso-fracao").textContent = `${concluidas}/${total}`;
+
+    const percentagem = total > 0 ? concluidas / total : 0;
+    const circunferencia = 2 * Math.PI * 13;
+    const arco = document.querySelector("#estudo-progresso-arco");
+    arco.style.strokeDasharray = String(circunferencia);
+    arco.style.strokeDashoffset = String(circunferencia * (1 - percentagem));
   }
 
   function renderizarAulaActual() {
@@ -1962,6 +2015,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initPaginaCurso();
   initAcordeaoProgramaCurso();
   initPaginaEstudo();
+  initPartilhaModalEstudo();
   initSobreCursoExpandir();
   initFormularioBanco();
   initFiltroGaleria();

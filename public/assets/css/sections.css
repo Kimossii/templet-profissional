@@ -4633,9 +4633,27 @@ body.lightbox-aberta {
   flex-shrink: 0;
 }
 
-.estudo-topo__logo img {
-  display: block;
+.estudo-topo__logo-caixa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  background-color: var(--cor-texto-claro);
   border-radius: 50%;
+  transition: transform var(--transicao-base), box-shadow var(--transicao-base);
+}
+
+.estudo-topo__logo:hover .estudo-topo__logo-caixa {
+  transform: scale(1.06);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.estudo-topo__logo-caixa img {
+  display: block;
+  width: 24px;
+  height: 24px;
 }
 
 .estudo-topo__voltar {
@@ -4678,42 +4696,229 @@ body.lightbox-aberta {
 }
 
 .estudo-topo__progresso {
-  font-size: var(--fs-xs);
-  color: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.75rem 0.3rem 0.4rem;
+  border-radius: var(--raio-pill);
+  background-color: rgba(255, 255, 255, 0.1);
   white-space: nowrap;
 }
 
-.estudo-topo__partilhar {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
+.estudo-topo__progresso-anel {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
 }
 
-.estudo-topo__partilhar a {
+.estudo-topo__progresso-trilho {
+  stroke: rgba(255, 255, 255, 0.25);
+}
+
+.estudo-topo__progresso-arco {
+  stroke: #f0a324;
+  stroke-linecap: round;
+  transition: stroke-dashoffset var(--transicao-base);
+}
+
+.estudo-topo__progresso-texto {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.estudo-topo__progresso-texto strong {
+  font-family: var(--fonte-titulo);
+  font-size: var(--fs-sm);
+  color: var(--cor-texto-claro);
+}
+
+.estudo-topo__progresso-texto span {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.estudo-topo__partilhar-botao {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: var(--raio-pill);
+  background: none;
+  color: var(--cor-texto-claro);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color var(--transicao-base), border-color var(--transicao-base);
+}
+
+.estudo-topo__partilhar-botao:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.estudo-topo__partilhar-botao svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.partilha-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--espaco-md);
+}
+
+.partilha-modal[hidden] {
+  display: none;
+}
+
+.partilha-modal__fundo {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(10, 20, 16, 0.65);
+  backdrop-filter: blur(4px);
+}
+
+.partilha-modal__caixa {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 380px;
+  padding: var(--espaco-lg) var(--espaco-md) var(--espaco-md);
+  background-color: var(--cor-fundo);
+  border-radius: var(--raio-lg);
+  box-shadow: var(--sombra-lg);
+}
+
+.partilha-modal__fechar {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 32px;
   height: 32px;
+  border: none;
   border-radius: 50%;
-  color: rgba(255, 255, 255, 0.85);
+  background-color: var(--cor-fundo-alt);
+  color: var(--cor-texto-suave);
+  cursor: pointer;
   transition: background-color var(--transicao-base), color var(--transicao-base);
 }
 
-.estudo-topo__partilhar a:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-  color: var(--cor-texto-claro);
+.partilha-modal__fechar:hover {
+  background-color: var(--cor-primaria-suave);
+  color: var(--cor-primaria-escura);
 }
 
-.estudo-topo__partilhar svg {
+.partilha-modal__fechar svg {
   width: 16px;
   height: 16px;
+}
+
+.partilha-modal__titulo {
+  margin: 0 0 var(--espaco-md);
+  font-size: var(--fs-md);
+  text-align: center;
+}
+
+.partilha-modal__opcoes {
+  display: flex;
+  justify-content: center;
+  gap: var(--espaco-md);
+  margin-bottom: var(--espaco-md);
+}
+
+.partilha-modal__opcao {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--cor-texto);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+}
+
+.partilha-modal__opcao-icone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  color: var(--cor-texto-claro);
+  transition: transform var(--transicao-base);
+}
+
+.partilha-modal__opcao:hover .partilha-modal__opcao-icone {
+  transform: scale(1.08);
+}
+
+.partilha-modal__opcao-icone svg {
+  width: 22px;
+  height: 22px;
+}
+
+.partilha-modal__opcao-icone--whatsapp {
+  background-color: #25d366;
+}
+
+.partilha-modal__opcao-icone--facebook {
+  background-color: #1877f2;
+}
+
+.partilha-modal__opcao-icone--email {
+  background-color: var(--cor-primaria);
+}
+
+.partilha-modal__link {
+  display: flex;
+  gap: 0.5rem;
+  padding-top: var(--espaco-sm);
+  border-top: 1px solid var(--cor-borda);
+}
+
+.partilha-modal__link-campo {
+  flex: 1;
+  min-width: 0;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-sm);
+  background-color: var(--cor-fundo-alt);
+  color: var(--cor-texto-suave);
+  font-size: var(--fs-xs);
+}
+
+.partilha-modal__link-botao {
+  flex-shrink: 0;
+  padding: 0.5rem 0.9rem;
+  border: none;
+  border-radius: var(--raio-sm);
+  background-color: var(--cor-primaria);
+  color: var(--cor-texto-claro);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color var(--transicao-base);
+}
+
+.partilha-modal__link-botao:hover {
+  background-color: var(--cor-primaria-escura);
 }
 
 .estudo-corpo {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 360px;
   gap: var(--espaco-lg);
+  max-width: 1320px;
   align-items: start;
   padding-block: var(--espaco-lg);
 }
@@ -4964,5 +5169,17 @@ body.lightbox-aberta {
 
   .estudo-topo__titulo {
     display: none;
+  }
+
+  .estudo-topo__progresso-texto span {
+    display: none;
+  }
+
+  .estudo-topo__partilhar-botao span {
+    display: none;
+  }
+
+  .estudo-topo__partilhar-botao {
+    padding: 0.5rem;
   }
 }
