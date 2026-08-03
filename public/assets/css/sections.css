@@ -5457,4 +5457,34 @@ body.lightbox-aberta {
   .estudo-topo__partilhar-botao {
     padding: 0.5rem;
   }
+
+  .estudo-aula-actual {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .estudo-aula-actual__concluir {
+    justify-content: center;
+  }
+
+  .estudo-numeros__grelha {
+    grid-template-columns: 1fr;
+  }
+
+  .estudo-video__nav {
+    width: 34px;
+    height: 34px;
+  }
+
+  .estudo-video__nav-dica {
+    display: none;
+  }
+
+  .partilha-modal__caixa {
+    max-width: calc(100vw - 2rem);
+  }
+
+  .partilha-modal__opcoes {
+    gap: var(--espaco-sm);
+  }
 }
