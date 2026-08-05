@@ -4739,6 +4739,15 @@ body.lightbox-aberta {
   transition: stroke-dashoffset var(--transicao-base);
 }
 
+.estudo-topo__progresso-trofeu {
+  color: rgba(255, 255, 255, 0.45);
+  transition: color var(--transicao-base);
+}
+
+.estudo-topo__progresso.esta-completo .estudo-topo__progresso-trofeu {
+  color: #f0a324;
+}
+
 .estudo-topo__progresso-texto {
   display: flex;
   flex-direction: column;
@@ -4747,17 +4756,15 @@ body.lightbox-aberta {
 
 .estudo-topo__progresso-texto strong {
   font-family: var(--fonte-titulo);
-  font-size: var(--fs-md);
-  font-weight: 800;
+  font-size: var(--fs-sm);
+  font-weight: 700;
   color: var(--cor-texto-claro);
 }
 
 .estudo-topo__progresso-texto span {
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: #f0a324;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .estudo-topo__partilhar-botao {

@@ -1861,6 +1861,8 @@ function initPaginaEstudo() {
     const arco = document.querySelector("#estudo-progresso-arco");
     arco.style.strokeDasharray = String(circunferencia);
     arco.style.strokeDashoffset = String(circunferencia * (1 - percentagem));
+
+    document.querySelector("#estudo-progresso").classList.toggle("esta-completo", total > 0 && concluidas === total);
   }
 
   function renderizarAulaActual() {
