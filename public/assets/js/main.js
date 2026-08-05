@@ -2142,6 +2142,65 @@ function executarInit(funcaoInit) {
   }
 }
 
+function initLogin() {
+  const pagina = document.querySelector(".pagina-login");
+  if (!pagina) return;
+
+  const formularioLogin = document.querySelector("#formulario-login");
+  const botaoSenha = document.querySelector("[data-alternar-senha]");
+
+  if (botaoSenha) {
+    const campoSenha = document.querySelector("#login-senha");
+    const iconeAberto = botaoSenha.querySelector(".login__icone-olho:not(.login__icone-olho--fechado)");
+    const iconeFechado = botaoSenha.querySelector(".login__icone-olho--fechado");
+
+    botaoSenha.addEventListener("click", () => {
+      const estaVisivel = campoSenha.type === "text";
+      campoSenha.type = estaVisivel ? "password" : "text";
+      botaoSenha.setAttribute("aria-pressed", String(!estaVisivel));
+      botaoSenha.setAttribute("aria-label", estaVisivel ? "Mostrar senha" : "Ocultar senha");
+      iconeAberto.hidden = !estaVisivel;
+      iconeFechado.hidden = estaVisivel;
+    });
+  }
+
+  function tratarSubmissaoSimulada(formulario, mensagens) {
+    if (!formulario) return;
+
+    const mensagem = formulario.querySelector(".formulario__mensagem");
+    const botao = formulario.querySelector("button[type='submit']");
+    const textoOriginal = botao.textContent;
+
+    formulario.addEventListener("submit", (evento) => {
+      evento.preventDefault();
+
+      if (!formulario.checkValidity()) {
+        formulario.reportValidity();
+        return;
+      }
+
+      // Sem backend por enquanto: simula o pedido de entrada.
+      // Substituir por uma chamada à API (ex: fetch) quando o backend existir.
+      botao.disabled = true;
+      botao.textContent = mensagens.aEnviar;
+      mensagem.classList.remove("formulario__mensagem--erro", "esta-visivel");
+
+      setTimeout(() => {
+        botao.disabled = false;
+        botao.textContent = textoOriginal;
+        mensagem.textContent = mensagens.sucesso;
+        mensagem.classList.add("formulario__mensagem--sucesso", "esta-visivel");
+        formulario.reset();
+      }, 900);
+    });
+  }
+
+  tratarSubmissaoSimulada(formularioLogin, {
+    aEnviar: "A entrar…",
+    sucesso: "Sessão simulada. A área de sócio está em preparação — brevemente disponível.",
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   executarInit(initVideoHero);
   executarInit(initCabecalhoFixo);
@@ -2173,4 +2232,5 @@ document.addEventListener("DOMContentLoaded", () => {
   executarInit(initDetalheCursoMovel);
   executarInit(initDetalheCursoDesktop);
   executarInit(initFavoritosCursos);
+  executarInit(initLogin);
 });
