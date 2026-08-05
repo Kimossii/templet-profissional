@@ -139,7 +139,7 @@ select {
   position: absolute;
   top: -100%;
   left: var(--espaco-sm);
-  z-index: 1000;
+  z-index: var(--z-sobreposicao);
   padding: var(--espaco-xs) var(--espaco-sm);
   background: var(--cor-primaria);
   color: var(--cor-texto-claro);

@@ -435,8 +435,9 @@
 
 .fio-migalha {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.3rem 0.4rem;
   font-family: var(--fonte-titulo);
   font-size: var(--fs-xs);
   font-weight: 700;
@@ -853,7 +854,7 @@
 .lightbox {
   position: fixed;
   inset: 0;
-  z-index: 1000;
+  z-index: var(--z-sobreposicao);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1571,19 +1572,19 @@ body.lightbox-aberta {
   outline-offset: 3px;
 }
 
-.palestrantes-carrossel__botao.is-activo {
+.palestrantes-carrossel__botao.esta-ativo {
   background-color: var(--cor-texto-claro);
   border-color: var(--cor-texto-claro);
   color: var(--cor-primaria-escura);
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.95), 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
-.palestrantes-carrossel__botao.is-activo .palestrantes-carrossel__botao-avatar {
+.palestrantes-carrossel__botao.esta-ativo .palestrantes-carrossel__botao-avatar {
   color: var(--cor-texto-claro);
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 
-.palestrantes-carrossel__botao.is-activo .palestrantes-carrossel__botao-tinta {
+.palestrantes-carrossel__botao.esta-ativo .palestrantes-carrossel__botao-tinta {
   background: linear-gradient(160deg, rgba(47, 139, 102, 0.2), rgba(10, 38, 27, 0.55));
 }
 
@@ -1619,7 +1620,7 @@ body.lightbox-aberta {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 300;
+  z-index: var(--z-carrossel-cartao);
   width: 260px;
   overflow: hidden;
   border-radius: var(--raio-md);
@@ -2740,7 +2741,7 @@ body.lightbox-aberta {
    atrás da grelha de cards, que é pintada depois no fluxo do documento. */
 .cursos__filtros {
   position: relative;
-  z-index: 60;
+  z-index: var(--z-dropdown-contexto);
   display: flex;
   flex-direction: column;
   gap: var(--espaco-sm);
@@ -2837,7 +2838,7 @@ body.lightbox-aberta {
   border: 1px solid var(--cor-borda);
   border-radius: var(--raio-lg);
   box-shadow: var(--sombra-lg);
-  z-index: 50;
+  z-index: var(--z-dropdown);
   max-height: 17.5rem;
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -3174,7 +3175,7 @@ body.lightbox-aberta {
 
 .cursos__estrelas-preenchimento::before {
   content: "★★★★★";
-  color: #f0a324;
+  color: var(--cor-acento);
 }
 
 .cursos__cartao-avaliacao-numero {
@@ -3227,7 +3228,7 @@ body.lightbox-aberta {
     var(--cor-primaria-escura),
     var(--cor-primaria),
     var(--cor-primaria-clara),
-    #f0a324,
+    var(--cor-acento),
     var(--cor-primaria-clara),
     var(--cor-primaria),
     var(--cor-primaria-escura));
@@ -3403,7 +3404,7 @@ body.lightbox-aberta {
 }
 
 .cursos__cartao-nivel--intermediario {
-  background-color: #f0a324;
+  background-color: var(--cor-acento);
 }
 
 /* Fora da escala de intensidade — cor neutra, não é um nível de
@@ -3424,7 +3425,7 @@ body.lightbox-aberta {
 @media (hover: hover) and (pointer: fine) {
   .cursos__cartao--hover-aberto,
   .cursos__cartao:focus-within {
-    z-index: 40;
+    z-index: var(--z-flutuante);
   }
 }
 
@@ -3439,7 +3440,7 @@ body.lightbox-aberta {
   border: 1px solid var(--cor-borda);
   border-radius: var(--raio-lg);
   box-shadow: var(--sombra-lg);
-  z-index: 30;
+  z-index: var(--z-painel-destaque);
   opacity: 0;
   visibility: hidden;
   transform: translateY(-6px);
@@ -4062,7 +4063,7 @@ body.lightbox-aberta {
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 40;
+    z-index: var(--z-flutuante);
     padding: var(--espaco-xs) var(--espaco-sm);
     background-color: var(--cor-fundo);
     border-top: 1px solid var(--cor-borda);
@@ -4347,7 +4348,7 @@ body.lightbox-aberta {
 }
 
 .curso-programa__licao-tipo--pratica {
-  background-color: #f0a324;
+  background-color: var(--cor-acento);
 }
 
 .curso-programa__licao-tipo--avaliacao {
@@ -4546,7 +4547,7 @@ body.lightbox-aberta {
 
 .curso-avaliacoes__barra-preenchimento {
   height: 100%;
-  background-color: #f0a324;
+  background-color: var(--cor-acento);
 }
 
 .curso-avaliacoes__lista {
@@ -4630,7 +4631,7 @@ body.lightbox-aberta {
 .estudo-topo {
   position: sticky;
   top: 0;
-  z-index: 20;
+  z-index: var(--z-cabecalho-estudo);
   display: flex;
   align-items: center;
   gap: var(--espaco-md);
@@ -4703,7 +4704,7 @@ body.lightbox-aberta {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #f0a324;
+  color: var(--cor-acento);
 }
 
 .estudo-topo__titulo {
@@ -4746,7 +4747,7 @@ body.lightbox-aberta {
 }
 
 .estudo-topo__progresso-arco {
-  stroke: #f0a324;
+  stroke: var(--cor-acento);
   stroke-linecap: round;
   transition: stroke-dashoffset var(--transicao-base);
 }
@@ -4757,7 +4758,7 @@ body.lightbox-aberta {
 }
 
 .estudo-topo__progresso.esta-completo .estudo-topo__progresso-trofeu {
-  color: #f0a324;
+  color: var(--cor-acento);
 }
 
 .estudo-topo__progresso-texto {
@@ -4809,7 +4810,7 @@ body.lightbox-aberta {
 .partilha-modal {
   position: fixed;
   inset: 0;
-  z-index: 1000;
+  z-index: var(--z-sobreposicao);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -5151,7 +5152,7 @@ body.lightbox-aberta {
   transition: color var(--transicao-base), border-color var(--transicao-base);
 }
 
-.estudo-separador-botao.esta-activo {
+.estudo-separador-botao.esta-ativo {
   color: var(--cor-primaria-escura);
   border-bottom-color: var(--cor-primaria);
 }
@@ -5458,7 +5459,7 @@ body.lightbox-aberta {
   gap: 0.4rem;
 }
 
-.estudo-lateral__accao {
+.estudo-lateral__acao {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -5473,24 +5474,24 @@ body.lightbox-aberta {
   transition: background-color var(--transicao-base), border-color var(--transicao-base), color var(--transicao-base);
 }
 
-.estudo-lateral__accao svg {
+.estudo-lateral__acao svg {
   width: 16px;
   height: 16px;
 }
 
-.estudo-lateral__accao:hover,
-.estudo-lateral__accao:focus-visible {
+.estudo-lateral__acao:hover,
+.estudo-lateral__acao:focus-visible {
   border-color: var(--cor-primaria);
   color: var(--cor-primaria);
 }
 
-.estudo-lateral__accao.esta-ativo {
+.estudo-lateral__acao.esta-ativo {
   background-color: var(--cor-primaria);
   border-color: var(--cor-primaria);
   color: var(--cor-texto-claro);
 }
 
-.estudo-lateral__accao-dica {
+.estudo-lateral__acao-dica {
   position: absolute;
   top: calc(100% + 0.5rem);
   right: 0;
@@ -5508,8 +5509,8 @@ body.lightbox-aberta {
   transition: opacity var(--transicao-base), transform var(--transicao-base);
 }
 
-.estudo-lateral__accao:hover .estudo-lateral__accao-dica,
-.estudo-lateral__accao:focus-visible .estudo-lateral__accao-dica {
+.estudo-lateral__acao:hover .estudo-lateral__acao-dica,
+.estudo-lateral__acao:focus-visible .estudo-lateral__acao-dica {
   opacity: 1;
   transform: translateY(0);
 }
@@ -5535,7 +5536,7 @@ body.lightbox-aberta {
   position: fixed;
   top: 50%;
   right: 0;
-  z-index: 20;
+  z-index: var(--z-aba-flutuante);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -5600,7 +5601,7 @@ body.lightbox-aberta {
     overflow-y: visible;
   }
 
-  .estudo-lateral__accao--expandir {
+  .estudo-lateral__acao--expandir {
     display: none;
   }
 

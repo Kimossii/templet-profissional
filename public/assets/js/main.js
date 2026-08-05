@@ -5,6 +5,34 @@
  */
 
 const CHAVE_PROGRESSO_CURSOS = "aesoa-cursos-progresso";
+const SVG_NS = "http://www.w3.org/2000/svg";
+
+function calcularIniciais(nome) {
+  return nome
+    .replace(/Enf\.º|Enf\.ª|Chefe|Dr\./g, "")
+    .trim()
+    .split(/\s+/)
+    .map((parte) => parte[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+}
+
+function criarSetaColapso(className) {
+  const seta = document.createElementNS(SVG_NS, "svg");
+  seta.setAttribute("class", className);
+  seta.setAttribute("viewBox", "0 0 24 24");
+  seta.setAttribute("fill", "none");
+  seta.setAttribute("stroke", "currentColor");
+  seta.setAttribute("stroke-width", "2");
+  seta.setAttribute("stroke-linecap", "round");
+  seta.setAttribute("stroke-linejoin", "round");
+  seta.setAttribute("aria-hidden", "true");
+  const path = document.createElementNS(SVG_NS, "path");
+  path.setAttribute("d", "m6 9 6 6 6-6");
+  seta.appendChild(path);
+  return seta;
+}
 
 function obterAulasConcluidas(slug) {
   try {
@@ -298,9 +326,9 @@ function initAcordeaoProgramaCurso() {
   });
 }
 
-function initSobreCursoExpandir() {
-  const texto = document.querySelector("#curso-sobre-texto");
-  const botao = document.querySelector("#curso-sobre-mostrar-mais");
+function initTextoExpandir(seletorTexto, seletorBotao) {
+  const texto = document.querySelector(seletorTexto);
+  const botao = document.querySelector(seletorBotao);
   if (!texto || !botao) return;
 
   botao.addEventListener("click", () => {
@@ -309,15 +337,12 @@ function initSobreCursoExpandir() {
   });
 }
 
-function initSobreEstudoExpandir() {
-  const texto = document.querySelector("#estudo-sobre-texto");
-  const botao = document.querySelector("#estudo-sobre-mostrar-mais");
-  if (!texto || !botao) return;
+function initSobreCursoExpandir() {
+  initTextoExpandir("#curso-sobre-texto", "#curso-sobre-mostrar-mais");
+}
 
-  botao.addEventListener("click", () => {
-    const expandido = texto.classList.toggle("esta-expandido");
-    botao.textContent = expandido ? "Mostrar menos" : "Mostrar mais";
-  });
+function initSobreEstudoExpandir() {
+  initTextoExpandir("#estudo-sobre-texto", "#estudo-sobre-mostrar-mais");
 }
 
 function initFormularioCongresso() {
@@ -746,21 +771,6 @@ function initPaginaCurso() {
   programaEl.replaceChildren();
 
   const svgNS = "http://www.w3.org/2000/svg";
-  const criarSetaColapso = (className) => {
-    const seta = document.createElementNS(svgNS, "svg");
-    seta.setAttribute("class", className);
-    seta.setAttribute("viewBox", "0 0 24 24");
-    seta.setAttribute("fill", "none");
-    seta.setAttribute("stroke", "currentColor");
-    seta.setAttribute("stroke-width", "2");
-    seta.setAttribute("stroke-linecap", "round");
-    seta.setAttribute("stroke-linejoin", "round");
-    seta.setAttribute("aria-hidden", "true");
-    const setaPath = document.createElementNS(svgNS, "path");
-    setaPath.setAttribute("d", "m6 9 6 6 6-6");
-    seta.appendChild(setaPath);
-    return seta;
-  };
 
   const criarIconePreview = () => {
     const icone = document.createElementNS(svgNS, "svg");
@@ -924,15 +934,7 @@ function initPaginaCurso() {
     publicoEl.appendChild(li);
   });
 
-  const iniciais = dados.formador.nome
-    .replace(/Enf\.º|Enf\.ª|Chefe|Dr\./g, "")
-    .trim()
-    .split(/\s+/)
-    .map((parte) => parte[0])
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
-  document.querySelector("#curso-formador-iniciais").textContent = iniciais;
+  document.querySelector("#curso-formador-iniciais").textContent = calcularIniciais(dados.formador.nome);
   document.querySelector("#curso-formador-nome").textContent = dados.formador.nome;
   document.querySelector("#curso-formador-credenciais").textContent = dados.formador.credenciais;
   document.querySelector("#curso-formador-bio").textContent = dados.formador.bio;
@@ -978,14 +980,7 @@ function initPaginaCurso() {
 
     const avatar = document.createElement("div");
     avatar.className = "curso-avaliacao-card__avatar";
-    avatar.textContent = review.nome
-      .replace(/Enf\.º|Enf\.ª|Chefe|Dr\./g, "")
-      .trim()
-      .split(/\s+/)
-      .map((parte) => parte[0])
-      .slice(0, 2)
-      .join("")
-      .toUpperCase();
+    avatar.textContent = calcularIniciais(review.nome);
     card.appendChild(avatar);
 
     const corpo = document.createElement("div");
@@ -1397,10 +1392,23 @@ function initFavoritosCursos() {
   if (!botoes.length) return;
 
   const CHAVE = "aesoa-cursos-favoritos";
-  const favoritos = new Set(JSON.parse(localStorage.getItem(CHAVE) || "[]"));
+
+  function obterFavoritosGuardados() {
+    try {
+      return JSON.parse(localStorage.getItem(CHAVE) || "[]");
+    } catch {
+      return [];
+    }
+  }
+
+  const favoritos = new Set(obterFavoritosGuardados());
 
   function guardar() {
-    localStorage.setItem(CHAVE, JSON.stringify(Array.from(favoritos)));
+    try {
+      localStorage.setItem(CHAVE, JSON.stringify(Array.from(favoritos)));
+    } catch {
+      // localStorage indisponível — favoritos simplesmente não persistem.
+    }
   }
 
   botoes.forEach((botao) => {
@@ -1631,15 +1639,7 @@ function renderizarVisaoGeralEstudo(dados) {
     requisitosEl.appendChild(li);
   });
 
-  const iniciaisFormador = dados.formador.nome
-    .replace(/Enf\.º|Enf\.ª|Chefe|Dr\./g, "")
-    .trim()
-    .split(/\s+/)
-    .map((parte) => parte[0])
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
-  document.querySelector("#estudo-formador-iniciais").textContent = iniciaisFormador;
+  document.querySelector("#estudo-formador-iniciais").textContent = calcularIniciais(dados.formador.nome);
   document.querySelector("#estudo-formador-nome").textContent = dados.formador.nome;
   document.querySelector("#estudo-formador-credenciais").textContent = dados.formador.credenciais;
   document.querySelector("#estudo-formador-bio").textContent = dados.formador.bio;
@@ -1687,14 +1687,7 @@ function renderizarAvaliacoesEstudo(dados) {
 
     const avatar = document.createElement("div");
     avatar.className = "curso-avaliacao-card__avatar";
-    avatar.textContent = review.nome
-      .replace(/Enf\.º|Enf\.ª|Chefe|Dr\./g, "")
-      .trim()
-      .split(/\s+/)
-      .map((parte) => parte[0])
-      .slice(0, 2)
-      .join("")
-      .toUpperCase();
+    avatar.textContent = calcularIniciais(review.nome);
     card.appendChild(avatar);
 
     const corpo = document.createElement("div");
@@ -1741,9 +1734,9 @@ function initSeparadoresEstudo() {
   if (!botaoVisao || !botaoAvaliacoes || !painelVisao || !painelAvaliacoes) return;
 
   function activar(botaoActivo, botaoInactivo, painelActivo, painelInactivo) {
-    botaoActivo.classList.add("esta-activo");
+    botaoActivo.classList.add("esta-ativo");
     botaoActivo.setAttribute("aria-selected", "true");
-    botaoInactivo.classList.remove("esta-activo");
+    botaoInactivo.classList.remove("esta-ativo");
     botaoInactivo.setAttribute("aria-selected", "false");
     painelActivo.hidden = false;
     painelInactivo.hidden = true;
@@ -1787,22 +1780,6 @@ function initPaginaEstudo() {
   const TIPO_ROTULO = { aula: "Aula", pratica: "Prática", avaliacao: "Avaliação" };
   const svgNS = "http://www.w3.org/2000/svg";
 
-  function criarSetaColapso() {
-    const seta = document.createElementNS(svgNS, "svg");
-    seta.setAttribute("class", "curso-programa__seta");
-    seta.setAttribute("viewBox", "0 0 24 24");
-    seta.setAttribute("fill", "none");
-    seta.setAttribute("stroke", "currentColor");
-    seta.setAttribute("stroke-width", "2");
-    seta.setAttribute("stroke-linecap", "round");
-    seta.setAttribute("stroke-linejoin", "round");
-    seta.setAttribute("aria-hidden", "true");
-    const path = document.createElementNS(svgNS, "path");
-    path.setAttribute("d", "m6 9 6 6 6-6");
-    seta.appendChild(path);
-    return seta;
-  }
-
   function criarIconeCheck() {
     const icone = document.createElementNS(svgNS, "svg");
     icone.setAttribute("class", "estudo-lateral__check-icone");
@@ -1842,8 +1819,9 @@ function initPaginaEstudo() {
   }
 
   const aulaActual = resolverAulaInicial();
+  const modulosAbertos = new Set();
 
-  function actualizarUrlAula() {
+  function atualizarUrlAula() {
     const parametros = new URLSearchParams(location.search);
     parametros.set("slug", slug);
     parametros.set("modulo", String(aulaActual.indiceModulo));
@@ -1917,7 +1895,7 @@ function initPaginaEstudo() {
 
     aulaActual.indiceModulo = destino.indiceModulo;
     aulaActual.indiceLicao = destino.indiceLicao;
-    actualizarUrlAula();
+    atualizarUrlAula();
     renderizarAulaActual();
     renderizarNavegacaoVideo();
     renderizarSidebar();
@@ -1926,11 +1904,6 @@ function initPaginaEstudo() {
   function renderizarSidebar() {
     const aulasConcluidas = obterAulasConcluidas(slug);
     const listaEl = document.querySelector("#estudo-lateral-lista");
-    const modulosAbertos = new Set(
-      Array.from(listaEl.querySelectorAll(".curso-programa__modulo")).flatMap((elemento, indice) =>
-        elemento.classList.contains("esta-aberto") ? [indice] : []
-      )
-    );
     listaEl.replaceChildren();
 
     const { concluidas: totalConcluidas, total: totalAulas } = calcularContagemProgresso(
@@ -1957,7 +1930,7 @@ function initPaginaEstudo() {
       botaoModulo.className = "curso-programa__cabecalho";
       botaoModulo.setAttribute("aria-expanded", String(moduloContemAulaActual));
       botaoModulo.setAttribute("aria-controls", idPainel);
-      botaoModulo.appendChild(criarSetaColapso());
+      botaoModulo.appendChild(criarSetaColapso("curso-programa__seta"));
 
       const tituloModulo = document.createElement("span");
       tituloModulo.className = "curso-programa__titulo-modulo";
@@ -1984,6 +1957,11 @@ function initPaginaEstudo() {
       botaoModulo.addEventListener("click", () => {
         const aberto = item.classList.toggle("esta-aberto");
         botaoModulo.setAttribute("aria-expanded", String(aberto));
+        if (aberto) {
+          modulosAbertos.add(indiceModulo);
+        } else {
+          modulosAbertos.delete(indiceModulo);
+        }
       });
 
       item.appendChild(botaoModulo);
@@ -2051,7 +2029,7 @@ function initPaginaEstudo() {
         botaoLicao.addEventListener("click", () => {
           aulaActual.indiceModulo = indiceModulo;
           aulaActual.indiceLicao = indiceLicao;
-          actualizarUrlAula();
+          atualizarUrlAula();
           renderizarAulaActual();
           renderizarNavegacaoVideo();
           renderizarSidebar();
@@ -2080,7 +2058,7 @@ function initPaginaEstudo() {
   document.querySelector("#estudo-video-anterior").addEventListener("click", () => irParaAulaRelativa(-1));
   document.querySelector("#estudo-video-seguinte").addEventListener("click", () => irParaAulaRelativa(1));
 
-  actualizarUrlAula();
+  atualizarUrlAula();
   renderizarAulaActual();
   renderizarNavegacaoVideo();
   renderizarSidebar();
@@ -2147,35 +2125,52 @@ function initPainelEstudo() {
   aplicarEstado(obterEstadoPainel());
 }
 
+/*
+ * Cada init*() trata da secção/página onde os seus elementos existem e
+ * faz early-return quando não os encontra. Numa página normal, a maioria
+ * das ~30 chamadas abaixo é um no-op. Correr cada uma através deste
+ * wrapper evita que um erro numa (ex.: um id em falta nessa página)
+ * aborte todas as chamadas seguintes na fila — sem isto, uma excepção
+ * lançada a meio da lista impede a inicialização de secções completamente
+ * não relacionadas que vêm depois.
+ */
+function executarInit(funcaoInit) {
+  try {
+    funcaoInit();
+  } catch (erro) {
+    console.error(`Falha ao inicializar "${funcaoInit.name}":`, erro);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  initVideoHero();
-  initCabecalhoFixo();
-  initMenuMobile();
-  initSubmenusDropdown();
-  initAcordeaoValores();
-  initAbasPrograma();
-  initAcordeaoFAQ();
-  initAcordeaoEstatutos();
-  initAnoRodape();
-  initRevelarAoScroll();
-  initBotaoTopo();
-  initFormularioMembro();
-  initFormularioCongresso();
-  initFormularioContacto();
-  initFormularioNewsletter();
-  initPaginaNoticia();
-  initPaginaCurso();
-  initAcordeaoProgramaCurso();
-  initPaginaEstudo();
-  initPainelEstudo();
-  initPartilhaModalEstudo();
-  initSobreCursoExpandir();
-  initSobreEstudoExpandir();
-  initFormularioBanco();
-  initFiltroGaleria();
-  initLightboxGaleria();
-  initFiltroCursos();
-  initDetalheCursoMovel();
-  initDetalheCursoDesktop();
-  initFavoritosCursos();
+  executarInit(initVideoHero);
+  executarInit(initCabecalhoFixo);
+  executarInit(initMenuMobile);
+  executarInit(initSubmenusDropdown);
+  executarInit(initAcordeaoValores);
+  executarInit(initAbasPrograma);
+  executarInit(initAcordeaoFAQ);
+  executarInit(initAcordeaoEstatutos);
+  executarInit(initAnoRodape);
+  executarInit(initRevelarAoScroll);
+  executarInit(initBotaoTopo);
+  executarInit(initFormularioMembro);
+  executarInit(initFormularioCongresso);
+  executarInit(initFormularioContacto);
+  executarInit(initFormularioNewsletter);
+  executarInit(initPaginaNoticia);
+  executarInit(initPaginaCurso);
+  executarInit(initAcordeaoProgramaCurso);
+  executarInit(initPaginaEstudo);
+  executarInit(initPainelEstudo);
+  executarInit(initPartilhaModalEstudo);
+  executarInit(initSobreCursoExpandir);
+  executarInit(initSobreEstudoExpandir);
+  executarInit(initFormularioBanco);
+  executarInit(initFiltroGaleria);
+  executarInit(initLightboxGaleria);
+  executarInit(initFiltroCursos);
+  executarInit(initDetalheCursoMovel);
+  executarInit(initDetalheCursoDesktop);
+  executarInit(initFavoritosCursos);
 });

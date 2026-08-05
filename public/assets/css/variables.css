@@ -10,6 +10,7 @@
   --cor-primaria-escura: #123d2c;
   --cor-primaria-clara: #2f8b66;
   --cor-primaria-suave: #e7f2ec;
+  --cor-acento: #f0a324;
 
   --cor-texto: #1f2a24;
   --cor-texto-suave: #4c5a53;
@@ -65,4 +66,23 @@
   --sombra-lg: 0 24px 56px rgba(18, 61, 44, 0.18);
 
   --transicao-base: 0.2s ease;
+
+  /* ===== Camadas (z-index) =====
+   * Escala documentada para elementos position: fixed/sticky que
+   * atravessam o documento (cabeçalhos, dropdowns, modais, flutuantes).
+   * Valores locais pequenos (0, 1, 2, 3, -1, -2) usados dentro de um
+   * único contexto de empilhamento (ex.: camadas decorativas de um
+   * cartão ou de um herói) não entram nesta escala — são relativos só
+   * aos seus irmãos diretos e não precisam de coordenação global. */
+  --z-dropdown-contexto: 60;
+  --z-dropdown: 50;
+  --z-flutuante: 40;
+  --z-painel-destaque: 30;
+  --z-cabecalho-estudo: 20;
+  --z-aba-flutuante: 20;
+  --z-carrossel-cartao: 300;
+  --z-cabecalho: 500;
+  --z-cabecalho-accao: 501;
+  --z-botao-topo: 600;
+  --z-sobreposicao: 1000;
 }

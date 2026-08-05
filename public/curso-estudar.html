@@ -31,7 +31,7 @@
         <div class="secao-divisor"></div>
         <p>O link pode estar incorrecto ou o curso já não está disponível.</p>
       </div>
-      <div class="hero__acoes" style="justify-content:center;">
+      <div class="hero__acoes">
         <a class="btn btn--primario" href="cursos.html">Ver Todos os Cursos</a>
       </div>
     </div>
@@ -45,7 +45,7 @@
             <img src="assets/img/logo-emblema.png" alt="Logótipo da AESOA" width="24" height="24" />
           </span>
         </a>
-        <a class="estudo-topo__voltar" id="estudo-voltar" href="curso-detalhe.html">
+        <a class="estudo-topo__voltar" id="estudo-voltar" href="curso-detalhe.html" aria-label="Voltar aos detalhes do curso">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
             stroke-linejoin="round" aria-hidden="true">
             <path d="m15 18-6-6 6-6" />
@@ -133,7 +133,7 @@
 
         <div class="estudo-separadores">
           <div class="estudo-separadores__botoes" role="tablist">
-            <button type="button" class="estudo-separador-botao esta-activo" id="estudo-aba-visao-botao" role="tab"
+            <button type="button" class="estudo-separador-botao esta-ativo" id="estudo-aba-visao-botao" role="tab"
               aria-selected="true" aria-controls="estudo-aba-visao">Visão geral</button>
             <button type="button" class="estudo-separador-botao" id="estudo-aba-avaliacoes-botao" role="tab"
               aria-selected="false" aria-controls="estudo-aba-avaliacoes">Avaliações</button>
@@ -272,7 +272,7 @@
           <div class="estudo-lateral__cabecalho-topo">
             <h2>Conteúdo do curso</h2>
             <div class="estudo-lateral__acoes">
-              <button type="button" class="estudo-lateral__accao estudo-lateral__accao--expandir"
+              <button type="button" class="estudo-lateral__acao estudo-lateral__acao--expandir"
                 id="estudo-painel-expandir" aria-label="Expandir painel">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                   stroke-linejoin="round" aria-hidden="true">
@@ -280,9 +280,9 @@
                   <polyline points="6 8 2 12 6 16" />
                   <line x1="2" y1="12" x2="22" y2="12" />
                 </svg>
-                <span class="estudo-lateral__accao-dica" id="estudo-painel-expandir-dica">Expandir painel</span>
+                <span class="estudo-lateral__acao-dica" id="estudo-painel-expandir-dica">Expandir painel</span>
               </button>
-              <button type="button" class="estudo-lateral__accao" id="estudo-painel-fechar"
+              <button type="button" class="estudo-lateral__acao" id="estudo-painel-fechar"
                 aria-label="Fechar painel">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                   stroke-linejoin="round" aria-hidden="true">
@@ -290,7 +290,7 @@
                   <path d="M15 3v18" />
                   <path d="m8 9 3 3-3 3" />
                 </svg>
-                <span class="estudo-lateral__accao-dica">Fechar painel</span>
+                <span class="estudo-lateral__acao-dica">Fechar painel</span>
               </button>
             </div>
           </div>

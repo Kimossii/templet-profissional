@@ -399,7 +399,7 @@
         botao.style.opacity = String(s.opacity);
         botao.style.zIndex = String(s.zIndex);
         const isActive = idx === mod(Math.round(posDisplay), M);
-        botao.classList.toggle("is-activo", isActive);
+        botao.classList.toggle("esta-ativo", isActive);
         botao.setAttribute("aria-pressed", isActive ? "true" : "false");
       });
     }
