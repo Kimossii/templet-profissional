@@ -2149,6 +2149,26 @@ function initLogin() {
   const formularioLogin = document.querySelector("#formulario-login");
   const botaoSenha = document.querySelector("[data-alternar-senha]");
 
+  const formularioRecuperar = document.querySelector("#formulario-recuperar");
+  const linkEsqueci = document.querySelector("[data-mostrar-recuperar]");
+  const linkVoltarLogin = document.querySelector("[data-mostrar-login]");
+
+  if (linkEsqueci && formularioLogin && formularioRecuperar) {
+    linkEsqueci.addEventListener("click", () => {
+      formularioLogin.hidden = true;
+      formularioRecuperar.hidden = false;
+      formularioRecuperar.querySelector("input").focus();
+    });
+  }
+
+  if (linkVoltarLogin && formularioLogin && formularioRecuperar) {
+    linkVoltarLogin.addEventListener("click", () => {
+      formularioRecuperar.hidden = true;
+      formularioLogin.hidden = false;
+      formularioLogin.querySelector("input").focus();
+    });
+  }
+
   if (botaoSenha) {
     const campoSenha = document.querySelector("#login-senha");
     const iconeAberto = botaoSenha.querySelector(".login__icone-olho:not(.login__icone-olho--fechado)");
@@ -2198,6 +2218,11 @@ function initLogin() {
   tratarSubmissaoSimulada(formularioLogin, {
     aEnviar: "A entrar…",
     sucesso: "Sessão simulada. A área de sócio está em preparação — brevemente disponível.",
+  });
+
+  tratarSubmissaoSimulada(formularioRecuperar, {
+    aEnviar: "A enviar…",
+    sucesso: "Se o e-mail estiver registado, vai receber um link de recuperação em breve.",
   });
 }
 

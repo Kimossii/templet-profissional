@@ -87,6 +87,23 @@
         <p class="formulario__mensagem" role="status"></p>
       </form>
 
+      <form class="login__formulario" id="formulario-recuperar" novalidate hidden>
+        <div class="login__cabecalho">
+          <h2>Recuperar senha</h2>
+          <p>Indique o seu e-mail e enviamos um link de recuperação.</p>
+        </div>
+
+        <div class="formulario__grupo">
+          <label for="recuperar-email">E-mail</label>
+          <input type="email" id="recuperar-email" name="email" autocomplete="email" required />
+        </div>
+
+        <button class="btn btn--primario btn--bloco efeito-brilho" type="submit">Enviar link de recuperação</button>
+        <button type="button" class="login__esqueci-link" data-mostrar-login>Voltar ao login</button>
+
+        <p class="formulario__mensagem" role="status"></p>
+      </form>
+
       <p class="login__rodape">
         Ainda não é sócio? <a href="index.html#torne-se-membro">Torne-se sócio</a>
       </p>
