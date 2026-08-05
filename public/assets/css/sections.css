@@ -5722,6 +5722,10 @@ body.lightbox-aberta {
   text-decoration: none;
 }
 
+.login__voltar:focus-visible {
+  outline-color: var(--cor-texto-claro);
+}
+
 .login__voltar img {
   border-radius: 50%;
 }
