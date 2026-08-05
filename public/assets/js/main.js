@@ -2088,6 +2088,63 @@ function initPaginaEstudo() {
   naoEncontrado.hidden = true;
 }
 
+const CHAVE_PAINEL_ESTUDO = "aesoa-estudo-painel-estado";
+
+function obterEstadoPainel() {
+  try {
+    const estado = localStorage.getItem(CHAVE_PAINEL_ESTUDO);
+    return estado === "expandido" || estado === "fechado" ? estado : "normal";
+  } catch {
+    return "normal";
+  }
+}
+
+function guardarEstadoPainel(estado) {
+  try {
+    localStorage.setItem(CHAVE_PAINEL_ESTUDO, estado);
+  } catch {
+    // localStorage indisponível — a preferência simplesmente não persiste.
+  }
+}
+
+function initPainelEstudo() {
+  const corpo = document.querySelector(".estudo-corpo");
+  const botaoExpandir = document.querySelector("#estudo-painel-expandir");
+  const dicaExpandir = document.querySelector("#estudo-painel-expandir-dica");
+  const botaoFechar = document.querySelector("#estudo-painel-fechar");
+  const botaoReabrir = document.querySelector("#estudo-painel-reabrir");
+  if (!corpo || !botaoExpandir || !dicaExpandir || !botaoFechar || !botaoReabrir) return;
+
+  let ultimoEstadoAberto = "normal";
+
+  function aplicarEstado(estado) {
+    corpo.classList.toggle("estudo-painel--expandido", estado === "expandido");
+    corpo.classList.toggle("estudo-painel--fechado", estado === "fechado");
+    botaoExpandir.classList.toggle("esta-ativo", estado === "expandido");
+    botaoExpandir.setAttribute("aria-label", estado === "expandido" ? "Reduzir painel" : "Expandir painel");
+    dicaExpandir.textContent = estado === "expandido" ? "Reduzir painel" : "Expandir painel";
+    botaoReabrir.hidden = estado !== "fechado";
+    if (estado !== "fechado") ultimoEstadoAberto = estado;
+    guardarEstadoPainel(estado);
+  }
+
+  botaoExpandir.addEventListener("click", () => {
+    const estaExpandido = corpo.classList.contains("estudo-painel--expandido");
+    aplicarEstado(estaExpandido ? "normal" : "expandido");
+  });
+
+  botaoFechar.addEventListener("click", () => {
+    aplicarEstado("fechado");
+    botaoReabrir.focus();
+  });
+  botaoReabrir.addEventListener("click", () => {
+    aplicarEstado(ultimoEstadoAberto);
+    botaoFechar.focus();
+  });
+
+  aplicarEstado(obterEstadoPainel());
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initVideoHero();
   initCabecalhoFixo();
@@ -2108,6 +2165,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initPaginaCurso();
   initAcordeaoProgramaCurso();
   initPaginaEstudo();
+  initPainelEstudo();
   initPartilhaModalEstudo();
   initSobreCursoExpandir();
   initSobreEstudoExpandir();
