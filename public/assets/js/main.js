@@ -2145,12 +2145,23 @@ function executarInit(funcaoInit) {
 // Liga um botão [data-alternar-senha] ao campo de senha dentro do mesmo
 // .login__campo-senha — reutilizado pelo login e pela criação de conta,
 // onde pode haver mais do que um campo de senha na mesma página.
+// Nº de caracteres a partir do qual o cone da "lanterna" atinge o
+// alcance máximo (funil todo aberto) — antes disso, cresce com cada tecla.
+const LANTERNA_COMPRIMENTO_MAXIMO = 14;
+
 function configurarAlternarSenha(botaoSenha) {
   const wrapper = botaoSenha.closest(".login__campo-senha");
   const campoSenha = wrapper?.querySelector("input");
   const iconeAberto = botaoSenha.querySelector(".login__icone-olho:not(.login__icone-olho--fechado)");
   const iconeFechado = botaoSenha.querySelector(".login__icone-olho--fechado");
   if (!wrapper || !campoSenha || !iconeAberto || !iconeFechado) return;
+
+  function atualizarAlcanceLanterna() {
+    const alcance = Math.min(1, campoSenha.value.length / LANTERNA_COMPRIMENTO_MAXIMO);
+    wrapper.style.setProperty("--lanterna-alcance", alcance);
+  }
+
+  campoSenha.addEventListener("input", atualizarAlcanceLanterna);
 
   botaoSenha.addEventListener("click", () => {
     const estaVisivel = campoSenha.type === "text";
@@ -2161,7 +2172,9 @@ function configurarAlternarSenha(botaoSenha) {
     // HTML em elementos <svg> — usa-se toggleAttribute diretamente.
     iconeAberto.toggleAttribute("hidden", !estaVisivel);
     iconeFechado.toggleAttribute("hidden", estaVisivel);
-    // Efeito "lanterna": cone de luz no campo enquanto a senha está visível.
+    // Efeito "lanterna": cone de luz no campo enquanto a senha está visível,
+    // com o alcance a refletir o que já está escrito nesse momento.
+    atualizarAlcanceLanterna();
     wrapper.classList.toggle("esta-iluminado", !estaVisivel);
   });
 }

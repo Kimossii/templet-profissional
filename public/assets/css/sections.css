@@ -5767,14 +5767,21 @@ body.lightbox-aberta {
   pointer-events: none;
   opacity: 0;
   mix-blend-mode: multiply;
-  transition: opacity var(--transicao-base);
+  /* Alcance do feixe (0–1) — nasce como um ponto na ponta, junto ao
+     botão, e cresce em comprimento E altura ao mesmo tempo conforme os
+     caracteres escritos (ver --lanterna-alcance em main.js). */
+  transform: scale(var(--lanterna-alcance, 0));
+  transform-origin: 100% 50%;
+  transition: opacity var(--transicao-base), transform 0.15s ease-out;
   clip-path: polygon(100% 50%, 0 0, 0 100%);
   background: linear-gradient(to left, #ff5a1f, var(--cor-acento) 45%, #ffd166 80%, rgba(255, 209, 102, 0.55));
 }
 
 .login__campo-senha.esta-iluminado::before {
   opacity: 1;
-  animation: login-lanterna-pulsar 1.4s ease-in-out infinite, login-lanterna-cor 2.6s ease-in-out infinite;
+  animation: login-lanterna-pulsar 1.4s ease-in-out infinite,
+    login-lanterna-cor 2.6s ease-in-out infinite,
+    login-lanterna-tremor 2.2s ease-in-out infinite;
 }
 
 .login__alternar-senha[aria-pressed="true"] {
@@ -5821,6 +5828,34 @@ body.lightbox-aberta {
 
   75% {
     filter: saturate(1.6) brightness(1.08) hue-rotate(-4deg);
+  }
+}
+
+/* Balanço leve à volta da ponta (junto ao botão) — como se fosse uma
+   lanterna segura à mão, não perfeitamente firme. O scale() usa sempre a
+   mesma variável --lanterna-alcance para não perder o crescimento
+   controlado por JS enquanto roda. */
+@keyframes login-lanterna-tremor {
+
+  0%,
+  100% {
+    transform: scale(var(--lanterna-alcance, 0)) rotate(0deg);
+  }
+
+  22% {
+    transform: scale(var(--lanterna-alcance, 0)) rotate(2.4deg);
+  }
+
+  41% {
+    transform: scale(var(--lanterna-alcance, 0)) rotate(-1.6deg);
+  }
+
+  63% {
+    transform: scale(var(--lanterna-alcance, 0)) rotate(1.8deg);
+  }
+
+  85% {
+    transform: scale(var(--lanterna-alcance, 0)) rotate(-2.2deg);
   }
 }
 
