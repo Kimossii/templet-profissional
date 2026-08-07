@@ -2142,13 +2142,66 @@ function executarInit(funcaoInit) {
   }
 }
 
+// Liga um botão [data-alternar-senha] ao campo de senha dentro do mesmo
+// .login__campo-senha — reutilizado pelo login e pela criação de conta,
+// onde pode haver mais do que um campo de senha na mesma página.
+function configurarAlternarSenha(botaoSenha) {
+  const campoSenha = botaoSenha.closest(".login__campo-senha")?.querySelector("input");
+  const iconeAberto = botaoSenha.querySelector(".login__icone-olho:not(.login__icone-olho--fechado)");
+  const iconeFechado = botaoSenha.querySelector(".login__icone-olho--fechado");
+  if (!campoSenha || !iconeAberto || !iconeFechado) return;
+
+  botaoSenha.addEventListener("click", () => {
+    const estaVisivel = campoSenha.type === "text";
+    campoSenha.type = estaVisivel ? "password" : "text";
+    botaoSenha.setAttribute("aria-pressed", String(!estaVisivel));
+    botaoSenha.setAttribute("aria-label", estaVisivel ? "Mostrar senha" : "Ocultar senha");
+    // .hidden (propriedade) não reflete de forma fiável para o atributo
+    // HTML em elementos <svg> — usa-se toggleAttribute diretamente.
+    iconeAberto.toggleAttribute("hidden", !estaVisivel);
+    iconeFechado.toggleAttribute("hidden", estaVisivel);
+  });
+}
+
+// Simula a submissão de um formulário sem backend: valida, mostra estado de
+// carregamento no botão e depois uma mensagem de sucesso. Reutilizado pelo
+// login, recuperação de senha e criação de conta.
+function tratarSubmissaoSimulada(formulario, mensagens) {
+  if (!formulario) return;
+
+  const mensagem = formulario.querySelector(".formulario__mensagem");
+  const botao = formulario.querySelector("button[type='submit']");
+  const textoOriginal = botao.textContent;
+
+  formulario.addEventListener("submit", (evento) => {
+    evento.preventDefault();
+
+    if (!formulario.checkValidity()) {
+      formulario.reportValidity();
+      return;
+    }
+
+    // Sem backend por enquanto: simula o pedido.
+    // Substituir por uma chamada à API (ex: fetch) quando o backend existir.
+    botao.disabled = true;
+    botao.textContent = mensagens.aEnviar;
+    mensagem.classList.remove("formulario__mensagem--erro", "esta-visivel");
+
+    setTimeout(() => {
+      botao.disabled = false;
+      botao.textContent = textoOriginal;
+      mensagem.textContent = mensagens.sucesso;
+      mensagem.classList.add("formulario__mensagem--sucesso", "esta-visivel");
+      formulario.reset();
+    }, 900);
+  });
+}
+
 function initLogin() {
   const pagina = document.querySelector(".pagina-login");
   if (!pagina) return;
 
   const formularioLogin = document.querySelector("#formulario-login");
-  const botaoSenha = document.querySelector("[data-alternar-senha]");
-
   const formularioRecuperar = document.querySelector("#formulario-recuperar");
   const linkEsqueci = document.querySelector("[data-mostrar-recuperar]");
   const linkVoltarLogin = document.querySelector("[data-mostrar-login]");
@@ -2169,53 +2222,7 @@ function initLogin() {
     });
   }
 
-  if (botaoSenha) {
-    const campoSenha = document.querySelector("#login-senha");
-    const iconeAberto = botaoSenha.querySelector(".login__icone-olho:not(.login__icone-olho--fechado)");
-    const iconeFechado = botaoSenha.querySelector(".login__icone-olho--fechado");
-
-    botaoSenha.addEventListener("click", () => {
-      const estaVisivel = campoSenha.type === "text";
-      campoSenha.type = estaVisivel ? "password" : "text";
-      botaoSenha.setAttribute("aria-pressed", String(!estaVisivel));
-      botaoSenha.setAttribute("aria-label", estaVisivel ? "Mostrar senha" : "Ocultar senha");
-      // .hidden (propriedade) não reflete de forma fiável para o atributo
-      // HTML em elementos <svg> — usa-se toggleAttribute diretamente.
-      iconeAberto.toggleAttribute("hidden", !estaVisivel);
-      iconeFechado.toggleAttribute("hidden", estaVisivel);
-    });
-  }
-
-  function tratarSubmissaoSimulada(formulario, mensagens) {
-    if (!formulario) return;
-
-    const mensagem = formulario.querySelector(".formulario__mensagem");
-    const botao = formulario.querySelector("button[type='submit']");
-    const textoOriginal = botao.textContent;
-
-    formulario.addEventListener("submit", (evento) => {
-      evento.preventDefault();
-
-      if (!formulario.checkValidity()) {
-        formulario.reportValidity();
-        return;
-      }
-
-      // Sem backend por enquanto: simula o pedido de entrada.
-      // Substituir por uma chamada à API (ex: fetch) quando o backend existir.
-      botao.disabled = true;
-      botao.textContent = mensagens.aEnviar;
-      mensagem.classList.remove("formulario__mensagem--erro", "esta-visivel");
-
-      setTimeout(() => {
-        botao.disabled = false;
-        botao.textContent = textoOriginal;
-        mensagem.textContent = mensagens.sucesso;
-        mensagem.classList.add("formulario__mensagem--sucesso", "esta-visivel");
-        formulario.reset();
-      }, 900);
-    });
-  }
+  pagina.querySelectorAll("[data-alternar-senha]").forEach(configurarAlternarSenha);
 
   tratarSubmissaoSimulada(formularioLogin, {
     aEnviar: "A entrar…",
@@ -2225,6 +2232,34 @@ function initLogin() {
   tratarSubmissaoSimulada(formularioRecuperar, {
     aEnviar: "A enviar…",
     sucesso: "Se o e-mail estiver registado, vai receber um link de recuperação em breve.",
+  });
+}
+
+function initCriarConta() {
+  const pagina = document.querySelector(".pagina-criar-conta");
+  if (!pagina) return;
+
+  const formulario = document.querySelector("#formulario-criar-conta");
+  const campoSenha = document.querySelector("#criarconta-senha");
+  const campoConfirmarSenha = document.querySelector("#criarconta-confirmar-senha");
+
+  pagina.querySelectorAll("[data-alternar-senha]").forEach(configurarAlternarSenha);
+
+  if (campoSenha && campoConfirmarSenha) {
+    const validarConfirmacao = () => {
+      campoConfirmarSenha.setCustomValidity(
+        campoConfirmarSenha.value && campoConfirmarSenha.value !== campoSenha.value
+          ? "As senhas não coincidem."
+          : ""
+      );
+    };
+    campoSenha.addEventListener("input", validarConfirmacao);
+    campoConfirmarSenha.addEventListener("input", validarConfirmacao);
+  }
+
+  tratarSubmissaoSimulada(formulario, {
+    aEnviar: "A criar conta…",
+    sucesso: "Conta simulada com sucesso. Pode agora iniciar sessão.",
   });
 }
 
@@ -2260,4 +2295,5 @@ document.addEventListener("DOMContentLoaded", () => {
   executarInit(initDetalheCursoDesktop);
   executarInit(initFavoritosCursos);
   executarInit(initLogin);
+  executarInit(initCriarConta);
 });

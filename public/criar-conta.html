@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Criar Conta | AESOA — Associação dos Enfermeiros da Sala Operatória de Angola</title>
+  <meta name="description"
+    content="Crie a sua conta AESOA para aceder à área de sócio, cursos e serviços reservados aos associados." />
+  <meta name="theme-color" content="#1b5e43" />
+
+  <link rel="icon" type="image/png" href="assets/img/logo-emblema.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Criar Conta — AESOA — Associação dos Enfermeiros da Sala Operatória de Angola" />
+  <meta property="og:description" content="Crie a sua conta para aceder à área de sócio da AESOA." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/variables.css" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/sections.css" />
+</head>
+
+<body class="pagina-criar-conta">
+  <!-- SECTION: criar-conta -->
+  <div class="login">
+    <aside class="login__painel" aria-hidden="true"></aside>
+
+    <div class="login__conteudo">
+      <a class="login__marca" href="index.html" aria-label="Voltar à página inicial da AESOA">
+        <img src="assets/img/logo-emblema.png" alt="" aria-hidden="true" />
+        <span>AESOA</span>
+      </a>
+
+      <div class="login__cartao">
+        <div class="login__cartao-linha" aria-hidden="true"></div>
+        <div class="login__cabecalho">
+          <h1>Criar Conta</h1>
+          <p>Crie a sua conta para aceder à área de sócio da AESOA.</p>
+        </div>
+
+        <form class="login__formulario" id="formulario-criar-conta" novalidate>
+          <div class="formulario__grupo">
+            <label for="criarconta-nome">Nome completo</label>
+            <input type="text" id="criarconta-nome" name="nome" autocomplete="name" required />
+          </div>
+
+          <div class="formulario__grupo">
+            <label for="criarconta-email">E-mail</label>
+            <input type="email" id="criarconta-email" name="email" autocomplete="email" required />
+          </div>
+
+          <div class="formulario__grupo">
+            <label for="criarconta-senha">Senha</label>
+            <div class="login__campo-senha">
+              <input type="password" id="criarconta-senha" name="senha" autocomplete="new-password" minlength="8"
+                required />
+              <button type="button" class="login__alternar-senha" data-alternar-senha aria-pressed="false"
+                aria-label="Mostrar senha">
+                <svg class="login__icone-olho" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+                <svg class="login__icone-olho login__icone-olho--fechado" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true" hidden>
+                  <path
+                    d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a21.6 21.6 0 0 1 5.06-6.06M9.9 4.24A10.4 10.4 0 0 1 12 4c7 0 11 8 11 8a21.7 21.7 0 0 1-2.16 3.19M14.12 14.12a3 3 0 1 1-4.24-4.24" />
+                  <line x1="1" y1="1" x2="23" y2="23" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="formulario__grupo">
+            <label for="criarconta-confirmar-senha">Confirmar senha</label>
+            <div class="login__campo-senha">
+              <input type="password" id="criarconta-confirmar-senha" name="confirmarSenha" autocomplete="new-password"
+                required />
+              <button type="button" class="login__alternar-senha" data-alternar-senha aria-pressed="false"
+                aria-label="Mostrar senha">
+                <svg class="login__icone-olho" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+                <svg class="login__icone-olho login__icone-olho--fechado" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true" hidden>
+                  <path
+                    d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a21.6 21.6 0 0 1 5.06-6.06M9.9 4.24A10.4 10.4 0 0 1 12 4c7 0 11 8 11 8a21.7 21.7 0 0 1-2.16 3.19M14.12 14.12a3 3 0 1 1-4.24-4.24" />
+                  <line x1="1" y1="1" x2="23" y2="23" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <label class="formulario__consentimento">
+            <input type="checkbox" name="termos" required />
+            Concordo com os termos de utilização e a política de privacidade da AESOA.
+          </label>
+
+          <button class="btn btn--primario btn--bloco efeito-brilho" type="submit"
+            style="margin-top: var(--espaco-md);">Criar Conta</button>
+
+          <p class="formulario__mensagem" role="status"></p>
+        </form>
+
+        <p class="login__rodape">
+          Já tem conta? <a href="login.html">Iniciar sessão</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- /SECTION: criar-conta -->
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+
+</html>

@@ -5663,7 +5663,8 @@ body.lightbox-aberta {
 
 /* SECTION: login */
 
-.pagina-login {
+.pagina-login,
+.pagina-criar-conta {
   background-color: var(--cor-fundo);
 }
 
