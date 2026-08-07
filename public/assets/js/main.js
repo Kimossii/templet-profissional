@@ -2146,10 +2146,11 @@ function executarInit(funcaoInit) {
 // .login__campo-senha — reutilizado pelo login e pela criação de conta,
 // onde pode haver mais do que um campo de senha na mesma página.
 function configurarAlternarSenha(botaoSenha) {
-  const campoSenha = botaoSenha.closest(".login__campo-senha")?.querySelector("input");
+  const wrapper = botaoSenha.closest(".login__campo-senha");
+  const campoSenha = wrapper?.querySelector("input");
   const iconeAberto = botaoSenha.querySelector(".login__icone-olho:not(.login__icone-olho--fechado)");
   const iconeFechado = botaoSenha.querySelector(".login__icone-olho--fechado");
-  if (!campoSenha || !iconeAberto || !iconeFechado) return;
+  if (!wrapper || !campoSenha || !iconeAberto || !iconeFechado) return;
 
   botaoSenha.addEventListener("click", () => {
     const estaVisivel = campoSenha.type === "text";
@@ -2160,6 +2161,8 @@ function configurarAlternarSenha(botaoSenha) {
     // HTML em elementos <svg> — usa-se toggleAttribute diretamente.
     iconeAberto.toggleAttribute("hidden", !estaVisivel);
     iconeFechado.toggleAttribute("hidden", estaVisivel);
+    // Efeito "lanterna": cone de luz no campo enquanto a senha está visível.
+    wrapper.classList.toggle("esta-iluminado", !estaVisivel);
   });
 }
 

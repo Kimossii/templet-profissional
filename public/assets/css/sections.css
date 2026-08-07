@@ -5738,14 +5738,102 @@ body.lightbox-aberta {
 
 .login__campo-senha {
   position: relative;
+  isolation: isolate;
 }
 
 .login__campo-senha input {
+  position: relative;
+  z-index: 0;
   padding-right: 2.75rem;
+  background-color: var(--cor-fundo);
+}
+
+/* Efeito "lanterna": ao revelar a senha, um triângulo de luz âmbar sai do
+   botão do olho (a "lanterna", vértice à direita) e abre-se para a
+   esquerda sobre o texto — um cone recortado a sério com clip-path, não
+   um brilho difuso. Fica por CIMA do input (não atrás) e usa
+   mix-blend-mode: multiply para tingir o fundo branco de âmbar sem tapar
+   o texto (que, sendo escuro, "resiste" à multiplicação e mantém-se
+   legível). A classe fica no wrapper (não no input) para não depender de
+   :has(), que pode faltar em browsers mais antigos. */
+.login__campo-senha::before {
+  content: "";
+  position: absolute;
+  top: 6%;
+  bottom: 6%;
+  left: 0;
+  right: 2.25rem;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: multiply;
+  transition: opacity var(--transicao-base);
+  clip-path: polygon(100% 50%, 0 0, 0 100%);
+  background: linear-gradient(to left, #ff5a1f, var(--cor-acento) 45%, #ffd166 80%, rgba(255, 209, 102, 0.55));
+}
+
+.login__campo-senha.esta-iluminado::before {
+  opacity: 1;
+  animation: login-lanterna-pulsar 1.4s ease-in-out infinite, login-lanterna-cor 2.6s ease-in-out infinite;
+}
+
+.login__alternar-senha[aria-pressed="true"] {
+  color: #ff5a1f;
+}
+
+@keyframes login-lanterna-pulsar {
+
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  55% {
+    opacity: 0.7;
+  }
+
+  80% {
+    opacity: 1;
+  }
+}
+
+/* Anima a própria cor (não só a opacidade) para a chama parecer viva:
+   varia saturação, brilho e um leve giro de matiz entre vermelho e
+   amarelo, em vez de tremeluzir sempre com o mesmo tom. */
+@keyframes login-lanterna-cor {
+
+  0%,
+  100% {
+    filter: saturate(1.4) brightness(1) hue-rotate(0deg);
+  }
+
+  25% {
+    filter: saturate(1.7) brightness(1.12) hue-rotate(-8deg);
+  }
+
+  50% {
+    filter: saturate(1.25) brightness(0.94) hue-rotate(6deg);
+  }
+
+  75% {
+    filter: saturate(1.6) brightness(1.08) hue-rotate(-4deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login__campo-senha.esta-iluminado::before {
+    animation: none;
+    opacity: 0.95;
+  }
 }
 
 .login__alternar-senha {
   position: absolute;
+  z-index: 2;
   top: 50%;
   right: 0.4rem;
   transform: translateY(-50%);
