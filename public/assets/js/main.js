@@ -2179,8 +2179,10 @@ function initLogin() {
       campoSenha.type = estaVisivel ? "password" : "text";
       botaoSenha.setAttribute("aria-pressed", String(!estaVisivel));
       botaoSenha.setAttribute("aria-label", estaVisivel ? "Mostrar senha" : "Ocultar senha");
-      iconeAberto.hidden = !estaVisivel;
-      iconeFechado.hidden = estaVisivel;
+      // .hidden (propriedade) não reflete de forma fiável para o atributo
+      // HTML em elementos <svg> — usa-se toggleAttribute diretamente.
+      iconeAberto.toggleAttribute("hidden", !estaVisivel);
+      iconeFechado.toggleAttribute("hidden", estaVisivel);
     });
   }
 

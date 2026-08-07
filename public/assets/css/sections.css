@@ -5668,76 +5668,56 @@ body.lightbox-aberta {
 }
 
 .login {
-  position: relative;
-  min-height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  overflow: hidden;
-  padding: var(--espaco-lg);
+  min-height: 100vh;
 }
 
-.login__faixa {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: var(--espaco-2xl) var(--espaco-lg);
-  background: linear-gradient(135deg,
+.login__painel {
+  flex: 0 0 44%;
+  background: linear-gradient(165deg,
       var(--cor-primaria-clara),
       var(--cor-primaria) 55%,
       var(--cor-primaria-escura));
-  clip-path: polygon(0 0, 62% 0, 38% 100%, 0 100%);
 }
 
-.login__faixa-emblema {
-  width: 72px;
-  height: 72px;
-  opacity: 0.3;
-  margin-bottom: var(--espaco-sm);
+.login__conteudo {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--espaco-lg);
 }
 
-.login__faixa-frase {
-  max-width: 260px;
-  color: var(--cor-texto-claro);
-  font-family: var(--fonte-titulo);
-  font-size: var(--fs-lg);
-  font-weight: 600;
-  line-height: var(--lh-titulo);
-}
-
-.login__voltar {
+.login__marca {
   position: absolute;
-  top: var(--espaco-lg);
-  left: var(--espaco-lg);
-  z-index: 2;
+  top: var(--espaco-md);
+  right: var(--espaco-md);
   display: inline-flex;
   align-items: center;
   gap: var(--espaco-2xs);
-  color: var(--cor-texto-claro);
+  color: var(--cor-primaria);
   font-family: var(--fonte-titulo);
   font-weight: 700;
   text-decoration: none;
 }
 
-.login__voltar:focus-visible {
-  outline-color: var(--cor-texto-claro);
-}
-
-.login__voltar img {
-  border-radius: 50%;
+.login__marca img {
+  width: 32px;
+  height: 32px;
 }
 
 .login__cartao {
-  position: relative;
-  z-index: 1;
-  width: min(420px, 100%);
-  background-color: var(--cor-fundo);
-  border-radius: var(--raio-lg);
-  box-shadow: var(--sombra-lg);
-  padding: var(--espaco-lg);
+  width: min(380px, 100%);
+  margin-right: 14rem;
+}
+
+.login__cartao-linha {
+  width: 40px;
+  height: 4px;
+  border-radius: var(--raio-pill);
+  background-color: var(--cor-acento);
+  margin-bottom: var(--espaco-md);
 }
 
 .login__cabecalho {
@@ -5766,22 +5746,38 @@ body.lightbox-aberta {
 .login__alternar-senha {
   position: absolute;
   top: 50%;
-  right: 0.6rem;
+  right: 0.4rem;
   transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--raio-sm);
   color: var(--cor-texto-suave);
   background: none;
   border: none;
   cursor: pointer;
+  transition: color var(--transicao-base), background-color var(--transicao-base);
+}
+
+.login__alternar-senha:hover,
+.login__alternar-senha:focus-visible {
+  color: var(--cor-primaria);
+  background-color: var(--cor-primaria-suave);
 }
 
 .login__alternar-senha svg {
   width: 20px;
   height: 20px;
+}
+
+/* A regra global `svg { display: block }` (base.css) tem origem de autor e
+   vence o `[hidden]` do próprio HTML (que é uma regra do user-agent) —
+   sem isto, os dois ícones (aberto/fechado) ficam sempre visíveis e
+   sobrepostos, em vez de alternar. */
+.login__icone-olho[hidden] {
+  display: none;
 }
 
 .login__opcoes {
@@ -5819,28 +5815,34 @@ body.lightbox-aberta {
   font-weight: 600;
 }
 
-@media (max-width: 768px) {
+/* Ver comentário em .curso-inscricao__cta.efeito-brilho::after — mesma
+   correção: sem isto a máscara do brilho pinta var(--cor-fundo) por cima
+   do preenchimento verde do botão, deixando o texto branco ilegível. */
+.login__cartao .efeito-brilho::after {
+  background-color: var(--cor-primaria);
+}
+
+.login__cartao .efeito-brilho:hover::after,
+.login__cartao .efeito-brilho:focus-visible::after {
+  background-color: var(--cor-primaria-escura);
+}
+
+@media (max-width: 820px) {
   .login {
     flex-direction: column;
-    justify-content: flex-start;
-    padding: 0 0 var(--espaco-xl);
+    min-height: 0;
   }
 
-  .login__faixa {
-    position: static;
-    clip-path: none;
-    width: 100%;
-    padding: calc(var(--espaco-2xl) + 2rem) var(--espaco-lg) var(--espaco-lg);
-  }
-
-  .login__voltar {
-    top: var(--espaco-sm);
-    left: var(--espaco-sm);
+  .login__painel {
+    display: none;
   }
 
   .login__cartao {
-    margin: 0 var(--espaco-md);
-    margin-top: calc(-1 * var(--espaco-lg));
+    margin-right: 0;
+  }
+
+  .login__conteudo {
+    padding: var(--espaco-lg) var(--espaco-md);
   }
 }
 

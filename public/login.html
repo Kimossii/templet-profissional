@@ -30,83 +30,83 @@
 <body class="pagina-login">
   <!-- SECTION: login -->
   <div class="login">
-    <div class="login__faixa" aria-hidden="true">
-      <img class="login__faixa-emblema" src="assets/img/logo-emblema-branco.png" alt="" />
-      <p class="login__faixa-frase">Formação e representação da enfermagem de sala operatória.</p>
-    </div>
+    <aside class="login__painel" aria-hidden="true"></aside>
 
-    <a class="login__voltar" href="index.html" aria-label="Voltar à página inicial da AESOA">
-      <img src="assets/img/logo-emblema-branco.png" alt="" width="28" height="28" />
-      <span>AESOA</span>
-    </a>
+    <div class="login__conteudo">
+      <a class="login__marca" href="index.html" aria-label="Voltar à página inicial da AESOA">
+        <img src="assets/img/logo-emblema.png" alt="" aria-hidden="true" />
+        <span>AESOA</span>
+      </a>
 
-    <div class="login__cartao">
-      <div class="login__cabecalho">
-        <h1>Área de Sócio</h1>
-        <p>Entre com as suas credenciais para aceder aos conteúdos exclusivos da AESOA.</p>
-      </div>
-
-      <form class="login__formulario" id="formulario-login" novalidate>
-        <div class="formulario__grupo">
-          <label for="login-email">E-mail</label>
-          <input type="email" id="login-email" name="email" autocomplete="email" required />
-        </div>
-
-        <div class="formulario__grupo">
-          <label for="login-senha">Senha</label>
-          <div class="login__campo-senha">
-            <input type="password" id="login-senha" name="senha" autocomplete="current-password" required />
-            <button type="button" class="login__alternar-senha" data-alternar-senha aria-pressed="false"
-              aria-label="Mostrar senha">
-              <svg class="login__icone-olho" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                <circle cx="12" cy="12" r="3" />
-              </svg>
-              <svg class="login__icone-olho login__icone-olho--fechado" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                aria-hidden="true" hidden>
-                <path
-                  d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a21.6 21.6 0 0 1 5.06-6.06M9.9 4.24A10.4 10.4 0 0 1 12 4c7 0 11 8 11 8a21.7 21.7 0 0 1-2.16 3.19M14.12 14.12a3 3 0 1 1-4.24-4.24" />
-                <line x1="1" y1="1" x2="23" y2="23" />
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        <div class="login__opcoes">
-          <label class="formulario__consentimento">
-            <input type="checkbox" name="lembrar" />
-            Lembrar-me
-          </label>
-          <button type="button" class="login__esqueci-link" data-mostrar-recuperar>Esqueci-me da senha</button>
-        </div>
-
-        <button class="btn btn--primario btn--bloco efeito-brilho" type="submit">Entrar</button>
-
-        <p class="formulario__mensagem" role="status"></p>
-      </form>
-
-      <form class="login__formulario" id="formulario-recuperar" novalidate hidden>
+      <div class="login__cartao">
+        <div class="login__cartao-linha" aria-hidden="true"></div>
         <div class="login__cabecalho">
-          <h2>Recuperar senha</h2>
-          <p>Indique o seu e-mail e enviamos um link de recuperação.</p>
+          <h1>Área de Sócio</h1>
+          <p>Entre com as suas credenciais para aceder aos conteúdos exclusivos da AESOA.</p>
         </div>
 
-        <div class="formulario__grupo">
-          <label for="recuperar-email">E-mail</label>
-          <input type="email" id="recuperar-email" name="email" autocomplete="email" required />
-        </div>
+        <form class="login__formulario" id="formulario-login" novalidate>
+          <div class="formulario__grupo">
+            <label for="login-email">E-mail</label>
+            <input type="email" id="login-email" name="email" autocomplete="email" required />
+          </div>
 
-        <button class="btn btn--primario btn--bloco efeito-brilho" type="submit">Enviar link de recuperação</button>
-        <button type="button" class="login__esqueci-link" data-mostrar-login>Voltar ao login</button>
+          <div class="formulario__grupo">
+            <label for="login-senha">Senha</label>
+            <div class="login__campo-senha">
+              <input type="password" id="login-senha" name="senha" autocomplete="current-password" required />
+              <button type="button" class="login__alternar-senha" data-alternar-senha aria-pressed="false"
+                aria-label="Mostrar senha">
+                <svg class="login__icone-olho" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+                <svg class="login__icone-olho login__icone-olho--fechado" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true" hidden>
+                  <path
+                    d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a21.6 21.6 0 0 1 5.06-6.06M9.9 4.24A10.4 10.4 0 0 1 12 4c7 0 11 8 11 8a21.7 21.7 0 0 1-2.16 3.19M14.12 14.12a3 3 0 1 1-4.24-4.24" />
+                  <line x1="1" y1="1" x2="23" y2="23" />
+                </svg>
+              </button>
+            </div>
+          </div>
 
-        <p class="formulario__mensagem" role="status"></p>
-      </form>
+          <div class="login__opcoes">
+            <label class="formulario__consentimento">
+              <input type="checkbox" name="lembrar" />
+              Lembrar-me
+            </label>
+            <button type="button" class="login__esqueci-link" data-mostrar-recuperar>Esqueci-me da senha</button>
+          </div>
 
-      <p class="login__rodape">
-        Ainda não é sócio? <a href="index.html#torne-se-membro">Torne-se sócio</a>
-      </p>
+          <button class="btn btn--primario btn--bloco efeito-brilho" type="submit">Entrar</button>
+
+          <p class="formulario__mensagem" role="status"></p>
+        </form>
+
+        <form class="login__formulario" id="formulario-recuperar" novalidate hidden>
+          <div class="login__cabecalho">
+            <h2>Recuperar senha</h2>
+            <p>Indique o seu e-mail e enviamos um link de recuperação.</p>
+          </div>
+
+          <div class="formulario__grupo">
+            <label for="recuperar-email">E-mail</label>
+            <input type="email" id="recuperar-email" name="email" autocomplete="email" required />
+          </div>
+
+          <button class="btn btn--primario btn--bloco efeito-brilho" type="submit">Enviar link de recuperação</button>
+          <button type="button" class="login__esqueci-link" data-mostrar-login>Voltar ao login</button>
+
+          <p class="formulario__mensagem" role="status"></p>
+        </form>
+
+        <p class="login__rodape">
+          Ainda não é sócio? <a href="index.html#torne-se-membro">Torne-se sócio</a>
+        </p>
+      </div>
     </div>
   </div>
   <!-- /SECTION: login -->
